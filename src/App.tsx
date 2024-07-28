@@ -1,25 +1,41 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import { Provider } from 'react-redux';
+import { store } from './data/redux/store';
+import { Route, Router, Routes } from 'react-router-dom';
+import BackdropComponent from './views/components/BackdropComponent';
+import NavbarComponent from './views/components/NavbarComponent';
+import LandingScreen from './views/screens/LandingScreen';
+import { createBrowserHistory } from 'history'; // Import createBrowserHistory from 'history' package
+import AboutMeScreen from './views/screens/AboutMeScreen';
+import ContactScreen from './views/screens/ContactScreen';
+import MyWorkScreen from './views/screens/MyWorkScreen';
 
 function App() {
+  const history = createBrowserHistory(); // Create browser history
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "scroll";
+    };
+  }, []);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Router location={history.location} navigator={history}>
+        <BackdropComponent />
+        <NavbarComponent />
+
+        <Routes>
+          <Route path="/" element={<LandingScreen />} />
+          <Route path="/aboutMe" element={<AboutMeScreen />} />
+          <Route path="/contact" element={<ContactScreen />} />
+          <Route path="/myWork" element={<MyWorkScreen />} />
+        </Routes>
+      </Router>
+    </Provider>
   );
 }
 
