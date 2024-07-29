@@ -65,7 +65,7 @@ async function handlePost(route: string, data?: any, blob: boolean = false): Pro
     return response;
 }
 
-export default {
+const routes = {
     general: {
         read: async (model: string, _id: string): Promise<Res> => await handlePost('api/general/read', { model, _id }),
         update: async (model: string, _id: string, data: object): Promise<Res> => await handlePost('api/general/update', { model, _id, rawData: JSON.stringify(data) }),
@@ -85,3 +85,5 @@ export default {
         searchPosts: async (query: string) => await handlePost('api/portfolio/post/searchPosts', { query }),
     }
 }
+
+export default routes;

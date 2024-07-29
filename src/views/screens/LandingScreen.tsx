@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { setScreen } from "../../data/redux/global.reducer";
 import api from "../../data/server/api";
 import { Res } from "../../data/constants/types";
+import PostComponent from "../components/PostComponent";
 
 
 const LandingScreen = () => {
@@ -14,13 +15,12 @@ const LandingScreen = () => {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        console.log('baby baby')
         api.post.searchPosts('').then((res: Res) => {
             if (res.success) {
                 setPosts(res.data);
             }
         })
-    }, [])
+    }, []);
 
     return (
         <div className="container" style={{
@@ -32,7 +32,14 @@ const LandingScreen = () => {
             padding: 8,
             paddingTop: 48 + 20 + 8,
         }}>
-            
+            {posts && posts.length > 0 && posts.map((post: any, index: number) => {
+                return (
+                    <div key={index}>
+                        <PostComponent post={post} />
+                    </div>
+                )
+            })}
+
         </div>
     )
 }

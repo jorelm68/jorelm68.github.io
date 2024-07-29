@@ -11,9 +11,9 @@ interface PhotoComponentProps {
 }
 
 const PhotoComponent = ({ photo, resolution = 1080, width, height, style }: PhotoComponentProps) => {
-    const defaultPhoto = "https://via.placeholder.com/150";
-
     const [source, setSource] = useState(photos.defaultImage);
+
+    console.log('I was given this photo,', photo);
 
     useEffect(() => {
         const fetchPhoto = async () => {
@@ -24,6 +24,7 @@ const PhotoComponent = ({ photo, resolution = 1080, width, height, style }: Phot
                 }
                 else {
                     type = await cache.get(photo, resolution);
+                    console.log('I got this data:', type);
                 }
 
                 if (type) {
@@ -45,7 +46,7 @@ const PhotoComponent = ({ photo, resolution = 1080, width, height, style }: Phot
             width: '100%',
             height: '100%',
         }}>
-            <img src={photo ? photo : defaultPhoto} alt="Photo" style={{
+            <img src={source} alt="" style={{
                 width: width ? width : 'auto',
                 height: height ? height : 'auto',
                 objectFit: 'cover',

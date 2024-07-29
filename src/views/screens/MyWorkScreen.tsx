@@ -3,12 +3,10 @@ import { useDispatch } from "react-redux"
 import { setScreen } from "../../data/redux/global.reducer";
 
 export default function MyWorkScreen() {
-    console.log('my work screen rednered');
     const dispatch = useDispatch();
     useEffect(() => {
-        console.log('my work');
         dispatch(setScreen('MyWorkScreen'));
-    }, [])
+    }, [dispatch])
 
     return (
         <div className="container">

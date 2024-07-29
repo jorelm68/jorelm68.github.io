@@ -23,13 +23,13 @@ function useFetch<T>(type: string, id: string, initialData: T): T {
     }, [id, refresh]);
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setRefresh(new Date().getTime());
-        }, 1000);
+        // const interval = setInterval(() => {
+        //     setRefresh(new Date().getTime());
+        // }, 1000);
 
-        return () => {
-            clearInterval(interval);
-        }
+        // return () => {
+        //     clearInterval(interval);
+        // }
     }, [])
 
     return data;
@@ -37,10 +37,3 @@ function useFetch<T>(type: string, id: string, initialData: T): T {
 
 export const usePost = (post: string): Post => useFetch('Post', post, EMPTY_POST)
 export const useBlank = (): Blank => useFetch('Blank', '', EMPTY_BLANK);
-
-export function useAbstract(type: string, id: string) {
-    switch (type) {
-        case 'Post': return usePost(id);
-        default: return useBlank();
-    }
-}
