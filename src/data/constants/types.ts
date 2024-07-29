@@ -16,8 +16,8 @@ export type Blank = {
 
 export type Post = {
     _id: string,
-    title: string,
-    body: string,
+    name: string,
+    description: string,
     photo: string,
     maxWidth: string,
     maxHeight: string,

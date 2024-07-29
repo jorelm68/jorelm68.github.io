@@ -82,6 +82,6 @@ export default {
         deletePhoto: async (photo: string) => await handlePost('api/photo/deletePhoto', { photo }),
     },
     post: {
-        searchPosts: async (query: string) => await handlePost('api/post/searchPosts', { query }),
+        searchPosts: async (query: string) => await handlePost('api/portfolio/post/searchPosts', { query }),
     }
 }

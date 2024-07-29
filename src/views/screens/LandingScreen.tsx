@@ -1,16 +1,25 @@
-import { useEffect } from "react";
-import { useAppSelector } from "../../data/redux/hooks";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setScreen } from "../../data/redux/global.reducer";
-import PostComponent from "../components/PostComponent";
+import api from "../../data/server/api";
+import { Res } from "../../data/constants/types";
 
 
 const LandingScreen = () => {
-    const { screen } = useAppSelector(state => state.global);
     const dispatch = useDispatch();
-
     useEffect(() => {
         dispatch(setScreen('LandingScreen'));
+    }, [dispatch])
+
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        console.log('baby baby')
+        api.post.searchPosts('').then((res: Res) => {
+            if (res.success) {
+                setPosts(res.data);
+            }
+        })
     }, [])
 
     return (

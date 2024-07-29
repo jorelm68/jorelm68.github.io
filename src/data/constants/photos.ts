@@ -1,4 +1,4 @@
-export default {
+const photos = {
     defaultImage: require('../../assets/photos/defaultImage.jpg'),
     headshot: require('../../assets/photos/headshot.jpg'),
     generic1: require('../../assets/photos/generic1.jpg'),
@@ -26,6 +26,7 @@ export default {
     generic23: require('../../assets/photos/generic23.jpg'),
 }
 
+
 export interface Photos {
     defaultImage: any;
     generic1: any;
@@ -52,3 +53,5 @@ export interface Photos {
     generic22: any;
     generic23: any;
 }
+
+export default photos;
