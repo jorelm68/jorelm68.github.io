@@ -79,7 +79,7 @@ const routes = {
     },
     post: {
         searchPosts: async (query: string) => await handlePost('api/portfolio/post/searchPosts', { query }),
-    }
+    },
 }
 
 export default routes;

@@ -13,16 +13,19 @@ interface PhotoComponentProps {
 
 const PhotoComponent = ({ photo, resolution = 1080, width, height, style }: PhotoComponentProps) => {
     const [source, setSource] = useState(photos.defaultImage);
-    
+
     useEffect(() => {
         const fetchPhoto = async () => {
             if (typeof photo === 'string') {
-                if (photo.startsWith("file://") || photo.startsWith('http')) {
+                if (photo.startsWith("file://")) {
                     setSource({ uri: photo });
                 }
+                else if (photo.startsWith('http')) {
+                    setSource(photo);
+                }
                 else {
-                    const data = await cache.get(photo, resolution);
-                    setSource({ uri: data.uri });
+                    const source = await cache.get(photo, resolution);
+                    setSource(source);
                 }
             }
             else {
@@ -32,7 +35,6 @@ const PhotoComponent = ({ photo, resolution = 1080, width, height, style }: Phot
 
         fetchPhoto();
     }, [photo, resolution]);
-
 
     return (
         <div style={style ? style : {
