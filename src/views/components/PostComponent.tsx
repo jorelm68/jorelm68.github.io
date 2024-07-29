@@ -34,8 +34,10 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
             }}>
                 <PhotoComponent 
                     photo={post && post.photo ? post.photo : EMPTY_POST.photo} 
-                    width={post ? post.photoWidth : EMPTY_POST.photoWidth} 
-                    height={post ? post.photoHeight : EMPTY_POST.photoHeight} 
+                    style={{
+                        width: post && post.photoWidth ? post.photoWidth : EMPTY_POST.photoWidth,
+                        height: post && post.photoHeight ? post.photoHeight : EMPTY_POST.photoHeight,
+                    }} 
                     resolution={1080}
                 />
             </div>

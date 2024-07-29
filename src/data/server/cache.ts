@@ -1,6 +1,5 @@
 // import { CAPACITY } from '@env'
 
-import { Res } from "../constants/types";
 import api from "./api";
 
 const CAPACITY = 500;
@@ -35,7 +34,7 @@ class CancellationToken {
 class Cache {
     static instance: Cache;
     cache!: Map<string, any>;
-    requests!: { [key: string]: () => Promise<Res> };
+    requests!: { [key: string]: Promise<string | undefined> };
     putLocks!: Map<string, CancellationToken>;
 
     constructor() {
@@ -56,7 +55,7 @@ class Cache {
     }
 
     // Retrieve data from cache or fetch from backend if not available
-    async get(photo: string, resolution: number): Promise<string> {
+    async get(photo: string, resolution: number): Promise<string | undefined> {
         const key = this.key(photo, resolution.toString());
         if (this.cache.has(key)) {
             // Cache hit - Move the key to the end to mark it as most recently used
@@ -67,34 +66,45 @@ class Cache {
         } else {
             if (this.requests[key] !== undefined) {
                 // Cache miss but ongoing request for the same data - return the promise
-                const fetch = this.requests[key]; // Await the promise to get the retrieved data
-                const res: Res = await fetch();
-                return res.data;
+                return this.requests[key];
             }
 
             // Cache miss and no ongoing request - create a new promise for data retrieval
-            const fetch = async (): Promise<Res> => {
-                // Fetch data from the backend
-                const res: Res = await api.photo.readPhoto(photo, resolution);
+            const fetch = new Promise<string | undefined>(async (resolve, reject) => {
+                try {
+                    // Fetch data from the backend
+                    const response: any = await api.photo.readPhoto(photo, resolution);
 
-                if (res.success) {
-                    console.log(res);
-                    const data = res.data;
-                    console.log(res.data);
-                    // Cache the retrieved data
-                    this.put(key, data);
+                    if (response.success) {
+                        const data = response.data.uri;
+                        // Cache the retrieved data and resolve the promise with it
+                        this.put(key, data);
+                        resolve(data);
+                    } else {
+                        // Reject the promise with the error message
+                        reject(new Error(response.error));
+                    }
+                } catch (error) {
+                    // Reject the promise with any other error that occurred
+                    reject(error);
                 }
 
-                delete this.requests[key]; // Remove the request from the requests object
-                return res;
-            }
+                // Remove the request from requests once resolved or rejected
+                delete this.requests[key];
+            });
 
             // Store the promise in the requests object
             this.requests[key] = fetch;
 
-            // Await the promise to get the retrieved data
-            const res: Res = await fetch();
-            return res.data;
+            try {
+                // Await the promise to get the retrieved data
+                const data = await fetch;
+                return data;
+            } catch (error) {
+                // Handle the error here or propagate it to the calling code
+                console.error(error);
+                return undefined;
+            }
         }
     }
 
@@ -144,6 +154,4 @@ class Cache {
     }
 }
 
-const cache = new Cache();
-
-export default cache;
+export default new Cache();

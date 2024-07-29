@@ -1,33 +1,36 @@
-import React, { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import photos from "../../data/constants/photos";
 import cache from "../../data/server/cache";
 
 interface PhotoComponentProps {
-    photo: string,
-    resolution?: number,
-    width?: string,
-    height?: string,
-    style?: React.CSSProperties,
+    photo: string;
+    resolution?: number;
+    style?: object;
 }
 
-const PhotoComponent = ({ photo, resolution = 1080, width, height, style }: PhotoComponentProps) => {
+export default function PhotoComponent({ photo, resolution = 1080, style }: PhotoComponentProps) {
     const [source, setSource] = useState(photos.defaultImage);
 
     useEffect(() => {
         const fetchPhoto = async () => {
             if (typeof photo === 'string') {
                 if (photo.startsWith("file://")) {
+                    // Handling a local file
                     setSource({ uri: photo });
-                }
-                else if (photo.startsWith('http')) {
+                } else if (photo.startsWith('http')) {
+                    // Handling a link to an image
                     setSource(photo);
+                } else if (photo.startsWith('data:image')) {
+                    // Handling base64 data directly
+                    setSource(photo);
+                } else if (photo) {
+                    // Handling a photo ID from the backend
+                    const uri: string | undefined = await cache.get(photo, resolution);
+                    if (uri) {
+                        setSource(uri);
+                    }
                 }
-                else {
-                    const source = await cache.get(photo, resolution);
-                    setSource(source);
-                }
-            }
-            else {
+            } else {
                 setSource(photo);
             }
         };
@@ -36,18 +39,10 @@ const PhotoComponent = ({ photo, resolution = 1080, width, height, style }: Phot
     }, [photo, resolution]);
 
     return (
-        <div style={style ? style : {
-            display: 'flex',
+        <img alt="" src={source} style={{
             width: '100%',
             height: '100%',
-        }}>
-            <img src={source} alt="" style={{
-                width: width ? width : 'auto',
-                height: height ? height : 'auto',
-                objectFit: 'cover',
-            }} />
-        </div>
+            ...style,
+        }} />
     );
 }
-
-export default PhotoComponent;

@@ -10,7 +10,7 @@ function useFetch<T>(type: string, id: string, initialData: T): T {
 
     useEffect(() => {
         const fetchData = async (id: string) => {
-            if (!id) return;
+            if (!id || !type) return;
     
             api.general.read(type, id).then((res: Res) => {
                 if (res.success) {
