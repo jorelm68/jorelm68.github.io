@@ -1,5 +1,5 @@
 interface PageProps {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 export default function Page({ children }: PageProps) {
