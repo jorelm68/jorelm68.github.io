@@ -1,5 +1,6 @@
 const photos = {
     defaultImage: require('../../assets/photos/defaultImage.jpg'),
+    gear: require('../../assets/photos/gear.jpg'),
     headshot: require('../../assets/photos/headshot.jpg'),
     generic1: require('../../assets/photos/generic1.jpg'),
     generic2: require('../../assets/photos/generic2.jpg'),
@@ -29,6 +30,7 @@ const photos = {
 
 export interface Photos {
     defaultImage: any;
+    gear: any;
     generic1: any;
     generic2: any;
     generic3: any;

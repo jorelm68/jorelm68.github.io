@@ -6,9 +6,12 @@ import { Res } from "../../data/constants/types";
 import PostComponent from "../components/PostComponent";
 import Page from "../components/Page";
 import View from "../components/View";
+import { useAppSelector } from "../../data/redux/hooks";
 
 
 const LandingScreen = () => {
+    const { isAuthenticated } = useAppSelector(state => state.global);
+
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(setScreen('LandingScreen'));
@@ -33,6 +36,10 @@ const LandingScreen = () => {
                     </View>
                 )
             })}
+
+            {isAuthenticated && (
+                <h1>View more</h1>
+            )}
         </Page>
     )
 }

@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../data/redux/hooks";
 import photos from "../../data/constants/photos";
+import PhotoComponent from "./PhotoComponent";
 
 const NavbarComponent = () => {
-    const { screen } = useAppSelector(state => state.global);
+    const { screen, isAuthenticated } = useAppSelector(state => state.global);
     const headshot = photos.headshot;
 
     const linkStyle = (active: boolean) => ({
@@ -122,6 +123,30 @@ const NavbarComponent = () => {
                     </Link>
                 </div>
             </div>
+
+            {isAuthenticated && (
+                <Link
+                    to="/dev"
+                    style={{
+                        width: '24px',
+                        height: '24px',
+                        position: 'absolute',
+                        top: 0,
+                        right: 0,
+                        margin: '8px',
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+                    }}
+                >
+                    <PhotoComponent
+                        photo={photos.gear}
+                    />
+                </Link>
+            )}
         </div>
     )
 }
