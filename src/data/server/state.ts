@@ -23,13 +23,13 @@ function useFetch<T>(type: string, id: string, initialData: T): T {
     }, [id, refresh]);
 
     useEffect(() => {
-        // const interval = setInterval(() => {
-        //     setRefresh(new Date().getTime());
-        // }, 1000);
+        const interval = setInterval(() => {
+            setRefresh(new Date().getTime());
+        }, 1000);
 
-        // return () => {
-        //     clearInterval(interval);
-        // }
+        return () => {
+            clearInterval(interval);
+        }
     }, [])
 
     return data;

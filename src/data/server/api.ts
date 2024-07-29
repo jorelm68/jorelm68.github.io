@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { Res } from '../constants/types';
-import { EMPTY_RES } from '../constants/empty';
+import { Res } from '../constants/types'
+import { EMPTY_RES } from '../constants/empty'
 // import { API_URL, API_KEY } from '@env'
 
 // const API_URL = 'https://scrap-back-end-6a4f36f8f7ee.herokuapp.com'
@@ -56,12 +56,14 @@ async function handlePost(route: string, data?: any, blob: boolean = false): Pro
         response.status = error.response.status;
         response.success = false;
         response.errorMessage = error?.response?.data?.errorMessage || error?.message || 'An error occured during the API request';
+
+        console.error(error);
     }
 
     return response;
 }
 
-const routes = {
+export default {
     general: {
         read: async (model: string, _id: string): Promise<Res> => await handlePost('api/general/read', { model, _id }),
         update: async (model: string, _id: string, data: object): Promise<Res> => await handlePost('api/general/update', { model, _id, rawData: JSON.stringify(data) }),
@@ -81,5 +83,3 @@ const routes = {
         searchPosts: async (query: string) => await handlePost('api/portfolio/post/searchPosts', { query }),
     },
 }
-
-export default routes;

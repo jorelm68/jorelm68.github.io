@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import photos from "../../data/constants/photos";
 import cache from "../../data/server/cache";
-import { Res } from "../../data/constants/types";
 
 interface PhotoComponentProps {
     photo: string,
