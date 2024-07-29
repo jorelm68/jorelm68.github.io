@@ -2,10 +2,12 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 type GlobalReducer = {
   screen: string,
+  isAuthenticated: boolean,
 }
 
 const INITIAL_STATE: GlobalReducer = {
   screen: '',
+  isAuthenticated: false,
 };
 
 const authState = createSlice({
@@ -15,9 +17,12 @@ const authState = createSlice({
     setScreen: (state, action: PayloadAction<string>) => {
       state.screen = action.payload;
     },
+    setIsAuthenticated: (state, action: PayloadAction<boolean>) => {
+      state.isAuthenticated = action.payload;
+    },
   },
 });
 
-export const { setScreen } = authState.actions;
+export const { setScreen, setIsAuthenticated } = authState.actions;
 
 export default authState.reducer;

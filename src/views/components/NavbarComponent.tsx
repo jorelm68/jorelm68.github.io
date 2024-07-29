@@ -46,6 +46,9 @@ const NavbarComponent = () => {
                         to="/"
                         style={{
                             fontSize: 0,
+                            width: '44px',
+                            height: '44px',
+                            margin: '2px',
                         }}
                         onMouseEnter={(e) => {
                             e.currentTarget.style.borderColor = 'white';
