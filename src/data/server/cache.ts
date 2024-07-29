@@ -74,7 +74,6 @@ class Cache {
                 try {
                     // Fetch data from the backend
                     const response: any = await api.photo.readPhoto(photo, resolution);
-                    console.log(response);
 
                     if (response.success) {
                         const data = response.data;

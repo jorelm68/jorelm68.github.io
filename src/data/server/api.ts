@@ -42,7 +42,7 @@ async function handlePost(route: string, data?: any, blob: boolean = false): Pro
                 reader.onloadend = () => resolve(reader.result as string);
                 reader.onerror = () => reject('Error reading the blob data');
             });
-            response.data.uri = base64data;
+            response.data = { uri: base64data };
         }
         else {
             // Handle a JSON response
@@ -52,14 +52,10 @@ async function handlePost(route: string, data?: any, blob: boolean = false): Pro
         response.status = 200;
         response.success = true;
         response.errorMessage = '';
-
-        console.log(response);
     } catch (error: any) {
         response.status = error.response.status;
         response.success = false;
         response.errorMessage = error?.response?.data?.errorMessage || error?.message || 'An error occured during the API request';
-
-        console.error(response.errorMessage);
     }
 
     return response;

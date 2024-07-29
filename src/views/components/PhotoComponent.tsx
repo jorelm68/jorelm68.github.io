@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import photos from "../../data/constants/photos";
 import cache from "../../data/server/cache";
+import { Res } from "../../data/constants/types";
 
 interface PhotoComponentProps {
     photo: string,
@@ -12,23 +13,16 @@ interface PhotoComponentProps {
 
 const PhotoComponent = ({ photo, resolution = 1080, width, height, style }: PhotoComponentProps) => {
     const [source, setSource] = useState(photos.defaultImage);
-
-    console.log('I was given this photo,', photo);
-
+    
     useEffect(() => {
         const fetchPhoto = async () => {
             if (typeof photo === 'string') {
-                let type: { uri: string } = { uri: photos.defaultImage };
-                if (photo.startsWith("file://")) {
-                    type = { uri: photo };
+                if (photo.startsWith("file://") || photo.startsWith('http')) {
+                    setSource({ uri: photo });
                 }
                 else {
-                    type = await cache.get(photo, resolution);
-                    console.log('I got this data:', type);
-                }
-
-                if (type) {
-                    setSource(type);
+                    const data = await cache.get(photo, resolution);
+                    setSource({ uri: data.uri });
                 }
             }
             else {
