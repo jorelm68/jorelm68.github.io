@@ -128,7 +128,7 @@ export default function CreatePostScreen() {
         return true;
     };
 
-    const handleMoveImage = (index: number, direction: 'up' | 'down') => {
+    const handleMoveImage = (index: number, direction: 'up' | 'down' | 'top') => {
         const newMediaBase64 = [...mediaBase64];
         const newCaptions = [...captions];
 
@@ -138,6 +138,11 @@ export default function CreatePostScreen() {
         } else if (direction === 'down' && index < mediaBase64.length - 1) {
             [newMediaBase64[index], newMediaBase64[index + 1]] = [newMediaBase64[index + 1], newMediaBase64[index]];
             [newCaptions[index], newCaptions[index + 1]] = [newCaptions[index + 1], newCaptions[index]];
+        } else if (direction === 'top' && index > 0) {
+            const [movedMedia] = newMediaBase64.splice(index, 1);
+            const [movedCaption] = newCaptions.splice(index, 1);
+            newMediaBase64.unshift(movedMedia);
+            newCaptions.unshift(movedCaption);
         }
 
         setMediaBase64(newMediaBase64);
@@ -185,7 +190,7 @@ export default function CreatePostScreen() {
     return (
         <Page style={{ backgroundColor: 'white' }}>
             <form onSubmit={handleSubmit}>
-                <View style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row', gap: '16px', width: '100%' }}>
+                <View style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row', gap: '32px', width: '100%' }}>
                     <div style={{ marginBottom: '16px' }}>
                         <label htmlFor="name">Name:</label>
                         <input
@@ -260,8 +265,16 @@ export default function CreatePostScreen() {
                                     type="button"
                                     onClick={() => handleMoveImage(index, 'down')}
                                     disabled={index === mediaBase64.length - 1}
+                                    style={{ marginRight: '8px' }}
                                 >
                                     Move Down
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => handleMoveImage(index, 'top')}
+                                    disabled={index === 0}
+                                >
+                                    Move to Top
                                 </button>
                             </div>
                         </div>
