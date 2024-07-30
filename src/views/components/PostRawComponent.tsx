@@ -9,7 +9,6 @@ interface PostRawComponentProps {
     name: string;
     description: string;
     media: string[];
-    link: string;
     color: string;
     backgroundColor: string;
 }
@@ -18,14 +17,12 @@ export default function PostRawComponent({
     name,
     description,
     media,
-    link,
     color,
     backgroundColor,
 }: PostRawComponentProps) {
 
     return (
-        <Link
-            to={link ? link : ''}
+        <View
             style={{
                 display: 'flex',
                 flexDirection: 'row',
@@ -94,6 +91,6 @@ export default function PostRawComponent({
                     </Text>
                 )}
             </View>
-        </Link>
+        </View>
     );
 }

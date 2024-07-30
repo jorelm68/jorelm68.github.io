@@ -150,5 +150,6 @@ export default {
                 ...mediaData,
             });
         },
+        deletePost: async (_id: string) => await handlePost('api/portfolio/post/deletePost', { _id }),
     },
 }

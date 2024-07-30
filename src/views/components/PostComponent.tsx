@@ -4,12 +4,14 @@ import { usePost } from "../../data/server/state";
 import { EMPTY_POST } from "../../data/constants/empty";
 import View from "./View";
 import Text from "./Text";
+import { useAppSelector } from "../../data/redux/hooks";
 
 interface PostComponentProps {
     post: string,
 }
 
 const PostComponent = ({ post: _id }: PostComponentProps) => {
+    const { isAuthenticated } = useAppSelector(state => state.global);
     const post = usePost(_id);
 
     if (!post) {
@@ -88,6 +90,30 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                         </Text>
                     )}
                 </View>
+
+                {isAuthenticated && (
+                    <Link
+                        to={`/post/${_id}/edit`}
+
+                        style={{
+                            textDecoration: 'none',
+                            alignSelf: 'flex-end',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: '24px',
+                            height: '24px',
+                            zIndex: 5,
+                        }}
+                    >
+                        <Text style={{
+                            fontSize: '1.5em',
+                            color: 'black',
+                        }}>
+                            🖊
+                        </Text>
+                    </Link>
+                )}
             </Link>
         )
     }

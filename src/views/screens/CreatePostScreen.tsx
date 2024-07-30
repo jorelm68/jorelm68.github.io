@@ -392,7 +392,6 @@ export default function CreatePostScreen() {
                     name={name}
                     description={description}
                     media={mediaBase64} // Use Base64 encoded media
-                    link={link}
                     color={color}
                     backgroundColor={backgroundColor}
                 />

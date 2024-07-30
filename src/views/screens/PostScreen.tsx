@@ -103,7 +103,6 @@ export default function PostScreen() {
                             description={captions[index]}
                             color={color}
                             backgroundColor={backgroundColor}
-                            link={''}
                         />
                     )
                 })}
