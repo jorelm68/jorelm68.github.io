@@ -41,6 +41,7 @@ export default function ContactScreen() {
                 style={{
                     width: '50%',
                     height: 'auto',
+                    minWidth: '500px',
                 }}
             />
 

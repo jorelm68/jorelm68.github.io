@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import photos from "../../data/constants/photos";
 import cache from "../../data/server/cache";
+import View from "./View";
 
 interface PhotoComponentProps {
     photo: string | File;
@@ -40,6 +41,10 @@ export default function PhotoComponent({ photo, resolution = 1080, style }: Phot
 
         fetchPhoto();
     }, [photo, resolution]);
+
+    if (source === photos.defaultImage) {
+        return <View />;
+    }
 
     return (
         <img alt="" src={source} style={{
