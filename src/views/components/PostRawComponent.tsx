@@ -25,7 +25,7 @@ export default function PostRawComponent({
 
     return (
         <Link
-            to={link ? link : EMPTY_POST.link}
+            to={link ? link : ''}
             style={{
                 display: 'flex',
                 flexDirection: 'row',
@@ -36,6 +36,7 @@ export default function PostRawComponent({
                 color: color,
                 textDecoration: 'none',
                 padding: '10px',
+                minHeight: '200px',
                 maxHeight: '200px',
                 overflow: 'hidden',
                 borderRadius: '8px',
@@ -64,29 +65,34 @@ export default function PostRawComponent({
                     overflow: 'hidden',
                 }}
             >
-                <Text
-                    style={{
-                        fontSize: '1.5em',
-                        fontWeight: 'bold',
-                        marginBottom: '10px',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        height: '32px',
-                        color: color ? color : EMPTY_POST.color,
-                    }}
-                >
-                    {name ? name : EMPTY_POST.name}
-                </Text>
-                <Text
-                    style={{
-                        fontSize: '1em',
-                        overflow: 'hidden',
-                        color: color ? color : EMPTY_POST.color,
-                    }}
-                >
-                    {description}
-                </Text>
+                {name && (
+                    <Text
+                        style={{
+                            fontSize: '1.5em',
+                            fontWeight: 'bold',
+                            marginBottom: '10px',
+                            whiteSpace: 'nowrap',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            height: '32px',
+                            color: color ? color : EMPTY_POST.color,
+                        }}
+                    >
+                        {name}
+                    </Text>
+                )}
+
+                {description && (
+                    <Text
+                        style={{
+                            fontSize: '1em',
+                            overflow: 'hidden',
+                            color: color ? color : EMPTY_POST.color,
+                        }}
+                    >
+                        {description}
+                    </Text>
+                )}
             </View>
         </Link>
     );

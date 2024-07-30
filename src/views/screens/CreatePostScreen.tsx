@@ -26,7 +26,7 @@ export default function CreatePostScreen() {
     const [location, setLocation] = useState('');
     const [start, setStart] = useState('');
     const [end, setEnd] = useState('');
-    const [link, setLink] = useState('/');
+    const [link, setLink] = useState('/post/<POST>');
     const [color, setColor] = useState('');
     const [backgroundColor, setBackgroundColor] = useState('');
     const [canSubmit, setCanSubmit] = useState(false);

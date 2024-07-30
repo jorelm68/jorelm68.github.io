@@ -10,6 +10,7 @@ import ContactScreen from './views/screens/ContactScreen';
 import MyWorkScreen from './views/screens/MyWorkScreen';
 import AuthScreen from './views/screens/AuthScreen';
 import CreatePostScreen from './views/screens/CreatePostScreen';
+import PostScreen from './views/screens/PostScreen';
 
 function App() {
   useEffect(() => {
@@ -33,6 +34,7 @@ function App() {
 
           <Route path="/auth" element={<AuthScreen />} />
           <Route path="/createPost" element={<CreatePostScreen />} />
+          <Route path="/post/:post" element={<PostScreen />} />
         </Routes>
       </Router>
     </Provider>
