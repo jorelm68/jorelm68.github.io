@@ -253,7 +253,7 @@ export default function CreatePostScreen() {
                             <PhotoComponent 
                                 photo={mediaBase64[index]}
                                 resolution={1080}
-                                style={{ height: 100, width: 100, objectFit: 'cover', marginBottom: 8 }}
+                                style={{ display: 'block', width: 'auto', maxHeight: '200px', height: '100%' }}
                             />
                             <input
                                 type="text"
@@ -322,9 +322,9 @@ export default function CreatePostScreen() {
                     </div>
 
                     <div style={{ marginBottom: '16px' }}>
-                        <label htmlFor="start">Start:</label>
+                        <label htmlFor="start">Start Date:</label>
                         <input
-                            type="text"
+                            type="date"
                             id="start"
                             value={start}
                             onChange={handleChange(setStart)}
@@ -334,9 +334,9 @@ export default function CreatePostScreen() {
                     </div>
 
                     <div style={{ marginBottom: '16px' }}>
-                        <label htmlFor="end">End:</label>
+                        <label htmlFor="end">End Date:</label>
                         <input
-                            type="text"
+                            type="date"
                             id="end"
                             value={end}
                             onChange={handleChange(setEnd)}
@@ -360,7 +360,7 @@ export default function CreatePostScreen() {
                     <div style={{ marginBottom: '16px' }}>
                         <label htmlFor="color">Color:</label>
                         <input
-                            type="text"
+                            type="color"
                             id="color"
                             value={color}
                             onChange={handleChange(setColor)}
@@ -372,7 +372,7 @@ export default function CreatePostScreen() {
                     <div style={{ marginBottom: '16px' }}>
                         <label htmlFor="backgroundColor">Background Color:</label>
                         <input
-                            type="text"
+                            type="color"
                             id="backgroundColor"
                             value={backgroundColor}
                             onChange={handleChange(setBackgroundColor)}

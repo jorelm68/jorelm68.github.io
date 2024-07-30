@@ -150,6 +150,63 @@ export default {
                 ...mediaData,
             });
         },
+        updatePost: async (_id: string, {
+            name,
+            description,
+            selectors,
+            media,
+            captions,
+            essay,
+            link,
+            color,
+            backgroundColor,
+            start,
+            end,
+            location,
+        }: {
+            name: string,
+            description: string,
+            selectors: string,
+            media: string[],
+            captions: string[],
+            essay: string,
+            link: string,
+            color: string,
+            backgroundColor: string,
+            start: string,
+            end: string,
+            location: string,
+        }) => {
+
+            // Create an object with media files as key-value pairs
+            const mediaData = media.reduce((acc, uri, index) => {
+                acc[`file${index}`] = uri;
+                return acc;
+            }, {} as Record<string, string>);
+
+            // Construct the final payload
+            const payload = {
+                name,
+                description,
+                selectors,
+                captions,
+                essay,
+                link,
+                color,
+                backgroundColor,
+                start,
+                end,
+                location,
+                numPhotos: media.length,
+            };
+
+            // Send the payload to the backend
+            return await handlePost('api/portfolio/post/updatePost', {
+                _id,
+                rawData: JSON.stringify(payload),
+                ...mediaData,
+            });
+        },
         deletePost: async (_id: string) => await handlePost('api/portfolio/post/deletePost', { _id }),
     },
 }

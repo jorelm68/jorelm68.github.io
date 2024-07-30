@@ -22,15 +22,15 @@ function useFetch<T>(type: string, id: string | undefined, initialData: T): T {
         fetchData(id);
     }, [type, id, refresh]);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setRefresh(new Date().getTime());
-        }, 1000);
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         setRefresh(new Date().getTime());
+    //     }, 1000);
 
-        return () => {
-            clearInterval(interval);
-        }
-    }, [])
+    //     return () => {
+    //         clearInterval(interval);
+    //     }
+    // }, [])
 
     return data;
 }
