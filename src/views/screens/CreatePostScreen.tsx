@@ -6,6 +6,7 @@ import { useAppSelector } from "../../data/redux/hooks";
 import View from "../components/View";
 import api from "../../data/server/api";
 import PostRawComponent from "../components/PostRawComponent";
+import PhotoComponent from "../components/PhotoComponent";
 
 export default function CreatePostScreen() {
     const { isAuthenticated } = useAppSelector(state => state.global);
@@ -127,6 +128,22 @@ export default function CreatePostScreen() {
         return true;
     };
 
+    const handleMoveImage = (index: number, direction: 'up' | 'down') => {
+        const newMediaBase64 = [...mediaBase64];
+        const newCaptions = [...captions];
+
+        if (direction === 'up' && index > 0) {
+            [newMediaBase64[index], newMediaBase64[index - 1]] = [newMediaBase64[index - 1], newMediaBase64[index]];
+            [newCaptions[index], newCaptions[index - 1]] = [newCaptions[index - 1], newCaptions[index]];
+        } else if (direction === 'down' && index < mediaBase64.length - 1) {
+            [newMediaBase64[index], newMediaBase64[index + 1]] = [newMediaBase64[index + 1], newMediaBase64[index]];
+            [newCaptions[index], newCaptions[index + 1]] = [newCaptions[index + 1], newCaptions[index]];
+        }
+
+        setMediaBase64(newMediaBase64);
+        setCaptions(newCaptions);
+    };
+
     // Handle form submission
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         setLoading(true);
@@ -218,6 +235,11 @@ export default function CreatePostScreen() {
                     {mediaBase64.length > 0 && mediaBase64.map((_, index) => (
                         <div key={index} style={{ marginBottom: '16px' }}>
                             <label htmlFor={`caption-${index}`}>Caption for Media {index + 1}:</label>
+                            <PhotoComponent 
+                                photo={mediaBase64[index]}
+                                resolution={1080}
+                                style={{ height: 100, width: 100, objectFit: 'cover', marginBottom: 8 }}
+                            />
                             <input
                                 type="text"
                                 id={`caption-${index}`}
@@ -225,6 +247,23 @@ export default function CreatePostScreen() {
                                 onChange={handleCaptionChange(index)}
                                 style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
                             />
+                            <div style={{ marginTop: '8px' }}>
+                                <button
+                                    type="button"
+                                    onClick={() => handleMoveImage(index, 'up')}
+                                    disabled={index === 0}
+                                    style={{ marginRight: '8px' }}
+                                >
+                                    Move Up
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => handleMoveImage(index, 'down')}
+                                    disabled={index === mediaBase64.length - 1}
+                                >
+                                    Move Down
+                                </button>
+                            </div>
                         </div>
                     ))}
 
