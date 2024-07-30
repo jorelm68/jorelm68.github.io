@@ -1,12 +1,14 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Page from "../components/Page";
 import { usePost } from "../../data/server/state";
 import View from "../components/View";
 import Text from "../components/Text";
 import PhotoComponent from "../components/PhotoComponent";
 import PostRawComponent from "../components/PostRawComponent";
+import { useAppSelector } from "../../data/redux/hooks";
 
 export default function PostScreen() {
+    const { isAuthenticated } = useAppSelector(state => state.global);
     const { post } = useParams();
     const {
         name,
@@ -57,6 +59,30 @@ export default function PostScreen() {
                     paddingRight: 32,
                     borderRadius: 8,
                 }}>
+                    {isAuthenticated && (
+                        <Link
+                            to={`/post/${post}/edit`}
+
+                            style={{
+                                textDecoration: 'none',
+                                alignSelf: 'flex-end',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                width: '24px',
+                                height: '24px',
+                                zIndex: 5,
+                            }}
+                        >
+                            <Text style={{
+                                fontSize: '1.5em',
+                                color: 'black',
+                            }}>
+                                🖊
+                            </Text>
+                        </Link>
+                    )}
+                    
                     <Text style={{
                         fontSize: 24,
                         fontWeight: 'bold',
