@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Page from "../components/Page";
 import { useDispatch } from "react-redux";
 import { setScreen } from "../../data/redux/global.reducer";
@@ -7,42 +8,73 @@ import View from "../components/View";
 import api from "../../data/server/api";
 import PostRawComponent from "../components/PostRawComponent";
 import PhotoComponent from "../components/PhotoComponent";
+import { usePost } from "../../data/server/state";
 
-export default function CreatePostScreen() {
+export default function EditPostScreen() {
+    const { post } = useParams();
+
     const { isAuthenticated } = useAppSelector(state => state.global);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(setScreen('CreatePostScreen'));
+        dispatch(setScreen('EditPostScreen'));
     }, [dispatch]);
 
     // State for form fields
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [selectors, setSelectors] = useState('');
-    const [mediaBase64, setMediaBase64] = useState<string[]>([]); // State to hold Base64 encoded media
-    const [captions, setCaptions] = useState<string[]>([]); // State to hold captions
+    const [mediaBase64, setMediaBase64] = useState<string[]>([]);
+    const [captions, setCaptions] = useState<string[]>([]);
     const [essay, setEssay] = useState('');
     const [location, setLocation] = useState('');
     const [start, setStart] = useState('');
     const [end, setEnd] = useState('');
-    const [link, setLink] = useState('/post/<POST>');
+    const [link, setLink] = useState('');
     const [color, setColor] = useState('');
     const [backgroundColor, setBackgroundColor] = useState('');
-    const [canSubmit, setCanSubmit] = useState(false);
     const [loading, setLoading] = useState(false);
+
+    const data = usePost(post);
+    useEffect(() => {
+        const {
+            name: initialName,
+            description: initialDescription,
+            selectors: initialSelectors,
+            media: initialMedia,
+            captions: initialCaptions,
+            essay: initialEssay,
+            location: initialLocation,
+            start: initialStart,
+            end: initialEnd,
+            link: initialLink,
+            color: initialColor,
+            backgroundColor: initialBackgroundColor
+        } = data;
+
+        setName(initialName);
+        setDescription(initialDescription);
+        setSelectors(initialSelectors);
+        setMediaBase64(initialMedia);
+        setCaptions(initialCaptions);
+        setEssay(initialEssay);
+        setLocation(initialLocation);
+        setStart(initialStart);
+        setEnd(initialEnd);
+        setLink(initialLink);
+        setColor(initialColor);
+        setBackgroundColor(initialBackgroundColor);
+    }, [data])
 
     // Handle input changes
     const handleChange = (setter: React.Dispatch<React.SetStateAction<string>>) => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setter(event.target.value);
-        setCanSubmit(validateForm());
     };
 
     const handleMediaChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
             const filesArray = Array.from(event.target.files);
 
-            // Convert media files to Base64
             const mediaBase64Promises = filesArray.map(file => {
                 return new Promise<string>((resolve, reject) => {
                     const reader = new FileReader();
@@ -59,9 +91,8 @@ export default function CreatePostScreen() {
 
             try {
                 const mediaBase64 = await Promise.all(mediaBase64Promises);
-                setMediaBase64(prevMedia => [...prevMedia, ...mediaBase64]);
-                setCaptions(prevCaptions => [...prevCaptions, ...new Array(mediaBase64.length).fill('')]); // Initialize captions for new files
-                setCanSubmit(validateForm());
+                setMediaBase64(prev => [...prev, ...mediaBase64]);
+                setCaptions(prev => [...prev, ...new Array(mediaBase64.length).fill('')]);
             } catch (error) {
                 console.error('Error converting files:', error);
             }
@@ -72,70 +103,6 @@ export default function CreatePostScreen() {
         const newCaptions = [...captions];
         newCaptions[index] = event.target.value;
         setCaptions(newCaptions);
-        setCanSubmit(validateForm());
-    };
-
-    const handleRemoveMedia = (index: number) => {
-        const newMediaBase64 = [...mediaBase64];
-        const newCaptions = [...captions];
-        newMediaBase64.splice(index, 1);
-        newCaptions.splice(index, 1);
-        setMediaBase64(newMediaBase64);
-        setCaptions(newCaptions);
-        setCanSubmit(validateForm());
-    };
-
-    const validateForm = () => {
-        if (mediaBase64.length === 0) {
-            return false;
-        }
-
-        if (mediaBase64.length !== captions.length) {
-            return false;
-        }
-
-        if (captions.some(caption => caption === '')) {
-            return false;
-        }
-
-        if (name === '') {
-            return false;
-        }
-
-        if (description === '') {
-            return false;
-        }
-
-        if (essay === '') {
-            return false;
-        }
-
-        if (location === '') {
-            return false;
-        }
-
-        if (start === '') {
-            return false;
-        }
-
-        if (end === '') {
-            return false;
-        }
-
-        if (link === '') {
-            return false;
-        }
-
-        if (color === '') {
-            return false;
-        }
-
-        if (backgroundColor === '') {
-            return false;
-        }
-
-        // If all checks pass, return true
-        return true;
     };
 
     const handleMoveImage = (index: number, direction: 'up' | 'down' | 'top') => {
@@ -159,39 +126,22 @@ export default function CreatePostScreen() {
         setCaptions(newCaptions);
     };
 
-    // Handle form submission
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        setLoading(true);
-        event.preventDefault();
-
-        try {
-            await api.post.createPost({
-                name,
-                description,
-                selectors,
-                media: mediaBase64, // Use Base64 encoded media
-                captions,
-                essay,
-                location,
-                start,
-                end,
-                link,
-                color,
-                backgroundColor,
-            });
-        } catch (error) {
-            console.error('Error creating post:', error);
-        }
-
-        setLoading(false);
-    };
-
     if (!isAuthenticated) {
         return (
             <Page style={{ backgroundColor: 'white' }}>
                 <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '16px', maxWidth: '600px', margin: '0 auto' }}>
-                    <h1>Create Post Screen</h1>
+                    <h1>Edit Post Screen</h1>
                     <p>Please authenticate to access this page.</p>
+                </View>
+            </Page>
+        );
+    }
+
+    if (loading) {
+        return (
+            <Page style={{ backgroundColor: 'white' }}>
+                <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '16px', maxWidth: '600px', margin: '0 auto' }}>
+                    <p>Loading...</p>
                 </View>
             </Page>
         );
@@ -199,8 +149,8 @@ export default function CreatePostScreen() {
 
     return (
         <Page style={{ backgroundColor: 'white' }}>
-            <form onSubmit={handleSubmit}>
-                <View style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row', gap: '32px', width: '100%' }}>
+            <form>
+                <View style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row', gap: '16px', width: '100%' }}>
                     <div style={{ marginBottom: '16px' }}>
                         <label htmlFor="name">Name:</label>
                         <input
@@ -250,7 +200,7 @@ export default function CreatePostScreen() {
                     {mediaBase64.length > 0 && mediaBase64.map((_, index) => (
                         <div key={index} style={{ marginBottom: '16px' }}>
                             <label htmlFor={`caption-${index}`}>Caption for Media {index + 1}:</label>
-                            <PhotoComponent 
+                            <PhotoComponent
                                 photo={mediaBase64[index]}
                                 resolution={1080}
                                 style={{ height: 100, width: 100, objectFit: 'cover', marginBottom: 8 }}
@@ -283,16 +233,8 @@ export default function CreatePostScreen() {
                                     type="button"
                                     onClick={() => handleMoveImage(index, 'top')}
                                     disabled={index === 0}
-                                    style={{ marginRight: '8px' }}
                                 >
                                     Move to Top
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={() => handleRemoveMedia(index)}
-                                    style={{ backgroundColor: 'red', color: 'white' }}
-                                >
-                                    Remove Media
                                 </button>
                             </div>
                         </div>
@@ -381,39 +323,17 @@ export default function CreatePostScreen() {
                         />
                     </div>
 
-                    {canSubmit && !loading && (
-                        <button
-                            type="submit"
-                            style={{
-                                padding: '10px 20px',
-                                fontSize: '16px',
-                                border: 'none',
-                                borderRadius: '5px',
-                                backgroundColor: '#007BFF',
-                                color: '#FFFFFF',
-                                cursor: 'pointer',
-                                transition: 'background-color 0.3s',
-                            }}
-                        >
-                            Submit
-                        </button>
-                    )}
-
-                    {loading && (
-                        <p>Loading...</p>
-                    )}
+                    <div style={{ display: 'flex', alignSelf: 'flex-start', border: '1px solid #000', marginBottom: 8, borderRadius: 8 }}>
+                        <PostRawComponent
+                            name={name}
+                            description={description}
+                            media={mediaBase64} // Use Base64 encoded media
+                            color={color}
+                            backgroundColor={backgroundColor}
+                        />
+                    </div>
                 </View>
             </form>
-
-            <View style={{ display: 'flex', alignSelf: 'flex-start', border: '1px solid #000', marginBottom: 8, borderRadius: 8 }}>
-                <PostRawComponent
-                    name={name}
-                    description={description}
-                    media={mediaBase64} // Use Base64 encoded media
-                    color={color}
-                    backgroundColor={backgroundColor}
-                />
-            </View>
         </Page>
     );
 }
