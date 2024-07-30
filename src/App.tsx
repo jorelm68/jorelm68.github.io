@@ -8,8 +8,8 @@ import LandingScreen from './views/screens/LandingScreen';
 import AboutMeScreen from './views/screens/AboutMeScreen';
 import ContactScreen from './views/screens/ContactScreen';
 import MyWorkScreen from './views/screens/MyWorkScreen';
-import DevScreen from './views/screens/DevScreen';
 import AuthScreen from './views/screens/AuthScreen';
+import CreatePostScreen from './views/screens/CreatePostScreen';
 
 function App() {
   useEffect(() => {
@@ -32,7 +32,7 @@ function App() {
           <Route path="/myWork" element={<MyWorkScreen />} />
 
           <Route path="/auth" element={<AuthScreen />} />
-          <Route path="/dev" element={<DevScreen />} />
+          <Route path="/createPost" element={<CreatePostScreen />} />
         </Routes>
       </Router>
     </Provider>

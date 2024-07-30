@@ -126,7 +126,7 @@ const NavbarComponent = () => {
 
             {isAuthenticated && (
                 <Link
-                    to="/dev"
+                    to="/createPost"
                     style={{
                         width: '24px',
                         height: '24px',

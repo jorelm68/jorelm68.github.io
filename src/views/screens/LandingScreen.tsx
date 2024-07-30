@@ -28,7 +28,13 @@ const LandingScreen = () => {
     }, []);
 
     return (
-        <Page>
+        <Page style={{
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: 8,
+        }}>
             {posts && posts.length > 0 && posts.map((post: any, index: number) => {
                 return (
                     <View key={index}>

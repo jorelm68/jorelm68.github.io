@@ -21,6 +21,7 @@ export const EMPTY_POST: Post = {
 
     name: '',
     description: '',
+    selectors: '',
     photo: 'https://via.placeholder.com/200',
 
     link: '/',

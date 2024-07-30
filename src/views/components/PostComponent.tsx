@@ -22,7 +22,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
             <Link to={post.link ? post.link : EMPTY_POST.link} style={{
                 textDecoration: 'none',
                 display: 'flex',
-                justifyContent: 'center',
+                justifyContent: 'space-around',
                 alignItems: 'center',
                 maxWidth: post.maxWidth ? post.maxWidth : EMPTY_POST.maxWidth,
                 maxHeight: post.maxHeight ? post.maxHeight : EMPTY_POST.maxHeight,

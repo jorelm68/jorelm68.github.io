@@ -18,6 +18,7 @@ export type Post = {
     _id: string,
     name: string,
     description: string,
+    selectors: string,
     photo: string,
     maxWidth: string,
     maxHeight: string,
