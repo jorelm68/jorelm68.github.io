@@ -6,12 +6,8 @@ import { Res } from "../../data/constants/types";
 import PostComponent from "../components/PostComponent";
 import Page from "../components/Page";
 import View from "../components/View";
-import { useAppSelector } from "../../data/redux/hooks";
-
 
 const LandingScreen = () => {
-    const { isAuthenticated } = useAppSelector(state => state.global);
-
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(setScreen('LandingScreen'));
@@ -33,7 +29,8 @@ const LandingScreen = () => {
             flexDirection: 'row',
             flexWrap: 'wrap',
             justifyContent: 'center',
-            gap: 8,
+            alignContent: 'flex-start',
+            gap: 16,
         }}>
             {posts && posts.length > 0 && posts.map((post: any, index: number) => {
                 return (

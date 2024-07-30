@@ -1,9 +1,7 @@
-import { Link } from "react-router-dom";
 import { EMPTY_POST } from "../../data/constants/empty";
 import PhotoComponent from "./PhotoComponent";
 import View from "./View";
 import Text from "./Text";
-import { useEffect, useRef, useState } from "react";
 
 interface PostRawComponentProps {
     name: string;

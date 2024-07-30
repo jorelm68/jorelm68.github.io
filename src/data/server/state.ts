@@ -6,7 +6,7 @@ import { EMPTY_BLANK, EMPTY_POST } from "../constants/empty";
 // Generic hook for fetching data
 function useFetch<T>(type: string, id: string | undefined, initialData: T): T {
     const [data, setData] = useState<T>(initialData);
-    const [refresh, setRefresh] = useState(0);
+    // const [refresh, setRefresh] = useState(0);
 
     useEffect(() => {
         const fetchData = async (id: string | undefined) => {
@@ -20,7 +20,7 @@ function useFetch<T>(type: string, id: string | undefined, initialData: T): T {
         };
 
         fetchData(id);
-    }, [type, id, refresh]);
+    }, [type, id]);
 
     // useEffect(() => {
     //     const interval = setInterval(() => {

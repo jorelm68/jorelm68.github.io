@@ -3,7 +3,6 @@ import Page from "../components/Page";
 import { usePost } from "../../data/server/state";
 import View from "../components/View";
 import Text from "../components/Text";
-import PhotoComponent from "../components/PhotoComponent";
 import PostRawComponent from "../components/PostRawComponent";
 import { useAppSelector } from "../../data/redux/hooks";
 
@@ -12,7 +11,6 @@ export default function PostScreen() {
     const { post } = useParams();
     const {
         name,
-        description,
         essay,
         backgroundColor,
         color,

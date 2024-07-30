@@ -1,6 +1,13 @@
 const photos = {
     defaultImage: require('../../assets/photos/defaultImage.jpg'),
     gear: require('../../assets/photos/gear.jpg'),
+    gmail: require('../../assets/photos/gmail.png'),
+    phone: require('../../assets/photos/phone.png'),
+    linkedIn: require('../../assets/photos/linkedIn.png'),
+    github: require('../../assets/photos/github.png'),
+    leetcode: require('../../assets/photos/leetcode.png'),
+    pdf: require('../../assets/photos/pdf.png'),
+    handshake: require('../../assets/photos/handshake.png'),
     headshot: require('../../assets/photos/headshot.jpg'),
     generic1: require('../../assets/photos/generic1.jpg'),
     generic2: require('../../assets/photos/generic2.jpg'),
@@ -31,6 +38,8 @@ const photos = {
 export interface Photos {
     defaultImage: any;
     gear: any;
+    handshake: any;
+    headshot: any;
     generic1: any;
     generic2: any;
     generic3: any;

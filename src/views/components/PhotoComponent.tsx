@@ -23,7 +23,10 @@ export default function PhotoComponent({ photo, resolution = 1080, style }: Phot
                 } else if (photo.startsWith('data:image')) {
                     // Handling base64 data directly
                     setSource(photo);
-                } else if (photo) {
+                } else if (photo.startsWith('/static/media/')) {
+                    // Handling a photo from the frontend
+                    setSource(photo);
+                } else if (photo.startsWith('Photo-')) {
                     // Handling a photo ID from the backend
                     const uri: string | undefined = await cache.get(photo, resolution);
                     if (uri) {
