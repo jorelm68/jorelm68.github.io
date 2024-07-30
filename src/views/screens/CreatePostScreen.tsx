@@ -19,103 +19,145 @@ export default function CreatePostScreen() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [selectors, setSelectors] = useState('');
-    const [photo, setPhoto] = useState<File | null>(null);
-    const [photoBase64, setPhotoBase64] = useState<string | null>(null); // State to hold Base64 data
-    const [link, setLink] = useState('');
-    const [maxWidth, setMaxWidth] = useState('');
-    const [maxHeight, setMaxHeight] = useState('');
-    const [minWidth, setMinWidth] = useState('');
-    const [minHeight, setMinHeight] = useState('');
-    const [photoWidth, setPhotoWidth] = useState('');
-    const [photoHeight, setPhotoHeight] = useState('');
+    const [mediaBase64, setMediaBase64] = useState<string[]>([]); // State to hold Base64 encoded media
+    const [captions, setCaptions] = useState<string[]>([]); // State to hold captions
+    const [essay, setEssay] = useState('');
+    const [location, setLocation] = useState('');
+    const [start, setStart] = useState('');
+    const [end, setEnd] = useState('');
+    const [link, setLink] = useState('/');
     const [color, setColor] = useState('');
     const [backgroundColor, setBackgroundColor] = useState('');
-    const [flexDirection, setFlexDirection] = useState('');
-
     const [canSubmit, setCanSubmit] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     // Handle input changes
     const handleChange = (setter: React.Dispatch<React.SetStateAction<string>>) => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setCanSubmit(false);
         setter(event.target.value);
-
-        // Validate the form fields
-        setTimeout(() => {
-            if (name && description && photoBase64 && link && maxWidth && maxHeight && minWidth && minHeight && photoWidth && photoHeight && color && backgroundColor && flexDirection) {
-                setCanSubmit(true);
-            } else {
-                setCanSubmit(false);
-            }
-        }, 10);
+        setCanSubmit(validateForm());
     };
 
-    const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files && event.target.files.length > 0) {
-            setCanSubmit(false);
-            const file = event.target.files[0];
-            setPhoto(file);
+    const handleMediaChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files) {
+            const filesArray = Array.from(event.target.files);
 
-            // Convert the image file to a Base64 string
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                if (reader.result) {
-                    setPhotoBase64(reader.result as string);
-                }
-            };
-            reader.readAsDataURL(file);
+            // Convert media files to Base64
+            const mediaBase64Promises = filesArray.map(file => {
+                return new Promise<string>((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        if (reader.result) {
+                            resolve(reader.result as string);
+                        } else {
+                            reject('Failed to convert file');
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                });
+            });
 
-            // Validate the form fields
-            setTimeout(() => {
-                if (name && description && photoBase64 && link && maxWidth && maxHeight && minWidth && minHeight && photoWidth && photoHeight && color && backgroundColor && flexDirection) {
-                    setCanSubmit(true);
-                } else {
-                    setCanSubmit(false);
-                }
-            }, 10);
+            try {
+                const mediaBase64 = await Promise.all(mediaBase64Promises);
+                setMediaBase64(mediaBase64);
+                setCaptions(new Array(mediaBase64.length).fill('')); // Initialize captions for new files
+                setCanSubmit(validateForm());
+            } catch (error) {
+                console.error('Error converting files:', error);
+            }
         }
     };
 
-    const [loading, setLoading] = useState(false);
+    const handleCaptionChange = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+        const newCaptions = [...captions];
+        newCaptions[index] = event.target.value;
+        setCaptions(newCaptions);
+        setCanSubmit(validateForm());
+    };
+
+    const validateForm = () => {
+        if (mediaBase64.length === 0) {
+            return false;
+        }
+
+        if (mediaBase64.length !== captions.length) {
+            return false;
+        }
+
+        if (captions.some(caption => caption === '')) {
+            return false;
+        }
+
+        if (name === '') {
+            return false;
+        }
+
+        if (description === '') {
+            return false;
+        }
+
+        if (essay === '') {
+            return false;
+        }
+
+        if (location === '') {
+            return false;
+        }
+
+        if (start === '') {
+            return false;
+        }
+
+        if (end === '') {
+            return false;
+        }
+
+        if (link === '') {
+            return false;
+        }
+
+        if (color === '') {
+            return false;
+        }
+
+        if (backgroundColor === '') {
+            return false;
+        }
+
+        // If all checks pass, return true
+        return true;
+    };
+
     // Handle form submission
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         setLoading(true);
         event.preventDefault();
 
-        await api.post.createPost(
-            name,
-            description,
-            selectors,
-            photoBase64 as string, // We know this is not null because we can submit
-            link,
-            maxWidth,
-            minWidth,
-            minHeight,
-            maxHeight,
-            photoWidth,
-            photoHeight,
-            color,
-            backgroundColor,
-            flexDirection,
-            new Date().toISOString(),
-        )
+        try {
+            await api.post.createPost({
+                name,
+                description,
+                selectors,
+                media: mediaBase64, // Use Base64 encoded media
+                captions,
+                essay,
+                location,
+                start,
+                end,
+                link,
+                color,
+                backgroundColor,
+            });
+        } catch (error) {
+            console.error('Error creating post:', error);
+        }
 
-        // You can dispatch an action or call an API to save the form data
         setLoading(false);
     };
 
     if (!isAuthenticated) {
         return (
-            <Page style={{
-                backgroundColor: 'white',
-            }}>
-                <View style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    padding: '16px',
-                    maxWidth: '600px',
-                    margin: '0 auto',
-                }}>
+            <Page style={{ backgroundColor: 'white' }}>
+                <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '16px', maxWidth: '600px', margin: '0 auto' }}>
                     <h1>Create Post Screen</h1>
                     <p>Please authenticate to access this page.</p>
                 </View>
@@ -124,41 +166,9 @@ export default function CreatePostScreen() {
     }
 
     return (
-        <Page style={{
-            backgroundColor: 'white',
-        }}>
-            <View style={{
-                display: 'flex',
-                alignSelf: 'flex-start',
-                border: '1px solid #000',
-                marginBottom: 8,
-                borderRadius: 8,
-            }}>
-                <PostRawComponent
-                    name={name}
-                    description={description}
-                    photoBase64={photoBase64}
-                    link={link}
-                    maxWidth={maxWidth}
-                    minWidth={minWidth}
-                    minHeight={minHeight}
-                    maxHeight={maxHeight}
-                    photoWidth={photoWidth}
-                    photoHeight={photoHeight}
-                    color={color}
-                    backgroundColor={backgroundColor}
-                    flexDirection={flexDirection}
-                />
-            </View>
-
+        <Page style={{ backgroundColor: 'white' }}>
             <form onSubmit={handleSubmit}>
-                <View style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    flexDirection: 'row',
-                    gap: '16px',
-                    width: '100%',
-                }}>
+                <View style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row', gap: '16px', width: '100%' }}>
                     <div style={{ marginBottom: '16px' }}>
                         <label htmlFor="name">Name:</label>
                         <input
@@ -194,13 +204,74 @@ export default function CreatePostScreen() {
                     </div>
 
                     <div style={{ marginBottom: '16px' }}>
-                        <label htmlFor="photo">Upload Photo:</label>
+                        <label htmlFor="media">Upload Media:</label>
                         <input
                             type="file"
-                            id="photo"
+                            id="media"
                             accept="image/*"
-                            onChange={handlePhotoChange}
+                            multiple
+                            onChange={handleMediaChange}
                             style={{ display: 'block' }}
+                        />
+                    </div>
+
+                    {mediaBase64.length > 0 && mediaBase64.map((_, index) => (
+                        <div key={index} style={{ marginBottom: '16px' }}>
+                            <label htmlFor={`caption-${index}`}>Caption for Media {index + 1}:</label>
+                            <input
+                                type="text"
+                                id={`caption-${index}`}
+                                value={captions[index]}
+                                onChange={handleCaptionChange(index)}
+                                style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
+                            />
+                        </div>
+                    ))}
+
+                    <div style={{ marginBottom: '16px' }}>
+                        <label htmlFor="essay">Essay:</label>
+                        <textarea
+                            id="essay"
+                            value={essay}
+                            onChange={handleChange(setEssay)}
+                            required
+                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px', height: '150px' }}
+                        />
+                    </div>
+
+                    <div style={{ marginBottom: '16px' }}>
+                        <label htmlFor="location">Location:</label>
+                        <input
+                            type="text"
+                            id="location"
+                            value={location}
+                            onChange={handleChange(setLocation)}
+                            required
+                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
+                        />
+                    </div>
+
+                    <div style={{ marginBottom: '16px' }}>
+                        <label htmlFor="start">Start:</label>
+                        <input
+                            type="text"
+                            id="start"
+                            value={start}
+                            onChange={handleChange(setStart)}
+                            required
+                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
+                        />
+                    </div>
+
+                    <div style={{ marginBottom: '16px' }}>
+                        <label htmlFor="end">End:</label>
+                        <input
+                            type="text"
+                            id="end"
+                            value={end}
+                            onChange={handleChange(setEnd)}
+                            required
+                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
                         />
                     </div>
 
@@ -211,72 +282,7 @@ export default function CreatePostScreen() {
                             id="link"
                             value={link}
                             onChange={handleChange(setLink)}
-                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
-                        />
-                    </div>
-
-                    <div style={{ marginBottom: '16px' }}>
-                        <label htmlFor="maxWidth">Max Width:</label>
-                        <input
-                            type="text"
-                            id="maxWidth"
-                            value={maxWidth}
-                            onChange={handleChange(setMaxWidth)}
-                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
-                        />
-                    </div>
-
-                    <div style={{ marginBottom: '16px' }}>
-                        <label htmlFor="maxHeight">Max Height:</label>
-                        <input
-                            type="text"
-                            id="maxHeight"
-                            value={maxHeight}
-                            onChange={handleChange(setMaxHeight)}
-                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
-                        />
-                    </div>
-
-                    <div style={{ marginBottom: '16px' }}>
-                        <label htmlFor="minWidth">Min Width:</label>
-                        <input
-                            type="text"
-                            id="minWidth"
-                            value={minWidth}
-                            onChange={handleChange(setMinWidth)}
-                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
-                        />
-                    </div>
-
-                    <div style={{ marginBottom: '16px' }}>
-                        <label htmlFor="minHeight">Min Height:</label>
-                        <input
-                            type="text"
-                            id="minHeight"
-                            value={minHeight}
-                            onChange={handleChange(setMinHeight)}
-                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
-                        />
-                    </div>
-
-                    <div style={{ marginBottom: '16px' }}>
-                        <label htmlFor="photoWidth">Photo Width:</label>
-                        <input
-                            type="text"
-                            id="photoWidth"
-                            value={photoWidth}
-                            onChange={handleChange(setPhotoWidth)}
-                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
-                        />
-                    </div>
-
-                    <div style={{ marginBottom: '16px' }}>
-                        <label htmlFor="photoHeight">Photo Height:</label>
-                        <input
-                            type="text"
-                            id="photoHeight"
-                            value={photoHeight}
-                            onChange={handleChange(setPhotoHeight)}
+                            required
                             style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
                         />
                     </div>
@@ -288,6 +294,7 @@ export default function CreatePostScreen() {
                             id="color"
                             value={color}
                             onChange={handleChange(setColor)}
+                            required
                             style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
                         />
                     </div>
@@ -299,17 +306,7 @@ export default function CreatePostScreen() {
                             id="backgroundColor"
                             value={backgroundColor}
                             onChange={handleChange(setBackgroundColor)}
-                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
-                        />
-                    </div>
-
-                    <div style={{ marginBottom: '16px' }}>
-                        <label htmlFor="flexDirection">Flex Direction:</label>
-                        <input
-                            type="text"
-                            id="flexDirection"
-                            value={flexDirection}
-                            onChange={handleChange(setFlexDirection)}
+                            required
                             style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
                         />
                     </div>
@@ -336,8 +333,18 @@ export default function CreatePostScreen() {
                         <p>Loading...</p>
                     )}
                 </View>
-
             </form>
+
+            <View style={{ display: 'flex', alignSelf: 'flex-start', border: '1px solid #000', marginBottom: 8, borderRadius: 8 }}>
+                <PostRawComponent
+                    name={name}
+                    description={description}
+                    media={mediaBase64} // Use Base64 encoded media
+                    link={link}
+                    color={color}
+                    backgroundColor={backgroundColor}
+                />
+            </View>
         </Page >
     );
 }

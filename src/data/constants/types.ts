@@ -16,20 +16,19 @@ export type Blank = {
 
 export type Post = {
     _id: string,
+    
     name: string,
     description: string,
     selectors: string,
-    photo: string,
-    maxWidth: string,
-    maxHeight: string,
-    minWidth: string,
-    minHeight: string,
-    photoWidth: string,
-    photoHeight: string,
+    media: string[],
+    captions: string[],
+    essay: string,
+    link: string,
     color: string,
     backgroundColor: string,
-    link: string,
-    flexDirection: string,
-    
+    start: string,
+    end: string,
+    location: string,
+
     createdAt: Date,
 }

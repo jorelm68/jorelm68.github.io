@@ -3,7 +3,7 @@ import photos from "../../data/constants/photos";
 import cache from "../../data/server/cache";
 
 interface PhotoComponentProps {
-    photo: string;
+    photo: string | File;
     resolution?: number;
     style?: object;
 }

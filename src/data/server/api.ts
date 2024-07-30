@@ -21,7 +21,7 @@ async function handlePost(route: string, data?: any, blob: boolean = false): Pro
 
         // Handle file conversion if needed
         for (const key in data) {
-            if (key === 'file' && typeof data[key] === 'string') {
+            if (key.includes('file') && typeof data[key] === 'string') {
                 // Convert URI to File if necessary
                 const file = await fetchFileFromUri(data[key]);
                 formData.append(key, file);
@@ -94,38 +94,61 @@ export default {
     },
     post: {
         searchPosts: async (query: string) => await handlePost('api/portfolio/post/searchPosts', { query }),
-        createPost: async (
-            name: string,
-            description: string,
-            selectors: string,
-            uri: string,
-            link: string,
-            maxWidth: string,
-            minWidth: string,
-            minHeight: string,
-            maxHeight: string,
-            photoWidth: string,
-            photoHeight: string,
-            color: string,
-            backgroundColor: string,
-            flexDirection: string,
-            createdAt: string,
-        ) => await handlePost('api/portfolio/post/createPost', {
+        createPost: async ({
             name,
             description,
             selectors,
-            file: uri,
+            media,
+            captions,
+            essay,
             link,
-            maxWidth,
-            minWidth,
-            minHeight,
-            maxHeight,
-            photoWidth,
-            photoHeight,
             color,
             backgroundColor,
-            flexDirection,
-            createdAt,
-        }),
+            start,
+            end,
+            location,
+        }: {
+            name: string,
+            description: string,
+            selectors: string,
+            media: string[],
+            captions: string[],
+            essay: string,
+            link: string,
+            color: string,
+            backgroundColor: string,
+            start: string,
+            end: string,
+            location: string,
+        }) => {
+
+            // Create an object with media files as key-value pairs
+            const mediaData = media.reduce((acc, uri, index) => {
+                acc[`file${index}`] = uri;
+                return acc;
+            }, {} as Record<string, string>);
+
+            // Construct the final payload
+            const payload = {
+                name,
+                description,
+                selectors,
+                captions,
+                essay,
+                link,
+                color,
+                backgroundColor,
+                start,
+                end,
+                location,
+                numPhotos: media.length,
+            };
+
+            // Send the payload to the backend
+            return await handlePost('api/portfolio/post/createPost', {
+                rawData: JSON.stringify(payload),
+                ...mediaData,
+            });
+        },
     },
 }

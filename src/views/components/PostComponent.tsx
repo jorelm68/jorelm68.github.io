@@ -19,55 +19,70 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
     }
     else {
         return (
-            <Link to={post.link ? post.link : EMPTY_POST.link} style={{
-                textDecoration: 'none',
+            <Link
+            to={post.link ? post.link : EMPTY_POST.link}
+            style={{
                 display: 'flex',
-                justifyContent: 'space-around',
-                alignItems: 'center',
-                maxWidth: post.maxWidth ? post.maxWidth : EMPTY_POST.maxWidth,
-                maxHeight: post.maxHeight ? post.maxHeight : EMPTY_POST.maxHeight,
-                minWidth: post.minWidth ? post.minWidth : EMPTY_POST.minWidth,
-                minHeight: post.minHeight ? post.minHeight : EMPTY_POST.minHeight,
-                padding: 8,
-                borderRadius: 8,
-                gap: 8,
+                flexDirection: 'row',
+                width: '50vw',
+                minWidth: '400px',
+                maxWidth: '50vw',
                 backgroundColor: post.backgroundColor ? post.backgroundColor : EMPTY_POST.backgroundColor,
-                flexDirection: (post.flexDirection) as 'row' | 'column' || EMPTY_POST.flexDirection,  // Explicit type assertion
-            }}>
-                <View style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    width: post.photoWidth ? post.photoWidth : EMPTY_POST.photoWidth,
-                    height: post.photoHeight ? post.photoHeight : EMPTY_POST.photoHeight,
-                }}>
-                    <PhotoComponent
-                        photo={post.photo ? post.photo : EMPTY_POST.photo}
-                        resolution={1080}
-                    />
-                </View>
-                <View style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 8,
-                }}>
-                    <Text style={{
-                        margin: 0,
-                        padding: 0,
-                        fontSize: 24,
+                color: post.color,
+                textDecoration: 'none',
+                padding: '10px',
+                maxHeight: '200px',
+                overflow: 'hidden'
+            }}
+        >
+            <View
+                style={{
+                    flex: '0 0 auto',
+                    width: 'auto',
+                    height: '200px',
+                    marginRight: '10px',
+                    overflow: 'hidden'
+                }}
+            >
+                <PhotoComponent
+                    photo={post.media && post.media.length > 0 ? post.media[0] : EMPTY_POST.media[0]}
+                    resolution={1080}
+                    style={{
+                        height: '100%',
+                        width: 'auto',
+                    }}
+                />
+            </View>
+            <View
+                style={{
+                    overflow: 'hidden',
+                }}
+            >
+                <Text
+                    style={{
+                        fontSize: '1.5em',
                         fontWeight: 'bold',
-                        textAlign: 'center',
-                        color: post.color ? post.color : EMPTY_POST.color
-                    }}>{post.name ? post.name : EMPTY_POST.name}</Text>
-                    <Text style={{
-                        margin: 0,
-                        padding: 0,
-                        fontSize: 16,
-                        color: post.color ? post.color : EMPTY_POST.color
-                    }}>{post.description ? post.description : EMPTY_POST.description}</Text>
-                </View>
-            </Link >
+                        marginBottom: '10px',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        height: '32px',
+                        color: post.color ? post.color : EMPTY_POST.color,
+                    }}
+                >
+                    {post.name ? post.name : EMPTY_POST.name}
+                </Text>
+                <Text
+                    style={{
+                        fontSize: '1em',
+                        overflow: 'hidden',
+                        color: post.color ? post.color : EMPTY_POST.color,
+                    }}
+                >
+                    {post.description}
+                </Text>
+            </View>
+        </Link>
         )
     }
 }
