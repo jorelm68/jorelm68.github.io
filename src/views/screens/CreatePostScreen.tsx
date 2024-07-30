@@ -236,23 +236,22 @@ export default function CreatePostScreen() {
                     </div>
 
                     <div style={{ marginBottom: '16px' }}>
-                        <label htmlFor="media">Upload Media:</label>
+                        <label htmlFor="media">Media:</label>
                         <input
                             type="file"
                             id="media"
-                            accept="image/*"
-                            multiple
+                            accept="image/*,video/*"
                             onChange={handleMediaChange}
-                            style={{ display: 'block' }}
+                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
+                            multiple
                         />
                     </div>
 
-                    {mediaBase64.length > 0 && mediaBase64.map((_, index) => (
+                    {mediaBase64.map((media, index) => (
                         <div key={index} style={{ marginBottom: '16px' }}>
                             <label htmlFor={`caption-${index}`}>Caption for Media {index + 1}:</label>
-                            <PhotoComponent 
-                                photo={mediaBase64[index]}
-                                resolution={1080}
+                            <PhotoComponent
+                                photo={media}
                                 style={{ display: 'block', width: 'auto', maxHeight: '200px', height: '100%' }}
                             />
                             <input
@@ -260,10 +259,10 @@ export default function CreatePostScreen() {
                                 id={`caption-${index}`}
                                 value={captions[index]}
                                 onChange={handleCaptionChange(index)}
+                                required
                                 style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
                             />
-                            <div style={{ marginTop: '8px' }}>
-                                <button
+                            <button
                                     type="button"
                                     onClick={() => handleMoveImage(index, 'up')}
                                     disabled={index === 0}
@@ -294,7 +293,6 @@ export default function CreatePostScreen() {
                                 >
                                     Remove Media
                                 </button>
-                            </div>
                         </div>
                     ))}
 
@@ -305,7 +303,7 @@ export default function CreatePostScreen() {
                             value={essay}
                             onChange={handleChange(setEssay)}
                             required
-                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px', height: '150px' }}
+                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px', height: '100px' }}
                         />
                     </div>
 
@@ -380,29 +378,13 @@ export default function CreatePostScreen() {
                             style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
                         />
                     </div>
-
-                    {canSubmit && !loading && (
-                        <button
-                            type="submit"
-                            style={{
-                                padding: '10px 20px',
-                                fontSize: '16px',
-                                border: 'none',
-                                borderRadius: '5px',
-                                backgroundColor: '#007BFF',
-                                color: '#FFFFFF',
-                                cursor: 'pointer',
-                                transition: 'background-color 0.3s',
-                            }}
-                        >
-                            Submit
-                        </button>
-                    )}
-
-                    {loading && (
-                        <p>Loading...</p>
-                    )}
                 </View>
+
+                <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'center' }}>
+                    <button type="submit" disabled={!canSubmit || loading} style={{ padding: '8px 16px', fontSize: '16px' }}>
+                        {loading ? 'Submitting...' : 'Submit'}
+                    </button>
+                </div>
             </form>
 
             <View style={{ display: 'flex', alignSelf: 'flex-start', border: '1px solid #000', marginBottom: 8, borderRadius: 8 }}>

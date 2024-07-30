@@ -177,9 +177,20 @@ export default {
             end: string,
             location: string,
         }) => {
+            let sameMedia = [];
+            let newMedia = [];
+            for (const uri of media) {
+                if (uri.startsWith('Photo')) {
+                    sameMedia.push(uri);
+                }
+                else {
+                    newMedia.push(uri);
+                    sameMedia.push('placeholder');
+                }
+            }
 
             // Create an object with media files as key-value pairs
-            const mediaData = media.reduce((acc, uri, index) => {
+            const mediaData = newMedia.reduce((acc, uri, index) => {
                 acc[`file${index}`] = uri;
                 return acc;
             }, {} as Record<string, string>);
@@ -191,13 +202,14 @@ export default {
                 selectors,
                 captions,
                 essay,
+                media: sameMedia,
                 link,
                 color,
                 backgroundColor,
                 start,
                 end,
                 location,
-                numPhotos: media.length,
+                numPhotos: newMedia.length,
             };
 
             // Send the payload to the backend
