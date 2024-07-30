@@ -24,15 +24,16 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
             style={{
                 display: 'flex',
                 flexDirection: 'row',
-                width: '50vw',
+                width: '40vw',
                 minWidth: '400px',
-                maxWidth: '50vw',
+                maxWidth: '40vw',
                 backgroundColor: post.backgroundColor ? post.backgroundColor : EMPTY_POST.backgroundColor,
                 color: post.color,
                 textDecoration: 'none',
                 padding: '10px',
                 maxHeight: '200px',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                borderRadius: '8px',
             }}
         >
             <View

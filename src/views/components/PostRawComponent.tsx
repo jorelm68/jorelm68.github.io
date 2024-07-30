@@ -29,15 +29,16 @@ export default function PostRawComponent({
             style={{
                 display: 'flex',
                 flexDirection: 'row',
-                width: '50vw',
+                width: '40vw',
                 minWidth: '400px',
-                maxWidth: '50vw',
+                maxWidth: '40vw',
                 backgroundColor: backgroundColor ? backgroundColor : EMPTY_POST.backgroundColor,
                 color: color,
                 textDecoration: 'none',
                 padding: '10px',
                 maxHeight: '200px',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                borderRadius: '8px',
             }}
         >
             <View

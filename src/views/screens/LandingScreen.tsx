@@ -42,10 +42,6 @@ const LandingScreen = () => {
                     </View>
                 )
             })}
-
-            {isAuthenticated && (
-                <h1>View more</h1>
-            )}
         </Page>
     )
 }
