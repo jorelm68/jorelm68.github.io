@@ -28,7 +28,7 @@ const NavbarComponent = () => {
             top: 0,
             left: 0,
             width: '100%',
-            zIndex: 1,
+            zIndex: 100,
             padding: '8px 0',
             backgroundColor: 'rgba(0, 0, 0, 0.5)',
         }}>

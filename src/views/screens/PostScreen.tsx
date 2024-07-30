@@ -21,43 +21,78 @@ export default function PostScreen() {
     return (
         <Page style={{
             flexDirection: 'row',
+            height: '100vh', // Ensure full viewport height
+            overflow: 'hidden', // Prevent scrollbars on the parent
+            paddingTop: 0,
         }}>
             <View style={{
                 display: 'flex',
                 alignSelf: 'flex-start',
                 flexDirection: 'column',
-                backgroundColor,
-                width: '40%',
+                width: '45%',
                 minWidth: '350px',
                 marginLeft: '5%',
-                paddingTop: 16,
-                paddingBottom: 16,
-                paddingLeft: 32,
-                paddingRight: 32,
-                borderRadius: 8,
-                zIndex: 1,
-            }}>
-                <Text style={{
-                    fontSize: 24,
-                    fontWeight: 'bold',
-                    color,
-                    textAlign: 'center',
-                }}>{name}</Text>
+                backgroundColor: 'transparent',
 
-                <Text style={{
-                    fontSize: 16,
-                    color,
-                }}>{essay}</Text>
+                zIndex: 1,
+                overflowY: 'auto', // Enable vertical scrolling
+                maxHeight: '100vh', // Constrain to viewport height
+                scrollbarWidth: 'none', // Hide scrollbar for Firefox
+            }}>
+                <View style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    paddingTop: 48 + 20 + 8,
+                    backgroundColor: 'transparent',
+                }} />
+
+                <View style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignSelf: 'flex-start',
+                    backgroundColor,
+                    paddingBottom: 16,
+                    paddingLeft: 32,
+                    paddingRight: 32,
+                    borderRadius: 8,
+                }}>
+                    <Text style={{
+                        fontSize: 24,
+                        fontWeight: 'bold',
+                        color,
+                        textAlign: 'center',
+                    }}>{name}</Text>
+
+                    <Text style={{
+                        fontSize: 16,
+                        color,
+                    }}>{essay}</Text>
+                </View>
+
+                <View style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    paddingBottom: 32,
+                    backgroundColor: 'transparent',
+                }} />
             </View>
 
             <View style={{
                 display: 'flex',
                 alignSelf: 'flex-start',
-                alignItems: 'center',
+                alignItems: 'flex-end',
                 justifyContent: 'space-around',
                 flexDirection: 'column',
-                width: '50%',
+                width: '45%',
                 gap: '16px',
+                overflowY: 'auto', // Enable vertical scrolling
+                maxHeight: '100vh', // Constrain to viewport height
+                scrollbarWidth: 'none', // Hide scrollbar for Firefox
+                paddingTop: 48 + 20 + 8,
+                zIndex: 2,
+                boxSizing: 'border-box',
             }}>
                 {media && media.length > 0 && media.map((photo, index) => {
                     return (
@@ -72,6 +107,14 @@ export default function PostScreen() {
                         />
                     )
                 })}
+
+                <View style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    paddingBottom: 16,
+                    backgroundColor: 'transparent',
+                }} />
             </View>
         </Page>
     )
