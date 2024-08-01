@@ -37,6 +37,7 @@ export default function Me2Component() {
                     overflow: 'hidden',
                     minWidth: `calc(75vh * ${aspectRatio})`, // Min width relative to height
                     maxWidth: '100%',
+                    pointerEvents: 'none', // Ignore all pointer events
                 }}
             >
                 <PhotoComponent photo={photos.me2} />

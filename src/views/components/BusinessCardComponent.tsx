@@ -47,8 +47,6 @@ export default function BusinessCardComponent() {
                 position: 'absolute',
                 top: 48,
                 left: 0,
-                zIndex: 100, // Ensure this is above other elements
-                pointerEvents: 'auto', // Ensure pointer events are enabled
             }}
         >
             <PhotoComponent
@@ -67,7 +65,7 @@ export default function BusinessCardComponent() {
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    pointerEvents: 'auto', // Ensure this is not set to 'none'
+                    zIndex: 100,
                 }}
             >
                 <Link
@@ -81,7 +79,6 @@ export default function BusinessCardComponent() {
                         top: '82.75%',
                         left: '6.75%',
                         cursor: 'pointer',
-                        zIndex: 101, // Ensure this is above other elements
                     }}
                 />
 
@@ -96,7 +93,6 @@ export default function BusinessCardComponent() {
                         top: '82.75%',
                         left: '30%',
                         cursor: 'pointer',
-                        zIndex: 101, // Ensure this is above other elements
                     }}
                 />
 
@@ -108,9 +104,7 @@ export default function BusinessCardComponent() {
                         top: '82.75%',
                         width: '30.75%',
                         height: '8%',
-                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
                         cursor: 'pointer',
-                        zIndex: 101, // Ensure this is above other elements
                     }}
                 />
             </View>
