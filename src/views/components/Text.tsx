@@ -6,7 +6,11 @@ interface TextProps extends HTMLProps<HTMLParagraphElement> {
 
 const Text: React.FC<TextProps> = ({ children, ...rest }) => {
     return (
-        <p {...rest}>{children}</p>
+        <p style={{
+            margin: 0,
+            padding: 0,
+            ...rest.style,
+        }} {...rest}>{children}</p>
     );
 }
 

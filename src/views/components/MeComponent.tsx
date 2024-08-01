@@ -5,10 +5,12 @@ import { motion } from "framer-motion";
 
 export default function MeComponent() {
     const [opacity, setOpacity] = useState(1);
+    const [left, setLeft] = useState(0);
 
     useEffect(() => {
         const handleResize = () => {
             setOpacity(window.innerWidth >= 1000 ? 1 : 0);
+            setLeft((window.innerWidth - 1600) > 0 ? 0 : (window.innerWidth - 1600) / 2);
         };
 
         // Set initial opacity
@@ -31,7 +33,7 @@ export default function MeComponent() {
             style={{
                 position: 'absolute',
                 bottom: 0,
-                left: 0,
+                left: left,
                 height: '75vh',
                 display: 'flex',
                 justifyContent: 'center',
