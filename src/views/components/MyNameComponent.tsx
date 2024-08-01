@@ -88,7 +88,7 @@ export default function MyNameComponent() {
                                 x: screen === 'LandingScreen' ? '0%' : '-50%',
                             }}
                             transition={{
-                                x: { duration: 0.35, delay: screen === 'LandingScreen' ? 0 : 2, ease: "backOut" },
+                                x: { duration: screen === 'LandingScreen' ? 0.35 : 0, delay: screen === 'LandingScreen' ? 0 : 2, ease: "backOut" },
                             }}
                         >ETHAN MCINTYRE</motion.p>
                     </View>
@@ -114,7 +114,7 @@ export default function MyNameComponent() {
                                 x: screen === 'LandingScreen' ? '0%' : '-50%',
                             }}
                             transition={{
-                                x: { duration: 0.35, delay: screen === 'LandingScreen' ? 0.1 : 2, ease: "backOut" },
+                                x: { duration: screen === 'LandingScreen' ? 0.35 : 0, delay: screen === 'LandingScreen' ? 0.1 : 2, ease: "backOut" },
                             }}
                         >DEVELOPER</motion.p>
                     </View>
