@@ -44,9 +44,11 @@ export default function BusinessCardComponent() {
                 maxWidth: 885,
                 height: 'auto',
                 transition: 'background-color 0.3s ease',
-                position: 'absolute', // Important to set the container to relative
+                position: 'absolute',
                 top: 48,
                 left: 0,
+                zIndex: 100, // Ensure this is above other elements
+                pointerEvents: 'auto', // Ensure pointer events are enabled
             }}
         >
             <PhotoComponent
@@ -63,8 +65,9 @@ export default function BusinessCardComponent() {
                     position: 'absolute',
                     top: 0,
                     left: 0,
-                    width: '100%', // Ensure it covers the full width of the image
-                    height: '100%', // Ensure it covers the full height of the image
+                    width: '100%',
+                    height: '100%',
+                    pointerEvents: 'auto', // Ensure this is not set to 'none'
                 }}
             >
                 <Link
@@ -78,6 +81,7 @@ export default function BusinessCardComponent() {
                         top: '82.75%',
                         left: '6.75%',
                         cursor: 'pointer',
+                        zIndex: 101, // Ensure this is above other elements
                     }}
                 />
 
@@ -92,22 +96,24 @@ export default function BusinessCardComponent() {
                         top: '82.75%',
                         left: '30%',
                         cursor: 'pointer',
+                        zIndex: 101, // Ensure this is above other elements
                     }}
                 />
 
                 <View
                     onClick={handleDownload}
                     style={{
-                        position: 'absolute', // Position relative to the parent
-                        right: '14.75%', // Use left instead of marginLeft
-                        top: '82.75%', // Use top instead of marginTop
+                        position: 'absolute',
+                        right: '14.75%',
+                        top: '82.75%',
                         width: '30.75%',
                         height: '8%',
-                        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Transparent background
-                        cursor: 'pointer', // Changes the cursor to a pointer when hovering
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        cursor: 'pointer',
+                        zIndex: 101, // Ensure this is above other elements
                     }}
                 />
             </View>
         </motion.div>
-    )
+    );
 }
