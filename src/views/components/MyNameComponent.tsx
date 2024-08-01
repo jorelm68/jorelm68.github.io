@@ -47,45 +47,77 @@ export default function MyNameComponent() {
                 <motion.div
                     initial={{
                         opacity: 0,
-                        x: '-100%',
+                        // x: '-100%',
                     }}
                     animate={{
                         opacity: screen !== 'LandingScreen' ? 0 : 1,
-                        x: screen === 'LandingScreen' ? '0%' : '-100%',
+                        // x: screen === 'LandingScreen' ? '0%' : '-100%',
                     }}
                     exit={{
                         opacity: 0,
-                        x: '-100%',
+                        // x: '-100%',
                     }}
                     transition={{
                         opacity: { duration: 0.35 },
-                        x: { duration: 0.2, ease: "linear" },
+                        // x: { duration: 0.2, ease: "linear" },
                     }}
                     style={{
                         width: '100%',
                         boxSizing: 'border-box',
                     }}
                 >
-                    <Text
-                        style={{
-                            paddingLeft: left,
-                            fontSize: 72,
-                            fontWeight: 'bold',
-                            color: 'white',
-                            textAlign: 'center',
-                            borderTop: '1px solid white',
-                            borderBottom: '1px solid white',
-
-                        }}>ETHAN MCINTYRE</Text>
-
-                    <Text style={{
-                        paddingLeft: left,
-                        fontSize: 72,
-                        fontWeight: 'bold',
-                        color: 'white',
-                        textAlign: 'center',
+                    <View style={{
+                        width: '100%',
+                        boxSizing: 'border-box',
                         borderBottom: '1px solid white',
-                    }}>DEVELOPER</Text>
+                        borderTop: '1px solid white',
+                    }}>
+                        <motion.p
+                            style={{
+                                margin: 0,
+                                paddingLeft: left,
+                                fontSize: 72,
+                                fontWeight: 'bold',
+                                color: 'white',
+                                textAlign: 'center',
+                            }}
+                            initial={{
+                                x: '-50%',
+                            }}
+                            animate={{
+                                x: screen === 'LandingScreen' ? '0%' : '-50%',
+                            }}
+                            transition={{
+                                x: { duration: 0.35, delay: screen === 'LandingScreen' ? 0 : 2, ease: "backOut" },
+                            }}
+                        >ETHAN MCINTYRE</motion.p>
+                    </View>
+
+                    <View style={{
+                        width: '100%',
+                        boxSizing: 'border-box',
+                        borderBottom: '1px solid white',
+                    }}>
+                        <motion.p
+                            style={{
+                                margin: 0,
+                                paddingLeft: left,
+                                fontSize: 72,
+                                fontWeight: 'bold',
+                                color: 'white',
+                                textAlign: 'center',
+                            }}
+                            initial={{
+                                x: '-50%',
+                            }}
+                            animate={{
+                                x: screen === 'LandingScreen' ? '0%' : '-50%',
+                            }}
+                            transition={{
+                                x: { duration: 0.35, delay: screen === 'LandingScreen' ? 0.1 : 2, ease: "backOut" },
+                            }}
+                        >DEVELOPER</motion.p>
+                    </View>
                 </motion.div>
             </AnimatePresence>
         </View>
