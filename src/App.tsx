@@ -12,6 +12,7 @@ import AuthScreen from './views/screens/AuthScreen';
 import CreatePostScreen from './views/screens/CreatePostScreen';
 import PostScreen from './views/screens/PostScreen';
 import EditPostScreen from './views/screens/EditPostScreen';
+import './App.css';
 
 function App() {
   useEffect(() => {

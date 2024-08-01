@@ -48,21 +48,20 @@ const NavbarComponent = () => {
                         style={{
                             fontSize: 0,
                             margin: '2px',
-                            width: '44px',
-                            height: '44px',
-                            minWidth: '44px',
+                            width: '48px',
+                            height: '48px',
+                            minWidth: '48px',
+                            boxSizing: 'border-box',
                         }}
                         onMouseEnter={(e) => {
                             e.currentTarget.style.borderColor = 'white';
-                            e.currentTarget.style.width = '48px';
-                            e.currentTarget.style.height = '48px';
-                            e.currentTarget.style.margin = '0';
+                            e.currentTarget.style.padding = '2px';
+                            e.currentTarget.style.borderWidth = '1px';
                         }}
                         onMouseLeave={(e) => {
                             e.currentTarget.style.borderColor = 'transparent';
-                            e.currentTarget.style.width = '44px';
-                            e.currentTarget.style.height = '44px';
-                            e.currentTarget.style.margin = '2px';
+                            e.currentTarget.style.padding = '0px';
+                            e.currentTarget.style.borderWidth = '0px';
                         }}
                     >
                         <img
