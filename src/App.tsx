@@ -14,8 +14,10 @@ import PostScreen from './views/screens/PostScreen';
 import EditPostScreen from './views/screens/EditPostScreen';
 import './App.css';
 import Text from './views/components/Text';
-import MeComponent from './views/components/MeComponent';
+import Me1Component from './views/components/Me1Component';
 import MyNameComponent from './views/components/MyNameComponent';
+import Me2Component from './views/components/Me2Component';
+import BusinessCardComponent from './views/components/BusinessCardComponent';
 
 function App() {
   useEffect(() => {
@@ -30,7 +32,9 @@ function App() {
       <Router>
         <BackdropComponent />
         <MyNameComponent />
-        <MeComponent />
+        <Me1Component />
+        <Me2Component />
+        <BusinessCardComponent />
         <NavbarComponent />
 
         <Routes>

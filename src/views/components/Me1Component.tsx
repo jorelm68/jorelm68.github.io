@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import View from "./View";
 import { useAppSelector } from "../../data/redux/hooks";
 
-export default function MeComponent() {
-    const { screen = 'LandingScreen' } = useAppSelector(state => state.global);
+export default function Me1Component() {
+    const { screen } = useAppSelector(state => state.global);
 
     const aspectRatio = 1248 / 1102; // Example aspect ratio. Replace with your image's actual aspect ratio.
     const imageHeight = '75vh';
@@ -35,12 +35,11 @@ export default function MeComponent() {
                     justifyContent: 'center',
                     alignItems: 'center',
                     overflow: 'hidden',
-                    pointerEvents: 'none', // Ignore mouse events for this component
                     minWidth: `calc(75vh * ${aspectRatio})`, // Min width relative to height
                     maxWidth: '100%',
                 }}
             >
-                <PhotoComponent photo={photos.me} />
+                <PhotoComponent photo={photos.me1} />
             </motion.div>
         </View>
     );

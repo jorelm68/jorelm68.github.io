@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { setScreen } from "../../data/redux/global.reducer";
 import Page from "../components/Page";
 import View from "../components/View";
-import MeComponent from "../components/MeComponent";
+import Me1Component from "../components/Me1Component";
 import Text from "../components/Text";
 import api from "../../data/server/api";
 import { Res } from "../../data/constants/types";

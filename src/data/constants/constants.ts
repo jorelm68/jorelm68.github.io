@@ -1,5 +1,5 @@
 const constants = {
-    NO_BACKDROP: ['ContactScreen', 'DevScreen', 'MyWorkScreen'],
+    NO_BACKDROP: ['DevScreen', 'MyWorkScreen'],
 }
 
 export default constants;

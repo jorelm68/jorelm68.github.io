@@ -1,15 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, HTMLAttributes } from "react";
 import photos from "../../data/constants/photos";
 import cache from "../../data/server/cache";
 import View from "./View";
 
-interface PhotoComponentProps {
+interface PhotoComponentProps extends HTMLAttributes<HTMLImageElement> {
     photo: string | File;
     resolution?: number;
-    style?: object;
 }
 
-export default function PhotoComponent({ photo, resolution = 1080, style }: PhotoComponentProps) {
+export default function PhotoComponent({ photo, resolution = 1080, ...rest }: PhotoComponentProps) {
     const [source, setSource] = useState(photos.defaultImage);
 
     useEffect(() => {
@@ -47,10 +46,10 @@ export default function PhotoComponent({ photo, resolution = 1080, style }: Phot
     }
 
     return (
-        <img alt="" src={source} style={{
+        <img alt="" {...rest} src={source} style={{
             width: '100%',
             height: '100%',
-            ...style,
+            ...rest.style,
         }} />
     );
 }
