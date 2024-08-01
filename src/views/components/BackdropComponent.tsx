@@ -31,8 +31,8 @@ const BackdropComponent = () => {
             position: 'absolute',
             top: 0,
             left: 0,
-            width: '100%',
-            height: '100%',
+            width: '110%',
+            height: '110%',
             backgroundColor: 'black',
         }}>
             <AnimatePresence>
@@ -40,10 +40,16 @@ const BackdropComponent = () => {
                     key={index}
                     src={photo}
                     alt="Backdrop"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: constants.NO_BACKDROP.includes(screen) ? 0 : 0.33 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: constants.NO_BACKDROP.includes(screen) ? 0.350 : 2 }}
+                    initial={{ opacity: 0, x: '0%' }}
+                    animate={{ 
+                        opacity: constants.NO_BACKDROP.includes(screen) ? 0 : 0.33, 
+                        x: '-5%'
+                    }}
+                    exit={{ opacity: 0, x: '-5%' }}
+                    transition={{ 
+                        opacity: { duration: constants.NO_BACKDROP.includes(screen) ? 0.350 : 2 },
+                        x: { duration: 25, ease: "linear" }  // Adjust the duration as needed
+                    }}
                     style={{
                         position: 'absolute',
                         width: '100%',

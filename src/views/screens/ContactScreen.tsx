@@ -35,16 +35,6 @@ export default function ContactScreen() {
         <Page style={{
             alignItems: 'center',
         }}>
-            <PhotoComponent
-                photo={photos.handshake}
-                resolution={1080}
-                style={{
-                    width: '50%',
-                    height: 'auto',
-                    minWidth: '500px',
-                }}
-            />
-
             <Text style={{
                 color: 'rgba(255, 255, 255, 0.75)',
                 fontSize: 32,

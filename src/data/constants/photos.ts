@@ -7,6 +7,7 @@ const photos = {
     github: require('../../assets/photos/github.png'),
     leetcode: require('../../assets/photos/leetcode.png'),
     pdf: require('../../assets/photos/pdf.png'),
+    me: require('../../assets/photos/me.png'),
     handshake: require('../../assets/photos/handshake.png'),
     headshot: require('../../assets/photos/headshot.jpg'),
     generic1: require('../../assets/photos/generic1.jpg'),

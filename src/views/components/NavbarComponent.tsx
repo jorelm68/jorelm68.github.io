@@ -89,7 +89,7 @@ const NavbarComponent = () => {
                             e.currentTarget.style.backgroundColor = screen === 'AboutMeScreen' ? 'white' : 'rgba(0, 0, 0, 0.5)';
                         }}
                     >
-                        About Me
+                        ABOUT
                     </Link>
 
                     <Link
@@ -104,7 +104,7 @@ const NavbarComponent = () => {
                             e.currentTarget.style.backgroundColor = screen === 'MyWorkScreen' ? 'white' : 'rgba(0, 0, 0, 0.5)';
                         }}
                     >
-                        My Work
+                        WORK
                     </Link>
 
                     <Link
@@ -119,7 +119,7 @@ const NavbarComponent = () => {
                             e.currentTarget.style.backgroundColor = screen === 'ContactScreen' ? 'white' : 'rgba(0, 0, 0, 0.5)';
                         }}
                     >
-                        Contact
+                        CONTACT
                     </Link>
                 </div>
             </div>

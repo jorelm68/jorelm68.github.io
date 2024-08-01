@@ -6,6 +6,9 @@ import { Res } from "../../data/constants/types";
 import PostComponent from "../components/PostComponent";
 import Page from "../components/Page";
 import View from "../components/View";
+import PhotoComponent from "../components/PhotoComponent";
+import photos from "../../data/constants/photos";
+import MeComponent from "../components/MeComponent";
 
 const LandingScreen = () => {
     const dispatch = useDispatch();
@@ -28,17 +31,11 @@ const LandingScreen = () => {
             display: 'flex',
             flexDirection: 'row',
             flexWrap: 'wrap',
-            justifyContent: 'center',
-            alignContent: 'flex-start',
+            justifyContent: 'flex-start',
+            alignContent: 'flex-end',
             gap: 16,
         }}>
-            {posts && posts.length > 0 && posts.map((post: any, index: number) => {
-                return (
-                    <View key={index}>
-                        <PostComponent post={post} />
-                    </View>
-                )
-            })}
+            <MeComponent />
         </Page>
     )
 }
