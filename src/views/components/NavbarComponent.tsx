@@ -9,14 +9,17 @@ const NavbarComponent = () => {
 
     const linkStyle = (active: boolean) => ({
         textDecoration: 'none',
-        backgroundColor: active ? 'white' : 'rgba(0, 0, 0, 0.5)',
-        borderRadius: '24px',
-        padding: '8px 16px',
-        minWidth: 64,
-        width: '15%',
+        fontSize: '12px',
+        height: '48px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         fontWeight: 'bold',
+        boxSizing: 'border-box' as const,
+        padding: '0px 16px',
+        margin: '0px',
         color: active ? 'black' : 'rgba(255, 255, 255, 0.9)',
-        fontSize: 14,
+        backgroundColor: active ? 'white' : 'transparent',
         textAlign: 'center' as const,
         transition: 'all 0.3s ease', // Smooth transition
         boxShadow: active ? '0 4px 8px rgba(0, 0, 0, 0.3)' : 'none', // Add shadow when active
@@ -29,99 +32,74 @@ const NavbarComponent = () => {
             left: 0,
             width: '100%',
             zIndex: 100,
-            padding: '8px 0',
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            backgroundColor: 'rgba(0, 0, 0, 0.75)',
         }}>
-            <div style={{
+            <div className="options" style={{
                 display: 'flex',
-                justifyContent: 'center',
+                justifyContent: 'flex-start',
                 alignItems: 'center',
+                maxHeight: 48,
             }}>
-                <div className="options" style={{
-                    display: 'flex',
-                    justifyContent: 'space-around',
-                    alignItems: 'center',
-                    width: '50%',
-                }}>
-                    <Link
-                        to="/"
+                <Link
+                    to="/"
+                    style={{
+                        width: '48px',
+                        height: '48px',
+                        minWidth: '48px',
+                        boxSizing: 'border-box',
+                    }}
+                >
+                    <img
+                        src={headshot}
+                        alt="headshot"
                         style={{
-                            fontSize: 0,
-                            margin: '2px',
-                            width: '48px',
-                            height: '48px',
-                            minWidth: '48px',
+                            width: '100%',
+                            height: '100%',
                             boxSizing: 'border-box',
+                            transition: 'border-color 0.3s ease', // Smooth transition
                         }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.borderColor = 'white';
-                            e.currentTarget.style.padding = '2px';
-                            e.currentTarget.style.borderWidth = '1px';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.borderColor = 'transparent';
-                            e.currentTarget.style.padding = '0px';
-                            e.currentTarget.style.borderWidth = '0px';
-                        }}
-                    >
-                        <img
-                            src={headshot}
-                            alt="headshot"
-                            style={{
-                                width: '100%',
-                                height: '100%',
-                                borderRadius: 100,
-                                border: screen === 'LandingScreen' ? '2px solid white' : '2px solid transparent',
-                                transition: 'border-color 0.3s ease', // Smooth transition
-                            }}
-                        />
-                    </Link>
+                    />
+                </Link>
 
-                    <Link
-                        to="/aboutMe"
-                        style={linkStyle(screen === 'AboutMeScreen')}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.fontSize = '16px';
-                            e.currentTarget.style.backgroundColor = screen === 'AboutMeScreen' ? 'white' : 'transparent';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.fontSize = '14px';
-                            e.currentTarget.style.backgroundColor = screen === 'AboutMeScreen' ? 'white' : 'rgba(0, 0, 0, 0.5)';
-                        }}
-                    >
-                        ABOUT
-                    </Link>
+                <Link
+                    to="/aboutMe"
+                    style={linkStyle(screen === 'AboutMeScreen')}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.textDecoration = 'underline';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.textDecoration = 'none';
+                    }}
+                >
+                    ABOUT
+                </Link>
 
-                    <Link
-                        to="/myWork"
-                        style={linkStyle(screen === 'MyWorkScreen')}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.fontSize = '16px';
-                            e.currentTarget.style.backgroundColor = screen === 'MyWorkScreen' ? 'white' : 'transparent';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.fontSize = '14px';
-                            e.currentTarget.style.backgroundColor = screen === 'MyWorkScreen' ? 'white' : 'rgba(0, 0, 0, 0.5)';
-                        }}
-                    >
-                        WORK
-                    </Link>
+                <Link
+                    to="/MyWork"
+                    style={linkStyle(screen === 'MyWorkScreen')}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.textDecoration = 'underline';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.textDecoration = 'none';
+                    }}
+                >
+                    WORK
+                </Link>
 
-                    <Link
-                        to="/contact"
-                        style={linkStyle(screen === 'ContactScreen')}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.fontSize = '16px';
-                            e.currentTarget.style.backgroundColor = screen === 'ContactScreen' ? 'white' : 'transparent';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.fontSize = '14px';
-                            e.currentTarget.style.backgroundColor = screen === 'ContactScreen' ? 'white' : 'rgba(0, 0, 0, 0.5)';
-                        }}
-                    >
-                        CONTACT
-                    </Link>
-                </div>
+                <Link
+                    to="/contact"
+                    style={linkStyle(screen === 'ContactScreen')}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.textDecoration = 'underline';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.textDecoration = 'none';
+                    }}
+                >
+                    CONTACT
+                </Link>
+
             </div>
 
             {isAuthenticated && (
