@@ -2,48 +2,46 @@ import { useState, useEffect } from "react";
 import photos from "../../data/constants/photos";
 import PhotoComponent from "./PhotoComponent";
 import { motion } from "framer-motion";
+import View from "./View";
+import { useAppSelector } from "../../data/redux/hooks";
 
 export default function MeComponent() {
-    const [opacity, setOpacity] = useState(1);
-    const [left, setLeft] = useState(0);
+    const { screen = 'LandingScreen' } = useAppSelector(state => state.global);
 
-    useEffect(() => {
-        const handleResize = () => {
-            setOpacity(window.innerWidth >= 1000 ? 1 : 0);
-            setLeft((window.innerWidth - 1600) > 0 ? 0 : (window.innerWidth - 1600) / 2);
-        };
-
-        // Set initial opacity
-        handleResize();
-
-        // Add event listener for window resize
-        window.addEventListener('resize', handleResize);
-
-        // Cleanup event listener on component unmount
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
+    const aspectRatio = 1248 / 1102; // Example aspect ratio. Replace with your image's actual aspect ratio.
+    const imageHeight = '75vh';
 
     return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity }}
-            transition={{ duration: 0.5 }}
-            style={{
-                position: 'absolute',
-                bottom: 0,
-                left: left,
-                height: '75vh',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                overflow: 'hidden',
-                maxWidth: '100%',
-                // Setting a maximum width based on image aspect ratio can be done dynamically
-            }}
-        >
-            <PhotoComponent photo={photos.me} />
-        </motion.div>
+        <View style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            zIndex: -10,
+            paddingTop: 40 + 20 + 8,
+        }}>
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: screen === 'LandingScreen' ? 1 : 0 }}
+                transition={{ duration: screen === 'LandingScreen' ? 1 : 0.35 }}
+                style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    height: imageHeight,
+                    display: 'flex',
+                    alignSelf: 'center',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    overflow: 'hidden',
+                    pointerEvents: 'none', // Ignore mouse events for this component
+                    minWidth: `calc(75vh * ${aspectRatio})`, // Min width relative to height
+                    maxWidth: '100%',
+                }}
+            >
+                <PhotoComponent photo={photos.me} />
+            </motion.div>
+        </View>
     );
 }

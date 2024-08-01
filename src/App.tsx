@@ -14,6 +14,8 @@ import PostScreen from './views/screens/PostScreen';
 import EditPostScreen from './views/screens/EditPostScreen';
 import './App.css';
 import Text from './views/components/Text';
+import MeComponent from './views/components/MeComponent';
+import MyNameComponent from './views/components/MyNameComponent';
 
 function App() {
   useEffect(() => {
@@ -27,6 +29,8 @@ function App() {
     <Provider store={store}>
       <Router>
         <BackdropComponent />
+        <MyNameComponent />
+        <MeComponent />
         <NavbarComponent />
 
         <Routes>

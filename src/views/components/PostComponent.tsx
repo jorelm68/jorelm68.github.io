@@ -34,6 +34,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                     textDecoration: 'none',
                     padding: '10px',
                     maxHeight: '200px',
+                    minHeight: '200px',
                     overflow: 'hidden',
                     borderRadius: '8px',
                 }}
