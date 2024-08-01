@@ -18,8 +18,8 @@ export default function MeComponent() {
             left: 0,
             width: '100%',
             height: '100%',
-            zIndex: -10,
             paddingTop: 48,
+            zIndex: 80,
         }}>
             <motion.div
                 initial={{ opacity: 0 }}

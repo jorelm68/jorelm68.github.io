@@ -9,7 +9,7 @@ const photos = {
     pdf: require('../../assets/photos/pdf.png'),
     me: require('../../assets/photos/me.png'),
     businessCard: require('../../assets/photos/businessCard.png'),
-    handshake: require('../../assets/photos/handshake.png'),
+    businessCardTransparent: require('../../assets/photos/businessCardTransparent.png'),
     headshot: require('../../assets/photos/headshot.jpg'),
     generic1: require('../../assets/photos/generic1.jpg'),
     generic2: require('../../assets/photos/generic2.jpg'),
@@ -38,9 +38,6 @@ const photos = {
 
 
 export interface Photos {
-    defaultImage: any;
-    gear: any;
-    handshake: any;
     headshot: any;
     generic1: any;
     generic2: any;
