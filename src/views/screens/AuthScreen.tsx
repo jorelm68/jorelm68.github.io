@@ -10,6 +10,7 @@ export default function AuthScreen() {
 
     const dispatch = useDispatch();
     useEffect(() => {
+        document.title = 'Auth | Ethan McIntyre';
         dispatch(setScreen('AuthScreen'));
     }, [dispatch]);
 

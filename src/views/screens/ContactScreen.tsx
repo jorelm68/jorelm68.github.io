@@ -12,6 +12,7 @@ import BusinessCardComponent from "../components/BusinessCardComponent";
 export default function ContactScreen() {
     const dispatch = useDispatch();
     useEffect(() => {
+        document.title = 'Contact | Ethan McIntyre';
         dispatch(setScreen('ContactScreen'));
     }, [dispatch]);
 

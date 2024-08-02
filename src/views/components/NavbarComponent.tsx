@@ -5,7 +5,6 @@ import PhotoComponent from "./PhotoComponent";
 
 const NavbarComponent = () => {
     const { screen, isAuthenticated } = useAppSelector(state => state.global);
-    const headshot = photos.headshot;
 
     const linkStyle = (active: boolean) => ({
         textDecoration: 'none',
@@ -50,7 +49,7 @@ const NavbarComponent = () => {
                     }}
                 >
                     <img
-                        src={headshot}
+                        src={photos.initialsTransparent}
                         alt="headshot"
                         style={{
                             width: '100%',

@@ -10,6 +10,7 @@ import photos from "../../data/constants/photos";
 export default function AboutScreen() {
     const dispatch = useDispatch();
     useEffect(() => {
+        document.title = 'About | Ethan McIntyre';
         dispatch(setScreen('AboutScreen'));
     }, [dispatch]);
 

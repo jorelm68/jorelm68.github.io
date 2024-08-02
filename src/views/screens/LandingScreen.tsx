@@ -14,6 +14,7 @@ const LandingScreen = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        document.title = 'Ethan McIntyre';
         dispatch(setScreen('LandingScreen'));
     }, [dispatch]);
 

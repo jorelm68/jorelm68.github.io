@@ -11,6 +11,7 @@ import PostComponent from "../components/PostComponent";
 export default function WorkScreen() {
     const dispatch = useDispatch();
     useEffect(() => {
+        document.title = 'Work | Ethan McIntyre';
         dispatch(setScreen('WorkScreen'));
     }, [dispatch])
 

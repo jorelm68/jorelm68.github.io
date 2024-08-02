@@ -11,6 +11,8 @@ const photos = {
     me2: require('../../assets/photos/me2.png'),
     view1: require('../../assets/photos/view1.jpg'),
     view2: require('../../assets/photos/view2.jpg'),
+    initials: require('../../assets/photos/initials.png'),
+    initialsTransparent: require('../../assets/photos/initialsTransparent.png'),
     skydive: require('../../assets/photos/skydive.jpg'),
     dance: require('../../assets/photos/dance.jpg'),
     businessCard: require('../../assets/photos/businessCard.png'),

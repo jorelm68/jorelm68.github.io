@@ -15,6 +15,7 @@ export default function EditPostScreen() {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        document.title = 'Edit Post | Ethan McIntyre';
         dispatch(setScreen('EditPostScreen'));
     }, [dispatch]);
 
@@ -235,7 +236,11 @@ export default function EditPostScreen() {
     }
 
     return (
-        <Page style={{ backgroundColor: 'white' }}>
+        <Page style={{
+            backgroundColor: 'white',
+            padding: '8px',
+            paddingTop: '56px',
+        }}>
             <form onSubmit={handleSubmit}>
                 <View style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row', gap: '32px', width: '100%' }}>
                     <div style={{ marginBottom: '16px' }}>
@@ -300,36 +305,36 @@ export default function EditPostScreen() {
                                 style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
                             />
                             <button
-                                    type="button"
-                                    onClick={() => handleMoveImage(index, 'up')}
-                                    disabled={index === 0}
-                                    style={{ marginRight: '8px' }}
-                                >
-                                    Move Up
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={() => handleMoveImage(index, 'down')}
-                                    disabled={index === mediaBase64.length - 1}
-                                    style={{ marginRight: '8px' }}
-                                >
-                                    Move Down
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={() => handleMoveImage(index, 'top')}
-                                    disabled={index === 0}
-                                    style={{ marginRight: '8px' }}
-                                >
-                                    Move to Top
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={() => handleRemoveMedia(index)}
-                                    style={{ backgroundColor: 'red', color: 'white' }}
-                                >
-                                    Remove Media
-                                </button>
+                                type="button"
+                                onClick={() => handleMoveImage(index, 'up')}
+                                disabled={index === 0}
+                                style={{ marginRight: '8px' }}
+                            >
+                                Move Up
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => handleMoveImage(index, 'down')}
+                                disabled={index === mediaBase64.length - 1}
+                                style={{ marginRight: '8px' }}
+                            >
+                                Move Down
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => handleMoveImage(index, 'top')}
+                                disabled={index === 0}
+                                style={{ marginRight: '8px' }}
+                            >
+                                Move to Top
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => handleRemoveMedia(index)}
+                                style={{ backgroundColor: 'red', color: 'white' }}
+                            >
+                                Remove Media
+                            </button>
                         </div>
                     ))}
 
