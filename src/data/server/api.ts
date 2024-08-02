@@ -8,7 +8,7 @@ async function fetchFileFromUri(uri: string): Promise<File> {
     return new File([blob], 'filename.jpg', { type: blob.type });
 }
 
-async function handlePost(route: string, data?: any, blob: boolean = false): Promise<Res> {
+async function handleRequest(route: string, type: string, data?: any, blob: boolean = false): Promise<Res> {
     const response: Res = EMPTY_RES;
 
     try {
@@ -31,11 +31,25 @@ async function handlePost(route: string, data?: any, blob: boolean = false): Pro
             headers['Content-Type'] = 'multipart/form-data'
         }
 
-        const serverResponse = await axios.post(`${'https://jorelm68-1dc8eff04a80.herokuapp.com'}/${route}`, formData, {
-            responseType: blob ? 'blob' : 'json',
-            headers,
-        });
+        let serverResponse = null;
+        if (type === 'POST') {
+            serverResponse = await axios.post(`${'https://jorelm68-1dc8eff04a80.herokuapp.com'}/${route}`, formData, {
+                responseType: blob ? 'blob' : 'json',
+                headers,
+            });
+        }
+        else if (type === 'GET') {
+            serverResponse = await axios.get(`${'https://jorelm68-1dc8eff04a80.herokuapp.com'}/${route}`, {
+                params: data,
+                responseType: blob ? 'blob' : 'json',
+                headers,
+            });
+        }
 
+
+        if (!serverResponse) {
+            throw new Error('No response from the server');
+        }
         if (serverResponse.status !== 200) {
             throw new Error(serverResponse.data.errorMessage);
         }
@@ -72,22 +86,22 @@ async function handlePost(route: string, data?: any, blob: boolean = false): Pro
 
 export default {
     general: {
-        read: async (model: string, _id: string): Promise<Res> => await handlePost('api/general/read', { model, _id }),
-        update: async (model: string, _id: string, data: object): Promise<Res> => await handlePost('api/general/update', { model, _id, rawData: JSON.stringify(data) }),
-        push: async (model: string, _id: string, data: object): Promise<Res> => await handlePost('api/general/push', { model, _id, rawData: JSON.stringify(data) }),
-        pull: async (model: string, _id: string, data: object): Promise<Res> => await handlePost('api/general/pull', { model, _id, rawData: JSON.stringify(data) }),
-        exists: async (model: string, data: object): Promise<Res> => await handlePost('api/general/exists', { model, rawData: JSON.stringify(data) }),
-        clean: async (models: string[]): Promise<Res> => await handlePost('api/general/clean', { rawModels: JSON.stringify(models) }),
-        factoryReset: async (): Promise<Res> => await handlePost('api/general/factoryReset'),
+        read: async (model: string, _id: string): Promise<Res> => await handleRequest('api/general/read', 'POST', { model, _id }),
+        update: async (model: string, _id: string, data: object): Promise<Res> => await handleRequest('api/general/update', 'POST', { model, _id, rawData: JSON.stringify(data) }),
+        push: async (model: string, _id: string, data: object): Promise<Res> => await handleRequest('api/general/push', 'POST', { model, _id, rawData: JSON.stringify(data) }),
+        pull: async (model: string, _id: string, data: object): Promise<Res> => await handleRequest('api/general/pull', 'POST', { model, _id, rawData: JSON.stringify(data) }),
+        exists: async (model: string, data: object): Promise<Res> => await handleRequest('api/general/exists', 'POST', { model, rawData: JSON.stringify(data) }),
+        clean: async (models: string[]): Promise<Res> => await handleRequest('api/general/clean', 'POST', { rawModels: JSON.stringify(models) }),
+        factoryReset: async (): Promise<Res> => await handleRequest('api/general/factoryReset', 'POST'),
     },
     photo: {
-        createPhoto: async (uri: string) => await handlePost('api/photo/createPhoto', { file: { uri, type: 'image/jpeg', name: 'file' } }),
-        readPhoto: async (photo: string, resolution: number) => await handlePost('api/photo/readPhoto', { photo, resolution }, true),
-        updatePhoto: async (photo: string, uri: string) => await handlePost('api/photo/updatePhoto', { photo, file: uri }),
-        deletePhoto: async (photo: string) => await handlePost('api/photo/deletePhoto', { photo }),
+        createPhoto: async (uri: string) => await handleRequest('api/photo/createPhoto', 'POST', { file: { uri, type: 'image/jpeg', name: 'file' } }),
+        readPhoto: async (photo: string, resolution: number) => await handleRequest(`api/photo/readPhoto/${photo}/${resolution}`, 'GET', undefined, true),
+        updatePhoto: async (photo: string, uri: string) => await handleRequest('api/photo/updatePhoto', 'POST', { photo, file: uri }),
+        deletePhoto: async (photo: string) => await handleRequest('api/photo/deletePhoto', 'POST', { photo }),
     },
     post: {
-        searchPosts: async (query: string) => await handlePost('api/portfolio/post/searchPosts', { query }),
+        searchPosts: async (query: string) => await handleRequest('api/portfolio/post/searchPosts', 'POST', { query }),
         createPost: async ({
             name,
             description,
@@ -139,7 +153,7 @@ export default {
             };
 
             // Send the payload to the backend
-            return await handlePost('api/portfolio/post/createPost', {
+            return await handleRequest('api/portfolio/post/createPost', 'POST', {
                 rawData: JSON.stringify(payload),
                 ...mediaData,
             });
@@ -207,12 +221,12 @@ export default {
             };
 
             // Send the payload to the backend
-            return await handlePost('api/portfolio/post/updatePost', {
+            return await handleRequest('api/portfolio/post/updatePost', 'POST', {
                 _id,
                 rawData: JSON.stringify(payload),
                 ...mediaData,
             });
         },
-        deletePost: async (_id: string) => await handlePost('api/portfolio/post/deletePost', { _id }),
+        deletePost: async (_id: string) => await handleRequest('api/portfolio/post/deletePost', 'POST', { _id }),
     },
 }
