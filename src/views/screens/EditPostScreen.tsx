@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Page from "../components/Page";
 import { useDispatch } from "react-redux";
 import { setScreen } from "../../data/redux/global.reducer";
@@ -13,6 +13,7 @@ export default function EditPostScreen() {
     const { post } = useParams();
     const { isAuthenticated } = useAppSelector(state => state.global);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         document.title = 'Edit Post | Ethan McIntyre';
@@ -224,6 +225,23 @@ export default function EditPostScreen() {
         setLoading(false);
     };
 
+    const handleDelete = async () => {
+        if (!post) return console.error('No post ID provided for deleting');
+
+        setLoading(true);
+
+        try {
+            await api.post.deletePost(post);
+
+            // Redirect to home page
+            navigate('/');
+        } catch (error) {
+            console.error('Error deleting post:', error);
+        }
+
+        setLoading(false);
+    }
+
     if (!isAuthenticated) {
         return (
             <Page style={{ backgroundColor: 'white' }}>
@@ -420,13 +438,21 @@ export default function EditPostScreen() {
                             style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
                         />
                     </div>
+
+                    <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'center' }}>
+                        <button type="submit" disabled={!canSubmit || loading} style={{ padding: '8px 16px', fontSize: '16px' }}>
+                            {loading ? 'Submitting...' : 'Submit'}
+                        </button>
+                    </div>
+
+                    <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'center' }}>
+                        <button type="button" disabled={loading} onClick={handleDelete} style={{ padding: '8px 16px', fontSize: '16px', color: 'red', }}>
+                            {loading ? 'Deleting...' : 'Delete'}
+                        </button>
+                    </div>
                 </View>
 
-                <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'center' }}>
-                    <button type="submit" disabled={!canSubmit || loading} style={{ padding: '8px 16px', fontSize: '16px' }}>
-                        {loading ? 'Submitting...' : 'Submit'}
-                    </button>
-                </div>
+
             </form>
         </Page>
     );
