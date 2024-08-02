@@ -18,8 +18,8 @@ export default function PostScreen() {
         essay,
         backgroundColor,
         color,
+        urls,
         captions,
-        media,
     } = usePost(post);
 
     useEffect(() => {
@@ -128,11 +128,11 @@ export default function PostScreen() {
                 zIndex: 1,
                 boxSizing: 'border-box',
             }}>
-                {media && media.length > 0 && media.map((photo, index) => {
+                {urls && urls.length > 0 && urls.map((url, index) => {
                     return (
                         <PostRawComponent
                             key={index}
-                            media={[media[index]]}
+                            url={url}
                             name={''}
                             description={captions[index]}
                             color={color}

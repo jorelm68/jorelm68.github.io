@@ -21,7 +21,7 @@ export default function WorkScreen() {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        api.post.searchPosts('work').then((res: Res) => {
+        api.post.searchPosts('').then((res: Res) => {
             setPosts(res.data);
         })
     }, [])
@@ -79,6 +79,15 @@ export default function WorkScreen() {
                     <PostComponent key={index} post={post} />
                 )
             })}
+
+            <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/8Ls7maJvjwQ"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+            ></iframe>
 
             {/* {images.map((image, index) => {
                 return (

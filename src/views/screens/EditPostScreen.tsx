@@ -43,7 +43,6 @@ export default function EditPostScreen() {
                 name: initialName,
                 description: initialDescription,
                 selectors: initialSelectors,
-                media: initialMedia,
                 captions: initialCaptions,
                 essay: initialEssay,
                 location: initialLocation,
@@ -57,7 +56,6 @@ export default function EditPostScreen() {
             setName(initialName);
             setDescription(initialDescription);
             setSelectors(initialSelectors);
-            setMediaBase64(initialMedia);
             setCaptions(initialCaptions);
             setEssay(initialEssay);
             setLocation(initialLocation);

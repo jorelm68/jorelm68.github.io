@@ -48,14 +48,26 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                         overflow: 'hidden'
                     }}
                 >
-                    <PhotoComponent
-                        photo={post.media && post.media.length > 0 ? post.media[0] : EMPTY_POST.media[0]}
-                        resolution={1080}
-                        style={{
-                            height: '100%',
-                            width: 'auto',
-                        }}
-                    />
+                    {post.urls[0] && post.urls[0].includes('api/photo/readPhoto') ? (
+                        <PhotoComponent
+                            photo={post.urls[0]}
+                            resolution={1080}
+                            style={{
+                                height: '100%',
+                                width: 'auto',
+                            }}
+                        />
+                    ) : (
+                        <iframe
+                            src={post.urls[0]}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            title={post.name}
+                            style={{
+                                height: '100%',
+                                width: 'auto',
+                            }}
+                        />
+                    )}
                 </View>
                 <View
                     style={{

@@ -22,7 +22,7 @@ export const EMPTY_POST: Post = {
     name: '',
     description: '',
     selectors: '',
-    media: [],
+    urls: [],
     captions: [],
     essay: '',
     link: '',

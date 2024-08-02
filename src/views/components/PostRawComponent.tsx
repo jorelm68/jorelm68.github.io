@@ -6,7 +6,7 @@ import Text from "./Text";
 interface PostRawComponentProps {
     name: string;
     description: string;
-    media: string[];
+    url: string;
     color: string;
     backgroundColor: string;
 }
@@ -14,7 +14,7 @@ interface PostRawComponentProps {
 export default function PostRawComponent({
     name,
     description,
-    media,
+    url,
     color,
     backgroundColor,
 }: PostRawComponentProps) {
@@ -47,7 +47,7 @@ export default function PostRawComponent({
                 }}
             >
                 <PhotoComponent
-                    photo={media && media.length > 0 ? media[0] : EMPTY_POST.media[0]}
+                    photo={url ? url : EMPTY_POST.urls[0]}
                     resolution={1080}
                     style={{
                         height: '100%',

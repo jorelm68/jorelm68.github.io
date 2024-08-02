@@ -20,7 +20,7 @@ export type Post = {
     name: string,
     description: string,
     selectors: string,
-    media: string[],
+    urls: string[],
     captions: string[],
     essay: string,
     link: string,

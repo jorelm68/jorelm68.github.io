@@ -2,6 +2,11 @@ import axios from 'axios'
 import { Res } from '../constants/types'
 import { EMPTY_RES } from '../constants/empty'
 
+const numbers = '172.25.240.1'
+
+const localURL = `http://${numbers}:4000`
+const serverURL = 'https://jorelm68-1dc8eff04a80.herokuapp.com'
+
 async function fetchFileFromUri(uri: string): Promise<File> {
     const response = await fetch(uri);
     const blob = await response.blob();
@@ -33,13 +38,14 @@ async function handleRequest(route: string, type: string, data?: any, blob: bool
 
         let serverResponse = null;
         if (type === 'POST') {
-            serverResponse = await axios.post(`${'https://jorelm68-1dc8eff04a80.herokuapp.com'}/${route}`, formData, {
+            console.log('POST', `${serverURL}/${route}`, formData);
+            serverResponse = await axios.post(`${localURL}/${route}`, formData, {
                 responseType: blob ? 'blob' : 'json',
                 headers,
             });
         }
         else if (type === 'GET') {
-            serverResponse = await axios.get(`${'https://jorelm68-1dc8eff04a80.herokuapp.com'}/${route}`, {
+            serverResponse = await axios.get(`${serverURL}/${route}`, {
                 params: data,
                 responseType: blob ? 'blob' : 'json',
                 headers,
@@ -129,18 +135,24 @@ export default {
             end: string,
             location: string,
         }) => {
-
             // Create an object with media files as key-value pairs
             const mediaData = media.reduce((acc, uri, index) => {
-                acc[`file${index}`] = uri;
+                // Only add image data, skip youtube ids
+                if (uri.startsWith('data:image')) {
+                    acc[`file${index}`] = uri;
+                }
                 return acc;
             }, {} as Record<string, string>);
+
+            // Replace image URLs in the media list with 'placeholder'
+            const processedMedia = media.map(uri => uri.startsWith('data:image') ? 'placeholder' : uri);
 
             // Construct the final payload
             const payload = {
                 name,
                 description,
                 selectors,
+                media: processedMedia,
                 captions,
                 essay,
                 link,
@@ -149,7 +161,7 @@ export default {
                 start,
                 end,
                 location,
-                numPhotos: media.length,
+                numPhotos: media.filter(uri => uri.startsWith('data:image')).length,
             };
 
             // Send the payload to the backend
