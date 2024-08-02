@@ -29,9 +29,10 @@ export default function CreatePostScreen(): JSX.Element {
         location: '',
         backgroundColor: '#ffffff',
         color: '#000000',
-        start: '',
-        end: ''
+        start: '2024-06-06',
+        end: '2024-08-08'
     });
+    console.log(formData);
     const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
     const [youtubeLink, setYoutubeLink] = useState<string>('');
     const [canSubmit, setCanSubmit] = useState(false);
