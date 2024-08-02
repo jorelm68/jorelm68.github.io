@@ -1,9 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux"
 import { setScreen } from "../../data/redux/global.reducer";
 import Page from "../components/Page";
 import Text from "../components/Text";
 import View from "../components/View";
+import api from "../../data/server/api";
+import { Res } from "../../data/constants/types";
+import PostComponent from "../components/PostComponent";
 
 export default function WorkScreen() {
     const dispatch = useDispatch();
@@ -11,42 +14,32 @@ export default function WorkScreen() {
         dispatch(setScreen('WorkScreen'));
     }, [dispatch])
 
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        api.post.searchPosts('').then((res: Res) => {
+            setPosts(res.data);
+        })
+    }, [])
+
     return (
-        <Page style={{}}>
-
-            <View className="wrapper" style={{
-                width: '100%',
-                maxWidth: '960px',
-                margin: '0 auto',
-            }}>
-                <View className="flex-container" style={{
-                    display: 'flex',
-                    backgroundColor: 'white',
-                    flexWrap: 'wrap',
-
-                }}>
-                    <View className="box-one" style={{
-                        flexGrow: 1,
-                        height: '100px',
-                        minWidth: '200px',
-                        backgroundColor: 'red',
-                    }} />
-
-                    <View className="box-two" style={{
-                        flexGrow: 1,
-                        height: '100px',
-                        minWidth: '200px',
-                        backgroundColor: 'blue',
-                    }} />
-
-                    <View className="box-three" style={{
-                        flexGrow: 1,
-                        height: '100px',
-                        minWidth: '200px',
-                        backgroundColor: 'green',
-                    }} />
-                </View>
-            </View>
+        <Page style={{
+            paddingTop: '48px',
+            paddingBottom: '32px',
+            alignItems: 'center',
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: '16px',
+            boxSizing: 'border-box',
+            scrollbarWidth: 'auto',
+        }}>
+            {posts.map((post, index) => {
+                return (
+                    <PostComponent key={index} post={post} />
+                )
+            })}
         </Page>
     )
 }
