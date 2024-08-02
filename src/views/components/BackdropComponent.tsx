@@ -6,18 +6,12 @@ import constants from "../../data/constants/constants";
 
 const BackdropComponent = () => {
     const { screen } = useAppSelector(state => state.global);
-    const [index, setIndex] = useState(1);
+    const [index, setIndex] = useState(Math.floor(Math.random() * 71) + 1);
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setIndex((prevIndex) => {
-                if (prevIndex === 24) {
-                    return 1;
-                }
-                else {
-                    return prevIndex + 1;
-                }
-            });
+            const randomNumber = Math.floor(Math.random() * 71) + 1;
+            setIndex(randomNumber);
         }, 20000);
 
         return () => clearInterval(interval);
@@ -37,17 +31,17 @@ const BackdropComponent = () => {
             zIndex: -100,
         }}>
             <AnimatePresence>
-                <motion.img 
+                <motion.img
                     key={index}
                     src={photo}
                     alt="Backdrop"
                     initial={{ opacity: 0, x: '0%' }}
-                    animate={{ 
-                        opacity: constants.NO_BACKDROP.includes(screen) ? 0 : 0.33, 
+                    animate={{
+                        opacity: constants.NO_BACKDROP.includes(screen) ? 0 : 0.33,
                         x: '-5%'
                     }}
                     exit={{ opacity: 0, x: '-5%' }}
-                    transition={{ 
+                    transition={{
                         opacity: { duration: constants.NO_BACKDROP.includes(screen) ? 0.350 : 2 },
                         x: { duration: 25, ease: "linear" }  // Adjust the duration as needed
                     }}
