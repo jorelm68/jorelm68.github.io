@@ -7,6 +7,9 @@ import View from "../components/View";
 import api from "../../data/server/api";
 import { Res } from "../../data/constants/types";
 import PostComponent from "../components/PostComponent";
+import axios from "axios";
+import PhotoComponent from "../components/PhotoComponent";
+import photos from "../../data/constants/photos";
 
 export default function WorkScreen() {
     const dispatch = useDispatch();
@@ -18,14 +21,49 @@ export default function WorkScreen() {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        api.post.searchPosts('').then((res: Res) => {
+        api.post.searchPosts('work').then((res: Res) => {
             setPosts(res.data);
         })
     }, [])
 
+
+
+
+
+
+    const [query, setQuery] = useState('moorish architecture');
+    const [images, setImages] = useState<Record<string, any>[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const fetchImages = async () => {
+        setLoading(true);
+        setError(null);
+
+        const API_KEY = 'AapsNavsOWPuyDk2gvRSO027MiXYVuw1p9KQ0a4zWkVzBmtaDgA19Fsm'; // Replace with your Pexels API key
+        const endpoint = `https://api.pexels.com/v1/search?query=${query}&per_page=10`;
+
+        try {
+            const response = await axios.get(endpoint, {
+                headers: {
+                    Authorization: API_KEY,
+                },
+            });
+            setImages(response.data.photos);
+        } catch (err: any) {
+            setError('Failed to fetch images.');
+        } finally {
+            setLoading(false);
+        }
+    };
+    useEffect(() => {
+        fetchImages();
+    }, [])
+    console.log(images);
+
     return (
         <Page style={{
-            paddingTop: `${48 + 32}px`,
+            paddingTop: `${48}px`,
             paddingBottom: '32px',
             alignItems: 'center',
             display: 'flex',
@@ -41,6 +79,16 @@ export default function WorkScreen() {
                     <PostComponent key={index} post={post} />
                 )
             })}
+
+            {/* {images.map((image, index) => {
+                return (
+                    <PhotoComponent key={index} photo={image.src.original} style={{
+                        width: 'calc(50% - 16px)',
+                        height: 'calc(50% - 16px)',
+                        objectFit: 'cover',
+                    }} />
+                )
+            })} */}
         </Page>
     )
 }

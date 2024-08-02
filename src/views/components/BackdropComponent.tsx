@@ -3,6 +3,7 @@ import { useAppSelector } from "../../data/redux/hooks";
 import photos, { Photos } from "../../data/constants/photos";
 import { AnimatePresence, motion } from "framer-motion";
 import constants from "../../data/constants/constants";
+import axios from "axios";
 
 const BackdropComponent = () => {
     const { screen } = useAppSelector(state => state.global);

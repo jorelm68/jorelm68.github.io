@@ -17,7 +17,7 @@ export default function PhotoComponent({ photo, resolution = 1080, ...rest }: Ph
                 if (photo.startsWith("file://")) {
                     // Handling a local file
                     setSource({ uri: photo });
-                } else if (photo.startsWith('http')) {
+                } else if (photo.includes('https://') || photo.includes('http://')) {
                     // Handling a link to an image
                     setSource(photo);
                 } else if (photo.startsWith('data:image')) {

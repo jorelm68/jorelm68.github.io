@@ -19,6 +19,7 @@ export default function Me2Component() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
+            pointerEvents: 'none',
         }}>
             <motion.div
                 initial={{ opacity: 0 }}

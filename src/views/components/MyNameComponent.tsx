@@ -51,6 +51,7 @@ export default function MyNameComponent() {
                     style={{
                         width: '100%',
                         boxSizing: 'border-box',
+                        pointerEvents: 'none',
                     }}
                 >
                     <View style={{
