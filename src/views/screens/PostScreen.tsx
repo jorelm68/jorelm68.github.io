@@ -69,7 +69,7 @@ export default function PostScreen() {
                                 justifyContent: 'center',
                                 width: '24px',
                                 height: '24px',
-                                zIndex: 5,
+                                zIndex: 1,
                             }}
                         >
                             <Text style={{
@@ -115,7 +115,7 @@ export default function PostScreen() {
                 maxHeight: '100vh', // Constrain to viewport height
                 scrollbarWidth: 'none', // Hide scrollbar for Firefox
                 paddingTop: 48 + 20 + 8,
-                zIndex: 2,
+                zIndex: 1,
                 boxSizing: 'border-box',
             }}>
                 {media && media.length > 0 && media.map((photo, index) => {
