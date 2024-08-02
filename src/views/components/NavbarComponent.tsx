@@ -62,21 +62,8 @@ const NavbarComponent = () => {
                 </Link>
 
                 <Link
-                    to="/aboutMe"
-                    style={linkStyle(screen === 'AboutMeScreen')}
-                    onMouseEnter={(e) => {
-                        e.currentTarget.style.textDecoration = 'underline';
-                    }}
-                    onMouseLeave={(e) => {
-                        e.currentTarget.style.textDecoration = 'none';
-                    }}
-                >
-                    ABOUT
-                </Link>
-
-                <Link
-                    to="/MyWork"
-                    style={linkStyle(screen === 'MyWorkScreen')}
+                    to="/work"
+                    style={linkStyle(screen === 'WorkScreen')}
                     onMouseEnter={(e) => {
                         e.currentTarget.style.textDecoration = 'underline';
                     }}
@@ -85,6 +72,19 @@ const NavbarComponent = () => {
                     }}
                 >
                     WORK
+                </Link>
+
+                <Link
+                    to="/about"
+                    style={linkStyle(screen === 'AboutScreen')}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.textDecoration = 'underline';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.textDecoration = 'none';
+                    }}
+                >
+                    ABOUT
                 </Link>
 
                 <Link

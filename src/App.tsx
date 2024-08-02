@@ -5,19 +5,18 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Us
 import BackdropComponent from './views/components/BackdropComponent';
 import NavbarComponent from './views/components/NavbarComponent';
 import LandingScreen from './views/screens/LandingScreen';
-import AboutMeScreen from './views/screens/AboutMeScreen';
+import AboutScreen from './views/screens/AboutScreen';
 import ContactScreen from './views/screens/ContactScreen';
-import MyWorkScreen from './views/screens/MyWorkScreen';
 import AuthScreen from './views/screens/AuthScreen';
 import CreatePostScreen from './views/screens/CreatePostScreen';
 import PostScreen from './views/screens/PostScreen';
 import EditPostScreen from './views/screens/EditPostScreen';
 import './App.css';
-import Text from './views/components/Text';
 import Me1Component from './views/components/Me1Component';
 import MyNameComponent from './views/components/MyNameComponent';
 import Me2Component from './views/components/Me2Component';
 import BusinessCardComponent from './views/components/BusinessCardComponent';
+import WorkScreen from './views/screens/WorkScreen';
 
 function App() {
   useEffect(() => {
@@ -39,9 +38,9 @@ function App() {
 
         <Routes>
           <Route path="/" element={<LandingScreen />} />
-          <Route path="/aboutMe" element={<AboutMeScreen />} />
+          <Route path="/about" element={<AboutScreen />} />
           <Route path="/contact" element={<ContactScreen />} />
-          <Route path="/myWork" element={<MyWorkScreen />} />
+          <Route path="/work" element={<WorkScreen />} />
 
           <Route path="/auth" element={<AuthScreen />} />
           <Route path="/createPost" element={<CreatePostScreen />} />

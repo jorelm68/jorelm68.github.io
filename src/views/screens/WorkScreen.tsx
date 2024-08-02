@@ -5,10 +5,10 @@ import Page from "../components/Page";
 import Text from "../components/Text";
 import View from "../components/View";
 
-export default function MyWorkScreen() {
+export default function WorkScreen() {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(setScreen('MyWorkScreen'));
+        dispatch(setScreen('WorkScreen'));
     }, [dispatch])
 
     return (

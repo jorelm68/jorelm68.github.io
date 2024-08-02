@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setScreen } from "../../data/redux/global.reducer";
 
-export default function AboutMeScreen() {
+export default function AboutScreen() {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(setScreen('AboutMeScreen'));
+        dispatch(setScreen('AboutScreen'));
     }, [dispatch]);
 
     return (
