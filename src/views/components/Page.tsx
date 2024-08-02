@@ -10,6 +10,7 @@ export default function Page({ children, ...rest }: PageProps) {
             {...rest}
             className="container"
             style={{
+                zIndex: 0,
                 position: 'absolute',
                 top: 0,
                 left: 0,

@@ -41,7 +41,9 @@ export default function AuthScreen() {
     };
 
     return (
-        <Page>
+        <Page style={{
+            paddingTop: 48,
+        }}>
             <View style={{
                 display: 'flex',
                 flexDirection: 'column',

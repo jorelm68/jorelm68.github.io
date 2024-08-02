@@ -41,7 +41,7 @@ export default function MyNameComponent() {
             width: '100%',
             height: '100%',
             paddingTop: 48,
-            zIndex: 80,
+            zIndex: -10,
         }}>
             <AnimatePresence>
                 <motion.div

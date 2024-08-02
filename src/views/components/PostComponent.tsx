@@ -104,7 +104,6 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                             justifyContent: 'center',
                             width: '24px',
                             height: '24px',
-                            zIndex: 5,
                         }}
                     >
                         <Text style={{

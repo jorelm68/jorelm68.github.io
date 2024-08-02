@@ -19,7 +19,7 @@ export default function Me1Component() {
             width: '100%',
             height: '100%',
             paddingTop: 48,
-            zIndex: 80,
+            zIndex: -10,
         }}>
             <motion.div
                 initial={{ opacity: 0 }}
@@ -37,6 +37,7 @@ export default function Me1Component() {
                     overflow: 'hidden',
                     minWidth: `calc(75vh * ${aspectRatio})`, // Min width relative to height
                     maxWidth: '100%',
+                    pointerEvents: 'none',
                 }}
             >
                 <PhotoComponent photo={photos.me1} />

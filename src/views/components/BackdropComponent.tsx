@@ -34,7 +34,7 @@ const BackdropComponent = () => {
             width: '110%',
             height: '110%',
             backgroundColor: 'black',
-            zIndex: -10,
+            zIndex: -100,
         }}>
             <AnimatePresence>
                 <motion.img 
