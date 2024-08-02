@@ -41,10 +41,10 @@ function App() {
           <Route path="/about" element={<AboutScreen />} />
           <Route path="/contact" element={<ContactScreen />} />
           <Route path="/work" element={<WorkScreen />} />
+          <Route path="/post/:post" element={<PostScreen />} />
 
           {/* <Route path="/auth" element={<AuthScreen />} />
           <Route path="/createPost" element={<CreatePostScreen />} />
-          <Route path="/post/:post" element={<PostScreen />} />
           <Route path="/post/:post/edit" element={<EditPostScreen />} /> */}
         </Routes>
       </HashRouter>
