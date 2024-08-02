@@ -16,21 +16,22 @@ export default function AboutScreen() {
 
     return (
         <Page style={{
-            paddingTop: 48,
-            paddingBottom: 32,
+            paddingTop: '3rem',
+            paddingBottom: '2rem',
             alignItems: 'center',
             zIndex: 2,
             scrollbarWidth: 'auto',
+            boxSizing: 'border-box',
         }}>
             <View style={{
                 display: 'flex',
                 flexDirection: 'column',
                 width: '100%',
-                height: 'auto',
                 alignItems: 'center',
+                boxSizing: 'border-box',
             }}>
                 <Text style={{
-                    fontSize: '8rem',
+                    fontSize: 'clamp(2rem, 8vw, 8rem)', // Responsive font size
                     fontWeight: 'bold',
                     color: 'rgba(255, 255, 255, 0.9)',
                     borderBottom: '1px solid rgba(255, 255, 255, 0.5)',
@@ -43,18 +44,21 @@ export default function AboutScreen() {
                 </Text>
 
                 <View style={{
-                    display: 'fex',
+                    display: 'flex',
                     flexDirection: 'row',
-                    width: '40%',
-                    minWidth: '500px',
+                    flexWrap: 'wrap', // Allow items to wrap on small screens
+                    width: '100%',
+                    maxWidth: '1000px', // Limit maximum width
+                    justifyContent: 'center',
+                    gap: '1rem', // Add gap between images
+                    boxSizing: 'border-box',
                 }}>
                     <PhotoComponent
                         photo={photos.view1}
                         style={{
                             width: '45%',
+                            maxWidth: '500px', // Max width for each image
                             height: 'auto',
-                            marginLeft: `${10 / 3}%`,
-                            marginRight: `${10 / 3}%`,
                         }}
                     />
 
@@ -62,19 +66,21 @@ export default function AboutScreen() {
                         photo={photos.view2}
                         style={{
                             width: '45%',
+                            maxWidth: '500px', // Max width for each image
                             height: 'auto',
                         }}
                     />
                 </View>
 
                 <Text style={{
-                    fontSize: '1.2rem',
+                    fontSize: 'clamp(1rem, 2.5vw, 1.2rem)', // Responsive font size
                     color: 'rgba(255, 255, 255, 0.8)',
                     padding: '1rem',
-                    lineHeight: '2',
+                    lineHeight: '1.5',
                     fontWeight: 'normal',
-                    width: '35%',
-                    minWidth: '500px',
+                    width: '90%',
+                    maxWidth: '800px', // Max width for text
+                    boxSizing: 'border-box',
                 }}>
                     Hey! I'm Ethan and I'm a developer with a passion for creating and building things. 
                     I'm a junior studying Computer Science and Business at the University of Michigan. 

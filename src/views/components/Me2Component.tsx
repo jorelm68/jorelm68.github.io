@@ -1,15 +1,11 @@
-import { useState, useEffect } from "react";
-import photos from "../../data/constants/photos";
-import PhotoComponent from "./PhotoComponent";
 import { motion } from "framer-motion";
-import View from "./View";
+import photos from "../../data/constants/photos";
 import { useAppSelector } from "../../data/redux/hooks";
+import PhotoComponent from "./PhotoComponent";
+import View from "./View";
 
 export default function Me2Component() {
     const { screen } = useAppSelector(state => state.global);
-
-    const aspectRatio = 2048 / 1152; // Example aspect ratio. Replace with your image's actual aspect ratio.
-    const imageHeight = '75vh';
 
     return (
         <View style={{
@@ -19,7 +15,10 @@ export default function Me2Component() {
             width: '100%',
             height: '100%',
             paddingTop: 48,
-            zIndex: -10,
+            zIndex: 2,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
         }}>
             <motion.div
                 initial={{ opacity: 0 }}
@@ -28,19 +27,21 @@ export default function Me2Component() {
                 style={{
                     position: 'absolute',
                     bottom: 0,
-                    right: 0, // Aligned to the right side of the screen
-                    height: imageHeight,
-                    display: 'flex',
-                    alignSelf: 'center',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    overflow: 'hidden',
-                    minWidth: `calc(75vh * ${aspectRatio})`, // Min width relative to height
-                    maxWidth: '100%',
-                    pointerEvents: 'none', // Ignore all pointer events
+                    right: 0,
+                    maxWidth: '1200px',
+                    zIndex: 2,
                 }}
             >
-                <PhotoComponent photo={photos.me2} />
+                <PhotoComponent
+                    photo={photos.me2}
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        zIndex: 2,
+                        marginBottom: 44,
+                    }}
+                />
             </motion.div>
         </View>
     );

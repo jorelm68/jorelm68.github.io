@@ -1,15 +1,11 @@
-import { useState, useEffect } from "react";
-import photos from "../../data/constants/photos";
-import PhotoComponent from "./PhotoComponent";
 import { motion } from "framer-motion";
-import View from "./View";
+import photos from "../../data/constants/photos";
 import { useAppSelector } from "../../data/redux/hooks";
+import PhotoComponent from "./PhotoComponent";
+import View from "./View";
 
 export default function Me1Component() {
     const { screen } = useAppSelector(state => state.global);
-
-    const aspectRatio = 1248 / 1102; // Example aspect ratio. Replace with your image's actual aspect ratio.
-    const imageHeight = '75vh';
 
     return (
         <View style={{
@@ -20,6 +16,9 @@ export default function Me1Component() {
             height: '100%',
             paddingTop: 48,
             zIndex: -10,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
         }}>
             <motion.div
                 initial={{ opacity: 0 }}
@@ -29,18 +28,18 @@ export default function Me1Component() {
                     position: 'absolute',
                     bottom: 0,
                     left: 0,
-                    height: imageHeight,
-                    display: 'flex',
-                    alignSelf: 'center',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    overflow: 'hidden',
-                    minWidth: `calc(75vh * ${aspectRatio})`, // Min width relative to height
-                    maxWidth: '100%',
-                    pointerEvents: 'none',
+                    maxWidth: '700px',
                 }}
             >
-                <PhotoComponent photo={photos.me1} />
+                <PhotoComponent 
+                    photo={photos.me1} 
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        marginBottom: 44,
+                    }} 
+                />
             </motion.div>
         </View>
     );

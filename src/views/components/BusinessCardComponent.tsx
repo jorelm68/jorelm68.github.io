@@ -29,86 +29,119 @@ export default function BusinessCardComponent() {
     };
 
     return (
-        <motion.div
-            initial={{ opacity: 0, marginTop: '-100%' }}
-            animate={{
-                opacity: screen === 'ContactScreen' ? 1 : 0,
-                marginTop: screen === 'ContactScreen' ? 0 : '-100%',
-            }}
-            transition={{
-                opacity: { duration: 0.75 },
-                marginTop: { duration: 0.75, delay: screen === 'ContactScreen' ? 0 : 2 },
-            }}
-            style={{
-                width: '100%',
-                maxWidth: 885,
-                height: 'auto',
-                transition: 'background-color 0.3s ease',
-                position: 'absolute',
-                top: 48,
-                left: 0,
-                zIndex: 1,
-            }}
-        >
-            <PhotoComponent
-                photo={photos.businessCard}
-                style={{
-                    width: '100%',
-                    height: 'auto',
-                    borderBottomRightRadius: width < 885 ? 0 : 50,
+        <View>
+            <motion.div
+                initial={{ opacity: 0, marginTop: '-100%' }}
+                animate={{
+                    opacity: screen === 'ContactScreen' ? 1 : 0,
+                    marginTop: screen === 'ContactScreen' ? 0 : '-100%',
                 }}
-            />
-
-            <View
+                transition={{
+                    opacity: { duration: 0.75 },
+                    marginTop: { duration: 0.75, delay: screen === 'ContactScreen' ? 0 : 2 },
+                }}
                 style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
                     width: '100%',
-                    height: '100%',
+                    maxWidth: 885,
+                    height: 'auto',
+                    transition: 'background-color 0.3s ease',
+                    position: 'absolute',
+                    top: 48,
+                    left: 0,
                     zIndex: 1,
                 }}
             >
-                <Link
-                    to="https://www.github.com/jorelm68"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                <PhotoComponent
+                    photo={photos.businessCard}
                     style={{
-                        position: 'absolute',
-                        width: '16%',
-                        height: '8%',
-                        top: '82.75%',
-                        left: '6.75%',
-                        cursor: 'pointer',
+                        width: '100%',
+                        height: 'auto',
+                        borderBottomRightRadius: width < 885 ? 0 : 50,
                     }}
                 />
+            </motion.div>
 
-                <Link
-                    to="https://www.linkedin.com/in/ethan-mcintyre68"
-                    target="_blank"
-                    rel="noopener noreferrer"
+            <motion.div
+                initial={{ opacity: 0, marginTop: '-100%' }}
+                animate={{
+                    opacity: screen === 'ContactScreen' ? 1 : 0,
+                    marginTop: screen === 'ContactScreen' ? 0 : '-100%',
+                }}
+                transition={{
+                    opacity: { duration: 0.75 },
+                    marginTop: { duration: 0.75, delay: screen === 'ContactScreen' ? 0 : 2 },
+                }}
+                style={{
+                    width: '100%',
+                    maxWidth: 885,
+                    height: 'auto',
+                    transition: 'background-color 0.3s ease',
+                    position: 'absolute',
+                    top: 48,
+                    left: 0,
+                    zIndex: 5,
+                }}
+            >
+                <PhotoComponent
+                    photo={photos.businessCard}
                     style={{
-                        position: 'absolute',
-                        width: '17.5%',
-                        height: '8%',
-                        top: '82.75%',
-                        left: '30%',
-                        cursor: 'pointer',
+                        width: '100%',
+                        height: 'auto',
+                        opacity: 0,
+                        borderBottomRightRadius: width < 885 ? 0 : 50,
                     }}
                 />
 
                 <View
-                    onClick={handleDownload}
                     style={{
                         position: 'absolute',
-                        right: '14.75%',
-                        top: '82.75%',
-                        width: '30.75%',
-                        height: '8%',
-                        cursor: 'pointer',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
                     }}
-                />
-            </View>
-        </motion.div>
+                >
+                    <Link
+                        to="https://www.github.com/jorelm68"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                            position: 'absolute',
+                            width: '16%',
+                            height: '8%',
+                            top: '82.75%',
+                            left: '6.75%',
+                            cursor: 'pointer',
+                        }}
+                    />
+
+                    <Link
+                        to="https://www.linkedin.com/in/ethan-mcintyre68"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                            position: 'absolute',
+                            width: '17.5%',
+                            height: '8%',
+                            top: '82.75%',
+                            left: '30%',
+                            cursor: 'pointer',
+                        }}
+                    />
+
+                    <View
+                        onClick={handleDownload}
+                        style={{
+                            position: 'absolute',
+                            right: '14.75%',
+                            top: '82.75%',
+                            width: '30.75%',
+                            height: '8%',
+                            cursor: 'pointer',
+                        }}
+                    />
+                </View>
+            </motion.div>
+        </View>
     );
 }

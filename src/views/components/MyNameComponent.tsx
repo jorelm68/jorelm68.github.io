@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Text from "./Text";
 import View from "./View";
 import { useAppSelector } from "../../data/redux/hooks";
-import { constants } from "buffer";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function MyNameComponent() {
@@ -15,7 +14,7 @@ export default function MyNameComponent() {
             const contentWidth = 1000; // Content width to center
 
             if (viewportWidth > contentWidth) {
-                setLeft((viewportWidth - contentWidth));
+                setLeft((viewportWidth - contentWidth) / 2); // Center the text
             } else {
                 setLeft(0);
             }
@@ -45,18 +44,10 @@ export default function MyNameComponent() {
         }}>
             <AnimatePresence>
                 <motion.div
-                    initial={{
-                        opacity: 0,
-                    }}
-                    animate={{
-                        opacity: screen !== 'LandingScreen' ? 0 : 1,
-                    }}
-                    exit={{
-                        opacity: 0,
-                    }}
-                    transition={{
-                        opacity: { duration: 0.35 },
-                    }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: screen !== 'LandingScreen' ? 0 : 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ opacity: { duration: 0.35 } }}
                     style={{
                         width: '100%',
                         boxSizing: 'border-box',
@@ -72,20 +63,15 @@ export default function MyNameComponent() {
                             style={{
                                 margin: 0,
                                 paddingLeft: left,
-                                fontSize: 72,
+                                fontSize: 'clamp(24px, 6vw, 72px)', // Responsive font size
                                 fontWeight: 'bold',
                                 color: 'white',
                                 textAlign: 'center',
+                                whiteSpace: 'nowrap', // Prevent text wrapping
                             }}
-                            initial={{
-                                x: '-50%',
-                            }}
-                            animate={{
-                                x: screen === 'LandingScreen' ? '0%' : '-50%',
-                            }}
-                            transition={{
-                                x: { duration: screen === 'LandingScreen' ? 0.35 : 0, delay: screen === 'LandingScreen' ? 0 : 2, ease: "backOut" },
-                            }}
+                            initial={{ x: '-50%' }}
+                            animate={{ x: screen === 'LandingScreen' ? '0%' : '-50%' }}
+                            transition={{ x: { duration: screen === 'LandingScreen' ? 0.35 : 0, delay: screen === 'LandingScreen' ? 0 : 2, ease: "backOut" } }}
                         >ETHAN MCINTYRE</motion.p>
                     </View>
 
@@ -98,20 +84,15 @@ export default function MyNameComponent() {
                             style={{
                                 margin: 0,
                                 paddingLeft: left,
-                                fontSize: 72,
+                                fontSize: 'clamp(24px, 6vw, 72px)', // Responsive font size
                                 fontWeight: 'bold',
                                 color: 'white',
                                 textAlign: 'center',
+                                whiteSpace: 'nowrap', // Prevent text wrapping
                             }}
-                            initial={{
-                                x: '-50%',
-                            }}
-                            animate={{
-                                x: screen === 'LandingScreen' ? '0%' : '-50%',
-                            }}
-                            transition={{
-                                x: { duration: screen === 'LandingScreen' ? 0.35 : 0, delay: screen === 'LandingScreen' ? 0.1 : 2, ease: "backOut" },
-                            }}
+                            initial={{ x: '-50%' }}
+                            animate={{ x: screen === 'LandingScreen' ? '0%' : '-50%' }}
+                            transition={{ x: { duration: screen === 'LandingScreen' ? 0.35 : 0, delay: screen === 'LandingScreen' ? 0.1 : 2, ease: "backOut" } }}
                         >DEVELOPER</motion.p>
                     </View>
                 </motion.div>
