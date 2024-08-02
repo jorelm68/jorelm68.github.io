@@ -18,27 +18,27 @@ export default function BusinessCardComponent() {
     }, []);
 
     const handleDownload = () => {
-        // URL of the PDF file
-        const resumeUrl = files.resume; // Make sure this is a URL
+        const resumeUrl = files.resume;
 
-        // Create a temporary link element
         const link = document.createElement('a');
         link.href = resumeUrl;
         link.download = 'Ethan_McIntyre.pdf';
-
-        // Append the link to the document and trigger a click to start the download
         document.body.appendChild(link);
         link.click();
-
-        // Clean up
         document.body.removeChild(link);
     };
 
     return (
         <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: screen === 'ContactScreen' ? 1 : 0 }}
-            transition={{ duration: screen === 'ContactScreen' ? 1 : 0.35 }}
+            initial={{ opacity: 0, marginTop: '-100%' }}
+            animate={{
+                opacity: screen === 'ContactScreen' ? 1 : 0,
+                marginTop: screen === 'ContactScreen' ? 0 : '-100%',
+            }}
+            transition={{
+                opacity: { duration: 0.75 },
+                marginTop: { duration: 0.75, delay: screen === 'ContactScreen' ? 0 : 2 },
+            }}
             style={{
                 width: '100%',
                 maxWidth: 885,
@@ -47,6 +47,7 @@ export default function BusinessCardComponent() {
                 position: 'absolute',
                 top: 48,
                 left: 0,
+                zIndex: 100,
             }}
         >
             <PhotoComponent

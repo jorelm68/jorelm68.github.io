@@ -47,19 +47,15 @@ export default function MyNameComponent() {
                 <motion.div
                     initial={{
                         opacity: 0,
-                        // x: '-100%',
                     }}
                     animate={{
                         opacity: screen !== 'LandingScreen' ? 0 : 1,
-                        // x: screen === 'LandingScreen' ? '0%' : '-100%',
                     }}
                     exit={{
                         opacity: 0,
-                        // x: '-100%',
                     }}
                     transition={{
                         opacity: { duration: 0.35 },
-                        // x: { duration: 0.2, ease: "linear" },
                     }}
                     style={{
                         width: '100%',
