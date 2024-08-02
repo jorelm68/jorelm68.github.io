@@ -17,7 +17,7 @@ export default function Page({ children, ...rest }: PageProps) {
                 width: '100%',
                 height: '100%',
                 margin: 0,
-                paddingTop: 0,
+                padding: 0,
                 display: 'flex',
                 flexDirection: 'column',
                 boxSizing: 'border-box',

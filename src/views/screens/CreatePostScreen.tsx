@@ -202,8 +202,9 @@ export default function CreatePostScreen() {
         <Page style={{
             backgroundColor: 'white',
             padding: '8px',
-            paddingTop: '56px',
         }}>
+            <View style={{ height: 48 + 8 }} />
+
             <form onSubmit={handleSubmit}>
                 <View style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row', gap: '32px', width: '100%' }}>
                     <div style={{ marginBottom: '16px' }}>
