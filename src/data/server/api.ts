@@ -1,11 +1,6 @@
 import axios from 'axios'
 import { Res } from '../constants/types'
 import { EMPTY_RES } from '../constants/empty'
-// import { API_URL, API_KEY } from '@env'
-
-// const API_URL = 'https://scrap-back-end-6a4f36f8f7ee.herokuapp.com'
-const API_URL = 'http://10.0.0.82:4000'
-const API_KEY = 'mJvnWmmFvf3wGZu3FcY8hYKaQtxhfHrN4t9x'
 
 async function fetchFileFromUri(uri: string): Promise<File> {
     const response = await fetch(uri);
@@ -31,13 +26,12 @@ async function handlePost(route: string, data?: any, blob: boolean = false): Pro
         }
 
         const headers: any = {
-            'x-api-key': API_KEY,
         }
         if (data) {
             headers['Content-Type'] = 'multipart/form-data'
         }
 
-        const serverResponse = await axios.post(`${API_URL}/${route}`, formData, {
+        const serverResponse = await axios.post(`${'https://jorelm68-1dc8eff04a80.herokuapp.com'}/${route}`, formData, {
             responseType: blob ? 'blob' : 'json',
             headers,
         });
