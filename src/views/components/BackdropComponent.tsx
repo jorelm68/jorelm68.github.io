@@ -12,7 +12,7 @@ const BackdropComponent = () => {
         const interval = setInterval(() => {
             const randomNumber = Math.floor(Math.random() * 71) + 1;
             setIndex(randomNumber);
-        }, 20000);
+        }, 15000);
 
         return () => clearInterval(interval);
     }, [])
@@ -43,7 +43,7 @@ const BackdropComponent = () => {
                     exit={{ opacity: 0, x: '-5%' }}
                     transition={{
                         opacity: { duration: constants.NO_BACKDROP.includes(screen) ? 0.350 : 2 },
-                        x: { duration: 25, ease: "linear" }  // Adjust the duration as needed
+                        x: { duration: 20, ease: "linear" }  // Adjust the duration as needed
                     }}
                     style={{
                         position: 'absolute',
