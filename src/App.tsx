@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { store } from './data/redux/store';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Use BrowserRouter directly
+import { BrowserRouter as Router, Route, Routes, HashRouter } from 'react-router-dom'; // Use BrowserRouter directly
 import BackdropComponent from './views/components/BackdropComponent';
 import NavbarComponent from './views/components/NavbarComponent';
 import LandingScreen from './views/screens/LandingScreen';
@@ -28,7 +28,7 @@ function App() {
 
   return (
     <Provider store={store}>
-      <Router>
+      <HashRouter>
         <BackdropComponent />
         <MyNameComponent />
         <Me1Component />
@@ -47,7 +47,7 @@ function App() {
           <Route path="/post/:post" element={<PostScreen />} />
           <Route path="/post/:post/edit" element={<EditPostScreen />} /> */}
         </Routes>
-      </Router>
+      </HashRouter>
     </Provider>
   );
 }
