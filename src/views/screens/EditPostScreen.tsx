@@ -85,7 +85,6 @@ export default function EditPostScreen(): JSX.Element {
     const updateFormData = useCallback((field: string, value: any) => {
         setFormData(prevData => {
             const newData = { ...prevData, [field]: value };
-            validateForm(newData);
             return newData;
         });
     }, []);
@@ -179,12 +178,6 @@ export default function EditPostScreen(): JSX.Element {
 
         updateFormData('urls', newUrls);
         updateFormData('captions', newCaptions);
-    };
-
-    const validateForm = (data: typeof formData) => {
-        // Make sure every field has a value
-        const isValid = Object.values(data).every(value => value !== '');
-        setCanSubmit(isValid);
     };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

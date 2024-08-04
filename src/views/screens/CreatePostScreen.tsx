@@ -41,7 +41,6 @@ export default function CreatePostScreen(): JSX.Element {
     const updateFormData = useCallback((field: string, value: any) => {
         setFormData(prevData => {
             const newData = { ...prevData, [field]: value };
-            validateForm(newData);
             return newData;
         });
     }, []);
@@ -87,7 +86,6 @@ export default function CreatePostScreen(): JSX.Element {
                     const newUrls = [...prevData.urls, ...newMediaUrls];
                     const newCaptions = [...prevData.captions, ...newMediaUrls.map(() => '')];
                     const newData = { ...prevData, urls: newUrls, captions: newCaptions };
-                    validateForm(newData);
                     return newData;
                 });
             } catch (error) {
@@ -114,7 +112,6 @@ export default function CreatePostScreen(): JSX.Element {
                 const newUrls = [...prevData.urls, youtubeUrl];
                 const newCaptions = [...prevData.captions, ''];
                 const newData = { ...prevData, urls: newUrls, captions: newCaptions };
-                validateForm(newData);
                 return newData;
             });
         }
@@ -128,7 +125,6 @@ export default function CreatePostScreen(): JSX.Element {
             newUrls.splice(index, 1);
             newCaptions.splice(index, 1);
             const newData = { ...prevData, urls: newUrls, captions: newCaptions };
-            validateForm(newData);
             return newData;
         });
     };
@@ -152,15 +148,8 @@ export default function CreatePostScreen(): JSX.Element {
             }
 
             const newData = { ...prevData, urls: newUrls, captions: newCaptions };
-            validateForm(newData);
             return newData;
         });
-    };
-
-    const validateForm = (data: typeof formData) => {
-        // Make sure every fiedl has a valu
-        const isValid = Object.values(data).every(value => value !== '');
-        setCanSubmit(isValid);
     };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
