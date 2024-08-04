@@ -35,7 +35,6 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                     borderRadius: '8px',
                     boxSizing: 'border-box',
                     maxWidth: '650px',
-                    minWidth: '300px',
                 }}
             >
                 <View
@@ -43,7 +42,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                         flex: '1 1 40%',
                         marginRight: '2%',
                         height: 'auto',
-                        overflow: 'hidden'
+                        overflow: 'hidden',
                     }}
                 >
                     {post.urls[0] && post.urls[0].includes('api/photo/readPhoto') ? (
@@ -99,7 +98,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                                 color: post.color ? post.color : EMPTY_POST.color,
                             }}
                         >
-                            {post.description}
+                            {post.description}asdf awpajsf;a ksdjf;ask jdfa;lk sdjf;alk sjdf;alksjd fa;sdj f;oawidjf a;slkdjf a;slkdjf al;skdjf l;aksjdf ;laksjdf ;lasjfwioajf;lk asjdf;l kasjdf ;lkajsf ;lkasjdf ;laksjdf ;aksljdf ;laksjdf ;laskjfd ;alksdjf ;laskjf ;laksjdf ;laksjdf ;laksd f;lkjdfsadjf al;skj fa;lskdjf a;lskdjf a;lskjf al;skdjfa;lskjdf a;slkdj fa;slkd jfa;lskjf a;slkdjf a;slkdjf
                         </Text>
                     )}
                 </View>

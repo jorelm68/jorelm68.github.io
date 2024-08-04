@@ -32,7 +32,6 @@ export default function PostRawComponent({
                 borderRadius: '8px',
                 boxSizing: 'border-box',
                 maxWidth: '650px',
-                minWidth: '300px',
             }}
         >
             <View

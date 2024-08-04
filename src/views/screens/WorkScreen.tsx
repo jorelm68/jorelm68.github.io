@@ -73,6 +73,8 @@ export default function WorkScreen() {
             boxSizing: 'border-box',
             scrollbarWidth: 'auto',
             height: 'auto',
+            width: '90%',
+            marginLeft: '5%',
         }}>
             {posts.map((post, index) => {
                 return (
