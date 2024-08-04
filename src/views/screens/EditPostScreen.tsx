@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import api from "../../data/server/api";
 import PhotoComponent from "../components/PhotoComponent";
 import { usePost } from "../../data/server/state";
-import { Post } from "../../data/constants/types";
+import { Post, Res } from "../../data/constants/types";
 
 export default function EditPostScreen(): JSX.Element {
     const { post: postId } = useParams<{ post: string }>();
@@ -112,8 +112,11 @@ export default function EditPostScreen(): JSX.Element {
                 const mediaBase64 = await Promise.all(mediaBase64Promises);
 
                 const mediaUrlPromises = mediaBase64.map(async base64 => {
-                    const photoId = await api.photo.createPhoto(base64);
-                    return `https://jorelm68-1dc8eff04a80.herokuapp.com/api/photo/readPhoto/${photoId}/1080`;
+                    const res: Res = await api.photo.createPhoto(base64);
+                    if (!res.success) {
+                        throw new Error(res.errorMessage);
+                    }
+                    return `https://jorelm68-1dc8eff04a80.herokuapp.com/api/photo/readPhoto/${res.data}/1080`;
                 });
 
                 const mediaUrls = await Promise.all(mediaUrlPromises).then(urls => urls.filter(url => url !== null) as string[]);
