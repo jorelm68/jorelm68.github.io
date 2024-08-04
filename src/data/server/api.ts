@@ -39,13 +39,13 @@ async function handleRequest(route: string, type: string, data?: any, blob: bool
 
         let serverResponse = null;
         if (type === 'POST') {
-            serverResponse = await axios.post(`${localURL}/${route}`, formData, {
+            serverResponse = await axios.post(`${serverURL}/${route}`, formData, {
                 responseType: blob ? 'blob' : 'json',
                 headers,
             });
         }
         else if (type === 'GET') {
-            serverResponse = await axios.get(`${localURL}/${route}`, {
+            serverResponse = await axios.get(`${serverURL}/${route}`, {
                 params: data,
                 responseType: blob ? 'blob' : 'json',
                 headers,
