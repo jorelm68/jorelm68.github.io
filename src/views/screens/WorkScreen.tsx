@@ -62,7 +62,7 @@ export default function WorkScreen() {
 
     return (
         <Page style={{
-            paddingTop: `${48 + 8}px`,
+            paddingTop: `${48 + 32}px`,
             paddingBottom: '32px',
             alignItems: 'flex-start',
             display: 'flex',
