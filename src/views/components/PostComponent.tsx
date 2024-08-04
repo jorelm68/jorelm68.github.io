@@ -98,7 +98,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                                 color: post.color ? post.color : EMPTY_POST.color,
                             }}
                         >
-                            {post.description}asdf awpajsf;a ksdjf;ask jdfa;lk sdjf;alk sjdf;alksjd fa;sdj f;oawidjf a;slkdjf a;slkdjf al;skdjf l;aksjdf ;laksjdf ;lasjfwioajf;lk asjdf;l kasjdf ;lkajsf ;lkasjdf ;laksjdf ;aksljdf ;laksjdf ;laskjfd ;alksdjf ;laskjf ;laksjdf ;laksjdf ;laksd f;lkjdfsadjf al;skj fa;lskdjf a;lskdjf a;lskjf al;skdjfa;lskjdf a;slkdj fa;slkd jfa;lskjf a;slkdjf a;slkdjf
+                            {post.description}
                         </Text>
                     )}
                 </View>
