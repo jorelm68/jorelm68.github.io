@@ -297,7 +297,11 @@ export default function EditPostScreen(): JSX.Element {
                                 </div>
                             ) : (
                                 <>
-                                    <PhotoComponent photo={url} />
+                                    <PhotoComponent photo={url} style={{
+                                        height: '200px',
+                                        width: 'auto',
+                                        objectFit: 'cover',
+                                    }} />
                                     <input
                                         type="text"
                                         placeholder={`Caption for Photo ${index + 1}`}

@@ -53,6 +53,7 @@ export default function PostRawComponent({
                         style={{
                             height: '100%',
                             width: 'auto',
+                            objectFit: 'cover',
                         }}
                     />
                 ) : (

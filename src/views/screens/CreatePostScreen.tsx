@@ -236,7 +236,7 @@ export default function CreatePostScreen(): JSX.Element {
                         <input id="mediaUpload" type="file" multiple accept="image/*" onChange={handleMediaChange} />
                     </View>
 
-                    <View style={{ display: 'flex', alignItems: 'center' }}>
+                    <View style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
                         <input
                             id="youtubeLink"
                             type="url"
@@ -269,7 +269,12 @@ export default function CreatePostScreen(): JSX.Element {
                                 </div>
                             ) : (
                                 <>
-                                    <PhotoComponent photo={url} />
+                                    <PhotoComponent photo={url} style={{
+                                        height: '200px',
+                                        width: 'auto',
+                                        objectFit: 'cover',
+                                    }} />
+                                    <br />
                                     <input
                                         type="text"
                                         placeholder={`Caption for Photo ${index + 1}`}
