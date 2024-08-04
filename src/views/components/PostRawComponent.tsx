@@ -31,8 +31,8 @@ export default function PostRawComponent({
                 color: color,
                 textDecoration: 'none',
                 padding: '10px',
-                minHeight: '200px',
                 maxHeight: '200px',
+                minHeight: '200px',
                 overflow: 'hidden',
                 borderRadius: '8px',
             }}
@@ -46,14 +46,26 @@ export default function PostRawComponent({
                     overflow: 'hidden'
                 }}
             >
-                <PhotoComponent
-                    photo={url ? url : EMPTY_POST.urls[0]}
-                    resolution={1080}
-                    style={{
-                        height: '100%',
-                        width: 'auto',
-                    }}
-                />
+                {url && url.includes('api/photo/readPhoto') ? (
+                    <PhotoComponent
+                        photo={url}
+                        resolution={1080}
+                        style={{
+                            height: '100%',
+                            width: 'auto',
+                        }}
+                    />
+                ) : (
+                    <iframe
+                        src={url}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        title={name}
+                        style={{
+                            height: '100%',
+                            width: 'auto',
+                        }}
+                    />
+                )}
             </View>
             <View
                 style={{

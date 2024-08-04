@@ -44,7 +44,7 @@ async function handleRequest(route: string, type: string, data?: any, blob: bool
             });
         }
         else if (type === 'GET') {
-            serverResponse = await axios.get(`${serverURL}/${route}`, {
+            serverResponse = await axios.get(`${localURL}/${route}`, {
                 params: data,
                 responseType: blob ? 'blob' : 'json',
                 headers,

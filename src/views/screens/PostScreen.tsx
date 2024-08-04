@@ -12,7 +12,6 @@ import { setScreen } from "../../data/redux/global.reducer";
 export default function PostScreen() {
     const { isAuthenticated } = useAppSelector(state => state.global);
     const dispatch = useDispatch();
-    console.log('loaded');
     const { post } = useParams();
     const {
         name,
