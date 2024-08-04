@@ -59,7 +59,6 @@ export default function WorkScreen() {
     useEffect(() => {
         fetchImages();
     }, [])
-    console.log(images);
 
     return (
         <Page style={{

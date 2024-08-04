@@ -13,12 +13,14 @@ interface PostComponentProps {
 const PostComponent = ({ post: _id }: PostComponentProps) => {
     const { isAuthenticated } = useAppSelector(state => state.global);
     const post = usePost(_id);
+    console.log(post.link);
 
     if (!post) {
         return (
             <View />
         )
     }
+
     else {
         return (
             <Link

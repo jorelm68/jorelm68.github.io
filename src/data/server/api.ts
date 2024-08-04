@@ -38,7 +38,6 @@ async function handleRequest(route: string, type: string, data?: any, blob: bool
 
         let serverResponse = null;
         if (type === 'POST') {
-            console.log('POST', `${serverURL}/${route}`, formData);
             serverResponse = await axios.post(`${localURL}/${route}`, formData, {
                 responseType: blob ? 'blob' : 'json',
                 headers,
@@ -174,12 +173,12 @@ export default {
             name,
             description,
             selectors,
-            media,
+            urls,
             captions,
             essay,
             link,
-            color,
             backgroundColor,
+            color,
             start,
             end,
             location,
@@ -187,7 +186,7 @@ export default {
             name: string,
             description: string,
             selectors: string,
-            media: string[],
+            urls: string[],
             captions: string[],
             essay: string,
             link: string,
@@ -197,46 +196,22 @@ export default {
             end: string,
             location: string,
         }) => {
-            let sameMedia = [];
-            let newMedia = [];
-            for (const uri of media) {
-                if (uri.startsWith('Photo')) {
-                    sameMedia.push(uri);
-                }
-                else {
-                    newMedia.push(uri);
-                    sameMedia.push('placeholder');
-                }
-            }
-
-            // Create an object with media files as key-value pairs
-            const mediaData = newMedia.reduce((acc, uri, index) => {
-                acc[`file${index}`] = uri;
-                return acc;
-            }, {} as Record<string, string>);
-
-            // Construct the final payload
-            const payload = {
-                name,
-                description,
-                selectors,
-                captions,
-                essay,
-                media: sameMedia,
-                link,
-                color,
-                backgroundColor,
-                start,
-                end,
-                location,
-                numPhotos: newMedia.length,
-            };
-
-            // Send the payload to the backend
             return await handleRequest('api/portfolio/post/updatePost', 'POST', {
                 _id,
-                rawData: JSON.stringify(payload),
-                ...mediaData,
+                rawData: JSON.stringify({
+                    name,
+                    description,
+                    selectors,
+                    urls,
+                    captions,
+                    essay,
+                    link,
+                    color,
+                    backgroundColor,
+                    start,
+                    end,
+                    location,
+                }),
             });
         },
         deletePost: async (_id: string) => await handleRequest('api/portfolio/post/deletePost', 'POST', { _id }),

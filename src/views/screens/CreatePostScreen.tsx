@@ -23,7 +23,7 @@ export default function CreatePostScreen(): JSX.Element {
     const [formData, setFormData] = useState({
         name: '',
         description: '',
-        link: 'post/<POST>',
+        link: '/post/<POST>',
         selectors: '',
         essay: '',
         location: '',
@@ -32,7 +32,6 @@ export default function CreatePostScreen(): JSX.Element {
         start: '2024-06-06',
         end: '2024-08-08'
     });
-    console.log(formData);
     const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
     const [youtubeLink, setYoutubeLink] = useState<string>('');
     const [canSubmit, setCanSubmit] = useState(false);

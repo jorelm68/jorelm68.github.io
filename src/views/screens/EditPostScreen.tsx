@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useState, useCallback } from "react";
 import Page from "../components/Page";
 import { useDispatch } from "react-redux";
 import { setScreen } from "../../data/redux/global.reducer";
@@ -8,76 +7,99 @@ import View from "../components/View";
 import api from "../../data/server/api";
 import PhotoComponent from "../components/PhotoComponent";
 import { usePost } from "../../data/server/state";
+import { useParams } from "react-router-dom";
 
-export default function EditPostScreen() {
+// Typing for media items
+type MediaItem = { type: 'photo' | 'video', content: string, caption?: string };
+
+export default function EditPostScreen({ }): JSX.Element {
     const { post } = useParams();
     const { isAuthenticated } = useAppSelector(state => state.global);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     useEffect(() => {
         document.title = 'Edit Post | Ethan McIntyre';
         dispatch(setScreen('EditPostScreen'));
     }, [dispatch]);
 
-    // State for form fields
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [selectors, setSelectors] = useState('');
-    const [mediaBase64, setMediaBase64] = useState<string[]>([]);
-    const [captions, setCaptions] = useState<string[]>([]);
-    const [essay, setEssay] = useState('');
-    const [location, setLocation] = useState('');
-    const [start, setStart] = useState('');
-    const [end, setEnd] = useState('');
-    const [link, setLink] = useState('');
-    const [color, setColor] = useState('');
-    const [backgroundColor, setBackgroundColor] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [canSubmit, setCanSubmit] = useState(false);
-
-    const data = usePost(post);
-    useEffect(() => {
-        if (data) {
-            const {
-                name: initialName,
-                description: initialDescription,
-                selectors: initialSelectors,
-                captions: initialCaptions,
-                essay: initialEssay,
-                location: initialLocation,
-                start: initialStart,
-                end: initialEnd,
-                link: initialLink,
-                color: initialColor,
-                backgroundColor: initialBackgroundColor
-            } = data;
-
-            setName(initialName);
-            setDescription(initialDescription);
-            setSelectors(initialSelectors);
-            setCaptions(initialCaptions);
-            setEssay(initialEssay);
-            setLocation(initialLocation);
-            setStart(initialStart);
-            setEnd(initialEnd);
-            setLink(initialLink);
-            setColor(initialColor);
-            setBackgroundColor(initialBackgroundColor);
-        }
-    }, [data]);
-
-    // Handle input changes
-    const handleChange = (setter: React.Dispatch<React.SetStateAction<string>>) => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setter(event.target.value);
-        setCanSubmit(validateForm());
+    // Use custom hook to fetch post data
+    const { 
+        name, 
+        description, 
+        link, 
+        selectors, 
+        essay, 
+        location, 
+        backgroundColor, 
+        color, 
+        start, 
+        end, 
+        urls, 
+        captions, 
+    } = usePost(post);
+    
+    // Initial state setup, leveraging custom hook data
+    const initialFormData = {
+        name: name || '',
+        description: description || '',
+        link: link || `post/${post}`,
+        selectors: selectors || '',
+        essay: essay || '',
+        location: location || '',
+        backgroundColor: backgroundColor || '#ffffff',
+        color: color || '#000000',
+        start: start || '',
+        end: end || '',
     };
+
+    const initialMediaItems = urls ? 
+        urls.map((url: string, index: number) => ({
+            type: url.includes('youtube') ? 'video' as const : 'photo' as const,
+            content: url,
+            caption: captions[index] || ''
+        })) : [];
+
+    const [formData, setFormData] = useState(initialFormData);
+    const [mediaItems, setMediaItems] = useState<MediaItem[]>(initialMediaItems);
+    const [youtubeLink, setYoutubeLink] = useState<string>('');
+    const [canSubmit, setCanSubmit] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        if (name) {
+            setFormData({
+                name: name || '',
+                description: description || '',
+                link: link || `/post/${post}`,
+                selectors: selectors || '',
+                essay: essay || '',
+                location: location || '',
+                backgroundColor: backgroundColor || '#ffffff',
+                color: color || '#000000',
+                start: start || '',
+                end: end || '',
+            });
+
+            setMediaItems(urls.map((url: string, index: number) => ({
+                type: url.includes('youtube') ? 'video' : 'photo',
+                content: url,
+                caption: captions[index] || ''
+            })));
+        }
+    }, [name, description, link, selectors, essay, location, backgroundColor, color, start, end, urls, captions, post]);
+
+    const updateFormData = useCallback((field: string, value: any) => {
+        setFormData(prevData => {
+            const newData = { ...prevData, [field]: value };
+            validateForm(newData, mediaItems);
+            return newData;
+        });
+    }, [mediaItems]);
 
     const handleMediaChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
             const filesArray = Array.from(event.target.files);
 
-            // Convert media files to Base64
             const mediaBase64Promises = filesArray.map(file => {
                 return new Promise<string>((resolve, reject) => {
                     const reader = new FileReader();
@@ -93,10 +115,20 @@ export default function EditPostScreen() {
             });
 
             try {
-                const newMediaBase64 = await Promise.all(mediaBase64Promises);
-                setMediaBase64(prevMedia => [...prevMedia, ...newMediaBase64]);
-                setCaptions(prevCaptions => [...prevCaptions, ...new Array(newMediaBase64.length).fill('')]); // Initialize captions for new files
-                setCanSubmit(validateForm());
+                const mediaBase64 = await Promise.all(mediaBase64Promises);
+
+                const mediaUrlPromises = mediaBase64.map(async base64 => {
+                    const photoId = await api.photo.createPhoto(base64);
+                    return `https://jorelm68-1dc8eff04a80.herokuapp.com/api/photo/readPhoto/${photoId}/1080`;
+                });
+
+                const mediaUrls = await Promise.all(mediaUrlPromises);
+
+                setMediaItems(prevMedia => {
+                    const newMedia = [...prevMedia, ...mediaUrls.map(url => ({ type: 'photo' as const, content: url }))];
+                    validateForm(formData, newMedia);
+                    return newMedia;
+                });
             } catch (error) {
                 console.error('Error converting files:', error);
             }
@@ -104,117 +136,68 @@ export default function EditPostScreen() {
     };
 
     const handleCaptionChange = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newCaptions = [...captions];
-        newCaptions[index] = event.target.value;
-        setCaptions(newCaptions);
-        setCanSubmit(validateForm());
+        const newMediaItems = [...mediaItems];
+        newMediaItems[index].caption = event.target.value;
+        setMediaItems(newMediaItems);
+        validateForm(formData, newMediaItems);
+    };
+
+    const handleYoutubeLinkChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setYoutubeLink(event.target.value);
+    };
+
+    const addYoutubeLink = () => {
+        const youtubeID = youtubeLink.split('v=')[1];
+        if (youtubeID) {
+            setMediaItems(prevMedia => {
+                const newMedia = [...prevMedia, { type: 'video' as const, content: `https://www.youtube.com/embed/${youtubeID}` }];
+                validateForm(formData, newMedia);
+                return newMedia;
+            });
+        }
+        setYoutubeLink('');
     };
 
     const handleRemoveMedia = (index: number) => {
-        const newMediaBase64 = [...mediaBase64];
-        const newCaptions = [...captions];
-        newMediaBase64.splice(index, 1);
-        newCaptions.splice(index, 1);
-        setMediaBase64(newMediaBase64);
-        setCaptions(newCaptions);
-        setCanSubmit(validateForm());
+        const newMediaItems = [...mediaItems];
+        newMediaItems.splice(index, 1);
+        setMediaItems(newMediaItems);
+        validateForm(formData, newMediaItems);
     };
 
-    const validateForm = () => {
-        if (mediaBase64.length === 0) {
-            return false;
-        }
-
-        if (mediaBase64.length !== captions.length) {
-            return false;
-        }
-
-        if (captions.some(caption => caption === '')) {
-            return false;
-        }
-
-        if (name === '') {
-            return false;
-        }
-
-        if (description === '') {
-            return false;
-        }
-
-        if (essay === '') {
-            return false;
-        }
-
-        if (location === '') {
-            return false;
-        }
-
-        if (start === '') {
-            return false;
-        }
-
-        if (end === '') {
-            return false;
-        }
-
-        if (link === '') {
-            return false;
-        }
-
-        if (color === '') {
-            return false;
-        }
-
-        if (backgroundColor === '') {
-            return false;
-        }
-
-        // If all checks pass, return true
-        return true;
-    };
-
-    const handleMoveImage = (index: number, direction: 'up' | 'down' | 'top') => {
-        const newMediaBase64 = [...mediaBase64];
-        const newCaptions = [...captions];
+    const handleMoveMedia = (index: number, direction: 'up' | 'down' | 'top') => {
+        const newMediaItems = [...mediaItems];
 
         if (direction === 'up' && index > 0) {
-            [newMediaBase64[index], newMediaBase64[index - 1]] = [newMediaBase64[index - 1], newMediaBase64[index]];
-            [newCaptions[index], newCaptions[index - 1]] = [newCaptions[index - 1], newCaptions[index]];
-        } else if (direction === 'down' && index < mediaBase64.length - 1) {
-            [newMediaBase64[index], newMediaBase64[index + 1]] = [newMediaBase64[index + 1], newMediaBase64[index]];
-            [newCaptions[index], newCaptions[index + 1]] = [newCaptions[index + 1], newCaptions[index]];
+            [newMediaItems[index], newMediaItems[index - 1]] = [newMediaItems[index - 1], newMediaItems[index]];
+        } else if (direction === 'down' && index < mediaItems.length - 1) {
+            [newMediaItems[index], newMediaItems[index + 1]] = [newMediaItems[index + 1], newMediaItems[index]];
         } else if (direction === 'top' && index > 0) {
-            const [movedMedia] = newMediaBase64.splice(index, 1);
-            const [movedCaption] = newCaptions.splice(index, 1);
-            newMediaBase64.unshift(movedMedia);
-            newCaptions.unshift(movedCaption);
+            const [movedMedia] = newMediaItems.splice(index, 1);
+            newMediaItems.unshift(movedMedia);
         }
 
-        setMediaBase64(newMediaBase64);
-        setCaptions(newCaptions);
+        setMediaItems(newMediaItems);
     };
 
-    // Handle form submission
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        if (!post) return console.error('No post ID provided for editing');
+    const validateForm = (data: typeof formData, media: MediaItem[]) => {
+        const isValid = media.length > 0 &&
+            Object.values(data).every(value => value.trim() !== '') &&
+            media.every(item => item.type === 'video' || item.caption !== '');
 
-        setLoading(true);
+        setCanSubmit(isValid);
+    };
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        if (!post) return;
         event.preventDefault();
+        setLoading(true);
 
         try {
             await api.post.updatePost(post, {
-                name,
-                description,
-                selectors,
-                media: mediaBase64, // Use Base64 encoded media
-                captions,
-                essay,
-                location,
-                start,
-                end,
-                link,
-                color,
-                backgroundColor,
+                ...formData,
+                urls: mediaItems.map(item => item.content),
+                captions: mediaItems.map(item => item.caption || '')
             });
         } catch (error) {
             console.error('Error updating post:', error);
@@ -222,23 +205,6 @@ export default function EditPostScreen() {
 
         setLoading(false);
     };
-
-    const handleDelete = async () => {
-        if (!post) return console.error('No post ID provided for deleting');
-
-        setLoading(true);
-
-        try {
-            await api.post.deletePost(post);
-
-            // Redirect to home page
-            navigate('/');
-        } catch (error) {
-            console.error('Error deleting post:', error);
-        }
-
-        setLoading(false);
-    }
 
     if (!isAuthenticated) {
         return (
@@ -252,206 +218,118 @@ export default function EditPostScreen() {
     }
 
     return (
-        <Page style={{
-            backgroundColor: 'white',
-            padding: '8px',
-            paddingTop: '56px',
-        }}>
-            <form onSubmit={handleSubmit}>
-                <View style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row', gap: '32px', width: '100%' }}>
-                    <div style={{ marginBottom: '16px' }}>
+        <Page style={{ backgroundColor: 'white' }}>
+            <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '16px', maxWidth: '600px', margin: '0 auto' }}>
+                <h1>Edit Post Screen</h1>
+
+                <form onSubmit={handleSubmit}>
+                    <View>
                         <label htmlFor="name">Name:</label>
-                        <input
-                            type="text"
-                            id="name"
-                            value={name}
-                            onChange={handleChange(setName)}
-                            required
-                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
-                        />
-                    </div>
+                        <input id="name" type="text" value={formData.name} onChange={e => updateFormData('name', e.target.value)} />
+                    </View>
 
-                    <div style={{ marginBottom: '16px' }}>
+                    <View>
                         <label htmlFor="description">Description:</label>
-                        <textarea
-                            id="description"
-                            value={description}
-                            onChange={handleChange(setDescription)}
-                            required
-                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px', height: '100px' }}
-                        />
-                    </div>
+                        <textarea id="description" value={formData.description} onChange={e => updateFormData('description', e.target.value)} />
+                    </View>
 
-                    <div style={{ marginBottom: '16px' }}>
+                    <View>
+                        <label htmlFor="link">Link:</label>
+                        <input id="link" type="text" value={formData.link} onChange={e => updateFormData('link', e.target.value)} />
+                    </View>
+
+                    <View>
+                        <label htmlFor="essay">Essay:</label>
+                        <textarea id="essay" value={formData.essay} onChange={e => updateFormData('essay', e.target.value)} />
+                    </View>
+
+                    <View>
                         <label htmlFor="selectors">Selectors:</label>
-                        <input
-                            type="text"
-                            id="selectors"
-                            value={selectors}
-                            onChange={handleChange(setSelectors)}
-                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
-                        />
-                    </div>
+                        <input id="selectors" type="text" value={formData.selectors} onChange={e => updateFormData('selectors', e.target.value)} />
+                    </View>
 
-                    <div style={{ marginBottom: '16px' }}>
-                        <label htmlFor="media">Media:</label>
-                        <input
-                            type="file"
-                            id="media"
-                            accept="image/*,video/*"
-                            onChange={handleMediaChange}
-                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
-                            multiple
-                        />
-                    </div>
+                    <View>
+                        <label htmlFor="location">Location:</label>
+                        <input id="location" type="text" value={formData.location} onChange={e => updateFormData('location', e.target.value)} />
+                    </View>
 
-                    {mediaBase64.map((media, index) => (
-                        <div key={index} style={{ marginBottom: '16px' }}>
-                            <label htmlFor={`caption-${index}`}>Caption for Media {index + 1}:</label>
-                            <PhotoComponent
-                                photo={media}
-                                style={{ display: 'block', width: 'auto', maxHeight: '200px', height: '100%' }}
-                            />
-                            <input
-                                type="text"
-                                id={`caption-${index}`}
-                                value={captions[index]}
-                                onChange={handleCaptionChange(index)}
-                                required
-                                style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
-                            />
-                            <button
-                                type="button"
-                                onClick={() => handleMoveImage(index, 'up')}
-                                disabled={index === 0}
-                                style={{ marginRight: '8px' }}
-                            >
-                                Move Up
-                            </button>
-                            <button
-                                type="button"
-                                onClick={() => handleMoveImage(index, 'down')}
-                                disabled={index === mediaBase64.length - 1}
-                                style={{ marginRight: '8px' }}
-                            >
-                                Move Down
-                            </button>
-                            <button
-                                type="button"
-                                onClick={() => handleMoveImage(index, 'top')}
-                                disabled={index === 0}
-                                style={{ marginRight: '8px' }}
-                            >
-                                Move to Top
-                            </button>
-                            <button
-                                type="button"
-                                onClick={() => handleRemoveMedia(index)}
-                                style={{ backgroundColor: 'red', color: 'white' }}
-                            >
-                                Remove Media
-                            </button>
-                        </div>
+                    <View>
+                        <label htmlFor="backgroundColor">Background Color:</label>
+                        <input id="backgroundColor" type="color" value={formData.backgroundColor} onChange={e => updateFormData('backgroundColor', e.target.value)} />
+                    </View>
+
+                    <View>
+                        <label htmlFor="color">Text Color:</label>
+                        <input id="color" type="color" value={formData.color} onChange={e => updateFormData('color', e.target.value)} />
+                    </View>
+
+                    <View>
+                        <label htmlFor="start">Start Date:</label>
+                        <input id="start" type="date" value={formData.start} onChange={e => updateFormData('start', e.target.value)} />
+                    </View>
+
+                    <View>
+                        <label htmlFor="end">End Date:</label>
+                        <input id="end" type="date" value={formData.end} onChange={e => updateFormData('end', e.target.value)} />
+                    </View>
+
+                    <View>
+                        <label htmlFor="mediaUpload">Upload Photos:</label>
+                        <input id="mediaUpload" type="file" multiple accept="image/*" onChange={handleMediaChange} />
+                    </View>
+
+                    <View style={{ display: 'flex', alignItems: 'center' }}>
+                        <input
+                            id="youtubeLink"
+                            type="url"
+                            placeholder="Enter YouTube Video URL"
+                            value={youtubeLink}
+                            onChange={handleYoutubeLinkChange}
+                        />
+                        <button type="button" onClick={addYoutubeLink}>Add YouTube Video</button>
+                    </View>
+
+                    {mediaItems.map((item, index) => (
+                        <View key={index} style={{ marginBottom: '16px' }}>
+                            {item.type === 'photo' ? (
+                                <>
+                                    <PhotoComponent photo={item.content} />
+                                    <input
+                                        type="text"
+                                        placeholder={`Caption for Photo ${index + 1}`}
+                                        value={item.caption || ''}
+                                        onChange={handleCaptionChange(index)}
+                                    />
+                                </>
+                            ) : (
+                                <div>
+                                    <iframe
+                                        width="560"
+                                        height="315"
+                                        src={item.content}
+                                        title={`YouTube Video ${index + 1}`}
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                    ></iframe>
+                                    <input
+                                        type="text"
+                                        placeholder={`Caption for Video ${index + 1}`}
+                                        value={item.caption || ''}
+                                        onChange={handleCaptionChange(index)}
+                                    />
+                                </div>
+                            )}
+                            <button type="button" onClick={() => handleMoveMedia(index, 'up')}>Move Up</button>
+                            <button type="button" onClick={() => handleMoveMedia(index, 'down')}>Move Down</button>
+                            <button type="button" onClick={() => handleMoveMedia(index, 'top')}>Move to Top</button>
+                            <button type="button" onClick={() => handleRemoveMedia(index)}>Remove</button>
+                        </View>
                     ))}
 
-                    <div style={{ marginBottom: '16px' }}>
-                        <label htmlFor="essay">Essay:</label>
-                        <textarea
-                            id="essay"
-                            value={essay}
-                            onChange={handleChange(setEssay)}
-                            required
-                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px', height: '100px' }}
-                        />
-                    </div>
-
-                    <div style={{ marginBottom: '16px' }}>
-                        <label htmlFor="location">Location:</label>
-                        <input
-                            type="text"
-                            id="location"
-                            value={location}
-                            onChange={handleChange(setLocation)}
-                            required
-                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
-                        />
-                    </div>
-
-                    <div style={{ marginBottom: '16px' }}>
-                        <label htmlFor="start">Start Date:</label>
-                        <input
-                            type="date"
-                            id="start"
-                            value={start}
-                            onChange={handleChange(setStart)}
-                            required
-                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
-                        />
-                    </div>
-
-                    <div style={{ marginBottom: '16px' }}>
-                        <label htmlFor="end">End Date:</label>
-                        <input
-                            type="date"
-                            id="end"
-                            value={end}
-                            onChange={handleChange(setEnd)}
-                            required
-                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
-                        />
-                    </div>
-
-                    <div style={{ marginBottom: '16px' }}>
-                        <label htmlFor="link">Link:</label>
-                        <input
-                            type="text"
-                            id="link"
-                            value={link}
-                            onChange={handleChange(setLink)}
-                            required
-                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
-                        />
-                    </div>
-
-                    <div style={{ marginBottom: '16px' }}>
-                        <label htmlFor="color">Color:</label>
-                        <input
-                            type="color"
-                            id="color"
-                            value={color}
-                            onChange={handleChange(setColor)}
-                            required
-                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
-                        />
-                    </div>
-
-                    <div style={{ marginBottom: '16px' }}>
-                        <label htmlFor="backgroundColor">Background Color:</label>
-                        <input
-                            type="color"
-                            id="backgroundColor"
-                            value={backgroundColor}
-                            onChange={handleChange(setBackgroundColor)}
-                            required
-                            style={{ display: 'block', width: '100%', padding: '8px', fontSize: '16px' }}
-                        />
-                    </div>
-
-                    <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'center' }}>
-                        <button type="submit" disabled={!canSubmit || loading} style={{ padding: '8px 16px', fontSize: '16px' }}>
-                            {loading ? 'Submitting...' : 'Submit'}
-                        </button>
-                    </div>
-
-                    <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'center' }}>
-                        <button type="button" disabled={loading} onClick={handleDelete} style={{ padding: '8px 16px', fontSize: '16px', color: 'red', }}>
-                            {loading ? 'Deleting...' : 'Delete'}
-                        </button>
-                    </div>
-                </View>
-
-
-            </form>
+                    <button type="submit" disabled={!canSubmit || loading}>Update Post</button>
+                </form>
+            </View>
         </Page>
     );
 }
