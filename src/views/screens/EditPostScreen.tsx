@@ -302,6 +302,7 @@ export default function EditPostScreen(): JSX.Element {
                                         width: 'auto',
                                         objectFit: 'cover',
                                     }} />
+                                    <br />
                                     <input
                                         type="text"
                                         placeholder={`Caption for Photo ${index + 1}`}
