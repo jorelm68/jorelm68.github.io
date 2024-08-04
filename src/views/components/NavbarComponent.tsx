@@ -2,9 +2,24 @@ import { Link } from "react-router-dom";
 import { useAppSelector } from "../../data/redux/hooks";
 import photos from "../../data/constants/photos";
 import PhotoComponent from "./PhotoComponent";
+import { useDispatch } from "react-redux";
+import { setShowEssay, setWidth } from "../../data/redux/global.reducer";
+import { useEffect } from "react";
+import View from "./View";
 
 const NavbarComponent = () => {
-    const { screen, isAuthenticated } = useAppSelector(state => state.global);
+    const { screen, isAuthenticated, width, showEssay } = useAppSelector(state => state.global);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const handleResize = () => dispatch(setWidth(window.innerWidth));
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, [dispatch]);
+
+    const handleToggleShowEssay = () => {
+        dispatch(setShowEssay(!showEssay));
+    }
 
     const linkStyle = (active: boolean) => ({
         textDecoration: 'none',
@@ -100,6 +115,22 @@ const NavbarComponent = () => {
                 </Link>
 
             </div>
+
+            {width < 800 && screen === 'PostScreen' && (
+                <button onClick={handleToggleShowEssay} style={{
+                    height: '100%',
+                    position: 'absolute',
+                    top: 0,
+                    right: 0,
+                    backgroundColor: 'white',
+                    borderBottomLeftRadius: 8,
+                    border: 'none',
+                    color: 'black',
+                    cursor: 'pointer',
+                }}>
+                    {showEssay ? 'Show Media 📚' : 'Show Essay 📝'}
+                </button>
+            )}
 
             {isAuthenticated && (
                 <Link
