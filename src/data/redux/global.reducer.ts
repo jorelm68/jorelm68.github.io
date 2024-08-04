@@ -9,7 +9,7 @@ type GlobalReducer = {
 
 const INITIAL_STATE: GlobalReducer = {
   screen: '',
-  width: 0,
+  width: window.innerWidth,
   isAuthenticated: false,
   showEssay: true,
 };
