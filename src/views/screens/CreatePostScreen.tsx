@@ -6,9 +6,7 @@ import { useAppSelector } from "../../data/redux/hooks";
 import View from "../components/View";
 import api from "../../data/server/api";
 import PhotoComponent from "../components/PhotoComponent";
-
-// Typing for media items
-type MediaItem = { type: 'photo' | 'video', content: string, caption?: string };
+import { Post, Res } from "../../data/constants/types";
 
 export default function CreatePostScreen(): JSX.Element {
     const { isAuthenticated } = useAppSelector(state => state.global);
@@ -20,19 +18,22 @@ export default function CreatePostScreen(): JSX.Element {
     }, [dispatch]);
 
     // Unified state for form fields
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<Post>({
+        _id: '',
         name: '',
         description: '',
-        link: '/post/<POST>',
         selectors: '',
+        urls: [] as string[],
+        captions: [] as string[],
         essay: '',
-        location: '',
-        backgroundColor: '#ffffff',
+        link: '/post/<POST>',
         color: '#000000',
+        backgroundColor: '#ffffff',
         start: '2024-06-06',
-        end: '2024-08-08'
+        end: '2024-08-08',
+        location: '',
+        createdAt: new Date(),
     });
-    const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
     const [youtubeLink, setYoutubeLink] = useState<string>('');
     const [canSubmit, setCanSubmit] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -40,10 +41,10 @@ export default function CreatePostScreen(): JSX.Element {
     const updateFormData = useCallback((field: string, value: any) => {
         setFormData(prevData => {
             const newData = { ...prevData, [field]: value };
-            validateForm(newData, mediaItems);
+            validateForm(newData);
             return newData;
         });
-    }, [mediaItems]);
+    }, []);
 
     const handleMediaChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
@@ -65,10 +66,29 @@ export default function CreatePostScreen(): JSX.Element {
 
             try {
                 const mediaBase64 = await Promise.all(mediaBase64Promises);
-                setMediaItems(prevMedia => {
-                    const newMedia = [...prevMedia, ...mediaBase64.map(base64 => ({ type: 'photo' as const, content: base64 }))];
-                    validateForm(formData, newMedia);
-                    return newMedia;
+
+                // Create the API calls to upload the photos and get the photo IDs
+                const mediaUrlPromises = mediaBase64.map(async base64 => {
+                    try {
+                        const res: Res = await api.photo.createPhoto(base64);
+                        if (!res.success) {
+                            throw new Error(res.errorMessage);
+                        }
+                        return `https://jorelm68-1dc8eff04a80.herokuapp.com/api/photo/readPhoto/${res.data}/1080`;
+                    } catch (error) {
+                        console.error('Error creating photo:', error);
+                        return null; // Handle this appropriately in your app
+                    }
+                });
+
+                const newMediaUrls = (await Promise.all(mediaUrlPromises)).filter(url => url !== null) as string[];
+
+                setFormData(prevData => {
+                    const newUrls = [...prevData.urls, ...newMediaUrls];
+                    const newCaptions = [...prevData.captions, ...newMediaUrls.map(() => '')];
+                    const newData = { ...prevData, urls: newUrls, captions: newCaptions };
+                    validateForm(newData);
+                    return newData;
                 });
             } catch (error) {
                 console.error('Error converting files:', error);
@@ -77,10 +97,9 @@ export default function CreatePostScreen(): JSX.Element {
     };
 
     const handleCaptionChange = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newMediaItems = [...mediaItems];
-        newMediaItems[index].caption = event.target.value;
-        setMediaItems(newMediaItems);
-        validateForm(formData, newMediaItems);
+        const newCaptions = [...formData.captions];
+        newCaptions[index] = event.target.value;
+        updateFormData('captions', newCaptions);
     };
 
     const handleYoutubeLinkChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,42 +109,57 @@ export default function CreatePostScreen(): JSX.Element {
     const addYoutubeLink = () => {
         const youtubeID = youtubeLink.split('v=')[1];
         if (youtubeID) {
-            setMediaItems(prevMedia => {
-                const newMedia = [...prevMedia, { type: 'video' as const, content: youtubeID }];
-                validateForm(formData, newMedia);
-                return newMedia;
+            const youtubeUrl = `https://www.youtube.com/embed/${youtubeID}`;
+            setFormData(prevData => {
+                const newUrls = [...prevData.urls, youtubeUrl];
+                const newCaptions = [...prevData.captions, ''];
+                const newData = { ...prevData, urls: newUrls, captions: newCaptions };
+                validateForm(newData);
+                return newData;
             });
         }
         setYoutubeLink('');
     };
 
     const handleRemoveMedia = (index: number) => {
-        const newMediaItems = [...mediaItems];
-        newMediaItems.splice(index, 1);
-        setMediaItems(newMediaItems);
-        validateForm(formData, newMediaItems);
+        setFormData(prevData => {
+            const newUrls = [...prevData.urls];
+            const newCaptions = [...prevData.captions];
+            newUrls.splice(index, 1);
+            newCaptions.splice(index, 1);
+            const newData = { ...prevData, urls: newUrls, captions: newCaptions };
+            validateForm(newData);
+            return newData;
+        });
     };
 
     const handleMoveMedia = (index: number, direction: 'up' | 'down' | 'top') => {
-        const newMediaItems = [...mediaItems];
-        
-        if (direction === 'up' && index > 0) {
-            [newMediaItems[index], newMediaItems[index - 1]] = [newMediaItems[index - 1], newMediaItems[index]];
-        } else if (direction === 'down' && index < mediaItems.length - 1) {
-            [newMediaItems[index], newMediaItems[index + 1]] = [newMediaItems[index + 1], newMediaItems[index]];
-        } else if (direction === 'top' && index > 0) {
-            const [movedMedia] = newMediaItems.splice(index, 1);
-            newMediaItems.unshift(movedMedia);
-        }
+        setFormData(prevData => {
+            const newUrls = [...prevData.urls];
+            const newCaptions = [...prevData.captions];
 
-        setMediaItems(newMediaItems);
+            if (direction === 'up' && index > 0) {
+                [newUrls[index], newUrls[index - 1]] = [newUrls[index - 1], newUrls[index]];
+                [newCaptions[index], newCaptions[index - 1]] = [newCaptions[index - 1], newCaptions[index]];
+            } else if (direction === 'down' && index < newUrls.length - 1) {
+                [newUrls[index], newUrls[index + 1]] = [newUrls[index + 1], newUrls[index]];
+                [newCaptions[index], newCaptions[index + 1]] = [newCaptions[index + 1], newCaptions[index]];
+            } else if (direction === 'top' && index > 0) {
+                const [movedUrl] = newUrls.splice(index, 1);
+                const [movedCaption] = newCaptions.splice(index, 1);
+                newUrls.unshift(movedUrl);
+                newCaptions.unshift(movedCaption);
+            }
+
+            const newData = { ...prevData, urls: newUrls, captions: newCaptions };
+            validateForm(newData);
+            return newData;
+        });
     };
 
-    const validateForm = (data: typeof formData, media: MediaItem[]) => {
-        const isValid = media.length > 0 && 
-            Object.values(data).every(value => value.trim() !== '') && 
-            media.every(item => item.type === 'video' || item.caption !== '');
-
+    const validateForm = (data: typeof formData) => {
+        // Make sure every fiedl has a valu
+        const isValid = Object.values(data).every(value => value !== '');
         setCanSubmit(isValid);
     };
 
@@ -134,11 +168,7 @@ export default function CreatePostScreen(): JSX.Element {
         setLoading(true);
 
         try {
-            await api.post.createPost({
-                ...formData,
-                media: mediaItems.map(item => item.content),
-                captions: mediaItems.map(item => item.caption || '')
-            });
+            await api.post.createPost(formData);
         } catch (error) {
             console.error('Error creating post:', error);
         }
@@ -219,34 +249,24 @@ export default function CreatePostScreen(): JSX.Element {
                     </View>
 
                     <View style={{ display: 'flex', alignItems: 'center' }}>
-                        <input 
-                            id="youtubeLink" 
-                            type="url" 
+                        <input
+                            id="youtubeLink"
+                            type="url"
                             placeholder="Enter YouTube Video URL"
                             value={youtubeLink}
-                            onChange={handleYoutubeLinkChange} 
+                            onChange={handleYoutubeLinkChange}
                         />
                         <button type="button" onClick={addYoutubeLink}>Add YouTube Video</button>
                     </View>
 
-                    {mediaItems.map((item, index) => (
+                    {formData.urls.map((url, index) => (
                         <View key={index} style={{ marginBottom: '16px' }}>
-                            {item.type === 'photo' ? (
-                                <>
-                                    <PhotoComponent photo={item.content} />
-                                    <input
-                                        type="text"
-                                        placeholder={`Caption for Photo ${index + 1}`}
-                                        value={item.caption || ''}
-                                        onChange={handleCaptionChange(index)}
-                                    />
-                                </>
-                            ) : (
+                            {url.includes('youtube') ? (
                                 <div>
                                     <iframe
                                         width="560"
                                         height="315"
-                                        src={`https://www.youtube.com/embed/${item.content}`}
+                                        src={url}
                                         title={`YouTube Video ${index + 1}`}
                                         frameBorder="0"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -255,10 +275,20 @@ export default function CreatePostScreen(): JSX.Element {
                                     <input
                                         type="text"
                                         placeholder={`Caption for Video ${index + 1}`}
-                                        value={item.caption || ''}
+                                        value={formData.captions[index] || ''}
                                         onChange={handleCaptionChange(index)}
                                     />
                                 </div>
+                            ) : (
+                                <>
+                                    <PhotoComponent photo={url} />
+                                    <input
+                                        type="text"
+                                        placeholder={`Caption for Photo ${index + 1}`}
+                                        value={formData.captions[index] || ''}
+                                        onChange={handleCaptionChange(index)}
+                                    />
+                                </>
                             )}
                             <button type="button" onClick={() => handleMoveMedia(index, 'up')}>Move Up</button>
                             <button type="button" onClick={() => handleMoveMedia(index, 'down')}>Move Down</button>

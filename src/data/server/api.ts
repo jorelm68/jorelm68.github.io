@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Res } from '../constants/types'
+import { Post, Res } from '../constants/types'
 import { EMPTY_RES } from '../constants/empty'
 
 const numbers = '172.25.240.1'
@@ -17,6 +17,7 @@ async function handleRequest(route: string, type: string, data?: any, blob: bool
     const response: Res = EMPTY_RES;
 
     try {
+
         const formData = new FormData()
 
         // Handle file conversion if needed
@@ -100,120 +101,15 @@ export default {
         factoryReset: async (): Promise<Res> => await handleRequest('api/general/factoryReset', 'POST'),
     },
     photo: {
-        createPhoto: async (uri: string) => await handleRequest('api/photo/createPhoto', 'POST', { file: { uri, type: 'image/jpeg', name: 'file' } }),
+        createPhoto: async (uri: string) => await handleRequest('api/photo/createPhoto', 'POST', { file: uri }),
         readPhoto: async (photo: string, resolution: number) => await handleRequest(`api/photo/readPhoto/${photo}/${resolution}`, 'GET', undefined, true),
         updatePhoto: async (photo: string, uri: string) => await handleRequest('api/photo/updatePhoto', 'POST', { photo, file: uri }),
         deletePhoto: async (photo: string) => await handleRequest('api/photo/deletePhoto', 'POST', { photo }),
     },
     post: {
         searchPosts: async (query: string) => await handleRequest('api/portfolio/post/searchPosts', 'POST', { query }),
-        createPost: async ({
-            name,
-            description,
-            selectors,
-            media,
-            captions,
-            essay,
-            link,
-            color,
-            backgroundColor,
-            start,
-            end,
-            location,
-        }: {
-            name: string,
-            description: string,
-            selectors: string,
-            media: string[],
-            captions: string[],
-            essay: string,
-            link: string,
-            color: string,
-            backgroundColor: string,
-            start: string,
-            end: string,
-            location: string,
-        }) => {
-            // Create an object with media files as key-value pairs
-            const mediaData = media.reduce((acc, uri, index) => {
-                // Only add image data, skip youtube ids
-                if (uri.startsWith('data:image')) {
-                    acc[`file${index}`] = uri;
-                }
-                return acc;
-            }, {} as Record<string, string>);
-
-            // Replace image URLs in the media list with 'placeholder'
-            const processedMedia = media.map(uri => uri.startsWith('data:image') ? 'placeholder' : uri);
-
-            // Construct the final payload
-            const payload = {
-                name,
-                description,
-                selectors,
-                media: processedMedia,
-                captions,
-                essay,
-                link,
-                color,
-                backgroundColor,
-                start,
-                end,
-                location,
-                numPhotos: media.filter(uri => uri.startsWith('data:image')).length,
-            };
-
-            // Send the payload to the backend
-            return await handleRequest('api/portfolio/post/createPost', 'POST', {
-                rawData: JSON.stringify(payload),
-                ...mediaData,
-            });
-        },
-        updatePost: async (_id: string, {
-            name,
-            description,
-            selectors,
-            urls,
-            captions,
-            essay,
-            link,
-            backgroundColor,
-            color,
-            start,
-            end,
-            location,
-        }: {
-            name: string,
-            description: string,
-            selectors: string,
-            urls: string[],
-            captions: string[],
-            essay: string,
-            link: string,
-            color: string,
-            backgroundColor: string,
-            start: string,
-            end: string,
-            location: string,
-        }) => {
-            return await handleRequest('api/portfolio/post/updatePost', 'POST', {
-                _id,
-                rawData: JSON.stringify({
-                    name,
-                    description,
-                    selectors,
-                    urls,
-                    captions,
-                    essay,
-                    link,
-                    color,
-                    backgroundColor,
-                    start,
-                    end,
-                    location,
-                }),
-            });
-        },
+        createPost: async (post: Post) => await handleRequest('api/portfolio/post/createPost', 'POST', { rawData: JSON.stringify(post) }),
+        updatePost: async (_id: string, post: Post) => await handleRequest('api/portfolio/post/updatePost', 'POST', { _id, rawData: JSON.stringify(post) }),
         deletePost: async (_id: string) => await handleRequest('api/portfolio/post/deletePost', 'POST', { _id }),
     },
 }
