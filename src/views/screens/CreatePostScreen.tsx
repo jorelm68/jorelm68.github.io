@@ -35,7 +35,6 @@ export default function CreatePostScreen(): JSX.Element {
         createdAt: new Date(),
     });
     const [youtubeLink, setYoutubeLink] = useState<string>('');
-    const [canSubmit, setCanSubmit] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const updateFormData = useCallback((field: string, value: any) => {
@@ -286,7 +285,7 @@ export default function CreatePostScreen(): JSX.Element {
                         </View>
                     ))}
 
-                    <button type="submit" disabled={!canSubmit || loading}>Create Post</button>
+                    <button type="submit" disabled={loading}>Create Post</button>
                 </form>
             </View>
         </Page>

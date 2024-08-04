@@ -11,7 +11,7 @@ import { usePost } from "../../data/server/state";
 import { Post, Res } from "../../data/constants/types";
 
 export default function EditPostScreen(): JSX.Element {
-    const { post: postId } = useParams<{ post: string }>();
+    const { post } = useParams<{ post: string }>();
     const { isAuthenticated } = useAppSelector(state => state.global);
     const dispatch = useDispatch();
 
@@ -36,14 +36,14 @@ export default function EditPostScreen(): JSX.Element {
         urls, 
         captions, 
         createdAt,
-    } = usePost(postId);
+    } = usePost(post);
     
     // Initial state setup, leveraging custom hook data
     const initialFormData: Post = {
         _id: _id || '',
         name: name || '',
         description: description || '',
-        link: link || `post/${postId}`,
+        link: link || `post/${post}`,
         selectors: selectors || '',
         essay: essay || '',
         location: location || '',
@@ -58,7 +58,6 @@ export default function EditPostScreen(): JSX.Element {
 
     const [formData, setFormData] = useState(initialFormData);
     const [youtubeLink, setYoutubeLink] = useState<string>('');
-    const [canSubmit, setCanSubmit] = useState(false);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -67,7 +66,7 @@ export default function EditPostScreen(): JSX.Element {
                 _id: _id || '',
                 name: name || '',
                 description: description || '',
-                link: link || `post/${postId}`,
+                link: link || `post/${post}`,
                 selectors: selectors || '',
                 essay: essay || '',
                 location: location || '',
@@ -80,7 +79,7 @@ export default function EditPostScreen(): JSX.Element {
                 createdAt: createdAt || new Date(),
             });
         }
-    }, [name, description, link, selectors, essay, location, backgroundColor, color, start, end, urls, captions, postId]);
+    }, [name, description, link, selectors, essay, location, backgroundColor, color, start, end, urls, captions, post]);
 
     const updateFormData = useCallback((field: string, value: any) => {
         setFormData(prevData => {
@@ -314,7 +313,7 @@ export default function EditPostScreen(): JSX.Element {
                         </View>
                     ))}
 
-                    <button type="submit" disabled={!canSubmit || loading}>Update Post</button>
+                    <button type="submit" disabled={loading}>Update Post</button>
                 </form>
             </View>
         </Page>
