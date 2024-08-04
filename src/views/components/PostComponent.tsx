@@ -60,14 +60,14 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                         />
                     ) : (
                         <iframe
+                            height='100%'
+                            width='auto'
                             src={post.urls[0]}
+                            title={`YouTube Video`}
+                            frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            title={post.name}
-                            style={{
-                                height: '100%',
-                                width: 'auto',
-                            }}
-                        />
+                            allowFullScreen
+                        ></iframe>
                     )}
                 </View>
                 <View

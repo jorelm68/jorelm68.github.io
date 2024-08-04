@@ -58,14 +58,14 @@ export default function PostRawComponent({
                     />
                 ) : (
                     <iframe
+                        height='100%'
+                        width='auto'
                         src={url}
+                        title={`YouTube Video`}
+                        frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        title={name}
-                        style={{
-                            height: '100%',
-                            width: 'auto',
-                        }}
-                    />
+                        allowFullScreen
+                    ></iframe>
                 )}
             </View>
             <View
