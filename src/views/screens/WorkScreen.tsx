@@ -62,9 +62,9 @@ export default function WorkScreen() {
 
     return (
         <Page style={{
-            paddingTop: `${48}px`,
+            paddingTop: `${48 + 8}px`,
             paddingBottom: '32px',
-            alignItems: 'center',
+            alignItems: 'flex-start',
             display: 'flex',
             flexDirection: 'row',
             flexWrap: 'wrap',
@@ -72,31 +72,13 @@ export default function WorkScreen() {
             gap: '16px',
             boxSizing: 'border-box',
             scrollbarWidth: 'auto',
+            height: 'auto',
         }}>
             {posts.map((post, index) => {
                 return (
                     <PostComponent key={index} post={post} />
                 )
             })}
-
-            <iframe
-                width="560"
-                height="315"
-                src="https://www.youtube.com/embed/8Ls7maJvjwQ"
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-            ></iframe>
-
-            {/* {images.map((image, index) => {
-                return (
-                    <PhotoComponent key={index} photo={image.src.original} style={{
-                        width: 'calc(50% - 16px)',
-                        height: 'calc(50% - 16px)',
-                        objectFit: 'cover',
-                    }} />
-                )
-            })} */}
         </Page>
     )
 }

@@ -24,25 +24,22 @@ export default function PostRawComponent({
             style={{
                 display: 'flex',
                 flexDirection: 'row',
-                width: '40vw',
-                minWidth: '400px',
-                maxWidth: '40vw',
+                width: '100%',
                 backgroundColor: backgroundColor ? backgroundColor : EMPTY_POST.backgroundColor,
                 color: color,
                 textDecoration: 'none',
-                padding: '10px',
-                maxHeight: '200px',
-                minHeight: '200px',
-                overflow: 'hidden',
+                padding: '1%',
                 borderRadius: '8px',
+                boxSizing: 'border-box',
+                maxWidth: '650px',
+                minWidth: '300px',
             }}
         >
             <View
                 style={{
-                    flex: '0 0 auto',
-                    width: 'auto',
-                    height: '200px',
-                    marginRight: '10px',
+                    flex: '1 1 40%',
+                    marginRight: '2%',
+                    height: 'auto',
                     overflow: 'hidden'
                 }}
             >
@@ -51,15 +48,16 @@ export default function PostRawComponent({
                         photo={url}
                         resolution={1080}
                         style={{
-                            height: '100%',
-                            width: 'auto',
-                            objectFit: 'cover',
+                            width: '100%',
+                            height: 'auto',
                         }}
                     />
                 ) : (
                     <iframe
-                        height='100%'
-                        width='auto'
+                        style={{
+                            width: '100%',
+                            height: 'auto'
+                        }}
                         src={url}
                         title={`YouTube Video`}
                         frameBorder="0"
@@ -70,6 +68,7 @@ export default function PostRawComponent({
             </View>
             <View
                 style={{
+                    flex: '1 1 60%',
                     overflow: 'hidden',
                 }}
             >
@@ -82,7 +81,6 @@ export default function PostRawComponent({
                             whiteSpace: 'nowrap',
                             overflow: 'hidden',
                             textOverflow: 'ellipsis',
-                            height: '32px',
                             color: color ? color : EMPTY_POST.color,
                         }}
                     >

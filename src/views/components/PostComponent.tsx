@@ -27,25 +27,22 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                 style={{
                     display: 'flex',
                     flexDirection: 'row',
-                    width: '40vw',
-                    minWidth: '400px',
-                    maxWidth: '40vw',
+                    width: '100%',
                     backgroundColor: post.backgroundColor ? post.backgroundColor : EMPTY_POST.backgroundColor,
                     color: post.color,
                     textDecoration: 'none',
-                    padding: '10px',
-                    maxHeight: '200px',
-                    minHeight: '200px',
-                    overflow: 'hidden',
+                    padding: '1%',
                     borderRadius: '8px',
+                    boxSizing: 'border-box',
+                    maxWidth: '650px',
+                    minWidth: '300px',
                 }}
             >
                 <View
                     style={{
-                        flex: '0 0 auto',
-                        width: 'auto',
-                        height: '200px',
-                        marginRight: '10px',
+                        flex: '1 1 40%',
+                        marginRight: '2%',
+                        height: 'auto',
                         overflow: 'hidden'
                     }}
                 >
@@ -54,14 +51,16 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                             photo={post.urls[0]}
                             resolution={1080}
                             style={{
-                                height: '100%',
-                                width: 'auto',
+                                width: '100%',
+                                height: 'auto',
                             }}
                         />
                     ) : (
                         <iframe
-                            height='100%'
-                            width='auto'
+                            style={{
+                                width: '100%',
+                                height: 'auto'
+                            }}
                             src={post.urls[0]}
                             title={`YouTube Video`}
                             frameBorder="0"
@@ -72,6 +71,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                 </View>
                 <View
                     style={{
+                        flex: '1 1 60%',
                         overflow: 'hidden',
                     }}
                 >
@@ -84,7 +84,6 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                                 whiteSpace: 'nowrap',
                                 overflow: 'hidden',
                                 textOverflow: 'ellipsis',
-                                height: '32px',
                                 color: post.color ? post.color : EMPTY_POST.color,
                             }}
                         >
@@ -108,7 +107,6 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                 {isAuthenticated && (
                     <Link
                         to={`/post/${_id}/edit`}
-
                         style={{
                             textDecoration: 'none',
                             alignSelf: 'flex-end',
