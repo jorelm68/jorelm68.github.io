@@ -40,7 +40,8 @@ export default function PostRawComponent({
                     flex: '1 1 40%',
                     marginRight: '2%',
                     height: 'auto',
-                    overflow: 'hidden'
+                    overflow: 'hidden',
+                    minWidth: url.includes('api/photo/readPhoto') ? '0px' : '200px',
                 }}
             >
                 {url && url.includes('api/photo/readPhoto') ? (
@@ -62,7 +63,7 @@ export default function PostRawComponent({
                     <iframe
                         style={{
                             width: '100%',
-                            height: 'auto'
+                            height: 'auto',
                         }}
                         src={url}
                         title={`YouTube Video`}
