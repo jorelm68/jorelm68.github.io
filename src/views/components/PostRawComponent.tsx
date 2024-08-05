@@ -2,6 +2,7 @@ import { EMPTY_POST } from "../../data/constants/empty";
 import PhotoComponent from "./PhotoComponent";
 import View from "./View";
 import Text from "./Text";
+import { Link } from "react-router-dom";
 
 interface PostRawComponentProps {
     name: string;
@@ -43,14 +44,20 @@ export default function PostRawComponent({
                 }}
             >
                 {url && url.includes('api/photo/readPhoto') ? (
-                    <PhotoComponent
-                        photo={url}
-                        resolution={1080}
-                        style={{
-                            width: '100%',
-                            height: 'auto',
-                        }}
-                    />
+                    <Link
+                        to={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <PhotoComponent
+                            photo={url}
+                            resolution={1080}
+                            style={{
+                                width: '100%',
+                                height: 'auto',
+                            }}
+                        />
+                    </Link>
                 ) : (
                     <iframe
                         style={{
