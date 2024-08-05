@@ -43,9 +43,9 @@ function App() {
           <Route path="/work" element={<WorkScreen />} />
           <Route path="/post/:post" element={<PostScreen />} />
 
-          {/* <Route path="/auth" element={<AuthScreen />} />
+          <Route path="/auth" element={<AuthScreen />} />
           <Route path="/createPost" element={<CreatePostScreen />} />
-          <Route path="/post/:post/edit" element={<EditPostScreen />} /> */}
+          <Route path="/post/:post/edit" element={<EditPostScreen />} />
         </Routes>
       </HashRouter>
     </Provider>

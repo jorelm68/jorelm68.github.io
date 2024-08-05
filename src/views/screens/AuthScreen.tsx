@@ -21,7 +21,7 @@ export default function AuthScreen() {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (password === 'password') {
+        if (password === 'humpback') {
             dispatch(setIsAuthenticated(true));
         }
     }
