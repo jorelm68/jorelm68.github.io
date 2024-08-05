@@ -188,7 +188,22 @@ export default function CreatePostScreen(): JSX.Element {
 
                     <View>
                         <label htmlFor="description">Description:</label>
-                        <textarea id="description" value={formData.description} onChange={e => updateFormData('description', e.target.value)} />
+                        <textarea
+                            id="description"
+                            value={formData.description}
+                            onChange={e => updateFormData('description', e.target.value)}
+                            style={{
+                                width: '100%', // Ensure it takes up the full width of its container
+                                resize: 'none', // Prevent manual resizing by the user, optional
+                                overflow: 'hidden', // Hide the scrollbar when the text area expands
+                            }}
+                            rows={1} // Start with a single row
+                            onInput={(e) => {
+                                const target = e.target as HTMLTextAreaElement;
+                                target.style.height = 'auto'; // Reset height to auto to calculate new height
+                                target.style.height = `${target.scrollHeight}px`; // Set height based on scrollHeight
+                            }}
+                        />
                     </View>
 
                     <View>
@@ -198,7 +213,22 @@ export default function CreatePostScreen(): JSX.Element {
 
                     <View>
                         <label htmlFor="essay">Essay:</label>
-                        <textarea id="essay" value={formData.essay} onChange={e => updateFormData('essay', e.target.value)} />
+                        <textarea
+                            id="essay"
+                            value={formData.essay}
+                            onChange={e => updateFormData('essay', e.target.value)}
+                            style={{
+                                width: '100%', // Ensure it takes up the full width of its container
+                                resize: 'none', // Prevent manual resizing by the user, optional
+                                overflow: 'hidden', // Hide the scrollbar when the text area expands
+                            }}
+                            rows={1} // Start with a single row
+                            onInput={(e) => {
+                                const target = e.target as HTMLTextAreaElement;
+                                target.style.height = 'auto'; // Reset height to auto to calculate new height
+                                target.style.height = `${target.scrollHeight}px`; // Set height based on scrollHeight
+                            }}
+                        />
                     </View>
 
                     <View>

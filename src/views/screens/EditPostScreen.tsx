@@ -23,21 +23,21 @@ export default function EditPostScreen(): JSX.Element {
     // Use custom hook to fetch post data
     const {
         _id,
-        name, 
-        description, 
-        link, 
-        selectors, 
-        essay, 
-        location, 
-        backgroundColor, 
-        color, 
-        start, 
-        end, 
-        urls, 
-        captions, 
+        name,
+        description,
+        link,
+        selectors,
+        essay,
+        location,
+        backgroundColor,
+        color,
+        start,
+        end,
+        urls,
+        captions,
         createdAt,
     } = usePost(post);
-    
+
     // Initial state setup, leveraging custom hook data
     const initialFormData: Post = {
         _id: _id || '',
@@ -127,7 +127,7 @@ export default function EditPostScreen(): JSX.Element {
         }
     };
 
-    const handleCaptionChange = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleCaptionChange = (index: number) => (event: { target: { value: string; }; }) => {
         const newCaptions = [...formData.captions];
         newCaptions[index] = event.target.value;
         updateFormData('captions', newCaptions);
@@ -216,7 +216,22 @@ export default function EditPostScreen(): JSX.Element {
 
                     <View>
                         <label htmlFor="description">Description:</label>
-                        <textarea id="description" value={formData.description} onChange={e => updateFormData('description', e.target.value)} />
+                        <textarea
+                            id="description"
+                            value={formData.description}
+                            onChange={e => updateFormData('description', e.target.value)}
+                            style={{
+                                width: '100%', // Ensure it takes up the full width of its container
+                                resize: 'none', // Prevent manual resizing by the user, optional
+                                overflow: 'hidden', // Hide the scrollbar when the text area expands
+                            }}
+                            rows={1} // Start with a single row
+                            onInput={(e) => {
+                                const target = e.target as HTMLTextAreaElement;
+                                target.style.height = 'auto'; // Reset height to auto to calculate new height
+                                target.style.height = `${target.scrollHeight}px`; // Set height based on scrollHeight
+                            }}
+                        />
                     </View>
 
                     <View>
@@ -226,7 +241,22 @@ export default function EditPostScreen(): JSX.Element {
 
                     <View>
                         <label htmlFor="essay">Essay:</label>
-                        <textarea id="essay" value={formData.essay} onChange={e => updateFormData('essay', e.target.value)} />
+                        <textarea
+                            id="essay"
+                            value={formData.essay}
+                            onChange={e => updateFormData('essay', e.target.value)}
+                            style={{
+                                width: '100%', // Ensure it takes up the full width of its container
+                                resize: 'none', // Prevent manual resizing by the user, optional
+                                overflow: 'hidden', // Hide the scrollbar when the text area expands
+                            }}
+                            rows={1} // Start with a single row
+                            onInput={(e) => {
+                                const target = e.target as HTMLTextAreaElement;
+                                target.style.height = 'auto'; // Reset height to auto to calculate new height
+                                target.style.height = `${target.scrollHeight}px`; // Set height based on scrollHeight
+                            }}
+                        />
                     </View>
 
                     <View>
@@ -288,11 +318,21 @@ export default function EditPostScreen(): JSX.Element {
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                         allowFullScreen
                                     ></iframe>
-                                    <input
-                                        type="text"
+                                    <textarea
                                         placeholder={`Caption for Video ${index + 1}`}
                                         value={formData.captions[index] || ''}
                                         onChange={handleCaptionChange(index)}
+                                        style={{
+                                            width: '100%', // Ensure it takes up the full width of its container
+                                            resize: 'none', // Prevent manual resizing by the user, optional
+                                            overflow: 'hidden', // Hide the scrollbar when the text area expands
+                                        }}
+                                        rows={1} // Start with a single row
+                                        onInput={(e) => {
+                                            const target = e.target as HTMLTextAreaElement;
+                                            target.style.height = 'auto'; // Reset height to auto to calculate new height
+                                            target.style.height = `${target.scrollHeight}px`; // Set height based on scrollHeight
+                                        }}
                                     />
                                 </div>
                             ) : (
@@ -303,11 +343,21 @@ export default function EditPostScreen(): JSX.Element {
                                         objectFit: 'cover',
                                     }} />
                                     <br />
-                                    <input
-                                        type="text"
+                                    <textarea
                                         placeholder={`Caption for Photo ${index + 1}`}
                                         value={formData.captions[index] || ''}
                                         onChange={handleCaptionChange(index)}
+                                        style={{
+                                            width: '100%', // Ensure it takes up the full width of its container
+                                            resize: 'none', // Prevent manual resizing by the user, optional
+                                            overflow: 'hidden', // Hide the scrollbar when the text area expands
+                                        }}
+                                        rows={1} // Start with a single row
+                                        onInput={(e) => {
+                                            const target = e.target as HTMLTextAreaElement;
+                                            target.style.height = 'auto'; // Reset height to auto to calculate new height
+                                            target.style.height = `${target.scrollHeight}px`; // Set height based on scrollHeight
+                                        }}
                                     />
                                 </>
                             )}
