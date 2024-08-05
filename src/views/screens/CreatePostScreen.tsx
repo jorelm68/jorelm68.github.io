@@ -93,7 +93,7 @@ export default function CreatePostScreen(): JSX.Element {
         }
     };
 
-    const handleCaptionChange = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleCaptionChange = (index: number) => (event: { target: { value: string; }; }) => {
         const newCaptions = [...formData.captions];
         newCaptions[index] = event.target.value;
         updateFormData('captions', newCaptions);
@@ -260,11 +260,21 @@ export default function CreatePostScreen(): JSX.Element {
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                         allowFullScreen
                                     ></iframe>
-                                    <input
-                                        type="text"
+                                    <textarea
                                         placeholder={`Caption for Video ${index + 1}`}
                                         value={formData.captions[index] || ''}
                                         onChange={handleCaptionChange(index)}
+                                        style={{
+                                            width: '100%', // Ensure it takes up the full width of its container
+                                            resize: 'none', // Prevent manual resizing by the user, optional
+                                            overflow: 'hidden', // Hide the scrollbar when the text area expands
+                                        }}
+                                        rows={1} // Start with a single row
+                                        onInput={(e) => {
+                                            const target = e.target as HTMLTextAreaElement;
+                                            target.style.height = 'auto'; // Reset height to auto to calculate new height
+                                            target.style.height = `${target.scrollHeight}px`; // Set height based on scrollHeight
+                                        }}
                                     />
                                 </div>
                             ) : (
@@ -275,11 +285,21 @@ export default function CreatePostScreen(): JSX.Element {
                                         objectFit: 'cover',
                                     }} />
                                     <br />
-                                    <input
-                                        type="text"
+                                    <textarea
                                         placeholder={`Caption for Photo ${index + 1}`}
                                         value={formData.captions[index] || ''}
                                         onChange={handleCaptionChange(index)}
+                                        style={{
+                                            width: '100%', // Ensure it takes up the full width of its container
+                                            resize: 'none', // Prevent manual resizing by the user, optional
+                                            overflow: 'hidden', // Hide the scrollbar when the text area expands
+                                        }}
+                                        rows={1} // Start with a single row
+                                        onInput={(e) => {
+                                            const target = e.target as HTMLTextAreaElement;
+                                            target.style.height = 'auto'; // Reset height to auto to calculate new height
+                                            target.style.height = `${target.scrollHeight}px`; // Set height based on scrollHeight
+                                        }}
                                     />
                                 </>
                             )}
