@@ -138,7 +138,11 @@ export default function EditPostScreen(): JSX.Element {
     };
 
     const addYoutubeLink = () => {
-        const youtubeID = youtubeLink.split('v=')[1];
+        let youtubeID = youtubeLink.split('v=')[1];
+
+        if (!youtubeID) {
+            youtubeID = youtubeLink.split('/shorts/')[1];
+        }
         if (youtubeID) {
             const youtubeUrl = `https://www.youtube.com/embed/${youtubeID}`;
             const newUrls = [...formData.urls, youtubeUrl];
@@ -178,6 +182,8 @@ export default function EditPostScreen(): JSX.Element {
         updateFormData('urls', newUrls);
         updateFormData('captions', newCaptions);
     };
+
+    console.log(formData);
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();

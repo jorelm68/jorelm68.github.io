@@ -104,7 +104,11 @@ export default function CreatePostScreen(): JSX.Element {
     };
 
     const addYoutubeLink = () => {
-        const youtubeID = youtubeLink.split('v=')[1];
+        let youtubeID = youtubeLink.split('v=')[1];
+
+        if (!youtubeID) {
+            youtubeID = youtubeLink.split('/shorts/')[1];
+        }
         if (youtubeID) {
             const youtubeUrl = `https://www.youtube.com/embed/${youtubeID}`;
             setFormData(prevData => {
