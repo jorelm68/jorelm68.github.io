@@ -133,12 +133,16 @@ export default function PostScreen() {
                     height: 'auto',
                 }}>
                     {urls && urls.length > 0 && urls.map((url, index) => {
+                        const caption = captions[index];
+                        const parts = caption.split(' ~ ');
+                        const name = parts[0];
+                        const description = parts[1];
                         return (
                             <PostRawComponent
                                 key={index}
                                 url={url}
-                                name={''}
-                                description={captions[index]}
+                                name={name}
+                                description={description}
                                 color={color}
                                 backgroundColor={backgroundColor}
                             />
