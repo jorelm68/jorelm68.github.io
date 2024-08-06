@@ -6,9 +6,7 @@ import api from "../../lib/server/api";
 import { Res } from "../../lib/constants/types";
 import PostComponent from "../components/PostComponent";
 import constants from "../../lib/constants/constants";
-// import axios from "axios";
 
-// const PEXELS_API_KEY = 'AapsNavsOWPuyDk2gvRSO027MiXYVuw1p9KQ0a4zWkVzBmtaDgA19Fsm';
 const FULL_WIDTH = '90%';
 
 export default function WorkScreen() {
@@ -25,34 +23,6 @@ export default function WorkScreen() {
             setPosts(res.data);
         })
     }, [])
-
-    // const [query, setQuery] = useState('moorish architecture');
-    // const [images, setImages] = useState<Record<string, any>[]>([]);
-    // const [loading, setLoading] = useState(false);
-    // const [error, setError] = useState<string | null>(null);
-
-    // const fetchImages = async () => {
-    //     setLoading(true);
-    //     setError(null);
-
-    //     const endpoint = `https://api.pexels.com/v1/search?query=${query}&per_page=10`;
-
-    //     try {
-    //         const response = await axios.get(endpoint, {
-    //             headers: {
-    //                 Authorization: PEXELS_API_KEY,
-    //             },
-    //         });
-    //         setImages(response.data.photos);
-    //     } catch (err: any) {
-    //         setError('Failed to fetch images.');
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
-    // useEffect(() => {
-    //     fetchImages();
-    // }, [])
 
     return (
         <Page style={{

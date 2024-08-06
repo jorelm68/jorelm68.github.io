@@ -13,7 +13,9 @@ export default function PhotoComponent({ photo, resolution = constants.RESOLUTIO
     const [source, setSource] = useState<any>(photos.defaultImage);
 
     useEffect(() => {
-        helper.handlePhoto(photo, resolution, setSource);
+        helper.handlePhoto(photo, resolution).then((uri: any) => {
+            setSource(uri);
+        });
     }, [photo, resolution]);
 
     if (source === photos.defaultImage) {
