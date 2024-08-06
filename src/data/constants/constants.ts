@@ -21,13 +21,9 @@ const constants = {
     Z_FRONT: 1,
     Z_FAR_FRONT: 2,
 
-    ABSOLUTE: {
-        position: 'absolute' as const,
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-    },
+    RESUME_NAME: 'Ethan McIntyre.pdf',
+    GITHUB_LINK: 'https://www.github.com/jorelm68',
+    LINKEDIN_LINK: 'https://www.linkedin.com/in/ethan-mcintyre68',
 }
 
 export default constants;

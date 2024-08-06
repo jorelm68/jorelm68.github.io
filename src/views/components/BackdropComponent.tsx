@@ -4,6 +4,7 @@ import photos, { Photos } from "../../data/constants/photos";
 import { AnimatePresence, motion } from "framer-motion";
 import constants from "../../data/constants/constants";
 import colors from "../../data/constants/colors";
+import styles from "../../data/constants/styles";
 
 const BACKDROP_WIDTH = '110%';
 const BACKDROP_START = '0%';
@@ -12,7 +13,6 @@ const QUICK_TRANSITION = 0.35;
 const SLOW_TRANSITION = 2;
 const SLIDING_DURATION = 20;
 const PHOTO_INTERVAL = 15000;
-const TRANSPARENT = 0;
 const TINTED = 0.33;
 
 const BackdropComponent = () => {
@@ -33,7 +33,7 @@ const BackdropComponent = () => {
 
     return (
         <div className="container" style={{
-            ...constants.ABSOLUTE,
+            ...styles.absolute,
             width: BACKDROP_WIDTH,
             backgroundColor: colors.black,
             zIndex: constants.Z_FAR_BACK,
@@ -43,18 +43,18 @@ const BackdropComponent = () => {
                     key={index}
                     src={photo}
                     alt="Backdrop"
-                    initial={{ opacity: TRANSPARENT, x: BACKDROP_START }}
+                    initial={{ opacity: 0, x: BACKDROP_START }}
                     animate={{
-                        opacity: constants.NO_BACKDROP.includes(screen) ? TRANSPARENT : TINTED,
+                        opacity: constants.NO_BACKDROP.includes(screen) ? 0 : TINTED,
                         x: BACKDROP_END,
                     }}
-                    exit={{ opacity: TRANSPARENT, x: BACKDROP_END }}
+                    exit={{ opacity: 0, x: BACKDROP_END }}
                     transition={{
                         opacity: { duration: constants.NO_BACKDROP.includes(screen) ? QUICK_TRANSITION : SLOW_TRANSITION },
                         x: { duration: SLIDING_DURATION, ease: "linear" }
                     }}
                     style={{
-                        ...constants.ABSOLUTE,
+                        ...styles.absolute,
                         objectFit: 'cover',
                     }}
                 />

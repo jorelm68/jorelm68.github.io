@@ -7,6 +7,45 @@ import files from "../../data/constants/files";
 import { useAppSelector } from "../../data/redux/hooks";
 import { motion } from "framer-motion";
 import constants from "../../data/constants/constants";
+import styles from "../../data/constants/styles";
+
+const CONTACT_SCREEN = 'ContactScreen';
+const STARTING_POSITION = '-100%';
+const ENDING_POSITION = '0%';
+const DURATION = 0.75;
+const CONTAINER_WIDTH = 885;
+const BORDER_RADIUS = 50;
+const GITHUB_POSITION = {
+    position: 'absolute' as const,
+    width: '16%',
+    height: '8%',
+    top: '82.75%',
+    left: '6.75%',
+    cursor: 'pointer',
+}
+const LINKEDIN_POSITION = {
+    position: 'absolute' as const,
+    width: '17.5%',
+    height: '8%',
+    top: '82.75%',
+    left: '30%',
+    cursor: 'pointer',
+}
+const RESUME_POSITION = {
+    position: 'absolute' as const,
+    right: '14.75%',
+    top: '82.75%',
+    width: '30.75%',
+    height: '8%',
+    cursor: 'pointer',
+}
+const POSITION = {
+    position: 'absolute' as const,
+    width: '100%',
+    height: 'auto',
+    top: 48,
+    left: 0,
+}
 
 export default function BusinessCardComponent() {
     const { screen } = useAppSelector(state => state.global);
@@ -23,7 +62,7 @@ export default function BusinessCardComponent() {
 
         const link = document.createElement('a');
         link.href = resumeUrl;
-        link.download = 'Ethan_McIntyre.pdf';
+        link.download = constants.RESUME_NAME;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -32,23 +71,18 @@ export default function BusinessCardComponent() {
     return (
         <View>
             <motion.div
-                initial={{ opacity: 0, marginTop: '-100%' }}
+                initial={{ opacity: 0, marginTop: STARTING_POSITION }}
                 animate={{
-                    opacity: screen === 'ContactScreen' ? 1 : 0,
-                    marginTop: screen === 'ContactScreen' ? 0 : '-100%',
+                    opacity: screen === CONTACT_SCREEN ? 1 : 0,
+                    marginTop: screen === CONTACT_SCREEN ? ENDING_POSITION : STARTING_POSITION,
                 }}
                 transition={{
-                    opacity: { duration: 0.75 },
-                    marginTop: { duration: 0.75, delay: screen === 'ContactScreen' ? 0 : 2 },
+                    opacity: { duration: DURATION },
+                    marginTop: { duration: DURATION, delay: screen === CONTACT_SCREEN ? 0 : 2 },
                 }}
                 style={{
-                    width: '100%',
-                    maxWidth: 885,
-                    height: 'auto',
-                    transition: 'background-color 0.3s ease',
-                    position: 'absolute',
-                    top: 48,
-                    left: 0,
+                    ...POSITION,
+                    maxWidth: CONTAINER_WIDTH,
                     zIndex: constants.Z_BACK,
                 }}
             >
@@ -57,29 +91,24 @@ export default function BusinessCardComponent() {
                     style={{
                         width: '100%',
                         height: 'auto',
-                        borderBottomRightRadius: width < 885 ? 0 : 50,
+                        borderBottomRightRadius: width < CONTAINER_WIDTH ? 0 : BORDER_RADIUS,
                     }}
                 />
             </motion.div>
 
             <motion.div
-                initial={{ opacity: 0, marginTop: '-100%' }}
+                initial={{ opacity: 0, marginTop: STARTING_POSITION }}
                 animate={{
-                    opacity: screen === 'ContactScreen' ? 1 : 0,
-                    marginTop: screen === 'ContactScreen' ? 0 : '-100%',
+                    opacity: screen === CONTACT_SCREEN ? 1 : 0,
+                    marginTop: screen === CONTACT_SCREEN ? 0 : STARTING_POSITION,
                 }}
                 transition={{
-                    opacity: { duration: 0.75 },
-                    marginTop: { duration: 0.75, delay: screen === 'ContactScreen' ? 0 : 2 },
+                    opacity: { duration: DURATION },
+                    marginTop: { duration: DURATION, delay: screen === CONTACT_SCREEN ? 0 : 2 },
                 }}
                 style={{
-                    width: '100%',
-                    maxWidth: 885,
-                    height: 'auto',
-                    transition: 'background-color 0.3s ease',
-                    position: 'absolute',
-                    top: 48,
-                    left: 0,
+                    ...POSITION,
+                    maxWidth: CONTAINER_WIDTH,
                     zIndex: constants.Z_FRONT,
                 }}
             >
@@ -89,57 +118,30 @@ export default function BusinessCardComponent() {
                         width: '100%',
                         height: 'auto',
                         opacity: 0,
-                        borderBottomRightRadius: width < 885 ? 0 : 50,
+                        borderBottomRightRadius: width < CONTAINER_WIDTH ? 0 : BORDER_RADIUS,
                     }}
                 />
 
                 <View
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                    }}
+                    style={styles.absolute}
                 >
                     <Link
-                        to="https://www.github.com/jorelm68"
+                        to={constants.GITHUB_LINK}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{
-                            position: 'absolute',
-                            width: '16%',
-                            height: '8%',
-                            top: '82.75%',
-                            left: '6.75%',
-                            cursor: 'pointer',
-                        }}
+                        style={GITHUB_POSITION}
                     />
 
                     <Link
-                        to="https://www.linkedin.com/in/ethan-mcintyre68"
+                        to={constants.LINKEDIN_LINK}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{
-                            position: 'absolute',
-                            width: '17.5%',
-                            height: '8%',
-                            top: '82.75%',
-                            left: '30%',
-                            cursor: 'pointer',
-                        }}
+                        style={LINKEDIN_POSITION}
                     />
 
                     <View
                         onClick={handleDownload}
-                        style={{
-                            position: 'absolute',
-                            right: '14.75%',
-                            top: '82.75%',
-                            width: '30.75%',
-                            height: '8%',
-                            cursor: 'pointer',
-                        }}
+                        style={RESUME_POSITION}
                     />
                 </View>
             </motion.div>
