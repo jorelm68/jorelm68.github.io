@@ -306,7 +306,7 @@ export default function CreatePostScreen(): JSX.Element {
                                         src={url}
                                         title={`YouTube Video ${index + 1}`}
                                         frameBorder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allow={constants.VIDEO_ALLOW}
                                         allowFullScreen
                                     />
                                     <textarea
