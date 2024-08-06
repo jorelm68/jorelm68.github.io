@@ -1,4 +1,3 @@
-import { Dispatch } from "react";
 import cache from "../server/cache";
 import constants from "./constants";
 import photos from "./photos";
