@@ -5,6 +5,7 @@ import { EMPTY_POST } from "../../data/constants/empty";
 import View from "./View";
 import Text from "./Text";
 import { useAppSelector } from "../../data/redux/hooks";
+import constants from "../../data/constants/constants";
 
 interface PostComponentProps {
     post: string,
@@ -106,7 +107,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                             fontSize: '1em',
                             overflow: 'hidden',
                             color: post.color ? post.color : EMPTY_POST.color,
-                            fontFamily: 'Nunito',
+                            fontFamily: constants.FONT,
                             lineHeight: '1.5em',
                         }} />
                     )}

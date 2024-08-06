@@ -8,6 +8,7 @@ import { useAppSelector } from "../../data/redux/hooks";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setScreen } from "../../data/redux/global.reducer";
+import constants from "../../data/constants/constants";
 
 export default function PostScreen() {
     const { isAuthenticated } = useAppSelector(state => state.global);
@@ -102,7 +103,7 @@ export default function PostScreen() {
                             color: color,
                             borderTop: `1px solid ${color}`,
                             padding: '16px',
-                            fontFamily: 'Nunito',
+                            fontFamily: constants.FONT,
                             lineHeight: '1.5em',
                         }} />
                     </View>

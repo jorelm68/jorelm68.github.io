@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { setShowEssay, setWidth } from "../../data/redux/global.reducer";
 import { useEffect } from "react";
 import View from "./View";
+import constants from "../../data/constants/constants";
 
 const NavbarComponent = () => {
     const { screen, isAuthenticated, width, showEssay } = useAppSelector(state => state.global);
@@ -37,7 +38,7 @@ const NavbarComponent = () => {
         textAlign: 'center' as const,
         transition: 'all 0.3s ease', // Smooth transition
         boxShadow: active ? '0 4px 8px rgba(0, 0, 0, 0.3)' : 'none', // Add shadow when active
-        fontFamily: 'Nunito',
+        fontFamily: constants.FONT,
     });
 
     return (

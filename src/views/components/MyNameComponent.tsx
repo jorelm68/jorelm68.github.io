@@ -3,6 +3,7 @@ import Text from "./Text";
 import View from "./View";
 import { useAppSelector } from "../../data/redux/hooks";
 import { AnimatePresence, motion } from "framer-motion";
+import constants from "../../data/constants/constants";
 
 export default function MyNameComponent() {
     const { screen } = useAppSelector(state => state.global);
@@ -69,7 +70,7 @@ export default function MyNameComponent() {
                                 color: 'white',
                                 textAlign: 'center',
                                 whiteSpace: 'nowrap', // Prevent text wrapping
-                                fontFamily: 'Nunito',
+                                fontFamily: constants.FONT,
                             }}
                             initial={{ x: '-50%' }}
                             animate={{ x: screen === 'LandingScreen' ? '0%' : '-50%' }}
@@ -91,7 +92,7 @@ export default function MyNameComponent() {
                                 color: 'white',
                                 textAlign: 'center',
                                 whiteSpace: 'nowrap', // Prevent text wrapping
-                                fontFamily: 'Nunito',
+                                fontFamily: constants.FONT,
                             }}
                             initial={{ x: '-50%' }}
                             animate={{ x: screen === 'LandingScreen' ? '0%' : '-50%' }}

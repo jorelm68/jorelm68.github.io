@@ -4,6 +4,7 @@ import View from "./View";
 import Text from "./Text";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../data/redux/hooks";
+import constants from "../../data/constants/constants";
 
 interface PostRawComponentProps {
     name: string;
@@ -106,7 +107,7 @@ export default function PostRawComponent({
                         overflow: 'hidden',
                         color: color ? color : EMPTY_POST.color,
                         lineHeight: '1.5em',
-                        fontFamily: 'Nunito',
+                        fontFamily: constants.FONT,
                     }} />
                 )}
             </View>
