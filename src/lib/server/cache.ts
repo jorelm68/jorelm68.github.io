@@ -1,8 +1,5 @@
-// import { CAPACITY } from '@env'
-
+import constants from "../constants";
 import api from "./api";
-
-const CAPACITY = 500;
 
 // <><><><><><><><><><CANCELLATION TOKEN><><><><><><><><><><><><><>
 class CancellationToken {
@@ -100,7 +97,7 @@ class Cache {
 
         if (this.cache.has(key)) {
             this.cache.delete(key);
-        } else if (this.cache.size >= CAPACITY) {
+        } else if (this.cache.size >= constants.CACHE_CAPACITY) {
             const firstKey = this.cache.keys().next().value;
             this.cache.delete(firstKey);
         }

@@ -109,6 +109,10 @@ const constants = {
     PHOTO_PREFIX: 'Photo-',
 
     PEXELS_API_KEY: 'AapsNavsOWPuyDk2gvRSO027MiXYVuw1p9KQ0a4zWkVzBmtaDgA19Fsm',
+
+    CACHE_CAPACITY: 1000,
+    PHOTOS_ROUTE: '../assets/photos',
+    FILES_ROUTE: '../assets/files',
 }
 
 export default constants;

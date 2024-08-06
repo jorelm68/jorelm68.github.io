@@ -34,3 +34,7 @@ export type Post = {
 }
 
 export type Direction = 'up' | 'down' | 'top'
+
+export type Files = {
+    [key: string]: string;
+}

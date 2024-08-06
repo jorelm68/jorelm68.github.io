@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../lib/redux/hooks";
-import files, { Files } from "../../lib/files";
+import files from "../../lib/files";
 import { AnimatePresence, motion } from "framer-motion";
 import constants from "../../lib/constants";
 import styles from "../../lib/styles";
+import { Files } from "../../lib/types";
 
 const BACKDROP_WIDTH = '110%';
 const BACKDROP_START = '0%';
