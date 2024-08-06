@@ -3,6 +3,7 @@ import photos from "../../data/constants/photos";
 import { useAppSelector } from "../../data/redux/hooks";
 import PhotoComponent from "./PhotoComponent";
 import View from "./View";
+import constants from "../../data/constants/constants";
 
 export default function Me2Component() {
     const { screen } = useAppSelector(state => state.global);
@@ -15,7 +16,7 @@ export default function Me2Component() {
             width: '100%',
             height: '100%',
             paddingTop: 48,
-            zIndex: 2,
+            zIndex: constants.Z_MIDDLE,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -30,7 +31,6 @@ export default function Me2Component() {
                     bottom: 0,
                     right: 0,
                     maxWidth: '1200px',
-                    zIndex: 2,
                 }}
             >
                 <PhotoComponent
@@ -39,7 +39,6 @@ export default function Me2Component() {
                         width: '100%',
                         height: '100%',
                         objectFit: 'cover',
-                        zIndex: 2,
                         marginBottom: 44,
                     }}
                 />

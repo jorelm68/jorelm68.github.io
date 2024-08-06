@@ -1,4 +1,5 @@
 import { HTMLAttributes } from "react";
+import constants from "../../data/constants/constants";
 
 interface PageProps extends HTMLAttributes<HTMLDivElement> {
     children?: React.ReactNode;
@@ -10,7 +11,7 @@ export default function Page({ children, ...rest }: PageProps) {
             {...rest}
             className="container"
             style={{
-                zIndex: 0,
+                zIndex: constants.Z_MIDDLE,
                 position: 'absolute',
                 top: 0,
                 left: 0,

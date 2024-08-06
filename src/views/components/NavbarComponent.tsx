@@ -47,7 +47,7 @@ const NavbarComponent = () => {
             top: 0,
             left: 0,
             width: '100%',
-            zIndex: 100,
+            zIndex: constants.Z_FAR_FRONT,
             backgroundColor: 'rgba(0, 0, 0, 0.75)',
         }}>
             <div className="options" style={{

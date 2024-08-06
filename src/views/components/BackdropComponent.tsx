@@ -3,15 +3,14 @@ import { useAppSelector } from "../../data/redux/hooks";
 import photos, { Photos } from "../../data/constants/photos";
 import { AnimatePresence, motion } from "framer-motion";
 import constants from "../../data/constants/constants";
-import axios from "axios";
 
 const BackdropComponent = () => {
     const { screen } = useAppSelector(state => state.global);
-    const [index, setIndex] = useState(Math.floor(Math.random() * 71) + 1);
+    const [index, setIndex] = useState(Math.floor(Math.random() * constants.NUM_GENERIC_PHOTOS) + 1);
 
     useEffect(() => {
         const interval = setInterval(() => {
-            const randomNumber = Math.floor(Math.random() * 71) + 1;
+            const randomNumber = Math.floor(Math.random() * constants.NUM_GENERIC_PHOTOS) + 1;
             setIndex(randomNumber);
         }, 15000);
 
@@ -29,7 +28,7 @@ const BackdropComponent = () => {
             width: '110%',
             height: '110%',
             backgroundColor: 'black',
-            zIndex: -100,
+            zIndex: constants.Z_FAR_BACK,
         }}>
             <AnimatePresence>
                 <motion.img

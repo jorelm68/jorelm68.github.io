@@ -20,7 +20,6 @@ export default function AboutScreen() {
             paddingTop: '3rem',
             paddingBottom: '2rem',
             alignItems: 'center',
-            zIndex: 2,
             scrollbarWidth: 'auto',
             boxSizing: 'border-box',
         }}>

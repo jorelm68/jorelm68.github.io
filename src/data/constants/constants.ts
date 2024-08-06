@@ -12,6 +12,14 @@ const constants = {
     BORDER_RADIUS: '16px',
 
     TEXT_LINE_HEIGHT: '1.5em',
+
+    NUM_GENERIC_PHOTOS: 71,
+
+    Z_FAR_BACK: -2,
+    Z_BACK: -1,
+    Z_MIDDLE: 0,
+    Z_FRONT: 1,
+    Z_FAR_FRONT: 2,
 }
 
 export default constants;

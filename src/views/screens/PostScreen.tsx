@@ -43,6 +43,7 @@ export default function PostScreen() {
             overflow: 'hidden', // Prevent scrollbars on the parent
             paddingTop: 0,
             width: '100%',
+            zIndex: constants.Z_FRONT,
         }}>
             {!(width < 800) || showEssay ? (
                 <View style={{
@@ -52,7 +53,6 @@ export default function PostScreen() {
                     width: (width < 800) ? '90%' : '45%',
                     minWidth: (width < 800) ? 'unset' : '350px',
                     paddingTop: `${48 + 32}px`,
-                    zIndex: 1,
                     marginLeft: '5%',
                     paddingBottom: '32px',
                     boxSizing: 'border-box',
@@ -77,7 +77,6 @@ export default function PostScreen() {
                                     justifyContent: 'center',
                                     width: '24px',
                                     height: '24px',
-                                    zIndex: 1,
                                 }}
                             >
                                 <Text style={{
@@ -90,7 +89,7 @@ export default function PostScreen() {
                         )}
 
                         <Text style={{
-                            fontSize: constants.HEADER_FONT_SIZE,
+                            fontSize: constants.TITLE_FONT_SIZE,
                             fontWeight: 'bold',
                             color,
                             textAlign: 'center',

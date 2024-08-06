@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import files from "../../data/constants/files";
 import { useAppSelector } from "../../data/redux/hooks";
 import { motion } from "framer-motion";
+import constants from "../../data/constants/constants";
 
 export default function BusinessCardComponent() {
     const { screen } = useAppSelector(state => state.global);
@@ -48,7 +49,7 @@ export default function BusinessCardComponent() {
                     position: 'absolute',
                     top: 48,
                     left: 0,
-                    zIndex: 1,
+                    zIndex: constants.Z_BACK,
                 }}
             >
                 <PhotoComponent
@@ -79,7 +80,7 @@ export default function BusinessCardComponent() {
                     position: 'absolute',
                     top: 48,
                     left: 0,
-                    zIndex: 5,
+                    zIndex: constants.Z_FRONT,
                 }}
             >
                 <PhotoComponent
