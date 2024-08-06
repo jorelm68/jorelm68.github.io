@@ -11,7 +11,7 @@ interface PostComponentProps {
 }
 
 const PostComponent = ({ post: _id }: PostComponentProps) => {
-    const { isAuthenticated } = useAppSelector(state => state.global);
+    const { isAuthenticated, width } = useAppSelector(state => state.global);
     const post = usePost(_id);
 
     if (!post) {
@@ -26,7 +26,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                 to={post.link ? post.link : EMPTY_POST.link}
                 style={{
                     display: 'flex',
-                    flexDirection: 'row',
+                    flexDirection: width > 550 ? 'row' : 'column',
                     width: '100%',
                     backgroundColor: post.backgroundColor ? post.backgroundColor : EMPTY_POST.backgroundColor,
                     color: post.color,
@@ -35,14 +35,16 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                     borderRadius: '8px',
                     boxSizing: 'border-box',
                     maxWidth: '650px',
+                    alignItems: 'center',
                 }}
             >
                 <View
                     style={{
                         flex: '1 1 40%',
-                        marginRight: '2%',
                         height: 'auto',
                         overflow: 'hidden',
+                        minWidth: post.urls[0] && post.urls[0].includes('api/photo/readPhoto') ? '0px' : '300px',
+                        maxWidth: post.urls[0] && post.urls[0].includes('api/photo/readPhoto') ? '200px' : '300px',
                     }}
                 >
                     {post.urls[0] && post.urls[0].includes('api/photo/readPhoto') ? (
@@ -58,7 +60,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                         <iframe
                             style={{
                                 width: '100%',
-                                height: 'auto'
+                                height: 'auto',
                             }}
                             src={post.urls[0]}
                             title={`YouTube Video`}
@@ -68,10 +70,12 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                         ></iframe>
                     )}
                 </View>
+
                 <View
                     style={{
                         flex: '1 1 60%',
                         overflow: 'hidden',
+                        padding: '2%',
                     }}
                 >
                     {post.name && (
@@ -83,6 +87,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                                 whiteSpace: 'nowrap',
                                 overflow: 'hidden',
                                 textOverflow: 'ellipsis',
+                                textAlign: 'center',
                                 color: post.color ? post.color : EMPTY_POST.color,
                             }}
                         >
@@ -98,28 +103,6 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                         }} />
                     )}
                 </View>
-
-                {isAuthenticated && (
-                    <Link
-                        to={`/post/${_id}/edit`}
-                        style={{
-                            textDecoration: 'none',
-                            alignSelf: 'flex-end',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            width: '24px',
-                            height: '24px',
-                        }}
-                    >
-                        <Text style={{
-                            fontSize: '1.5em',
-                            color: 'black',
-                        }}>
-                            🖊
-                        </Text>
-                    </Link>
-                )}
             </Link>
         )
     }

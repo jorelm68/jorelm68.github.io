@@ -3,6 +3,7 @@ import PhotoComponent from "./PhotoComponent";
 import View from "./View";
 import Text from "./Text";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../../data/redux/hooks";
 
 interface PostRawComponentProps {
     name: string;
@@ -19,12 +20,13 @@ export default function PostRawComponent({
     color,
     backgroundColor,
 }: PostRawComponentProps) {
+    const { width } = useAppSelector(state => state.global);
 
     return (
         <View
             style={{
                 display: 'flex',
-                flexDirection: 'row',
+                flexDirection: width > 550 ? 'row' : 'column',
                 width: '100%',
                 backgroundColor: backgroundColor ? backgroundColor : EMPTY_POST.backgroundColor,
                 color: color,
@@ -33,32 +35,27 @@ export default function PostRawComponent({
                 borderRadius: '8px',
                 boxSizing: 'border-box',
                 maxWidth: '650px',
+                alignItems: 'center',
             }}
         >
             <View
                 style={{
                     flex: '1 1 40%',
-                    marginRight: '2%',
                     height: 'auto',
                     overflow: 'hidden',
-                    minWidth: url.includes('api/photo/readPhoto') ? '0px' : '200px',
+                    minWidth: url.includes('api/photo/readPhoto') ? '0px' : '220px',
+                    maxWidth: url.includes('api/photo/readPhoto') ? '200px' : '220px',
                 }}
             >
                 {url && url.includes('api/photo/readPhoto') ? (
-                    <Link
-                        to={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <PhotoComponent
-                            photo={url}
-                            resolution={1080}
-                            style={{
-                                width: '100%',
-                                height: 'auto',
-                            }}
-                        />
-                    </Link>
+                    <PhotoComponent
+                        photo={url}
+                        resolution={1080}
+                        style={{
+                            width: '100%',
+                            height: 'auto',
+                        }}
+                    />
                 ) : (
                     <iframe
                         style={{
@@ -73,10 +70,12 @@ export default function PostRawComponent({
                     ></iframe>
                 )}
             </View>
+
             <View
                 style={{
                     flex: '1 1 60%',
                     overflow: 'hidden',
+                    padding: '2%',
                 }}
             >
                 {name && (
@@ -88,6 +87,7 @@ export default function PostRawComponent({
                             whiteSpace: 'nowrap',
                             overflow: 'hidden',
                             textOverflow: 'ellipsis',
+                            textAlign: 'center',
                             color: color ? color : EMPTY_POST.color,
                         }}
                     >

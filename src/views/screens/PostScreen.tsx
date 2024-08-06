@@ -32,7 +32,7 @@ export default function PostScreen() {
     const commonColumnStyle = {
         overflowY: 'auto' as const,
         maxHeight: '100vh',
-        scrollbarWidth: 'none' as const // Hide scrollbar for Firefox
+        scrollbarWidth: 'none' as const, // Hide scrollbar for Firefox
     };
 
     return (
@@ -42,7 +42,6 @@ export default function PostScreen() {
             overflow: 'hidden', // Prevent scrollbars on the parent
             paddingTop: 0,
             width: '100%',
-            boxSizing: 'border-box',
         }}>
             {!(width < 800) || showEssay ? (
                 <View style={{
@@ -51,27 +50,21 @@ export default function PostScreen() {
                     flexDirection: 'column',
                     width: (width < 800) ? '90%' : '45%',
                     minWidth: (width < 800) ? 'unset' : '350px',
-                    paddingTop: 48 + 32,
+                    paddingTop: `${48 + 32}px`,
                     zIndex: 1,
-                    paddingLeft: '5%',
-                    paddingRight: '5%',
+                    marginLeft: '5%',
+                    marginRight: '5%',
+                    paddingBottom: '32px',
+                    boxSizing: 'border-box',
                 }}>
-                    <View style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: 'transparent',
-                    }} />
-
                     <View style={{
                         display: 'flex',
                         flexDirection: 'column',
                         alignSelf: 'flex-start',
                         backgroundColor,
-                        paddingBottom: 16,
-                        paddingLeft: 32,
-                        paddingRight: 32,
                         borderRadius: 8,
+                        padding: '2%',
+                        boxSizing: 'border-box',
                     }}>
                         {isAuthenticated && (
                             <Link
@@ -105,14 +98,6 @@ export default function PostScreen() {
 
                         <p dangerouslySetInnerHTML={{ __html: essay }} />
                     </View>
-
-                    <View style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        paddingBottom: 32,
-                        backgroundColor: 'transparent',
-                    }} />
                 </View>
             ) : null}
             {!(width < 800) || !showEssay ? (
@@ -126,7 +111,6 @@ export default function PostScreen() {
                     flexWrap: 'wrap',
                     justifyContent: 'center',
                     gap: '16px',
-                    boxSizing: 'border-box',
                     height: 'auto',
                     width: (width < 800) ? '100%' : '50%',
                 }}>
@@ -146,14 +130,6 @@ export default function PostScreen() {
                             />
                         )
                     })}
-
-                    <View style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        paddingBottom: 16,
-                        backgroundColor: 'transparent',
-                    }} />
                 </View>
             ) : null}
         </Page>
