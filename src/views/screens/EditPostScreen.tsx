@@ -7,10 +7,10 @@ import View from "../components/View";
 import { useParams } from "react-router-dom";
 import api from "../../lib/server/api";
 import PhotoComponent from "../components/PhotoComponent";
-import { usePost } from "../../lib/server/state";
-import { Direction, Post, Res } from "../../lib/constants/types";
-import constants from "../../lib/constants/constants";
-import colors from "../../lib/constants/colors";
+import { usePost } from "../../lib/hooks";
+import { Direction, Post, Res } from "../../lib/types";
+import constants from "../../lib/constants";
+import colors from "../../lib/colors";
 
 const DOCUMENT_TITLE = 'Edit Post | Ethan McIntyre';
 

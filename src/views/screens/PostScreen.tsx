@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import Page from "../components/Page";
-import { usePost } from "../../lib/server/state";
+import { usePost } from "../../lib/hooks";
 import View from "../components/View";
 import Text from "../components/Text";
 import PostRawComponent from "../components/PostRawComponent";
@@ -8,8 +8,8 @@ import { useAppSelector } from "../../lib/redux/hooks";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setScreen } from "../../lib/redux/global.reducer";
-import constants from "../../lib/constants/constants";
-import styles from "../../lib/constants/styles";
+import constants from "../../lib/constants";
+import styles from "../../lib/styles";
 
 const FULL_SIZE_ESSAY_WIDTH = '90%';
 const HALF_SIZE_ESSAY_WIDTH = '45%';

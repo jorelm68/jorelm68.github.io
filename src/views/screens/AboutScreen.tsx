@@ -5,9 +5,9 @@ import Page from "../components/Page";
 import Text from "../components/Text";
 import View from "../components/View";
 import PhotoComponent from "../components/PhotoComponent";
-import photos from "../../lib/constants/photos";
-import constants from "../../lib/constants/constants";
-import colors from "../../lib/constants/colors";
+import files from "../../lib/files";
+import constants from "../../lib/constants";
+import colors from "../../lib/colors";
 
 const DOCUMENT_TITLE = 'About | Ethan McIntyre';
 const ABOUT = "Hey! I'm Ethan and I'm a developer with a passion for creating and building things. I'm a junior studying Computer Science and Business at the University of Michigan. I have experience in full-stack web development and mobile app development. I'm always looking for new opportunities to learn and grow as a developer. I'm currently working as a developer for Streetmeet Inc. In my free time, I enjoy skydiving, ballroom dancing, and playing guitar.";
@@ -61,7 +61,7 @@ export default function AboutScreen() {
                     padding: constants.POST_TEXT_PADDING,
                 }}>
                     <PhotoComponent
-                        photo={photos.view1}
+                        photo={files.view1}
                         style={{
                             width: PHOTO_WIDTH,
                             maxWidth: MAX_PHOTO_WIDTH,
@@ -70,7 +70,7 @@ export default function AboutScreen() {
                     />
 
                     <PhotoComponent
-                        photo={photos.view2}
+                        photo={files.view2}
                         style={{
                             width: PHOTO_WIDTH,
                             maxWidth: MAX_PHOTO_WIDTH,

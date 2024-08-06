@@ -3,9 +3,9 @@ import { useDispatch } from "react-redux"
 import { setScreen } from "../../lib/redux/global.reducer";
 import Page from "../components/Page";
 import api from "../../lib/server/api";
-import { Res } from "../../lib/constants/types";
+import { Res } from "../../lib/types";
 import PostComponent from "../components/PostComponent";
-import constants from "../../lib/constants/constants";
+import constants from "../../lib/constants";
 
 const FULL_WIDTH = '90%';
 

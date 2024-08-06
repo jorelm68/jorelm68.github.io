@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../lib/redux/hooks";
-import photos from "../../lib/constants/photos";
+import files from "../../lib/files";
 import PhotoComponent from "./PhotoComponent";
 import { useDispatch } from "react-redux";
 import { setShowEssay, setWidth } from "../../lib/redux/global.reducer";
 import { useEffect } from "react";
-import constants from "../../lib/constants/constants";
-import colors from "../../lib/constants/colors";
-import styles from "../../lib/constants/styles";
+import constants from "../../lib/constants";
+import colors from "../../lib/colors";
+import styles from "../../lib/styles";
 
 const HORIZONTAL_PADDING = '16px';
 const IMAGE_SIZE = '48px';
@@ -77,7 +77,7 @@ const NavbarComponent = () => {
                     }}
                 >
                     <img
-                        src={photos.initialsTransparent}
+                        src={files.initialsTransparent}
                         alt="headshot"
                         style={{
                             width: '100%',
@@ -146,7 +146,7 @@ const NavbarComponent = () => {
                     }}
                 >
                     <PhotoComponent
-                        photo={photos.gear}
+                        photo={files.gear}
                     />
                 </Link>
             )}

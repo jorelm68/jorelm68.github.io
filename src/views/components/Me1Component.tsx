@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import photos from "../../lib/constants/photos";
+import files from "../../lib/files";
 import { useAppSelector } from "../../lib/redux/hooks";
 import PhotoComponent from "./PhotoComponent";
 import View from "./View";
-import constants from "../../lib/constants/constants";
-import styles from "../../lib/constants/styles";
+import constants from "../../lib/constants";
+import styles from "../../lib/styles";
 
 const MAX_WIDTH = '700px';
 
@@ -31,7 +31,7 @@ export default function Me1Component() {
                 }}
             >
                 <PhotoComponent 
-                    photo={photos.me1} 
+                    photo={files.me1} 
                     style={{
                         width: '100%',
                         height: '100%',

@@ -1,6 +1,6 @@
 import { HTMLProps, ReactNode } from "react";
-import constants from "../../lib/constants/constants";
-import styles from "../../lib/constants/styles";
+import constants from "../../lib/constants";
+import styles from "../../lib/styles";
 
 interface TextProps extends HTMLProps<HTMLParagraphElement> {
     children?: ReactNode;

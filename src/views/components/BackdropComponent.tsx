@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../lib/redux/hooks";
-import photos, { Photos } from "../../lib/constants/photos";
+import files, { Files } from "../../lib/files";
 import { AnimatePresence, motion } from "framer-motion";
-import constants from "../../lib/constants/constants";
-import colors from "../../lib/constants/colors";
-import styles from "../../lib/constants/styles";
+import constants from "../../lib/constants";
+import colors from "../../lib/colors";
+import styles from "../../lib/styles";
 
 const BACKDROP_WIDTH = '110%';
 const BACKDROP_START = '0%';
@@ -28,8 +28,8 @@ const BackdropComponent = () => {
         return () => clearInterval(interval);
     }, [])
 
-    const key = `generic${index}` as keyof Photos;
-    const photo = photos[key];
+    const key = `generic${index}` as keyof Files;
+    const photo = files[key];
 
     return (
         <div className="container" style={{

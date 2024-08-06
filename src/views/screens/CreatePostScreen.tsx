@@ -6,9 +6,9 @@ import { useAppSelector } from "../../lib/redux/hooks";
 import View from "../components/View";
 import api from "../../lib/server/api";
 import PhotoComponent from "../components/PhotoComponent";
-import { Direction, Post, Res } from "../../lib/constants/types";
-import constants from "../../lib/constants/constants";
-import colors from "../../lib/constants/colors";
+import { Direction, Post, Res } from "../../lib/types";
+import constants from "../../lib/constants";
+import colors from "../../lib/colors";
 
 const DOCUMENT_TITLE = 'Create Post | Ethan McIntyre';
 const DEFAULT_FORM_DATA = {

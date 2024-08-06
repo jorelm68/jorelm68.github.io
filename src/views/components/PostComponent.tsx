@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import PhotoComponent from "./PhotoComponent";
-import { usePost } from "../../lib/server/state";
-import { EMPTY_POST } from "../../lib/constants/empty";
+import { usePost } from "../../lib/hooks";
+import { EMPTY_POST } from "../../lib/empty";
 import View from "./View";
 import Text from "./Text";
 import { useAppSelector } from "../../lib/redux/hooks";
-import constants from "../../lib/constants/constants";
-import styles from "../../lib/constants/styles";
+import constants from "../../lib/constants";
+import styles from "../../lib/styles";
 
 interface PostComponentProps {
     post: string,

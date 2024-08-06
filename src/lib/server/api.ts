@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { Post, Res } from '../constants/types'
-import { EMPTY_RES } from '../constants/empty'
+import { Post, Res } from '../types'
+import { EMPTY_RES } from '../empty'
 
 // const numbers = '172.25.240.1'
 // const localURL = `http://${numbers}:4000`

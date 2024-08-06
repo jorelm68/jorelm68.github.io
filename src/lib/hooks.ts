@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import api from "./api";
-import { Blank, Post, Res } from "../constants/types";
-import { EMPTY_BLANK, EMPTY_POST } from "../constants/empty";
+import api from "./server/api";
+import { Blank, Post, Res } from "./types";
+import { EMPTY_BLANK, EMPTY_POST } from "./empty";
 
 // Generic hook for fetching data
 function useFetch<T>(type: string, id: string | undefined, initialData: T): T {

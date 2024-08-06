@@ -1,6 +1,6 @@
-import cache from "../server/cache";
+import cache from "./server/cache";
 import constants from "./constants";
-import photos from "./photos";
+import files from "./files";
 import axios from "axios";
 
 const handlePhoto = async (photo: any, resolution: number): Promise<any> => {
@@ -22,7 +22,7 @@ const handlePhoto = async (photo: any, resolution: number): Promise<any> => {
         }
     }
 
-    return photos.defaultImage;
+    return files.defaultImage;
 };
 
 const handlePexels = async (query: string, numResults: number = 10): Promise<Record<string, any>[]> => {

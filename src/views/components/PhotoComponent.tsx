@@ -1,8 +1,8 @@
 import { useState, useEffect, HTMLAttributes } from "react";
-import photos from "../../lib/constants/photos";
+import files from "../../lib/files";
 import View from "./View";
-import helper from "../../lib/constants/helper";
-import constants from "../../lib/constants/constants";
+import helper from "../../lib/helper";
+import constants from "../../lib/constants";
 
 interface PhotoComponentProps extends HTMLAttributes<HTMLImageElement> {
     photo: string | File;
@@ -10,7 +10,7 @@ interface PhotoComponentProps extends HTMLAttributes<HTMLImageElement> {
 }
 
 export default function PhotoComponent({ photo, resolution = constants.RESOLUTION, ...rest }: PhotoComponentProps) {
-    const [source, setSource] = useState<any>(photos.defaultImage);
+    const [source, setSource] = useState<any>(files.defaultImage);
 
     useEffect(() => {
         helper.handlePhoto(photo, resolution).then((uri: any) => {
@@ -18,7 +18,7 @@ export default function PhotoComponent({ photo, resolution = constants.RESOLUTIO
         });
     }, [photo, resolution]);
 
-    if (source === photos.defaultImage) {
+    if (source === files.defaultImage) {
         return <View />;
     }
 

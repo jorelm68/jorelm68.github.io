@@ -1,10 +1,10 @@
-import { EMPTY_POST } from "../../lib/constants/empty";
+import { EMPTY_POST } from "../../lib/empty";
 import PhotoComponent from "./PhotoComponent";
 import View from "./View";
 import Text from "./Text";
 import { useAppSelector } from "../../lib/redux/hooks";
-import constants from "../../lib/constants/constants";
-import styles from "../../lib/constants/styles";
+import constants from "../../lib/constants";
+import styles from "../../lib/styles";
 
 interface PostRawComponentProps {
     name: string;

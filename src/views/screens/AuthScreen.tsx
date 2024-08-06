@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { setIsAuthenticated, setScreen } from "../../lib/redux/global.reducer";
 import { useAppSelector } from "../../lib/redux/hooks";
 import View from "../components/View";
-import constants from "../../lib/constants/constants";
-import colors from "../../lib/constants/colors";
+import constants from "../../lib/constants";
+import colors from "../../lib/colors";
 
 const DOCUMENT_TITLE = 'Auth | Ethan McIntyre';
 const PASSWORD = 'humpback';

@@ -1,6 +1,6 @@
 import { HTMLAttributes } from "react";
-import constants from "../../lib/constants/constants";
-import styles from "../../lib/constants/styles";
+import constants from "../../lib/constants";
+import styles from "../../lib/styles";
 
 interface PageProps extends HTMLAttributes<HTMLDivElement> {
     children?: React.ReactNode;

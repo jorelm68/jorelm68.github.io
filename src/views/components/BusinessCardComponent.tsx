@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
-import photos from "../../lib/constants/photos";
 import PhotoComponent from "./PhotoComponent";
 import View from "./View";
 import { useState, useEffect } from "react";
-import files from "../../lib/constants/files";
 import { useAppSelector } from "../../lib/redux/hooks";
 import { motion } from "framer-motion";
-import constants from "../../lib/constants/constants";
-import styles from "../../lib/constants/styles";
+import constants from "../../lib/constants";
+import styles from "../../lib/styles";
+import files from "../../lib/files";
 
 const CONTACT_SCREEN = 'ContactScreen';
 const STARTING_POSITION = '-100%';
@@ -63,7 +62,7 @@ export default function BusinessCardComponent() {
                 }}
             >
                 <PhotoComponent
-                    photo={photos.businessCard}
+                    photo={files.businessCard}
                     style={{
                         width: '100%',
                         height: 'auto',
@@ -89,7 +88,7 @@ export default function BusinessCardComponent() {
                 }}
             >
                 <PhotoComponent
-                    photo={photos.businessCard}
+                    photo={files.businessCard}
                     style={{
                         width: '100%',
                         height: 'auto',
