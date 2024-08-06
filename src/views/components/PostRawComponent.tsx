@@ -37,7 +37,7 @@ export default function PostRawComponent({
                 backgroundColor: backgroundColor ? backgroundColor : EMPTY_POST.backgroundColor,
                 color: color,
                 textDecoration: 'none',
-                borderRadius: '16px',
+                borderRadius: constants.BORDER_RADIUS,
                 boxSizing: 'border-box',
                 maxWidth: '650px',
                 alignItems: 'center',
@@ -88,7 +88,7 @@ export default function PostRawComponent({
                 {name && (
                     <Text
                         style={{
-                            fontSize: '1.5em',
+                            fontSize: constants.TITLE_FONT_SIZE,
                             fontWeight: 'bold',
                             whiteSpace: 'nowrap',
                             overflow: 'hidden',
@@ -103,10 +103,10 @@ export default function PostRawComponent({
 
                 {description && (
                     <p dangerouslySetInnerHTML={{ __html: description }} style={{
-                        fontSize: '1em',
+                        fontSize: constants.TEXT_FONT_SIZE,
                         overflow: 'hidden',
                         color: color ? color : EMPTY_POST.color,
-                        lineHeight: '1.5em',
+                        lineHeight: constants.TEXT_LINE_HEIGHT,
                         fontFamily: constants.FONT,
                     }} />
                 )}

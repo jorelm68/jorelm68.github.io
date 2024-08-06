@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { setIsAuthenticated, setScreen } from "../../data/redux/global.reducer";
 import { useAppSelector } from "../../data/redux/hooks";
 import View from "../components/View";
+import constants from "../../data/constants/constants";
 
 export default function AuthScreen() {
     const { isAuthenticated } = useAppSelector(state => state.global);
@@ -28,9 +29,9 @@ export default function AuthScreen() {
 
     const buttonStyle = {
         padding: '10px 20px',
-        fontSize: '16px',
+        fontSize: constants.TEXT_FONT_SIZE,
         border: 'none',
-        borderRadius: '5px',
+        borderRadius: constants.SMALL_BORDER_RADIUS,
         backgroundColor: '#007BFF',
         color: '#FFFFFF',
         cursor: 'pointer',
@@ -59,7 +60,7 @@ export default function AuthScreen() {
                     (
                         <form onSubmit={handleSubmit}>
                             <label htmlFor="password" style={{
-                                fontSize: '16px',
+                                fontSize: constants.TEXT_FONT_SIZE,
                                 marginBottom: '10px',
                                 color: 'white',
                                 marginRight: 4,
@@ -73,8 +74,8 @@ export default function AuthScreen() {
                                 style={{
                                     marginBottom: '10px',
                                     padding: '10px',
-                                    fontSize: '16px',
-                                    borderRadius: '5px',
+                                    fontSize: constants.TEXT_FONT_SIZE,
+                                    borderRadius: constants.SMALL_BORDER_RADIUS,
                                     border: '1px solid #ccc',
                                 }}
                             />

@@ -62,7 +62,7 @@ export default function PostScreen() {
                         flexDirection: 'column',
                         alignSelf: 'flex-start',
                         backgroundColor,
-                        borderRadius: '16px',
+                        borderRadius: constants.BORDER_RADIUS,
                         boxSizing: 'border-box',
                         border: `1px solid ${color}`,
                     }}>
@@ -81,7 +81,7 @@ export default function PostScreen() {
                                 }}
                             >
                                 <Text style={{
-                                    fontSize: '1.5em',
+                                    fontSize: constants.TITLE_FONT_SIZE,
                                     color: color,
                                 }}>
                                     🖊
@@ -90,7 +90,7 @@ export default function PostScreen() {
                         )}
 
                         <Text style={{
-                            fontSize: 24,
+                            fontSize: constants.HEADER_FONT_SIZE,
                             fontWeight: 'bold',
                             color,
                             textAlign: 'center',
@@ -98,13 +98,13 @@ export default function PostScreen() {
                         }}>{name}</Text>
 
                         <p dangerouslySetInnerHTML={{ __html: essay }} style={{
-                            fontSize: '1em',
+                            fontSize: constants.TEXT_FONT_SIZE,
                             overflow: 'hidden',
                             color: color,
                             borderTop: `1px solid ${color}`,
                             padding: '16px',
                             fontFamily: constants.FONT,
-                            lineHeight: '1.5em',
+                            lineHeight: constants.TEXT_LINE_HEIGHT,
                         }} />
                     </View>
                 </View>

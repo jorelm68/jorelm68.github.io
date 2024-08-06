@@ -6,6 +6,7 @@ import Text from "../components/Text";
 import View from "../components/View";
 import PhotoComponent from "../components/PhotoComponent";
 import photos from "../../data/constants/photos";
+import constants from "../../data/constants/constants";
 
 export default function AboutScreen() {
     const dispatch = useDispatch();
@@ -31,7 +32,7 @@ export default function AboutScreen() {
                 boxSizing: 'border-box',
             }}>
                 <Text style={{
-                    fontSize: 'clamp(2rem, 8vw, 8rem)', // Responsive font size
+                    fontSize: constants.HEADER_FONT_SIZE,
                     fontWeight: 'bold',
                     color: 'rgba(255, 255, 255, 0.9)',
                     borderBottom: '1px solid rgba(255, 255, 255, 0.5)',
@@ -76,7 +77,7 @@ export default function AboutScreen() {
                     fontSize: 'clamp(1rem, 2.5vw, 1.2rem)', // Responsive font size
                     color: 'rgba(255, 255, 255, 0.8)',
                     padding: '1rem',
-                    lineHeight: '1.5em',
+                    lineHeight: constants.TEXT_LINE_HEIGHT,
                     fontWeight: 'normal',
                     width: '90%',
                     maxWidth: '800px', // Max width for text

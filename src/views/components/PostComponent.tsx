@@ -38,7 +38,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                     backgroundColor: post.backgroundColor ? post.backgroundColor : EMPTY_POST.backgroundColor,
                     color: post.color,
                     textDecoration: 'none',
-                    borderRadius: '16px',
+                    borderRadius: constants.BORDER_RADIUS,
                     boxSizing: 'border-box',
                     maxWidth: '650px',
                     alignItems: 'center',
@@ -89,7 +89,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                     {post.name && (
                         <Text
                             style={{
-                                fontSize: '1.5em',
+                                fontSize: constants.TITLE_FONT_SIZE,
                                 fontWeight: 'bold',
                                 whiteSpace: 'nowrap',
                                 overflow: 'hidden',
@@ -104,11 +104,11 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
 
                     {post.description && (
                         <p dangerouslySetInnerHTML={{ __html: post.description }} style={{
-                            fontSize: '1em',
+                            fontSize: constants.TEXT_FONT_SIZE,
                             overflow: 'hidden',
                             color: post.color ? post.color : EMPTY_POST.color,
                             fontFamily: constants.FONT,
-                            lineHeight: '1.5em',
+                            lineHeight: constants.TEXT_LINE_HEIGHT,
                         }} />
                     )}
                 </View>

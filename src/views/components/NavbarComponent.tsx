@@ -24,7 +24,7 @@ const NavbarComponent = () => {
 
     const linkStyle = (active: boolean) => ({
         textDecoration: 'none',
-        fontSize: '12px',
+        fontSize: constants.NAVBAR_FONT_SIZE,
         height: '48px',
         display: 'flex',
         justifyContent: 'center',
