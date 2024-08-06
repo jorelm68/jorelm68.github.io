@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useCallback } from "react";
 import Page from "../components/Page";
 import { useDispatch } from "react-redux";
-import { setScreen } from "../../data/redux/global.reducer";
-import { useAppSelector } from "../../data/redux/hooks";
+import { setScreen } from "../../lib/redux/global.reducer";
+import { useAppSelector } from "../../lib/redux/hooks";
 import View from "../components/View";
 import { useParams } from "react-router-dom";
-import api from "../../data/server/api";
+import api from "../../lib/server/api";
 import PhotoComponent from "../components/PhotoComponent";
-import { usePost } from "../../data/server/state";
-import { Direction, Post, Res } from "../../data/constants/types";
-import constants from "../../data/constants/constants";
-import colors from "../../data/constants/colors";
+import { usePost } from "../../lib/server/state";
+import { Direction, Post, Res } from "../../lib/constants/types";
+import constants from "../../lib/constants/constants";
+import colors from "../../lib/constants/colors";
 
 const DOCUMENT_TITLE = 'Edit Post | Ethan McIntyre';
 

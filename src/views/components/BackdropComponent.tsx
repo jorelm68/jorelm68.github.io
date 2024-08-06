@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useAppSelector } from "../../data/redux/hooks";
-import photos, { Photos } from "../../data/constants/photos";
+import { useAppSelector } from "../../lib/redux/hooks";
+import photos, { Photos } from "../../lib/constants/photos";
 import { AnimatePresence, motion } from "framer-motion";
-import constants from "../../data/constants/constants";
-import colors from "../../data/constants/colors";
-import styles from "../../data/constants/styles";
+import constants from "../../lib/constants/constants";
+import colors from "../../lib/constants/colors";
+import styles from "../../lib/constants/styles";
 
 const BACKDROP_WIDTH = '110%';
 const BACKDROP_START = '0%';

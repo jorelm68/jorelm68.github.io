@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import photos from "../../data/constants/photos";
-import { useAppSelector } from "../../data/redux/hooks";
+import photos from "../../lib/constants/photos";
+import { useAppSelector } from "../../lib/redux/hooks";
 import PhotoComponent from "./PhotoComponent";
 import View from "./View";
-import constants from "../../data/constants/constants";
-import styles from "../../data/constants/styles";
+import constants from "../../lib/constants/constants";
+import styles from "../../lib/constants/styles";
 
 const MAX_WIDTH = '1200px';
 

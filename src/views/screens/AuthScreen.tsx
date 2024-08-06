@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import Page from "../components/Page";
 import { useDispatch } from "react-redux";
-import { setIsAuthenticated, setScreen } from "../../data/redux/global.reducer";
-import { useAppSelector } from "../../data/redux/hooks";
+import { setIsAuthenticated, setScreen } from "../../lib/redux/global.reducer";
+import { useAppSelector } from "../../lib/redux/hooks";
 import View from "../components/View";
-import constants from "../../data/constants/constants";
-import colors from "../../data/constants/colors";
+import constants from "../../lib/constants/constants";
+import colors from "../../lib/constants/colors";
 
 const DOCUMENT_TITLE = 'Auth | Ethan McIntyre';
 const PASSWORD = 'humpback';

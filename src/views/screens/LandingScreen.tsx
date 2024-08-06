@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setScreen } from "../../data/redux/global.reducer";
+import { setScreen } from "../../lib/redux/global.reducer";
 import Page from "../components/Page";
 
 const DOCUMENT_TITLE = 'Ethan McIntyre';

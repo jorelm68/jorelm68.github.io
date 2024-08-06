@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux"
-import { setScreen } from "../../data/redux/global.reducer";
+import { setScreen } from "../../lib/redux/global.reducer";
 import Page from "../components/Page";
-import api from "../../data/server/api";
-import { Res } from "../../data/constants/types";
+import api from "../../lib/server/api";
+import { Res } from "../../lib/constants/types";
 import PostComponent from "../components/PostComponent";
-import constants from "../../data/constants/constants";
+import constants from "../../lib/constants/constants";
 // import axios from "axios";
 
 // const PEXELS_API_KEY = 'AapsNavsOWPuyDk2gvRSO027MiXYVuw1p9KQ0a4zWkVzBmtaDgA19Fsm';

@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../data/redux/hooks";
-import photos from "../../data/constants/photos";
+import { useAppSelector } from "../../lib/redux/hooks";
+import photos from "../../lib/constants/photos";
 import PhotoComponent from "./PhotoComponent";
 import { useDispatch } from "react-redux";
-import { setShowEssay, setWidth } from "../../data/redux/global.reducer";
+import { setShowEssay, setWidth } from "../../lib/redux/global.reducer";
 import { useEffect } from "react";
-import constants from "../../data/constants/constants";
-import colors from "../../data/constants/colors";
-import styles from "../../data/constants/styles";
+import constants from "../../lib/constants/constants";
+import colors from "../../lib/constants/colors";
+import styles from "../../lib/constants/styles";
 
 const HORIZONTAL_PADDING = '16px';
 const IMAGE_SIZE = '48px';

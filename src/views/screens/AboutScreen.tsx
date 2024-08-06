@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setScreen } from "../../data/redux/global.reducer";
+import { setScreen } from "../../lib/redux/global.reducer";
 import Page from "../components/Page";
 import Text from "../components/Text";
 import View from "../components/View";
 import PhotoComponent from "../components/PhotoComponent";
-import photos from "../../data/constants/photos";
-import constants from "../../data/constants/constants";
-import colors from "../../data/constants/colors";
+import photos from "../../lib/constants/photos";
+import constants from "../../lib/constants/constants";
+import colors from "../../lib/constants/colors";
 
 const DOCUMENT_TITLE = 'About | Ethan McIntyre';
 const ABOUT = "Hey! I'm Ethan and I'm a developer with a passion for creating and building things. I'm a junior studying Computer Science and Business at the University of Michigan. I have experience in full-stack web development and mobile app development. I'm always looking for new opportunities to learn and grow as a developer. I'm currently working as a developer for Streetmeet Inc. In my free time, I enjoy skydiving, ballroom dancing, and playing guitar.";

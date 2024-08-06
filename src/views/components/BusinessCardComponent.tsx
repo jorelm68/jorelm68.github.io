@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
-import photos from "../../data/constants/photos";
+import photos from "../../lib/constants/photos";
 import PhotoComponent from "./PhotoComponent";
 import View from "./View";
 import { useState, useEffect } from "react";
-import files from "../../data/constants/files";
-import { useAppSelector } from "../../data/redux/hooks";
+import files from "../../lib/constants/files";
+import { useAppSelector } from "../../lib/redux/hooks";
 import { motion } from "framer-motion";
-import constants from "../../data/constants/constants";
-import styles from "../../data/constants/styles";
+import constants from "../../lib/constants/constants";
+import styles from "../../lib/constants/styles";
 
 const CONTACT_SCREEN = 'ContactScreen';
 const STARTING_POSITION = '-100%';

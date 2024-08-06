@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import View from "./View";
-import { useAppSelector } from "../../data/redux/hooks";
+import { useAppSelector } from "../../lib/redux/hooks";
 import { AnimatePresence, motion } from "framer-motion";
-import constants from "../../data/constants/constants";
-import styles from "../../data/constants/styles";
-import colors from "../../data/constants/colors";
+import constants from "../../lib/constants/constants";
+import styles from "../../lib/constants/styles";
+import colors from "../../lib/constants/colors";
 
 const NO_PADDING = 0;
 const CONTENT_WIDTH = 1000;

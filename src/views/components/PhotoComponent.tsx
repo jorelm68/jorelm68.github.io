@@ -1,6 +1,6 @@
 import { useState, useEffect, HTMLAttributes } from "react";
-import photos from "../../data/constants/photos";
-import cache from "../../data/server/cache";
+import photos from "../../lib/constants/photos";
+import cache from "../../lib/server/cache";
 import View from "./View";
 
 const WEBSITE_PREFIXES = ['https://', 'http://'];

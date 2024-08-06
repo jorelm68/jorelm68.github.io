@@ -1,5 +1,5 @@
 import { HTMLProps } from "react";
-import styles from "../../data/constants/styles";
+import styles from "../../lib/constants/styles";
 
 interface ViewProps extends HTMLProps<HTMLDivElement> {
     children?: React.ReactNode;
