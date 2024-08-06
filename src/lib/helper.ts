@@ -1,4 +1,4 @@
-import cache from "./server/cache";
+import cache from "./cache";
 import constants from "./constants";
 import files from "./files";
 import axios from "axios";

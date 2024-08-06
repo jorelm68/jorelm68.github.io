@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useCallback } from "react";
 import Page from "../components/Page";
 import { useDispatch } from "react-redux";
-import { setScreen } from "../../lib/redux/global.reducer";
-import { useAppSelector } from "../../lib/redux/hooks";
+import { setScreen } from "../../redux/global.reducer";
+import { useAppSelector } from "../../redux/hooks";
 import View from "../components/View";
-import api from "../../lib/server/api";
+import api from "../../lib/api";
 import PhotoComponent from "../components/PhotoComponent";
 import { Direction, Post, Res } from "../../lib/types";
 import constants from "../../lib/constants";

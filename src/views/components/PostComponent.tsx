@@ -3,7 +3,7 @@ import PhotoComponent from "./PhotoComponent";
 import { usePost } from "../../lib/hooks";
 import View from "./View";
 import Text from "./Text";
-import { useAppSelector } from "../../lib/redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import constants from "../../lib/constants";
 import styles from "../../lib/styles";
 

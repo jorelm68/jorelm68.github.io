@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import files from "../../lib/files";
-import { useAppSelector } from "../../lib/redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import PhotoComponent from "./PhotoComponent";
 import View from "./View";
 import constants from "../../lib/constants";

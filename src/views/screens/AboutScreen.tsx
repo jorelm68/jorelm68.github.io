@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setScreen } from "../../lib/redux/global.reducer";
+import { setScreen } from "../../redux/global.reducer";
 import Page from "../components/Page";
 import Text from "../components/Text";
 import View from "../components/View";

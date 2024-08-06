@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import api from "./server/api";
+import api from "./api";
 import { Blank, Post, Res } from "./types";
 import constants from "./constants";
 

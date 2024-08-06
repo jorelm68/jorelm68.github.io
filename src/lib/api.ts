@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { Post, Res } from '../types'
-import constants from '../constants';
+import { Post, Res } from './types'
+import constants from './constants';
 
 async function fetchFileFromUri(uri: string): Promise<File> {
     const response = await fetch(uri);

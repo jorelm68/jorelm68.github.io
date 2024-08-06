@@ -1,4 +1,4 @@
-import { Blank, Post, Res } from "./types";
+import { Blank, GlobalReducer, Post, Res } from "./types";
 
 const NUMBERS = '172.25.240.1';
 const PORT = 4000;
@@ -38,6 +38,13 @@ const EMPTY_POST: Post = {
     createdAt: new Date(),
 };
 
+const EMPTY_GLOBAL_STATE: GlobalReducer = {
+    screen: '',
+    width: window.innerWidth,
+    isAuthenticated: false,
+    showEssay: true,
+};
+
 const constants = {
     NO_BACKDROP: ['AboutScreen'],
 
@@ -58,6 +65,7 @@ const constants = {
     EMPTY_RES: EMPTY_RES,
     EMPTY_BLANK: EMPTY_BLANK,
     EMPTY_POST: EMPTY_POST,
+    EMPTY_GLOBAL_STATE: EMPTY_GLOBAL_STATE,
 
     Z_FAR_BACK: -2,
     Z_BACK: -1,

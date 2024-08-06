@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux"
-import { setScreen } from "../../lib/redux/global.reducer";
+import { setScreen } from "../../redux/global.reducer";
 import Page from "../components/Page";
-import api from "../../lib/server/api";
+import api from "../../lib/api";
 import { Res } from "../../lib/types";
 import PostComponent from "../components/PostComponent";
 import constants from "../../lib/constants";

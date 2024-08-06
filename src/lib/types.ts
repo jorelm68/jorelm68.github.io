@@ -38,3 +38,10 @@ export type Direction = 'up' | 'down' | 'top'
 export type Files = {
     [key: string]: string;
 }
+
+export type GlobalReducer = {
+    screen: string,
+    width: number,
+    isAuthenticated: boolean,
+    showEssay: boolean,
+  }

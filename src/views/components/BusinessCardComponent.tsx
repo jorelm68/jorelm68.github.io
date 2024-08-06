@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import PhotoComponent from "./PhotoComponent";
 import View from "./View";
 import { useState, useEffect } from "react";
-import { useAppSelector } from "../../lib/redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import { motion } from "framer-motion";
 import constants from "../../lib/constants";
 import styles from "../../lib/styles";

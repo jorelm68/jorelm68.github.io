@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import View from "./View";
-import { useAppSelector } from "../../lib/redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import { AnimatePresence, motion } from "framer-motion";
 import constants from "../../lib/constants";
 import styles from "../../lib/styles";

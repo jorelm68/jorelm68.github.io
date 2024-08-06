@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../lib/redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import files from "../../lib/files";
 import PhotoComponent from "./PhotoComponent";
 import { useDispatch } from "react-redux";
-import { setShowEssay, setWidth } from "../../lib/redux/global.reducer";
+import { setShowEssay, setWidth } from "../../redux/global.reducer";
 import { useEffect } from "react";
 import constants from "../../lib/constants";
 import styles from "../../lib/styles";

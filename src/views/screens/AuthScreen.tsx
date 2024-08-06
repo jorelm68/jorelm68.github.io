@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Page from "../components/Page";
 import { useDispatch } from "react-redux";
-import { setIsAuthenticated, setScreen } from "../../lib/redux/global.reducer";
-import { useAppSelector } from "../../lib/redux/hooks";
+import { setIsAuthenticated, setScreen } from "../../redux/global.reducer";
+import { useAppSelector } from "../../redux/hooks";
 import View from "../components/View";
 import constants from "../../lib/constants";
 import styles from "../../lib/styles";

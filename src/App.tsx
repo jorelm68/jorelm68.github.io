@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Provider } from 'react-redux';
-import { store } from './lib/redux/store';
+import { store } from './redux/store';
 import { Route, Routes, HashRouter } from 'react-router-dom'; // Use BrowserRouter directly
 import BackdropComponent from './views/components/BackdropComponent';
 import NavbarComponent from './views/components/NavbarComponent';

@@ -1,22 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-
-type GlobalReducer = {
-  screen: string,
-  width: number,
-  isAuthenticated: boolean,
-  showEssay: boolean,
-}
-
-const INITIAL_STATE: GlobalReducer = {
-  screen: '',
-  width: window.innerWidth,
-  isAuthenticated: false,
-  showEssay: true,
-};
+import constants from "../lib/constants";
 
 const authState = createSlice({
   name: "Global",
-  initialState: INITIAL_STATE,
+  initialState: constants.EMPTY_GLOBAL_STATE,
   reducers: {
     setScreen: (state, action: PayloadAction<string>) => {
       state.screen = action.payload;
