@@ -60,6 +60,12 @@ const constants = {
 
     POST_GAP: 16,
     SIDE_GAP: '5%',
+
+    WEBSITE_PREFIXES: ['https://', 'http://'],
+    BASE64_PREFIXES: ['data:image/png;base64,', 'data:image/jpeg;base64,', 'data:image/jpg;base64,'],
+    FILE_PREFIXES: ['file://'],
+    STATIC_PREFIXES: ['/static/media/'],
+    PHOTO_PREFIX: 'Photo-',
 }
 
 export default constants;

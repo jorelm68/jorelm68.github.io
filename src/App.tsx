@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { store } from './lib/redux/store';
-import { BrowserRouter as Router, Route, Routes, HashRouter } from 'react-router-dom'; // Use BrowserRouter directly
+import { Route, Routes, HashRouter } from 'react-router-dom'; // Use BrowserRouter directly
 import BackdropComponent from './views/components/BackdropComponent';
 import NavbarComponent from './views/components/NavbarComponent';
 import LandingScreen from './views/screens/LandingScreen';

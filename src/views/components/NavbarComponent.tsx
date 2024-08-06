@@ -12,7 +12,6 @@ import styles from "../../lib/constants/styles";
 const HORIZONTAL_PADDING = '16px';
 const IMAGE_SIZE = '48px';
 const TINTED = 'rgba(0, 0, 0, 0.75)';
-
 const SETTING_SIZE = '24px';
 
 const NavbarComponent = () => {

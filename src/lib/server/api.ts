@@ -2,9 +2,9 @@ import axios from 'axios'
 import { Post, Res } from '../constants/types'
 import { EMPTY_RES } from '../constants/empty'
 
-const numbers = '172.25.240.1'
+// const numbers = '172.25.240.1'
+// const localURL = `http://${numbers}:4000`
 
-const localURL = `http://${numbers}:4000`
 const serverURL = 'https://jorelm68-1dc8eff04a80.herokuapp.com'
 
 async function fetchFileFromUri(uri: string): Promise<File> {

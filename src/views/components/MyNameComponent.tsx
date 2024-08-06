@@ -8,10 +8,8 @@ import colors from "../../lib/constants/colors";
 
 const NO_PADDING = 0;
 const CONTENT_WIDTH = 1000;
-
 const STARTING_POSITION = '0%';
 const ENDING_POSITION = '-50%';
-
 const RESTART_ANIMATION_DELAY = 2;
 
 export default function MyNameComponent() {
