@@ -7,7 +7,7 @@ import View from "../components/View";
 import PhotoComponent from "../components/PhotoComponent";
 import files from "../../lib/files";
 import constants from "../../lib/constants";
-import colors from "../../lib/colors";
+import styles from "../../lib/styles";
 
 const DOCUMENT_TITLE = 'About | Ethan McIntyre';
 const ABOUT = "Hey! I'm Ethan and I'm a developer with a passion for creating and building things. I'm a junior studying Computer Science and Business at the University of Michigan. I have experience in full-stack web development and mobile app development. I'm always looking for new opportunities to learn and grow as a developer. I'm currently working as a developer for Streetmeet Inc. In my free time, I enjoy skydiving, ballroom dancing, and playing guitar.";
@@ -40,7 +40,7 @@ export default function AboutScreen() {
                 <Text style={{
                     fontSize: constants.HEADER_FONT_SIZE,
                     fontWeight: 'bold',
-                    color: colors.offWhite,
+                    color: styles.colors.offWhite,
                     borderBottom: constants.BORDER,
                     borderTop: constants.BORDER,
                     width: '100%',
@@ -81,7 +81,7 @@ export default function AboutScreen() {
 
                 <Text style={{
                     fontSize: constants.TEXT_FONT_SIZE,
-                    color: colors.offWhite,
+                    color: styles.colors.offWhite,
                     lineHeight: constants.TEXT_LINE_HEIGHT,
                     fontWeight: 'normal',
                     maxWidth: MAX_CONTAINER_WIDTH,

@@ -8,7 +8,7 @@ import api from "../../lib/server/api";
 import PhotoComponent from "../components/PhotoComponent";
 import { Direction, Post, Res } from "../../lib/types";
 import constants from "../../lib/constants";
-import colors from "../../lib/colors";
+import styles from "../../lib/styles";
 
 const DOCUMENT_TITLE = 'Create Post | Ethan McIntyre';
 const DEFAULT_FORM_DATA = {
@@ -185,7 +185,7 @@ export default function CreatePostScreen(): JSX.Element {
 
     if (!isAuthenticated) {
         return (
-            <Page style={{ backgroundColor: colors.white }}>
+            <Page style={{ backgroundColor: styles.colors.white }}>
                 <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '16px', maxWidth: '600px', margin: '0 auto' }}>
                     <h1>Create Post Screen</h1>
                     <p>Please authenticate to access this page.</p>
@@ -195,7 +195,7 @@ export default function CreatePostScreen(): JSX.Element {
     }
 
     return (
-        <Page style={{ backgroundColor: colors.white }}>
+        <Page style={{ backgroundColor: styles.colors.white }}>
             <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '16px', maxWidth: '600px', margin: '0 auto' }}>
                 <h1>Create Post Screen</h1>
 

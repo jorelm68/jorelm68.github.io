@@ -5,7 +5,7 @@ import { setIsAuthenticated, setScreen } from "../../lib/redux/global.reducer";
 import { useAppSelector } from "../../lib/redux/hooks";
 import View from "../components/View";
 import constants from "../../lib/constants";
-import colors from "../../lib/colors";
+import styles from "../../lib/styles";
 
 const DOCUMENT_TITLE = 'Auth | Ethan McIntyre';
 const PASSWORD = 'humpback';
@@ -36,13 +36,13 @@ export default function AuthScreen() {
         fontSize: constants.TEXT_FONT_SIZE,
         border: 'none',
         borderRadius: constants.SMALL_BORDER_RADIUS,
-        backgroundColor: colors.blue,
-        color: colors.white,
+        backgroundColor: styles.colors.blue,
+        color: styles.colors.white,
         cursor: 'pointer',
     };
 
     const buttonHoverStyle = {
-        backgroundColor: colors.hoverBlue,
+        backgroundColor: styles.colors.hoverBlue,
     };
 
     return (
@@ -58,13 +58,13 @@ export default function AuthScreen() {
             }}>
                 {isAuthenticated ?
                     (
-                        <h1 style={{ color: colors.white }}>You are authenticated!</h1>
+                        <h1 style={{ color: styles.colors.white }}>You are authenticated!</h1>
                     ) :
                     (
                         <form onSubmit={handleSubmit}>
                             <label htmlFor="password" style={{
                                 fontSize: constants.TEXT_FONT_SIZE,
-                                color: colors.white,
+                                color: styles.colors.white,
                                 marginRight: 4,
                             }}>Password:</label>
                             <input

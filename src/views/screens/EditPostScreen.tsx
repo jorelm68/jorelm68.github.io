@@ -10,7 +10,7 @@ import PhotoComponent from "../components/PhotoComponent";
 import { usePost } from "../../lib/hooks";
 import { Direction, Post, Res } from "../../lib/types";
 import constants from "../../lib/constants";
-import colors from "../../lib/colors";
+import styles from "../../lib/styles";
 
 const DOCUMENT_TITLE = 'Edit Post | Ethan McIntyre';
 
@@ -212,7 +212,7 @@ export default function EditPostScreen(): JSX.Element {
 
     if (!isAuthenticated) {
         return (
-            <Page style={{ backgroundColor: colors.white }}>
+            <Page style={{ backgroundColor: styles.colors.white }}>
                 <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '16px', maxWidth: '600px', margin: '0 auto' }}>
                     <h1>Edit Post Screen</h1>
                     <p>Please authenticate to access this page.</p>
@@ -222,7 +222,7 @@ export default function EditPostScreen(): JSX.Element {
     }
 
     return (
-        <Page style={{ backgroundColor: colors.white }}>
+        <Page style={{ backgroundColor: styles.colors.white }}>
             <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '16px', maxWidth: '600px', margin: '0 auto' }}>
                 <h1>Edit Post Screen</h1>
 

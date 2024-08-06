@@ -4,7 +4,6 @@ import { useAppSelector } from "../../lib/redux/hooks";
 import { AnimatePresence, motion } from "framer-motion";
 import constants from "../../lib/constants";
 import styles from "../../lib/styles";
-import colors from "../../lib/colors";
 
 const NO_PADDING = 0;
 const CONTENT_WIDTH = 1000;
@@ -73,7 +72,7 @@ export default function MyNameComponent() {
                                 paddingLeft: padding,
                                 fontSize: constants.HEADER_FONT_SIZE,
                                 fontWeight: 'bold',
-                                color: colors.white,
+                                color: styles.colors.white,
                                 textAlign: 'center',
                                 whiteSpace: 'nowrap',
                                 fontFamily: constants.FONT,

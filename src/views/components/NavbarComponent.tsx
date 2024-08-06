@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import { setShowEssay, setWidth } from "../../lib/redux/global.reducer";
 import { useEffect } from "react";
 import constants from "../../lib/constants";
-import colors from "../../lib/colors";
 import styles from "../../lib/styles";
 
 const HORIZONTAL_PADDING = '16px';
@@ -44,11 +43,11 @@ const NavbarComponent = () => {
         boxSizing: 'border-box' as const,
         padding: `0px ${HORIZONTAL_PADDING}`,
         margin: '0px',
-        color: active ? colors.black : colors.offWhite,
-        backgroundColor: active ? colors.white : 'transparent',
+        color: active ? styles.colors.black : styles.colors.offWhite,
+        backgroundColor: active ? styles.colors.white : 'transparent',
         textAlign: 'center' as const,
         transition: `all ${constants.QUICK_TRANSITION}s ease`,
-        boxShadow: active ? `0 4px 8px ${colors.shadow}` : 'none',
+        boxShadow: active ? `0 4px 8px ${styles.colors.shadow}` : 'none',
         fontFamily: constants.FONT,
     });
 
@@ -124,9 +123,9 @@ const NavbarComponent = () => {
                     position: 'absolute',
                     top: 0,
                     right: 0,
-                    backgroundColor: colors.white,
+                    backgroundColor: styles.colors.white,
                     borderBottomLeftRadius: constants.SMALL_BORDER_RADIUS,
-                    color: colors.black,
+                    color: styles.colors.black,
                     cursor: 'pointer',
                 }}>
                     {showEssay ? 'Show Media 📚' : 'Show Essay 📝'}

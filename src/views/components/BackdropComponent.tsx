@@ -3,7 +3,6 @@ import { useAppSelector } from "../../lib/redux/hooks";
 import files, { Files } from "../../lib/files";
 import { AnimatePresence, motion } from "framer-motion";
 import constants from "../../lib/constants";
-import colors from "../../lib/colors";
 import styles from "../../lib/styles";
 
 const BACKDROP_WIDTH = '110%';
@@ -35,7 +34,7 @@ const BackdropComponent = () => {
         <div className="container" style={{
             ...styles.absolute,
             width: BACKDROP_WIDTH,
-            backgroundColor: colors.black,
+            backgroundColor: styles.colors.black,
             zIndex: constants.Z_FAR_BACK,
         }}>
             <AnimatePresence>
