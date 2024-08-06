@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "./server/api";
 import { Blank, Post, Res } from "./types";
-import { EMPTY_BLANK, EMPTY_POST } from "./empty";
+import constants from "./constants";
 
 // Generic hook for fetching data
 function useFetch<T>(type: string, id: string | undefined, initialData: T): T {
@@ -35,5 +35,5 @@ function useFetch<T>(type: string, id: string | undefined, initialData: T): T {
     return data;
 }
 
-export const usePost = (post: string | undefined): Post => useFetch('Post', post, EMPTY_POST)
-export const useBlank = (): Blank => useFetch('Blank', '', EMPTY_BLANK);
+export const usePost = (post: string | undefined): Post => useFetch('Post', post, constants.EMPTY_POST)
+export const useBlank = (): Blank => useFetch('Blank', '', constants.EMPTY_BLANK);

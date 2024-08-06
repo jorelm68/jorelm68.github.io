@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import PhotoComponent from "./PhotoComponent";
 import { usePost } from "../../lib/hooks";
-import { EMPTY_POST } from "../../lib/empty";
 import View from "./View";
 import Text from "./Text";
 import { useAppSelector } from "../../lib/redux/hooks";
@@ -31,19 +30,19 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
     else {
         return (
             <Link
-                to={post.link ? post.link : EMPTY_POST.link}
+                to={post.link ? post.link : constants.EMPTY_POST.link}
                 style={{
                     ...styles.reset,
                     display: 'flex',
                     flexDirection: (width < constants.MOBILE_THRESHOLD) || (width < constants.WEB_VERTICAL_POST_MAX && width >= constants.WEB_VERTICAL_POST_MIN) ? 'column' : 'row',
                     width: '100%',
-                    backgroundColor: post.backgroundColor ? post.backgroundColor : EMPTY_POST.backgroundColor,
+                    backgroundColor: post.backgroundColor ? post.backgroundColor : constants.EMPTY_POST.backgroundColor,
                     color: post.color,
                     borderRadius: constants.BORDER_RADIUS,
                     boxSizing: 'border-box',
                     maxWidth: constants.MAX_POST_WIDTH,
                     alignItems: 'center',
-                    border: `1px solid ${post.color ? post.color : EMPTY_POST.color}`,
+                    border: `1px solid ${post.color ? post.color : constants.EMPTY_POST.color}`,
                 }}
             >
                 <View
@@ -96,7 +95,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                                 overflow: 'hidden',
                                 textOverflow: 'ellipsis',
                                 textAlign: 'center',
-                                color: post.color ? post.color : EMPTY_POST.color,
+                                color: post.color ? post.color : constants.EMPTY_POST.color,
                             }}
                         >
                             {post.name}
@@ -107,7 +106,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                         <p dangerouslySetInnerHTML={{ __html: post.description }} style={{
                             fontSize: constants.TEXT_FONT_SIZE,
                             overflow: 'hidden',
-                            color: post.color ? post.color : EMPTY_POST.color,
+                            color: post.color ? post.color : constants.EMPTY_POST.color,
                             fontFamily: constants.FONT,
                             lineHeight: constants.TEXT_LINE_HEIGHT,
                         }} />

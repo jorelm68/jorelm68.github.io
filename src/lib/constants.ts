@@ -1,3 +1,40 @@
+import { Blank, Post, Res } from "./types";
+
+const EMPTY_RES: Res = {
+    status: 0,
+    success: false,
+    data: undefined,
+    errorMessage: 'This is the initial response message',
+}
+
+const EMPTY_BLANK: Blank = {
+    _id: '',
+    name: '',
+    photo: '',
+    description: '',
+
+    createdAt: new Date(),
+}
+
+const EMPTY_POST: Post = {
+    _id: '',
+
+    name: '',
+    description: '',
+    selectors: '',
+    urls: [],
+    captions: [],
+    essay: '',
+    link: '',
+    color: '',
+    backgroundColor: 'transparent',
+    start: '',
+    end: '',
+    location: '',
+
+    createdAt: new Date(),
+}
+
 const constants = {
     NO_BACKDROP: ['AboutScreen'],
 
@@ -14,6 +51,10 @@ const constants = {
     TEXT_LINE_HEIGHT: '1.5em',
 
     NUM_GENERIC_PHOTOS: 71,
+
+    EMPTY_RES: EMPTY_RES,
+    EMPTY_BLANK: EMPTY_BLANK,
+    EMPTY_POST: EMPTY_POST,
 
     Z_FAR_BACK: -2,
     Z_BACK: -1,

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Post, Res } from '../types'
-import { EMPTY_RES } from '../empty'
+import constants from '../constants';
 
 // const numbers = '172.25.240.1'
 // const localURL = `http://${numbers}:4000`
@@ -14,7 +14,7 @@ async function fetchFileFromUri(uri: string): Promise<File> {
 }
 
 async function handleRequest(route: string, type: string, data?: any, blob: boolean = false): Promise<Res> {
-    const response: Res = EMPTY_RES;
+    const response: Res = constants.EMPTY_RES;
 
     try {
 
