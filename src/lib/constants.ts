@@ -1,6 +1,6 @@
 import { Blank, GlobalReducer, Post, Res } from "./types";
 
-const NUMBERS = '172.25.240.1';
+const NUMBERS = '10.0.0.82';
 const PORT = 4000;
 
 const EMPTY_RES: Res = {

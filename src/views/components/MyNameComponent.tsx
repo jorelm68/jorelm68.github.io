@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import View from "./View";
 import { useAppSelector } from "../../redux/hooks";
 import { AnimatePresence, motion } from "framer-motion";
@@ -12,31 +12,16 @@ const ENDING_POSITION = '-50%';
 const RESTART_ANIMATION_DELAY = 2;
 
 export default function MyNameComponent() {
-    const { screen } = useAppSelector(state => state.global);
-    const [padding, setPadding] = useState(NO_PADDING);
+    const { screen, width } = useAppSelector(state => state.global);
 
-    useEffect(() => {
-        const handleResize = () => {
-            const viewportWidth = window.innerWidth;
-
-            if (viewportWidth > CONTENT_WIDTH) {
-                setPadding((viewportWidth - CONTENT_WIDTH) / 2);
-            } else {
-                setPadding(NO_PADDING);
-            }
-        };
-
-        // Set initial padding
-        handleResize();
-
-        // Add event listener for window resize
-        window.addEventListener('resize', handleResize);
-
-        // Cleanup event listener on component unmount
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
+    const padding = useMemo(() => {
+        if (width > CONTENT_WIDTH) {
+            return (width - CONTENT_WIDTH) / 2;
+        }
+        else {
+            return NO_PADDING;
+        }
+    }, [width]);
 
     return (
         <View style={{
