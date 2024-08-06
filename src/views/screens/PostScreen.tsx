@@ -63,7 +63,7 @@ export default function PostScreen() {
                         alignSelf: 'flex-start',
                         backgroundColor,
                         borderRadius: 8,
-                        padding: '2%',
+                        padding: '16px',
                         boxSizing: 'border-box',
                     }}>
                         {isAuthenticated && (

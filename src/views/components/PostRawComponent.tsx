@@ -43,8 +43,8 @@ export default function PostRawComponent({
                     flex: '1 1 40%',
                     height: 'auto',
                     overflow: 'hidden',
-                    minWidth: url.includes('api/photo/readPhoto') ? '0px' : '220px',
-                    maxWidth: url.includes('api/photo/readPhoto') ? '200px' : '220px',
+                    minWidth: url.includes('api/photo/readPhoto') ? '0px' : '226px',
+                    maxWidth: url.includes('api/photo/readPhoto') ? '226px' : '226px',
                 }}
             >
                 {url && url.includes('api/photo/readPhoto') ? (

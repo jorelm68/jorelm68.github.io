@@ -43,8 +43,8 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                         flex: '1 1 40%',
                         height: 'auto',
                         overflow: 'hidden',
-                        minWidth: post.urls[0] && post.urls[0].includes('api/photo/readPhoto') ? '0px' : '300px',
-                        maxWidth: post.urls[0] && post.urls[0].includes('api/photo/readPhoto') ? '200px' : '300px',
+                        minWidth: post.urls[0] && post.urls[0].includes('api/photo/readPhoto') ? '0px' : '226px',
+                        maxWidth: post.urls[0] && post.urls[0].includes('api/photo/readPhoto') ? '226px' : '226px',
                     }}
                 >
                     {post.urls[0] && post.urls[0].includes('api/photo/readPhoto') ? (
