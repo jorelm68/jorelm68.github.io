@@ -1,7 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.bbe0189e.css",
-    "main.js": "/static/js/main.22fc3b11.js",
+    "main.js": "/static/js/main.fe9128bd.js",
     "static/media/generic7.jpg": "/static/media/generic7.d5edbe12005812dafc48.jpg",
     "static/media/generic31.jpg": "/static/media/generic31.770dc8571c9649405b5b.jpg",
     "static/media/generic46.jpg": "/static/media/generic46.08adc993958128850241.jpg",
@@ -68,7 +67,6 @@
     "static/media/generic67.jpg": "/static/media/generic67.530c345d8622c8f28745.jpg",
     "static/media/generic62.jpg": "/static/media/generic62.52583693daf1863ffbfd.jpg",
     "static/media/generic56.jpg": "/static/media/generic56.5eed8ef0a8c5e990d8ef.jpg",
-    "static/media/Noto-Regular.ttf": "/static/media/Noto-Regular.a126c34d24ca73330980.ttf",
     "static/media/generic68.jpg": "/static/media/generic68.4e147b7a9633a178cb34.jpg",
     "static/media/generic59.jpg": "/static/media/generic59.0947f20e6bb88762d9ad.jpg",
     "static/media/generic63.jpg": "/static/media/generic63.c03085e84480c9a8dc14.jpg",
@@ -90,11 +88,9 @@
     "static/media/leetcode.png": "/static/media/leetcode.fe072219124ea9a62935.png",
     "static/media/pdf.png": "/static/media/pdf.70e51bca7cfb1e5e8857.png",
     "index.html": "/index.html",
-    "main.bbe0189e.css.map": "/static/css/main.bbe0189e.css.map",
-    "main.22fc3b11.js.map": "/static/js/main.22fc3b11.js.map"
+    "main.fe9128bd.js.map": "/static/js/main.fe9128bd.js.map"
   },
   "entrypoints": [
-    "static/css/main.bbe0189e.css",
-    "static/js/main.22fc3b11.js"
+    "static/js/main.fe9128bd.js"
   ]
 }
