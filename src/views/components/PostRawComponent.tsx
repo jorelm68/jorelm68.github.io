@@ -5,6 +5,7 @@ import Text from "./Text";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../data/redux/hooks";
 import constants from "../../data/constants/constants";
+import styles from "../../data/constants/styles";
 
 interface PostRawComponentProps {
     name: string;
@@ -22,7 +23,7 @@ export default function PostRawComponent({
     backgroundColor,
 }: PostRawComponentProps) {
     const { width } = useAppSelector(state => state.global);
-    const conditionalBorder = width < 550 || width < 1100 && width >= 800 ? {
+    const conditionalBorder = width < constants.MOBILE_THRESHOLD || width < constants.WEB_VERTICAL_POST_MAX && width >= constants.WEB_VERTICAL_POST_MIN ? {
         borderTop: `1px solid ${color ? color : EMPTY_POST.color}`,
     } : {
         borderLeft: `1px solid ${color ? color : EMPTY_POST.color}`,
@@ -31,15 +32,15 @@ export default function PostRawComponent({
     return (
         <View
             style={{
+                ...styles.reset,
                 display: 'flex',
-                flexDirection: width < 550 || width < 1100 && width >= 800 ? 'column' : 'row',
+                flexDirection: width < constants.MOBILE_THRESHOLD || width < constants.WEB_VERTICAL_POST_MAX && width >= constants.WEB_VERTICAL_POST_MIN ? 'column' : 'row',
                 width: '100%',
                 backgroundColor: backgroundColor ? backgroundColor : EMPTY_POST.backgroundColor,
                 color: color,
-                textDecoration: 'none',
                 borderRadius: constants.BORDER_RADIUS,
                 boxSizing: 'border-box',
-                maxWidth: '650px',
+                maxWidth: constants.MAX_POST_WIDTH,
                 alignItems: 'center',
                 border: `1px solid ${color ? color : EMPTY_POST.color}`,
             }}
@@ -49,8 +50,8 @@ export default function PostRawComponent({
                     flex: '1 1 40%',
                     height: 'auto',
                     overflow: 'hidden',
-                    minWidth: url.includes('api/photo/readPhoto') ? '0px' : '226px',
-                    maxWidth: url.includes('api/photo/readPhoto') ? '226px' : '226px',
+                    minWidth: url.includes('api/photo/readPhoto') ? constants.MIN_PHOTO_WIDTH : constants.MAX_MEDIA_WIDTH,
+                    maxWidth: constants.MAX_MEDIA_WIDTH,
                 }}
             >
                 {url && url.includes('youtube') ? (
@@ -62,7 +63,7 @@ export default function PostRawComponent({
                         src={url}
                         title={`YouTube Video`}
                         frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allow={constants.VIDEO_ALLOW}
                         allowFullScreen
                     />
                 ) : (
@@ -81,7 +82,7 @@ export default function PostRawComponent({
                 style={{
                     flex: '1 1 60%',
                     overflow: 'hidden',
-                    padding: '2%',
+                    padding: constants.POST_TEXT_PADDING,
                     ...conditionalBorder,
                 }}
             >

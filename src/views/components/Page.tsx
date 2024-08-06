@@ -1,5 +1,6 @@
 import { HTMLAttributes } from "react";
 import constants from "../../data/constants/constants";
+import styles from "../../data/constants/styles";
 
 interface PageProps extends HTMLAttributes<HTMLDivElement> {
     children?: React.ReactNode;
@@ -12,19 +13,14 @@ export default function Page({ children, ...rest }: PageProps) {
             className="container"
             style={{
                 zIndex: constants.Z_MIDDLE,
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                margin: 0,
-                padding: 0,
+                ...styles.absolute,
+                ...styles.reset,
                 display: 'flex',
                 flexDirection: 'column',
                 boxSizing: 'border-box',
-                overflowY: 'auto', // Enable vertical scrolling
-                overflowX: 'hidden', // Disable horizontal scrolling
-                scrollbarWidth: 'none', // Hide scrollbar for Firefox
+                overflowY: 'auto',
+                overflowX: 'hidden',
+                scrollbarWidth: 'none',
                 ...rest.style,
             }}
         >

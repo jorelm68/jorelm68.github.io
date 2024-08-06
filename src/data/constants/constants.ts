@@ -36,6 +36,20 @@ const constants = {
     SLOW_TRANSITION: 1,
 
     BORDER: '1px solid white',
+
+    RESOLUTION: 1080,
+
+    WEB_VERTICAL_POST_MIN: 800,
+    WEB_VERTICAL_POST_MAX: 1200,
+    MOBILE_THRESHOLD: 600,
+    MAX_POST_WIDTH: '650px',
+
+    MIN_PHOTO_WIDTH: '0px',
+    MAX_MEDIA_WIDTH: '226px',
+
+    POST_TEXT_PADDING: '2%',
+
+    VIDEO_ALLOW: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
 }
 
 export default constants;

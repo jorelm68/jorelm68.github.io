@@ -128,7 +128,6 @@ const NavbarComponent = () => {
                     right: 0,
                     backgroundColor: colors.white,
                     borderBottomLeftRadius: constants.SMALL_BORDER_RADIUS,
-                    border: 'none',
                     color: colors.black,
                     cursor: 'pointer',
                 }}>

@@ -3,6 +3,12 @@ import photos from "../../data/constants/photos";
 import cache from "../../data/server/cache";
 import View from "./View";
 
+const WEBSITE_PREFIXES = ['https://', 'http://'];
+const BASE64_PREFIXES = ['data:image/png;base64,', 'data:image/jpeg;base64,', 'data:image/jpg;base64,'];
+const FILE_PREFIXES = ['file://'];
+const STATIC_PREFIXES = ['/static/media/'];
+const PHOTO_PREFIX = 'Photo-';
+
 interface PhotoComponentProps extends HTMLAttributes<HTMLImageElement> {
     photo: string | File;
     resolution?: number;
@@ -14,24 +20,20 @@ export default function PhotoComponent({ photo, resolution = 1080, ...rest }: Ph
     useEffect(() => {
         const fetchPhoto = async () => {
             if (typeof photo === 'string') {
-                if (photo.startsWith("file://")) {
-                    // Handling a local file
+                if (FILE_PREFIXES.some(prefix => photo.startsWith(prefix))) {
                     setSource({ uri: photo });
-                } else if (photo.includes('https://') || photo.includes('http://')) {
-                    // Handling a link to an image
+                } else if (WEBSITE_PREFIXES.some(prefix => photo.startsWith(prefix))) {
                     setSource(photo);
-                } else if (photo.startsWith('data:image')) {
-                    // Handling base64 data directly
+                } else if (BASE64_PREFIXES.some(prefix => photo.startsWith(prefix))) {
                     setSource(photo);
-                } else if (photo.startsWith('/static/media/')) {
-                    // Handling a photo from the frontend
+                } else if (STATIC_PREFIXES.some(prefix => photo.startsWith(prefix))) {
                     setSource(photo);
-                } else if (photo.startsWith('Photo-')) {
-                    // Handling a photo ID from the backend
-                    const uri: string | undefined = await cache.get(photo, resolution);
-                    if (uri) {
-                        setSource(uri);
-                    }
+                } else if (photo.startsWith(PHOTO_PREFIX)) {
+                    await cache.get(photo, resolution).then((uri: string | undefined) => {
+                        if (uri) {
+                            setSource(uri);
+                        }
+                    })
                 }
             } else {
                 setSource(photo);
