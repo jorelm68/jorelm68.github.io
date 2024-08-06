@@ -37,7 +37,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                     backgroundColor: post.backgroundColor ? post.backgroundColor : EMPTY_POST.backgroundColor,
                     color: post.color,
                     textDecoration: 'none',
-                    borderRadius: '8px',
+                    borderRadius: '16px',
                     boxSizing: 'border-box',
                     maxWidth: '650px',
                     alignItems: 'center',
@@ -106,6 +106,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                             fontSize: '1em',
                             overflow: 'hidden',
                             color: post.color ? post.color : EMPTY_POST.color,
+                            fontFamily: 'Nunito',
                         }} />
                     )}
                 </View>

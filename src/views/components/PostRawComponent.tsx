@@ -36,7 +36,7 @@ export default function PostRawComponent({
                 backgroundColor: backgroundColor ? backgroundColor : EMPTY_POST.backgroundColor,
                 color: color,
                 textDecoration: 'none',
-                borderRadius: '8px',
+                borderRadius: '16px',
                 boxSizing: 'border-box',
                 maxWidth: '650px',
                 alignItems: 'center',
@@ -106,6 +106,7 @@ export default function PostRawComponent({
                         overflow: 'hidden',
                         color: color ? color : EMPTY_POST.color,
                         lineHeight: '1.5em',
+                        fontFamily: 'Nunito',
                     }} />
                 )}
             </View>

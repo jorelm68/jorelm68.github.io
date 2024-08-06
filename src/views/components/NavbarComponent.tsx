@@ -37,6 +37,7 @@ const NavbarComponent = () => {
         textAlign: 'center' as const,
         transition: 'all 0.3s ease', // Smooth transition
         boxShadow: active ? '0 4px 8px rgba(0, 0, 0, 0.3)' : 'none', // Add shadow when active
+        fontFamily: 'Nunito',
     });
 
     return (

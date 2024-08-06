@@ -9,6 +9,7 @@ const Text: React.FC<TextProps> = ({ children, ...rest }) => {
         <p {...rest} style={{
             margin: 0,
             padding: 0,
+            fontFamily: 'Nunito',
             ...rest.style,
         }} >{children}</p>
     );

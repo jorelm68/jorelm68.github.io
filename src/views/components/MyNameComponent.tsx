@@ -69,6 +69,7 @@ export default function MyNameComponent() {
                                 color: 'white',
                                 textAlign: 'center',
                                 whiteSpace: 'nowrap', // Prevent text wrapping
+                                fontFamily: 'Nunito',
                             }}
                             initial={{ x: '-50%' }}
                             animate={{ x: screen === 'LandingScreen' ? '0%' : '-50%' }}
@@ -90,6 +91,7 @@ export default function MyNameComponent() {
                                 color: 'white',
                                 textAlign: 'center',
                                 whiteSpace: 'nowrap', // Prevent text wrapping
+                                fontFamily: 'Nunito',
                             }}
                             initial={{ x: '-50%' }}
                             animate={{ x: screen === 'LandingScreen' ? '0%' : '-50%' }}

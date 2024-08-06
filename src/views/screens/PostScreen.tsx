@@ -61,7 +61,7 @@ export default function PostScreen() {
                         flexDirection: 'column',
                         alignSelf: 'flex-start',
                         backgroundColor,
-                        borderRadius: 8,
+                        borderRadius: '16px',
                         boxSizing: 'border-box',
                         border: `1px solid ${color}`,
                     }}>
@@ -93,6 +93,7 @@ export default function PostScreen() {
                             fontWeight: 'bold',
                             color,
                             textAlign: 'center',
+                            paddingTop: '16px',
                         }}>{name}</Text>
 
                         <p dangerouslySetInnerHTML={{ __html: essay }} style={{
@@ -101,6 +102,7 @@ export default function PostScreen() {
                             color: color,
                             borderTop: `1px solid ${color}`,
                             padding: '16px',
+                            fontFamily: 'Nunito',
                         }} />
                     </View>
                 </View>
