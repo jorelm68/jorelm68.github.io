@@ -103,6 +103,7 @@ export default function PostScreen() {
                             borderTop: `1px solid ${color}`,
                             padding: '16px',
                             fontFamily: 'Nunito',
+                            lineHeight: '1.5em',
                         }} />
                     </View>
                 </View>

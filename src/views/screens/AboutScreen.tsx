@@ -76,7 +76,7 @@ export default function AboutScreen() {
                     fontSize: 'clamp(1rem, 2.5vw, 1.2rem)', // Responsive font size
                     color: 'rgba(255, 255, 255, 0.8)',
                     padding: '1rem',
-                    lineHeight: '1.5',
+                    lineHeight: '1.5em',
                     fontWeight: 'normal',
                     width: '90%',
                     maxWidth: '800px', // Max width for text

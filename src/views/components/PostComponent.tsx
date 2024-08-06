@@ -107,6 +107,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                             overflow: 'hidden',
                             color: post.color ? post.color : EMPTY_POST.color,
                             fontFamily: 'Nunito',
+                            lineHeight: '1.5em',
                         }} />
                     )}
                 </View>
