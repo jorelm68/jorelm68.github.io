@@ -113,6 +113,9 @@ export default function PostScreen() {
                     gap: '16px',
                     height: 'auto',
                     width: (width < 800) ? '100%' : '50%',
+                    paddingRight: '5%',
+                    paddingLeft: '0%',
+                    boxSizing: 'border-box',
                 }}>
                     {urls && urls.length > 0 && urls.map((url, index) => {
                         const caption = captions[index];
@@ -135,10 +138,3 @@ export default function PostScreen() {
         </Page>
     )
 }
-
-const toggleButtonStyle = {
-    margin: '10px',
-    padding: '10px 20px',
-    fontSize: '16px',
-    cursor: 'pointer'
-};

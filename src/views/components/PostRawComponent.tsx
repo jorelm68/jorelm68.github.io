@@ -20,13 +20,13 @@ export default function PostRawComponent({
     color,
     backgroundColor,
 }: PostRawComponentProps) {
-    const { width } = useAppSelector(state => state.global);
+    const { width, showEssay } = useAppSelector(state => state.global);
 
     return (
         <View
             style={{
                 display: 'flex',
-                flexDirection: width > 550 ? 'row' : 'column',
+                flexDirection: width < 550 || width < 1100 && showEssay ? 'column' : 'row',
                 width: '100%',
                 backgroundColor: backgroundColor ? backgroundColor : EMPTY_POST.backgroundColor,
                 color: color,
