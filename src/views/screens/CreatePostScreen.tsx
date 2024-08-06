@@ -6,34 +6,39 @@ import { useAppSelector } from "../../data/redux/hooks";
 import View from "../components/View";
 import api from "../../data/server/api";
 import PhotoComponent from "../components/PhotoComponent";
-import { Post, Res } from "../../data/constants/types";
+import { Direction, Post, Res } from "../../data/constants/types";
+import constants from "../../data/constants/constants";
+import colors from "../../data/constants/colors";
+
+const DOCUMENT_TITLE = 'Create Post | Ethan McIntyre';
+const DEFAULT_FORM_DATA = {
+    _id: '',
+    name: '',
+    description: '',
+    selectors: '',
+    urls: [] as string[],
+    captions: [] as string[],
+    essay: '',
+    link: '/post/<POST>',
+    color: '#000000',
+    backgroundColor: '#ffffff',
+    start: '2024-06-06',
+    end: '2024-08-08',
+    location: '',
+    createdAt: new Date(),
+};
 
 export default function CreatePostScreen(): JSX.Element {
     const { isAuthenticated } = useAppSelector(state => state.global);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        document.title = 'Create Post | Ethan McIntyre';
+        document.title = DOCUMENT_TITLE;
         dispatch(setScreen('CreatePostScreen'));
     }, [dispatch]);
 
     // Unified state for form fields
-    const [formData, setFormData] = useState<Post>({
-        _id: '',
-        name: '',
-        description: '',
-        selectors: '',
-        urls: [] as string[],
-        captions: [] as string[],
-        essay: '',
-        link: '/post/<POST>',
-        color: '#000000',
-        backgroundColor: '#ffffff',
-        start: '2024-06-06',
-        end: '2024-08-08',
-        location: '',
-        createdAt: new Date(),
-    });
+    const [formData, setFormData] = useState<Post>(DEFAULT_FORM_DATA);
     const [url, setUrl] = useState<string>('');
     const [loading, setLoading] = useState(false);
 
@@ -65,17 +70,16 @@ export default function CreatePostScreen(): JSX.Element {
             try {
                 const mediaBase64 = await Promise.all(mediaBase64Promises);
 
-                // Create the API calls to upload the photos and get the photo IDs
                 const mediaUrlPromises = mediaBase64.map(async base64 => {
                     try {
                         const res: Res = await api.photo.createPhoto(base64);
                         if (!res.success) {
                             throw new Error(res.errorMessage);
                         }
-                        return `https://jorelm68-1dc8eff04a80.herokuapp.com/api/photo/readPhoto/${res.data}/1080`;
+                        return `${constants.PHOTO_ENDPOINT}${res.data}/${constants.RESOLUTION}`;
                     } catch (error) {
                         console.error('Error creating photo:', error);
-                        return null; // Handle this appropriately in your app
+                        return null;
                     }
                 });
 
@@ -111,7 +115,7 @@ export default function CreatePostScreen(): JSX.Element {
                 youtubeID = url.split('/shorts/')[1];
             }
             if (youtubeID) {
-                const youtubeUrl = `https://www.youtube.com/embed/${youtubeID}`;
+                const youtubeUrl = `${constants.YOUTUBE_ENDPOINT}${youtubeID}`;
                 setFormData(prevData => {
                     const newUrls = [...prevData.urls, youtubeUrl];
                     const newCaptions = [...prevData.captions, ''];
@@ -143,7 +147,7 @@ export default function CreatePostScreen(): JSX.Element {
         });
     };
 
-    const handleMoveMedia = (index: number, direction: 'up' | 'down' | 'top') => {
+    const handleMoveMedia = (index: number, direction: Direction) => {
         setFormData(prevData => {
             const newUrls = [...prevData.urls];
             const newCaptions = [...prevData.captions];
@@ -181,7 +185,7 @@ export default function CreatePostScreen(): JSX.Element {
 
     if (!isAuthenticated) {
         return (
-            <Page style={{ backgroundColor: 'white' }}>
+            <Page style={{ backgroundColor: colors.white }}>
                 <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '16px', maxWidth: '600px', margin: '0 auto' }}>
                     <h1>Create Post Screen</h1>
                     <p>Please authenticate to access this page.</p>
@@ -191,7 +195,7 @@ export default function CreatePostScreen(): JSX.Element {
     }
 
     return (
-        <Page style={{ backgroundColor: 'white' }}>
+        <Page style={{ backgroundColor: colors.white }}>
             <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '16px', maxWidth: '600px', margin: '0 auto' }}>
                 <h1>Create Post Screen</h1>
 

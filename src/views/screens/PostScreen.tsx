@@ -5,10 +5,16 @@ import View from "../components/View";
 import Text from "../components/Text";
 import PostRawComponent from "../components/PostRawComponent";
 import { useAppSelector } from "../../data/redux/hooks";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setScreen } from "../../data/redux/global.reducer";
 import constants from "../../data/constants/constants";
+import styles from "../../data/constants/styles";
+
+const FULL_SIZE_ESSAY_WIDTH = '90%';
+const HALF_SIZE_ESSAY_WIDTH = '45%';
+const MOBILE_ESSAY_MIN_WIDTH = 'unset';
+const WEB_ESSAY_MIN_WIDTH = '350px';
 
 export default function PostScreen() {
     const { isAuthenticated } = useAppSelector(state => state.global);
@@ -33,28 +39,25 @@ export default function PostScreen() {
     const commonColumnStyle = {
         overflowY: 'auto' as const,
         maxHeight: '100vh',
-        scrollbarWidth: 'none' as const, // Hide scrollbar for Firefox
+        scrollbarWidth: 'none' as const,
     };
 
     return (
         <Page style={{
             flexDirection: 'row',
-            height: '100vh', // Ensure full viewport height
-            overflow: 'hidden', // Prevent scrollbars on the parent
-            paddingTop: 0,
-            width: '100%',
+            overflow: 'hidden',
             zIndex: constants.Z_FRONT,
         }}>
-            {!(width < 800) || showEssay ? (
+            {width >= constants.MOBILE_THRESHOLD || showEssay ? (
                 <View style={{
                     ...commonColumnStyle,
                     alignSelf: 'flex-start',
                     flexDirection: 'column',
-                    width: (width < 800) ? '90%' : '45%',
-                    minWidth: (width < 800) ? 'unset' : '350px',
-                    paddingTop: `${48 + 32}px`,
-                    marginLeft: '5%',
-                    paddingBottom: '32px',
+                    width: (width < constants.MOBILE_THRESHOLD) ? FULL_SIZE_ESSAY_WIDTH : HALF_SIZE_ESSAY_WIDTH,
+                    minWidth: (width < constants.MOBILE_THRESHOLD) ? MOBILE_ESSAY_MIN_WIDTH : WEB_ESSAY_MIN_WIDTH,
+                    paddingTop: constants.HEADER_HEIGHT + constants.DEFAULT_PADDING,
+                    marginLeft: constants.SIDE_GAP,
+                    paddingBottom: constants.DEFAULT_PADDING,
                     boxSizing: 'border-box',
                 }}>
                     <View style={{
@@ -70,21 +73,14 @@ export default function PostScreen() {
                             <Link
                                 to={`/post/${post}/edit`}
                                 style={{
-                                    textDecoration: 'none',
+                                    ...styles.reset,
                                     alignSelf: 'flex-end',
                                     display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    width: '24px',
-                                    height: '24px',
-                                }}
-                            >
-                                <Text style={{
                                     fontSize: constants.TITLE_FONT_SIZE,
                                     color: color,
-                                }}>
-                                    🖊
-                                </Text>
+                                }}
+                            >
+                                🖊
                             </Link>
                         )}
 
@@ -93,7 +89,8 @@ export default function PostScreen() {
                             fontWeight: 'bold',
                             color,
                             textAlign: 'center',
-                            paddingTop: '16px',
+                            padding: constants.POST_TEXT_PADDING,
+                            paddingBottom: '0px',
                         }}>{name}</Text>
 
                         <p dangerouslySetInnerHTML={{ __html: essay }} style={{
@@ -101,7 +98,7 @@ export default function PostScreen() {
                             overflow: 'hidden',
                             color: color,
                             borderTop: `1px solid ${color}`,
-                            padding: '16px',
+                            padding: constants.POST_TEXT_PADDING,
                             fontFamily: constants.FONT,
                             lineHeight: constants.TEXT_LINE_HEIGHT,
                         }} />
@@ -111,18 +108,18 @@ export default function PostScreen() {
             {!(width < 800) || !showEssay ? (
                 <View style={{
                     ...commonColumnStyle,
-                    paddingTop: `${48 + 32}px`,
-                    paddingBottom: '32px',
-                    alignItems: 'flex-start',
+                    paddingTop: constants.HEADER_HEIGHT + constants.DEFAULT_PADDING,
+                    paddingBottom: constants.DEFAULT_PADDING,
                     display: 'flex',
+                    alignItems: 'flex-start',
+                    justifyContent: 'center',
                     flexDirection: 'row',
                     flexWrap: 'wrap',
-                    justifyContent: 'center',
-                    gap: '16px',
+                    gap: constants.POST_GAP,
                     height: 'auto',
-                    width: (width < 800) ? '100%' : '50%',
-                    paddingRight: '5%',
-                    paddingLeft: '5%',
+                    width: (width < constants.MOBILE_THRESHOLD) ? '100%' : '50%',
+                    paddingRight: constants.SIDE_GAP,
+                    paddingLeft: constants.SIDE_GAP,
                 }}>
                     {urls && urls.length > 0 && urls.map((url, index) => {
                         const caption = captions[index];

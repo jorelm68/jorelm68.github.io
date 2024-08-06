@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Text from "./Text";
 import View from "./View";
 import { useAppSelector } from "../../data/redux/hooks";
 import { AnimatePresence, motion } from "framer-motion";

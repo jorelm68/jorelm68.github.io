@@ -5,13 +5,17 @@ import { setIsAuthenticated, setScreen } from "../../data/redux/global.reducer";
 import { useAppSelector } from "../../data/redux/hooks";
 import View from "../components/View";
 import constants from "../../data/constants/constants";
+import colors from "../../data/constants/colors";
+
+const DOCUMENT_TITLE = 'Auth | Ethan McIntyre';
+const PASSWORD = 'humpback';
 
 export default function AuthScreen() {
     const { isAuthenticated } = useAppSelector(state => state.global);
 
     const dispatch = useDispatch();
     useEffect(() => {
-        document.title = 'Auth | Ethan McIntyre';
+        document.title = DOCUMENT_TITLE;
         dispatch(setScreen('AuthScreen'));
     }, [dispatch]);
 
@@ -22,29 +26,28 @@ export default function AuthScreen() {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (password === 'humpback') {
+        if (password === PASSWORD) {
             dispatch(setIsAuthenticated(true));
         }
     }
 
     const buttonStyle = {
-        padding: '10px 20px',
+        padding: constants.BUTTON_PADDING,
         fontSize: constants.TEXT_FONT_SIZE,
         border: 'none',
         borderRadius: constants.SMALL_BORDER_RADIUS,
-        backgroundColor: '#007BFF',
-        color: '#FFFFFF',
+        backgroundColor: colors.blue,
+        color: colors.white,
         cursor: 'pointer',
-        transition: 'background-color 0.3s',
     };
 
     const buttonHoverStyle = {
-        backgroundColor: '#0056b3',
+        backgroundColor: colors.hoverBlue,
     };
 
     return (
         <Page style={{
-            paddingTop: 48,
+            paddingTop: constants.HEADER_HEIGHT,
         }}>
             <View style={{
                 display: 'flex',
@@ -55,14 +58,13 @@ export default function AuthScreen() {
             }}>
                 {isAuthenticated ?
                     (
-                        <h1 style={{ color: 'white' }}>You are authenticated!</h1>
+                        <h1 style={{ color: colors.white }}>You are authenticated!</h1>
                     ) :
                     (
                         <form onSubmit={handleSubmit}>
                             <label htmlFor="password" style={{
                                 fontSize: constants.TEXT_FONT_SIZE,
-                                marginBottom: '10px',
-                                color: 'white',
+                                color: colors.white,
                                 marginRight: 4,
                             }}>Password:</label>
                             <input
@@ -72,11 +74,10 @@ export default function AuthScreen() {
                                 onChange={handleChangePassword}
                                 required
                                 style={{
-                                    marginBottom: '10px',
-                                    padding: '10px',
+                                    padding: constants.TEXT_INPUT_PADDING,
                                     fontSize: constants.TEXT_FONT_SIZE,
                                     borderRadius: constants.SMALL_BORDER_RADIUS,
-                                    border: '1px solid #ccc',
+                                    border: constants.BORDER,
                                 }}
                             />
                             <button

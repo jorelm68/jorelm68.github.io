@@ -32,3 +32,5 @@ export type Post = {
 
     createdAt: Date,
 }
+
+export type Direction = 'up' | 'down' | 'top'

@@ -5,7 +5,6 @@ import PhotoComponent from "./PhotoComponent";
 import { useDispatch } from "react-redux";
 import { setShowEssay, setWidth } from "../../data/redux/global.reducer";
 import { useEffect } from "react";
-import View from "./View";
 import constants from "../../data/constants/constants";
 import colors from "../../data/constants/colors";
 import styles from "../../data/constants/styles";

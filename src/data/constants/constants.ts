@@ -5,11 +5,11 @@ const constants = {
 
     HEADER_FONT_SIZE: 'clamp(24px, 6vw, 72px)',
     TITLE_FONT_SIZE: '1.5em',
-    TEXT_FONT_SIZE: '1em',
-    NAVBAR_FONT_SIZE: '12px',
+    TEXT_FONT_SIZE: 'clamp(1rem, 2.5vw, 1.2rem)',
+    NAVBAR_FONT_SIZE: 12,
 
-    SMALL_BORDER_RADIUS: '5px',
-    BORDER_RADIUS: '16px',
+    SMALL_BORDER_RADIUS: 5,
+    BORDER_RADIUS: 16,
 
     TEXT_LINE_HEIGHT: '1.5em',
 
@@ -25,8 +25,9 @@ const constants = {
     GITHUB_LINK: 'https://www.github.com/jorelm68',
     LINKEDIN_LINK: 'https://www.linkedin.com/in/ethan-mcintyre68',
 
-    HEADER_HEIGHT: '48px',
-    BOTTOM_ADJUSTMENT: '44px',
+    HEADER_HEIGHT: 48,
+    BOTTOM_ADJUSTMENT: 44,
+    DEFAULT_PADDING: 32,
 
     ME1_SCREEN: 'LandingScreen',
     ME2_SCREEN: 'ContactScreen',
@@ -42,14 +43,23 @@ const constants = {
     WEB_VERTICAL_POST_MIN: 800,
     WEB_VERTICAL_POST_MAX: 1200,
     MOBILE_THRESHOLD: 600,
-    MAX_POST_WIDTH: '650px',
+    MAX_POST_WIDTH: 650,
 
-    MIN_PHOTO_WIDTH: '0px',
-    MAX_MEDIA_WIDTH: '226px',
+    MIN_PHOTO_WIDTH: 0,
+    MAX_MEDIA_WIDTH: 226,
 
-    POST_TEXT_PADDING: '2%',
+    POST_TEXT_PADDING: '1rem',
 
     VIDEO_ALLOW: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
+
+    BUTTON_PADDING: '10px 20px',
+    TEXT_INPUT_PADDING: 10,
+
+    PHOTO_ENDPOINT: 'https://jorelm68-1dc8eff04a80.herokuapp.com/api/photo/readPhoto/',
+    YOUTUBE_ENDPOINT: 'https://www.youtube.com/embed/',
+
+    POST_GAP: 16,
+    SIDE_GAP: '5%',
 }
 
 export default constants;

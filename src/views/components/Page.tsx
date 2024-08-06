@@ -13,8 +13,8 @@ export default function Page({ children, ...rest }: PageProps) {
             className="container"
             style={{
                 zIndex: constants.Z_MIDDLE,
-                ...styles.absolute,
                 ...styles.reset,
+                ...styles.absolute,
                 display: 'flex',
                 flexDirection: 'column',
                 boxSizing: 'border-box',

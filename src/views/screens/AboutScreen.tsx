@@ -7,21 +7,28 @@ import View from "../components/View";
 import PhotoComponent from "../components/PhotoComponent";
 import photos from "../../data/constants/photos";
 import constants from "../../data/constants/constants";
+import colors from "../../data/constants/colors";
+
+const DOCUMENT_TITLE = 'About | Ethan McIntyre';
+const ABOUT = "Hey! I'm Ethan and I'm a developer with a passion for creating and building things. I'm a junior studying Computer Science and Business at the University of Michigan. I have experience in full-stack web development and mobile app development. I'm always looking for new opportunities to learn and grow as a developer. I'm currently working as a developer for Streetmeet Inc. In my free time, I enjoy skydiving, ballroom dancing, and playing guitar.";
+const MAX_CONTAINER_WIDTH = '1000px';
+const IMAGE_GAP = '1rem';
+const MAX_PHOTO_WIDTH = '450px';
+const PHOTO_WIDTH = '45%';
 
 export default function AboutScreen() {
     const dispatch = useDispatch();
     useEffect(() => {
-        document.title = 'About | Ethan McIntyre';
+        document.title = DOCUMENT_TITLE;
         dispatch(setScreen('AboutScreen'));
     }, [dispatch]);
 
     return (
         <Page style={{
-            paddingTop: '3rem',
-            paddingBottom: '2rem',
+            paddingTop: constants.HEADER_HEIGHT,
+            paddingBottom: constants.DEFAULT_PADDING,
             alignItems: 'center',
             scrollbarWidth: 'auto',
-            boxSizing: 'border-box',
         }}>
             <View style={{
                 display: 'flex',
@@ -33,12 +40,11 @@ export default function AboutScreen() {
                 <Text style={{
                     fontSize: constants.HEADER_FONT_SIZE,
                     fontWeight: 'bold',
-                    color: 'rgba(255, 255, 255, 0.9)',
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.5)',
-                    borderTop: '1px solid rgba(255, 255, 255, 0.5)',
+                    color: colors.offWhite,
+                    borderBottom: constants.BORDER,
+                    borderTop: constants.BORDER,
                     width: '100%',
                     textAlign: 'center',
-                    marginBottom: '1rem',
                 }}>
                     ABOUT
                 </Text>
@@ -46,18 +52,19 @@ export default function AboutScreen() {
                 <View style={{
                     display: 'flex',
                     flexDirection: 'row',
-                    flexWrap: 'wrap', // Allow items to wrap on small screens
+                    flexWrap: 'wrap',
                     width: '100%',
-                    maxWidth: '1000px', // Limit maximum width
-                    justifyContent: 'center',
-                    gap: '1rem', // Add gap between images
+                    maxWidth: MAX_CONTAINER_WIDTH,
+                    justifyContent: 'space-around',
+                    gap: IMAGE_GAP, 
                     boxSizing: 'border-box',
+                    padding: constants.POST_TEXT_PADDING,
                 }}>
                     <PhotoComponent
                         photo={photos.view1}
                         style={{
-                            width: '45%',
-                            maxWidth: '500px', // Max width for each image
+                            width: PHOTO_WIDTH,
+                            maxWidth: MAX_PHOTO_WIDTH,
                             height: 'auto',
                         }}
                     />
@@ -65,29 +72,24 @@ export default function AboutScreen() {
                     <PhotoComponent
                         photo={photos.view2}
                         style={{
-                            width: '45%',
-                            maxWidth: '500px', // Max width for each image
+                            width: PHOTO_WIDTH,
+                            maxWidth: MAX_PHOTO_WIDTH,
                             height: 'auto',
                         }}
                     />
                 </View>
 
                 <Text style={{
-                    fontSize: 'clamp(1rem, 2.5vw, 1.2rem)', // Responsive font size
-                    color: 'rgba(255, 255, 255, 0.8)',
-                    padding: '1rem',
+                    fontSize: constants.TEXT_FONT_SIZE,
+                    color: colors.offWhite,
                     lineHeight: constants.TEXT_LINE_HEIGHT,
                     fontWeight: 'normal',
-                    width: '90%',
-                    maxWidth: '800px', // Max width for text
+                    maxWidth: MAX_CONTAINER_WIDTH,
                     boxSizing: 'border-box',
+                    padding:  constants.POST_TEXT_PADDING,
+                    paddingTop: '0px',
                 }}>
-                    Hey! I'm Ethan and I'm a developer with a passion for creating and building things. 
-                    I'm a junior studying Computer Science and Business at the University of Michigan. 
-                    I have experience in full-stack web development and mobile app development.
-                    I'm always looking for new opportunities to learn and grow as a developer. 
-                    I'm currently working as a developer for Streetmeet Inc. 
-                    In my free time, I enjoy skydiving, ballroom dancing, and playing guitar.
+                    {ABOUT}
                 </Text>
             </View>
         </Page>

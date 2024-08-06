@@ -2,7 +2,6 @@ import { EMPTY_POST } from "../../data/constants/empty";
 import PhotoComponent from "./PhotoComponent";
 import View from "./View";
 import Text from "./Text";
-import { Link } from "react-router-dom";
 import { useAppSelector } from "../../data/redux/hooks";
 import constants from "../../data/constants/constants";
 import styles from "../../data/constants/styles";
@@ -23,7 +22,7 @@ export default function PostRawComponent({
     backgroundColor,
 }: PostRawComponentProps) {
     const { width } = useAppSelector(state => state.global);
-    const conditionalBorder = width < constants.MOBILE_THRESHOLD || width < constants.WEB_VERTICAL_POST_MAX && width >= constants.WEB_VERTICAL_POST_MIN ? {
+    const conditionalBorder = (width < constants.MOBILE_THRESHOLD) || (width < constants.WEB_VERTICAL_POST_MAX && width >= constants.WEB_VERTICAL_POST_MIN) ? {
         borderTop: `1px solid ${color ? color : EMPTY_POST.color}`,
     } : {
         borderLeft: `1px solid ${color ? color : EMPTY_POST.color}`,
@@ -34,7 +33,7 @@ export default function PostRawComponent({
             style={{
                 ...styles.reset,
                 display: 'flex',
-                flexDirection: width < constants.MOBILE_THRESHOLD || width < constants.WEB_VERTICAL_POST_MAX && width >= constants.WEB_VERTICAL_POST_MIN ? 'column' : 'row',
+                flexDirection: (width < constants.MOBILE_THRESHOLD) || (width < constants.WEB_VERTICAL_POST_MAX && width >= constants.WEB_VERTICAL_POST_MIN) ? 'column' : 'row',
                 width: '100%',
                 backgroundColor: backgroundColor ? backgroundColor : EMPTY_POST.backgroundColor,
                 color: color,

@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux"
 import { setScreen } from "../../data/redux/global.reducer";
 import Page from "../components/Page";
-import Text from "../components/Text";
-import View from "../components/View";
 import api from "../../data/server/api";
 import { Res } from "../../data/constants/types";
 import PostComponent from "../components/PostComponent";
-import axios from "axios";
-import PhotoComponent from "../components/PhotoComponent";
-import photos from "../../data/constants/photos";
+import constants from "../../data/constants/constants";
+// import axios from "axios";
+
+// const PEXELS_API_KEY = 'AapsNavsOWPuyDk2gvRSO027MiXYVuw1p9KQ0a4zWkVzBmtaDgA19Fsm';
+const FULL_WIDTH = '90%';
 
 export default function WorkScreen() {
     const dispatch = useDispatch();
@@ -26,55 +26,48 @@ export default function WorkScreen() {
         })
     }, [])
 
+    // const [query, setQuery] = useState('moorish architecture');
+    // const [images, setImages] = useState<Record<string, any>[]>([]);
+    // const [loading, setLoading] = useState(false);
+    // const [error, setError] = useState<string | null>(null);
 
+    // const fetchImages = async () => {
+    //     setLoading(true);
+    //     setError(null);
 
+    //     const endpoint = `https://api.pexels.com/v1/search?query=${query}&per_page=10`;
 
-
-
-    const [query, setQuery] = useState('moorish architecture');
-    const [images, setImages] = useState<Record<string, any>[]>([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-
-    const fetchImages = async () => {
-        setLoading(true);
-        setError(null);
-
-        const API_KEY = 'AapsNavsOWPuyDk2gvRSO027MiXYVuw1p9KQ0a4zWkVzBmtaDgA19Fsm'; // Replace with your Pexels API key
-        const endpoint = `https://api.pexels.com/v1/search?query=${query}&per_page=10`;
-
-        try {
-            const response = await axios.get(endpoint, {
-                headers: {
-                    Authorization: API_KEY,
-                },
-            });
-            setImages(response.data.photos);
-        } catch (err: any) {
-            setError('Failed to fetch images.');
-        } finally {
-            setLoading(false);
-        }
-    };
-    useEffect(() => {
-        fetchImages();
-    }, [])
+    //     try {
+    //         const response = await axios.get(endpoint, {
+    //             headers: {
+    //                 Authorization: PEXELS_API_KEY,
+    //             },
+    //         });
+    //         setImages(response.data.photos);
+    //     } catch (err: any) {
+    //         setError('Failed to fetch images.');
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
+    // useEffect(() => {
+    //     fetchImages();
+    // }, [])
 
     return (
         <Page style={{
-            paddingTop: `${48 + 32}px`,
-            paddingBottom: '32px',
-            alignItems: 'flex-start',
+            paddingTop: constants.HEADER_HEIGHT + constants.DEFAULT_PADDING,
+            paddingBottom: constants.DEFAULT_PADDING,
             display: 'flex',
+            alignItems: 'flex-start',
+            justifyContent: 'center',
             flexDirection: 'row',
             flexWrap: 'wrap',
-            justifyContent: 'center',
-            gap: '16px',
-            boxSizing: 'border-box',
+            gap: constants.POST_GAP,
             scrollbarWidth: 'auto',
             height: 'auto',
-            width: '90%',
-            marginLeft: '5%',
+            width: FULL_WIDTH,
+            marginLeft: constants.SIDE_GAP,
         }}>
             {posts.map((post, index) => {
                 return (

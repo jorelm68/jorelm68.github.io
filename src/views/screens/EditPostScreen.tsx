@@ -8,7 +8,11 @@ import { useParams } from "react-router-dom";
 import api from "../../data/server/api";
 import PhotoComponent from "../components/PhotoComponent";
 import { usePost } from "../../data/server/state";
-import { Post, Res } from "../../data/constants/types";
+import { Direction, Post, Res } from "../../data/constants/types";
+import constants from "../../data/constants/constants";
+import colors from "../../data/constants/colors";
+
+const DOCUMENT_TITLE = 'Edit Post | Ethan McIntyre';
 
 export default function EditPostScreen(): JSX.Element {
     const { post } = useParams<{ post: string }>();
@@ -16,7 +20,7 @@ export default function EditPostScreen(): JSX.Element {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        document.title = 'Edit Post | Ethan McIntyre';
+        document.title = DOCUMENT_TITLE;
         dispatch(setScreen('EditPostScreen'));
     }, [dispatch]);
 
@@ -38,7 +42,6 @@ export default function EditPostScreen(): JSX.Element {
         createdAt,
     } = usePost(post);
 
-    // Initial state setup, leveraging custom hook data
     const initialFormData: Post = {
         _id: _id || '',
         name: name || '',
@@ -79,7 +82,7 @@ export default function EditPostScreen(): JSX.Element {
                 createdAt: createdAt || new Date(),
             });
         }
-    }, [name, description, link, selectors, essay, location, backgroundColor, color, start, end, urls, captions, post]);
+    }, [_id, name, description, link, selectors, essay, location, backgroundColor, color, start, end, urls, captions, post, createdAt]);
 
     const updateFormData = useCallback((field: string, value: any) => {
         setFormData(prevData => {
@@ -114,7 +117,7 @@ export default function EditPostScreen(): JSX.Element {
                     if (!res.success) {
                         throw new Error(res.errorMessage);
                     }
-                    return `https://jorelm68-1dc8eff04a80.herokuapp.com/api/photo/readPhoto/${res.data}/1080`;
+                    return `${constants.PHOTO_ENDPOINT}${res.data}/${constants.RESOLUTION}`;
                 });
 
                 const mediaUrls = await Promise.all(mediaUrlPromises).then(urls => urls.filter(url => url !== null) as string[]);
@@ -145,7 +148,7 @@ export default function EditPostScreen(): JSX.Element {
                 youtubeID = url.split('/shorts/')[1];
             }
             if (youtubeID) {
-                const youtubeUrl = `https://www.youtube.com/embed/${youtubeID}`;
+                const youtubeUrl = `${constants.YOUTUBE_ENDPOINT}${youtubeID}`;
                 const newUrls = [...formData.urls, youtubeUrl];
                 const newCaptions = [...formData.captions, ''];
                 updateFormData('urls', newUrls);
@@ -171,7 +174,7 @@ export default function EditPostScreen(): JSX.Element {
         updateFormData('captions', newCaptions);
     };
 
-    const handleMoveMedia = (index: number, direction: 'up' | 'down' | 'top') => {
+    const handleMoveMedia = (index: number, direction: Direction) => {
         const newUrls = [...formData.urls];
         const newCaptions = [...formData.captions];
 
@@ -209,7 +212,7 @@ export default function EditPostScreen(): JSX.Element {
 
     if (!isAuthenticated) {
         return (
-            <Page style={{ backgroundColor: 'white' }}>
+            <Page style={{ backgroundColor: colors.white }}>
                 <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '16px', maxWidth: '600px', margin: '0 auto' }}>
                     <h1>Edit Post Screen</h1>
                     <p>Please authenticate to access this page.</p>
@@ -219,7 +222,7 @@ export default function EditPostScreen(): JSX.Element {
     }
 
     return (
-        <Page style={{ backgroundColor: 'white' }}>
+        <Page style={{ backgroundColor: colors.white }}>
             <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '16px', maxWidth: '600px', margin: '0 auto' }}>
                 <h1>Edit Post Screen</h1>
 
