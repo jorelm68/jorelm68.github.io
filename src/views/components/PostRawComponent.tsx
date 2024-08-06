@@ -96,15 +96,11 @@ export default function PostRawComponent({
                 )}
 
                 {description && (
-                    <Text
-                        style={{
-                            fontSize: '1em',
-                            overflow: 'hidden',
-                            color: color ? color : EMPTY_POST.color,
-                        }}
-                    >
-                        {description}
-                    </Text>
+                    <p dangerouslySetInnerHTML={{ __html: description }} style={{
+                        fontSize: '1em',
+                        overflow: 'hidden',
+                        color: color ? color : EMPTY_POST.color,
+                    }} />
                 )}
             </View>
         </View>

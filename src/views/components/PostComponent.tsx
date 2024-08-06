@@ -91,15 +91,11 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                     )}
 
                     {post.description && (
-                        <Text
-                            style={{
-                                fontSize: '1em',
-                                overflow: 'hidden',
-                                color: post.color ? post.color : EMPTY_POST.color,
-                            }}
-                        >
-                            {post.description}
-                        </Text>
+                        <p dangerouslySetInnerHTML={{ __html: post.description }} style={{
+                            fontSize: '1em',
+                            overflow: 'hidden',
+                            color: post.color ? post.color : EMPTY_POST.color,
+                        }} />
                     )}
                 </View>
 

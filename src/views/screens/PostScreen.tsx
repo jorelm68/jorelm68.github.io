@@ -41,20 +41,20 @@ export default function PostScreen() {
             height: '100vh', // Ensure full viewport height
             overflow: 'hidden', // Prevent scrollbars on the parent
             paddingTop: 0,
-            gap: '16px',
             width: '100%',
-            paddingLeft: '5%',
-            paddingRight: '5%',
+            boxSizing: 'border-box',
         }}>
             {!(width < 800) || showEssay ? (
                 <View style={{
                     ...commonColumnStyle,
                     alignSelf: 'flex-start',
                     flexDirection: 'column',
-                    width: (width < 800) ? '100%' : '45%',
+                    width: (width < 800) ? '90%' : '45%',
                     minWidth: (width < 800) ? 'unset' : '350px',
                     paddingTop: 48 + 32,
                     zIndex: 1,
+                    paddingLeft: '5%',
+                    paddingRight: '5%',
                 }}>
                     <View style={{
                         display: 'flex',
@@ -103,10 +103,7 @@ export default function PostScreen() {
                             textAlign: 'center',
                         }}>{name}</Text>
 
-                        <Text style={{
-                            fontSize: 16,
-                            color,
-                        }}>{essay}</Text>
+                        <p dangerouslySetInnerHTML={{ __html: essay }} />
                     </View>
 
                     <View style={{
@@ -131,6 +128,7 @@ export default function PostScreen() {
                     gap: '16px',
                     boxSizing: 'border-box',
                     height: 'auto',
+                    width: (width < 800) ? '100%' : '50%',
                 }}>
                     {urls && urls.length > 0 && urls.map((url, index) => {
                         const caption = captions[index];
