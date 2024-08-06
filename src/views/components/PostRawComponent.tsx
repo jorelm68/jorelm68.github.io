@@ -26,7 +26,7 @@ export default function PostRawComponent({
         <View
             style={{
                 display: 'flex',
-                flexDirection: width < 550 || width < 1100 && showEssay ? 'column' : 'row',
+                flexDirection: width < 550 || width < 1100 && width >= 800 ? 'column' : 'row',
                 width: '100%',
                 backgroundColor: backgroundColor ? backgroundColor : EMPTY_POST.backgroundColor,
                 color: color,

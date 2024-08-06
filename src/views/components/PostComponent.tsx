@@ -11,7 +11,7 @@ interface PostComponentProps {
 }
 
 const PostComponent = ({ post: _id }: PostComponentProps) => {
-    const { isAuthenticated, width } = useAppSelector(state => state.global);
+    const { isAuthenticated, width, showEssay } = useAppSelector(state => state.global);
     const post = usePost(_id);
 
     if (!post) {
@@ -26,7 +26,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                 to={post.link ? post.link : EMPTY_POST.link}
                 style={{
                     display: 'flex',
-                    flexDirection: width > 550 ? 'row' : 'column',
+                    flexDirection: width < 550 || width < 1100 && width >= 800 ? 'column' : 'row',
                     width: '100%',
                     backgroundColor: post.backgroundColor ? post.backgroundColor : EMPTY_POST.backgroundColor,
                     color: post.color,

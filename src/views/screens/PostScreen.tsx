@@ -37,7 +37,7 @@ export default function PostScreen() {
 
     return (
         <Page style={{
-            flexDirection: (width < 800) ? 'column' : 'row',
+            flexDirection: 'row',
             height: '100vh', // Ensure full viewport height
             overflow: 'hidden', // Prevent scrollbars on the parent
             paddingTop: 0,
@@ -53,7 +53,6 @@ export default function PostScreen() {
                     paddingTop: `${48 + 32}px`,
                     zIndex: 1,
                     marginLeft: '5%',
-                    marginRight: '5%',
                     paddingBottom: '32px',
                     boxSizing: 'border-box',
                 }}>
@@ -114,8 +113,7 @@ export default function PostScreen() {
                     height: 'auto',
                     width: (width < 800) ? '100%' : '50%',
                     paddingRight: '5%',
-                    paddingLeft: '0%',
-                    boxSizing: 'border-box',
+                    paddingLeft: '5%',
                 }}>
                     {urls && urls.length > 0 && urls.map((url, index) => {
                         const caption = captions[index];
