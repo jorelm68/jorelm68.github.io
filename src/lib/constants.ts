@@ -1,11 +1,14 @@
 import { Blank, Post, Res } from "./types";
 
+const NUMBERS = '172.25.240.1';
+const PORT = 4000;
+
 const EMPTY_RES: Res = {
     status: 0,
     success: false,
     data: undefined,
     errorMessage: 'This is the initial response message',
-}
+};
 
 const EMPTY_BLANK: Blank = {
     _id: '',
@@ -14,7 +17,7 @@ const EMPTY_BLANK: Blank = {
     description: '',
 
     createdAt: new Date(),
-}
+};
 
 const EMPTY_POST: Post = {
     _id: '',
@@ -33,7 +36,7 @@ const EMPTY_POST: Post = {
     location: '',
 
     createdAt: new Date(),
-}
+};
 
 const constants = {
     NO_BACKDROP: ['AboutScreen'],
@@ -113,6 +116,10 @@ const constants = {
     CACHE_CAPACITY: 1000,
     PHOTOS_ROUTE: '../assets/photos',
     FILES_ROUTE: '../assets/files',
-}
+
+    SERVER_URL: 'https://jorelm68-1dc8eff04a80.herokuapp.com',
+
+    LOCAL_URL: `http://${NUMBERS}:${PORT}`,
+};
 
 export default constants;

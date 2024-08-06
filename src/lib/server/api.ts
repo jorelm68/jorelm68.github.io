@@ -2,11 +2,6 @@ import axios from 'axios'
 import { Post, Res } from '../types'
 import constants from '../constants';
 
-// const numbers = '172.25.240.1'
-// const localURL = `http://${numbers}:4000`
-
-const serverURL = 'https://jorelm68-1dc8eff04a80.herokuapp.com'
-
 async function fetchFileFromUri(uri: string): Promise<File> {
     const response = await fetch(uri);
     const blob = await response.blob();
@@ -39,13 +34,13 @@ async function handleRequest(route: string, type: string, data?: any, blob: bool
 
         let serverResponse = null;
         if (type === 'POST') {
-            serverResponse = await axios.post(`${serverURL}/${route}`, formData, {
+            serverResponse = await axios.post(`${constants.SERVER_URL}/${route}`, formData, {
                 responseType: blob ? 'blob' : 'json',
                 headers,
             });
         }
         else if (type === 'GET') {
-            serverResponse = await axios.get(`${serverURL}/${route}`, {
+            serverResponse = await axios.get(`${constants.SERVER_URL}/${route}`, {
                 params: data,
                 responseType: blob ? 'blob' : 'json',
                 headers,
