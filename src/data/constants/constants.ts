@@ -20,6 +20,14 @@ const constants = {
     Z_MIDDLE: 0,
     Z_FRONT: 1,
     Z_FAR_FRONT: 2,
+
+    ABSOLUTE: {
+        position: 'absolute' as const,
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+    },
 }
 
 export default constants;

@@ -3,6 +3,17 @@ import { useAppSelector } from "../../data/redux/hooks";
 import photos, { Photos } from "../../data/constants/photos";
 import { AnimatePresence, motion } from "framer-motion";
 import constants from "../../data/constants/constants";
+import colors from "../../data/constants/colors";
+
+const BACKDROP_WIDTH = '110%';
+const BACKDROP_START = '0%';
+const BACKDROP_END = '-5%';
+const QUICK_TRANSITION = 0.35;
+const SLOW_TRANSITION = 2;
+const SLIDING_DURATION = 20;
+const PHOTO_INTERVAL = 15000;
+const TRANSPARENT = 0;
+const TINTED = 0.33;
 
 const BackdropComponent = () => {
     const { screen } = useAppSelector(state => state.global);
@@ -12,7 +23,7 @@ const BackdropComponent = () => {
         const interval = setInterval(() => {
             const randomNumber = Math.floor(Math.random() * constants.NUM_GENERIC_PHOTOS) + 1;
             setIndex(randomNumber);
-        }, 15000);
+        }, PHOTO_INTERVAL);
 
         return () => clearInterval(interval);
     }, [])
@@ -22,12 +33,9 @@ const BackdropComponent = () => {
 
     return (
         <div className="container" style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '110%',
-            height: '110%',
-            backgroundColor: 'black',
+            ...constants.ABSOLUTE,
+            width: BACKDROP_WIDTH,
+            backgroundColor: colors.black,
             zIndex: constants.Z_FAR_BACK,
         }}>
             <AnimatePresence>
@@ -35,20 +43,18 @@ const BackdropComponent = () => {
                     key={index}
                     src={photo}
                     alt="Backdrop"
-                    initial={{ opacity: 0, x: '0%' }}
+                    initial={{ opacity: TRANSPARENT, x: BACKDROP_START }}
                     animate={{
-                        opacity: constants.NO_BACKDROP.includes(screen) ? 0 : 0.33,
-                        x: '-5%'
+                        opacity: constants.NO_BACKDROP.includes(screen) ? TRANSPARENT : TINTED,
+                        x: BACKDROP_END,
                     }}
-                    exit={{ opacity: 0, x: '-5%' }}
+                    exit={{ opacity: TRANSPARENT, x: BACKDROP_END }}
                     transition={{
-                        opacity: { duration: constants.NO_BACKDROP.includes(screen) ? 0.350 : 2 },
-                        x: { duration: 20, ease: "linear" }  // Adjust the duration as needed
+                        opacity: { duration: constants.NO_BACKDROP.includes(screen) ? QUICK_TRANSITION : SLOW_TRANSITION },
+                        x: { duration: SLIDING_DURATION, ease: "linear" }
                     }}
                     style={{
-                        position: 'absolute',
-                        width: '100%',
-                        height: '100%',
+                        ...constants.ABSOLUTE,
                         objectFit: 'cover',
                     }}
                 />
