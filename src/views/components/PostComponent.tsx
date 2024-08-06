@@ -11,8 +11,14 @@ interface PostComponentProps {
 }
 
 const PostComponent = ({ post: _id }: PostComponentProps) => {
-    const { isAuthenticated, width, showEssay } = useAppSelector(state => state.global);
+    const { isAuthenticated, width } = useAppSelector(state => state.global);
     const post = usePost(_id);
+
+    const conditionalBorder = width < 550 || width < 1100 && width >= 800 ? {
+        borderTop: `1px solid ${post.color}`,
+    } : {
+        borderLeft: `1px solid ${post.color}`,
+    }
 
     if (!post) {
         return (
@@ -31,11 +37,11 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                     backgroundColor: post.backgroundColor ? post.backgroundColor : EMPTY_POST.backgroundColor,
                     color: post.color,
                     textDecoration: 'none',
-                    padding: '1%',
                     borderRadius: '8px',
                     boxSizing: 'border-box',
                     maxWidth: '650px',
                     alignItems: 'center',
+                    border: `1px solid ${post.color ? post.color : EMPTY_POST.color}`,
                 }}
             >
                 <View
@@ -76,6 +82,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                         flex: '1 1 60%',
                         overflow: 'hidden',
                         padding: '2%',
+                        ...conditionalBorder,
                     }}
                 >
                     {post.name && (
@@ -83,7 +90,6 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                             style={{
                                 fontSize: '1.5em',
                                 fontWeight: 'bold',
-                                marginBottom: '10px',
                                 whiteSpace: 'nowrap',
                                 overflow: 'hidden',
                                 textOverflow: 'ellipsis',

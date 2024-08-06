@@ -27,7 +27,7 @@ export const EMPTY_POST: Post = {
     essay: '',
     link: '',
     color: '',
-    backgroundColor: '',
+    backgroundColor: 'transparent',
     start: '',
     end: '',
     location: '',

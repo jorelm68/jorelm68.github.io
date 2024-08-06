@@ -20,7 +20,12 @@ export default function PostRawComponent({
     color,
     backgroundColor,
 }: PostRawComponentProps) {
-    const { width, showEssay } = useAppSelector(state => state.global);
+    const { width } = useAppSelector(state => state.global);
+    const conditionalBorder = width < 550 || width < 1100 && width >= 800 ? {
+        borderTop: `1px solid ${color ? color : EMPTY_POST.color}`,
+    } : {
+        borderLeft: `1px solid ${color ? color : EMPTY_POST.color}`,
+    }
 
     return (
         <View
@@ -31,11 +36,11 @@ export default function PostRawComponent({
                 backgroundColor: backgroundColor ? backgroundColor : EMPTY_POST.backgroundColor,
                 color: color,
                 textDecoration: 'none',
-                padding: '1%',
                 borderRadius: '8px',
                 boxSizing: 'border-box',
                 maxWidth: '650px',
                 alignItems: 'center',
+                border: `1px solid ${color ? color : EMPTY_POST.color}`,
             }}
         >
             <View
@@ -76,6 +81,7 @@ export default function PostRawComponent({
                     flex: '1 1 60%',
                     overflow: 'hidden',
                     padding: '2%',
+                    ...conditionalBorder,
                 }}
             >
                 {name && (
@@ -83,7 +89,6 @@ export default function PostRawComponent({
                         style={{
                             fontSize: '1.5em',
                             fontWeight: 'bold',
-                            marginBottom: '10px',
                             whiteSpace: 'nowrap',
                             overflow: 'hidden',
                             textOverflow: 'ellipsis',
@@ -100,6 +105,7 @@ export default function PostRawComponent({
                         fontSize: '1em',
                         overflow: 'hidden',
                         color: color ? color : EMPTY_POST.color,
+                        lineHeight: '1.5em',
                     }} />
                 )}
             </View>

@@ -62,8 +62,8 @@ export default function PostScreen() {
                         alignSelf: 'flex-start',
                         backgroundColor,
                         borderRadius: 8,
-                        padding: '16px',
                         boxSizing: 'border-box',
+                        border: `1px solid ${color}`,
                     }}>
                         {isAuthenticated && (
                             <Link
@@ -81,7 +81,7 @@ export default function PostScreen() {
                             >
                                 <Text style={{
                                     fontSize: '1.5em',
-                                    color: 'black',
+                                    color: color,
                                 }}>
                                     🖊
                                 </Text>
@@ -95,7 +95,13 @@ export default function PostScreen() {
                             textAlign: 'center',
                         }}>{name}</Text>
 
-                        <p dangerouslySetInnerHTML={{ __html: essay }} />
+                        <p dangerouslySetInnerHTML={{ __html: essay }} style={{
+                            fontSize: '1em',
+                            overflow: 'hidden',
+                            color: color,
+                            borderTop: `1px solid ${color}`,
+                            padding: '16px',
+                        }} />
                     </View>
                 </View>
             ) : null}
