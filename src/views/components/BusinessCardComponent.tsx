@@ -15,31 +15,7 @@ const ENDING_POSITION = '0%';
 const DURATION = 0.75;
 const CONTAINER_WIDTH = 885;
 const BORDER_RADIUS = 50;
-const GITHUB_POSITION = {
-    position: 'absolute' as const,
-    width: '16%',
-    height: '8%',
-    top: '82.75%',
-    left: '6.75%',
-    cursor: 'pointer',
-}
-const LINKEDIN_POSITION = {
-    position: 'absolute' as const,
-    width: '17.5%',
-    height: '8%',
-    top: '82.75%',
-    left: '30%',
-    cursor: 'pointer',
-}
-const RESUME_POSITION = {
-    position: 'absolute' as const,
-    right: '14.75%',
-    top: '82.75%',
-    width: '30.75%',
-    height: '8%',
-    cursor: 'pointer',
-}
-const POSITION = {
+const BUSINESS_CARD = {
     position: 'absolute' as const,
     width: '100%',
     height: 'auto',
@@ -81,7 +57,7 @@ export default function BusinessCardComponent() {
                     marginTop: { duration: DURATION, delay: screen === CONTACT_SCREEN ? 0 : 2 },
                 }}
                 style={{
-                    ...POSITION,
+                    ...BUSINESS_CARD,
                     maxWidth: CONTAINER_WIDTH,
                     zIndex: constants.Z_BACK,
                 }}
@@ -107,7 +83,7 @@ export default function BusinessCardComponent() {
                     marginTop: { duration: DURATION, delay: screen === CONTACT_SCREEN ? 0 : 2 },
                 }}
                 style={{
-                    ...POSITION,
+                    ...BUSINESS_CARD,
                     maxWidth: CONTAINER_WIDTH,
                     zIndex: constants.Z_FRONT,
                 }}
@@ -129,19 +105,40 @@ export default function BusinessCardComponent() {
                         to={constants.GITHUB_LINK}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={GITHUB_POSITION}
+                        style={{
+                            position: 'absolute',
+                            width: '16%',
+                            height: '8%',
+                            top: '82.75%',
+                            left: '6.75%',
+                            cursor: 'pointer',
+                        }}
                     />
 
                     <Link
                         to={constants.LINKEDIN_LINK}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={LINKEDIN_POSITION}
+                        style={{
+                            position: 'absolute',
+                            width: '17.5%',
+                            height: '8%',
+                            top: '82.75%',
+                            left: '30%',
+                            cursor: 'pointer',
+                        }}
                     />
 
                     <View
                         onClick={handleDownload}
-                        style={RESUME_POSITION}
+                        style={{
+                            position: 'absolute',
+                            right: '14.75%',
+                            top: '82.75%',
+                            width: '30.75%',
+                            height: '8%',
+                            cursor: 'pointer',
+                        }}
                     />
                 </View>
             </motion.div>

@@ -4,20 +4,29 @@ import View from "./View";
 import { useAppSelector } from "../../data/redux/hooks";
 import { AnimatePresence, motion } from "framer-motion";
 import constants from "../../data/constants/constants";
+import styles from "../../data/constants/styles";
+import colors from "../../data/constants/colors";
+
+const NO_PADDING = 0;
+const CONTENT_WIDTH = 1000;
+
+const STARTING_POSITION = '0%';
+const ENDING_POSITION = '-50%';
+
+const RESTART_ANIMATION_DELAY = 2;
 
 export default function MyNameComponent() {
     const { screen } = useAppSelector(state => state.global);
-    const [left, setLeft] = useState(0);
+    const [padding, setPadding] = useState(NO_PADDING);
 
     useEffect(() => {
         const handleResize = () => {
             const viewportWidth = window.innerWidth;
-            const contentWidth = 1000; // Content width to center
 
-            if (viewportWidth > contentWidth) {
-                setLeft((viewportWidth - contentWidth) / 2); // Center the text
+            if (viewportWidth > CONTENT_WIDTH) {
+                setPadding((viewportWidth - CONTENT_WIDTH) / 2);
             } else {
-                setLeft(0);
+                setPadding(NO_PADDING);
             }
         };
 
@@ -35,20 +44,20 @@ export default function MyNameComponent() {
 
     return (
         <View style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            paddingTop: 48,
+            ...styles.absolute,
+            paddingTop: constants.HEADER_HEIGHT,
             zIndex: constants.Z_MIDDLE,
         }}>
             <AnimatePresence>
                 <motion.div
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: screen !== 'LandingScreen' ? 0 : 1 }}
+                    animate={{
+                        opacity: screen === constants.MY_NAME_SCREEN
+                            ? 1
+                            : 0
+                    }}
                     exit={{ opacity: 0 }}
-                    transition={{ opacity: { duration: 0.35 } }}
+                    transition={{ opacity: { duration: constants.QUICK_TRANSITION } }}
                     style={{
                         width: '100%',
                         boxSizing: 'border-box',
@@ -58,45 +67,71 @@ export default function MyNameComponent() {
                     <View style={{
                         width: '100%',
                         boxSizing: 'border-box',
-                        borderBottom: '1px solid white',
-                        borderTop: '1px solid white',
+                        borderBottom: constants.BORDER,
+                        borderTop: constants.BORDER,
                     }}>
                         <motion.p
                             style={{
                                 margin: 0,
-                                paddingLeft: left,
-                                fontSize: 'clamp(24px, 6vw, 72px)', // Responsive font size
+                                paddingLeft: padding,
+                                fontSize: constants.HEADER_FONT_SIZE,
                                 fontWeight: 'bold',
-                                color: 'white',
+                                color: colors.white,
                                 textAlign: 'center',
-                                whiteSpace: 'nowrap', // Prevent text wrapping
+                                whiteSpace: 'nowrap',
                                 fontFamily: constants.FONT,
                             }}
-                            initial={{ x: '-50%' }}
-                            animate={{ x: screen === 'LandingScreen' ? '0%' : '-50%' }}
-                            transition={{ x: { duration: screen === 'LandingScreen' ? 0.35 : 0, delay: screen === 'LandingScreen' ? 0 : 2, ease: "backOut" } }}
+                            initial={{ x: STARTING_POSITION }}
+                            animate={{
+                                x: screen === constants.MY_NAME_SCREEN
+                                    ? STARTING_POSITION
+                                    : ENDING_POSITION
+                            }}
+                            transition={{
+                                x: {
+                                    duration: screen === constants.MY_NAME_SCREEN
+                                        ? constants.QUICK_TRANSITION
+                                        : 0, delay: screen === constants.MY_NAME_SCREEN
+                                            ? 0
+                                            : RESTART_ANIMATION_DELAY,
+                                    ease: "backOut"
+                                }
+                            }}
                         >ETHAN MCINTYRE</motion.p>
                     </View>
 
                     <View style={{
                         width: '100%',
                         boxSizing: 'border-box',
-                        borderBottom: '1px solid white',
+                        borderBottom: constants.BORDER,
                     }}>
                         <motion.p
                             style={{
                                 margin: 0,
-                                paddingLeft: left,
-                                fontSize: 'clamp(24px, 6vw, 72px)', // Responsive font size
+                                paddingLeft: padding,
+                                fontSize: constants.HEADER_FONT_SIZE,
                                 fontWeight: 'bold',
                                 color: 'white',
                                 textAlign: 'center',
-                                whiteSpace: 'nowrap', // Prevent text wrapping
+                                whiteSpace: 'nowrap',
                                 fontFamily: constants.FONT,
                             }}
-                            initial={{ x: '-50%' }}
-                            animate={{ x: screen === 'LandingScreen' ? '0%' : '-50%' }}
-                            transition={{ x: { duration: screen === 'LandingScreen' ? 0.35 : 0, delay: screen === 'LandingScreen' ? 0.1 : 2, ease: "backOut" } }}
+                            initial={{ x: STARTING_POSITION }}
+                            animate={{
+                                x: screen === constants.MY_NAME_SCREEN
+                                    ? STARTING_POSITION
+                                    : ENDING_POSITION
+                            }}
+                            transition={{
+                                x: {
+                                    duration: screen === constants.MY_NAME_SCREEN
+                                        ? constants.QUICK_TRANSITION
+                                        : 0, delay: screen === constants.MY_NAME_SCREEN
+                                            ? 0.1
+                                            : 2,
+                                    ease: "backOut"
+                                }
+                            }}
                         >DEVELOPER</motion.p>
                     </View>
                 </motion.div>
