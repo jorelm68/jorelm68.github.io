@@ -57,7 +57,7 @@ export default function EditPostScreen(): JSX.Element {
     };
 
     const [formData, setFormData] = useState(initialFormData);
-    const [youtubeLink, setYoutubeLink] = useState<string>('');
+    const [url, setUrl] = useState<string>('');
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -133,24 +133,33 @@ export default function EditPostScreen(): JSX.Element {
         updateFormData('captions', newCaptions);
     };
 
-    const handleYoutubeLinkChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setYoutubeLink(event.target.value);
+    const handleUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setUrl(event.target.value);
     };
 
-    const addYoutubeLink = () => {
-        let youtubeID = youtubeLink.split('v=')[1];
+    const addUrl = () => {
+        if (url.includes('youtube')) {
+            let youtubeID = url.split('v=')[1];
 
-        if (!youtubeID) {
-            youtubeID = youtubeLink.split('/shorts/')[1];
+            if (!youtubeID) {
+                youtubeID = url.split('/shorts/')[1];
+            }
+            if (youtubeID) {
+                const youtubeUrl = `https://www.youtube.com/embed/${youtubeID}`;
+                const newUrls = [...formData.urls, youtubeUrl];
+                const newCaptions = [...formData.captions, ''];
+                updateFormData('urls', newUrls);
+                updateFormData('captions', newCaptions);
+            }
         }
-        if (youtubeID) {
-            const youtubeUrl = `https://www.youtube.com/embed/${youtubeID}`;
-            const newUrls = [...formData.urls, youtubeUrl];
+        else {
+            const newUrls = [...formData.urls, url];
             const newCaptions = [...formData.captions, ''];
             updateFormData('urls', newUrls);
             updateFormData('captions', newCaptions);
         }
-        setYoutubeLink('');
+        
+        setUrl('');
     };
 
     const handleRemoveMedia = (index: number) => {
@@ -302,13 +311,13 @@ export default function EditPostScreen(): JSX.Element {
 
                     <View style={{ display: 'flex', alignItems: 'center' }}>
                         <input
-                            id="youtubeLink"
+                            id="url"
                             type="url"
                             placeholder="Enter YouTube Video URL"
-                            value={youtubeLink}
-                            onChange={handleYoutubeLinkChange}
+                            value={url}
+                            onChange={handleUrlChange}
                         />
-                        <button type="button" onClick={addYoutubeLink}>Add YouTube Video</button>
+                        <button type="button" onClick={addUrl}>Add Url</button>
                     </View>
 
                     {formData.urls.map((url, index) => (

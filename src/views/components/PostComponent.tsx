@@ -53,16 +53,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                         maxWidth: post.urls[0] && post.urls[0].includes('api/photo/readPhoto') ? '226px' : '226px',
                     }}
                 >
-                    {post.urls[0] && post.urls[0].includes('api/photo/readPhoto') ? (
-                        <PhotoComponent
-                            photo={post.urls[0]}
-                            resolution={1080}
-                            style={{
-                                width: '100%',
-                                height: 'auto',
-                            }}
-                        />
-                    ) : (
+                    {post.urls[0] && post.urls[0].includes('youtube') ? (
                         <iframe
                             style={{
                                 width: '100%',
@@ -73,7 +64,16 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                             frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen
-                        ></iframe>
+                        />
+                    ) : (
+                        <PhotoComponent
+                            photo={post.urls[0]}
+                            resolution={1080}
+                            style={{
+                                width: '100%',
+                                height: 'auto',
+                            }}
+                        />
                     )}
                 </View>
 

@@ -52,16 +52,7 @@ export default function PostRawComponent({
                     maxWidth: url.includes('api/photo/readPhoto') ? '226px' : '226px',
                 }}
             >
-                {url && url.includes('api/photo/readPhoto') ? (
-                    <PhotoComponent
-                        photo={url}
-                        resolution={1080}
-                        style={{
-                            width: '100%',
-                            height: 'auto',
-                        }}
-                    />
-                ) : (
+                {url && url.includes('youtube') ? (
                     <iframe
                         style={{
                             width: '100%',
@@ -72,7 +63,16 @@ export default function PostRawComponent({
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
-                    ></iframe>
+                    />
+                ) : (
+                    <PhotoComponent
+                        photo={url}
+                        resolution={1080}
+                        style={{
+                            width: '100%',
+                            height: 'auto',
+                        }}
+                    />
                 )}
             </View>
 

@@ -34,7 +34,7 @@ export default function CreatePostScreen(): JSX.Element {
         location: '',
         createdAt: new Date(),
     });
-    const [youtubeLink, setYoutubeLink] = useState<string>('');
+    const [url, setUrl] = useState<string>('');
     const [loading, setLoading] = useState(false);
 
     const updateFormData = useCallback((field: string, value: any) => {
@@ -99,26 +99,37 @@ export default function CreatePostScreen(): JSX.Element {
         updateFormData('captions', newCaptions);
     };
 
-    const handleYoutubeLinkChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setYoutubeLink(event.target.value);
+    const handleUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setUrl(event.target.value);
     };
 
-    const addYoutubeLink = () => {
-        let youtubeID = youtubeLink.split('v=')[1];
+    const addUrl = () => {
+        if (url.includes('youtube')) {
+            let youtubeID = url.split('v=')[1];
 
-        if (!youtubeID) {
-            youtubeID = youtubeLink.split('/shorts/')[1];
+            if (!youtubeID) {
+                youtubeID = url.split('/shorts/')[1];
+            }
+            if (youtubeID) {
+                const youtubeUrl = `https://www.youtube.com/embed/${youtubeID}`;
+                setFormData(prevData => {
+                    const newUrls = [...prevData.urls, youtubeUrl];
+                    const newCaptions = [...prevData.captions, ''];
+                    const newData = { ...prevData, urls: newUrls, captions: newCaptions };
+                    return newData;
+                });
+            }
         }
-        if (youtubeID) {
-            const youtubeUrl = `https://www.youtube.com/embed/${youtubeID}`;
+        else {
             setFormData(prevData => {
-                const newUrls = [...prevData.urls, youtubeUrl];
+                const newUrls = [...prevData.urls, url];
                 const newCaptions = [...prevData.captions, ''];
                 const newData = { ...prevData, urls: newUrls, captions: newCaptions };
                 return newData;
-            });
+            })
         }
-        setYoutubeLink('');
+        
+        setUrl('');
     };
 
     const handleRemoveMedia = (index: number) => {
@@ -272,13 +283,13 @@ export default function CreatePostScreen(): JSX.Element {
 
                     <View style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
                         <input
-                            id="youtubeLink"
+                            id="url"
                             type="url"
-                            placeholder="Enter YouTube Video URL"
-                            value={youtubeLink}
-                            onChange={handleYoutubeLinkChange}
+                            placeholder="Enter URL"
+                            value={url}
+                            onChange={handleUrlChange}
                         />
-                        <button type="button" onClick={addYoutubeLink}>Add YouTube Video</button>
+                        <button type="button" onClick={addUrl}>Add Url</button>
                     </View>
 
                     {formData.urls.map((url, index) => (
@@ -293,7 +304,7 @@ export default function CreatePostScreen(): JSX.Element {
                                         frameBorder="0"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                         allowFullScreen
-                                    ></iframe>
+                                    />
                                     <textarea
                                         placeholder={`Caption for Video ${index + 1}`}
                                         value={formData.captions[index] || ''}
