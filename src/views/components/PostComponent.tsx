@@ -15,7 +15,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
     const { width } = useAppSelector(state => state.global);
     const post = usePost(_id);
 
-    const conditionalBorder = (width < constants.MOBILE_THRESHOLD) || (width < constants.WEB_VERTICAL_POST_MAX && width >= constants.WEB_VERTICAL_POST_MIN) ? {
+    const conditionalBorder = (width < constants.WEB_VERTICAL_POST_MIN) || (width < constants.WEB_VERTICAL_POST_MAX && width >= constants.WEB_VERTICAL_POST_MIN) ? {
         borderTop: `1px solid ${post.color}`,
     } : {
         borderLeft: `1px solid ${post.color}`,
@@ -34,7 +34,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                 style={{
                     ...styles.reset,
                     display: 'flex',
-                    flexDirection: (width < constants.MOBILE_THRESHOLD) || (width < constants.WEB_VERTICAL_POST_MAX && width >= constants.WEB_VERTICAL_POST_MIN) ? 'column' : 'row',
+                    flexDirection: (width < constants.WEB_VERTICAL_POST_MIN) || (width < constants.WEB_VERTICAL_POST_MAX && width >= constants.WEB_VERTICAL_POST_MIN) ? 'column' : 'row',
                     width: '100%',
                     backgroundColor: post.backgroundColor ? post.backgroundColor : constants.EMPTY_POST.backgroundColor,
                     color: post.color,
