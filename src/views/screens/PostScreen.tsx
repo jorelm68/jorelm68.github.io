@@ -51,13 +51,15 @@ export default function PostScreen() {
             {width >= constants.WEB_VERTICAL_POST_MIN || showEssay ? (
                 <View style={{
                     ...commonColumnStyle,
-                    alignSelf: 'flex-start',
-                    flexDirection: 'column',
+                    paddingTop: constants.HEADER_HEIGHT + constants.DEFAULT_PADDING,
+                    paddingBottom: constants.DEFAULT_PADDING,
+                    height: 'auto',
                     width: (width < constants.WEB_VERTICAL_POST_MIN) ? FULL_SIZE_ESSAY_WIDTH : HALF_SIZE_ESSAY_WIDTH,
                     minWidth: (width < constants.WEB_VERTICAL_POST_MIN) ? MOBILE_ESSAY_MIN_WIDTH : WEB_ESSAY_MIN_WIDTH,
-                    paddingTop: constants.HEADER_HEIGHT + constants.DEFAULT_PADDING,
+                    display: 'flex',
+                    alignSelf: 'flex-start',
+                    flexDirection: 'column',
                     marginLeft: constants.SIDE_GAP,
-                    paddingBottom: constants.DEFAULT_PADDING,
                     boxSizing: 'border-box',
                 }}>
                     <View style={{
