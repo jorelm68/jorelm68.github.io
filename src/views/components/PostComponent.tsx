@@ -27,6 +27,7 @@ const LinkWrapper = ({ link, children }: LinkWrapperProps) => {
             display: 'flex',
             width: '100%',
             maxWidth: constants.MAX_POST_WIDTH,
+            alignItems: 'center',
         }}>
             {children}
         </Link>
@@ -61,7 +62,6 @@ const PostComponent = ({ color, link, backgroundColor, url, name, description }:
                         minWidth: url && url.includes('api/photo/readPhoto') ? constants.MIN_PHOTO_WIDTH : constants.MAX_MEDIA_WIDTH,
                         maxWidth: constants.MAX_MEDIA_WIDTH,
                         padding: constants.POST_MEDIA_PADDING,
-                        boxSizing: 'border-box',
                     }}
                 >
                     {url && url.includes('youtube') ? (

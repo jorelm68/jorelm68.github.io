@@ -35,15 +35,12 @@ export default function WorkScreen() {
             flexDirection: 'row',
             flexWrap: 'wrap',
             gap: constants.POST_GAP,
-            height: '100%',
             width: FULL_WIDTH,
             marginLeft: constants.SIDE_GAP,
             overflowY: 'auto',
         }}>
             {posts.map((post, index) => {
-                return (
-                    <PostWrapper key={index} post={post} />
-                )
+                return <PostWrapper key={index} post={post} />
             })}
         </Page>
     )
