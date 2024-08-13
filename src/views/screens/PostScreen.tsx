@@ -48,13 +48,13 @@ export default function PostScreen() {
             overflow: 'hidden',
             zIndex: constants.Z_FRONT,
         }}>
-            {width >= constants.MOBILE_THRESHOLD || showEssay ? (
+            {width >= constants.WEB_VERTICAL_POST_MIN || showEssay ? (
                 <View style={{
                     ...commonColumnStyle,
                     alignSelf: 'flex-start',
                     flexDirection: 'column',
-                    width: (width < constants.MOBILE_THRESHOLD) ? FULL_SIZE_ESSAY_WIDTH : HALF_SIZE_ESSAY_WIDTH,
-                    minWidth: (width < constants.MOBILE_THRESHOLD) ? MOBILE_ESSAY_MIN_WIDTH : WEB_ESSAY_MIN_WIDTH,
+                    width: (width < constants.WEB_VERTICAL_POST_MIN) ? FULL_SIZE_ESSAY_WIDTH : HALF_SIZE_ESSAY_WIDTH,
+                    minWidth: (width < constants.WEB_VERTICAL_POST_MIN) ? MOBILE_ESSAY_MIN_WIDTH : WEB_ESSAY_MIN_WIDTH,
                     paddingTop: constants.HEADER_HEIGHT + constants.DEFAULT_PADDING,
                     marginLeft: constants.SIDE_GAP,
                     paddingBottom: constants.DEFAULT_PADDING,
@@ -105,7 +105,7 @@ export default function PostScreen() {
                     </View>
                 </View>
             ) : null}
-            {!(width < 800) || !showEssay ? (
+            {width >= constants.WEB_VERTICAL_POST_MIN || !showEssay ? (
                 <View style={{
                     ...commonColumnStyle,
                     paddingTop: constants.HEADER_HEIGHT + constants.DEFAULT_PADDING,
@@ -117,7 +117,7 @@ export default function PostScreen() {
                     flexWrap: 'wrap',
                     gap: constants.POST_GAP,
                     height: 'auto',
-                    width: (width < constants.MOBILE_THRESHOLD) ? '100%' : '50%',
+                    width: (width < constants.WEB_VERTICAL_POST_MIN) ? '100%' : '50%',
                     paddingRight: constants.SIDE_GAP,
                     paddingLeft: constants.SIDE_GAP,
                 }}>

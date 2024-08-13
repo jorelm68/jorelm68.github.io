@@ -116,7 +116,7 @@ const NavbarComponent = () => {
 
             </div>
 
-            {width < 800 && screen === 'PostScreen' && (
+            {width < constants.WEB_VERTICAL_POST_MIN && screen === 'PostScreen' && (
                 <button onClick={handleToggleShowEssay} style={{
                     ...styles.reset,
                     height: '100%',
