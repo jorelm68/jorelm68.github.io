@@ -38,12 +38,6 @@ const LinkWrapper = ({ link, children }: LinkWrapperProps) => {
 const PostComponent = ({ color, link, backgroundColor, url, name, description }: PostComponentProps) => {
     const { width } = useAppSelector(state => state.global);
 
-    const conditionalBorder = (width < constants.WEB_VERTICAL_POST_MIN) || (width < constants.WEB_VERTICAL_POST_MAX && width >= constants.WEB_VERTICAL_POST_MIN) ? {
-        borderTop: `1px solid ${color}`,
-    } : {
-        borderLeft: `1px solid ${color}`,
-    }
-
     return (
         <LinkWrapper link={link}>
             <View
@@ -51,6 +45,7 @@ const PostComponent = ({ color, link, backgroundColor, url, name, description }:
                     ...styles.reset,
                     display: 'flex',
                     width: '100%',
+                    alignItems: 'center',
                     flexDirection: (width < constants.WEB_VERTICAL_POST_MIN) || (width < constants.WEB_VERTICAL_POST_MAX && width >= constants.WEB_VERTICAL_POST_MIN) ? 'column' : 'row',
                     backgroundColor: backgroundColor ? backgroundColor : constants.EMPTY_POST.backgroundColor,
                     color: color,
@@ -98,7 +93,6 @@ const PostComponent = ({ color, link, backgroundColor, url, name, description }:
                         flex: '1 1 60%',
                         overflow: 'hidden',
                         padding: constants.POST_TEXT_PADDING,
-                        ...conditionalBorder,
                     }}
                 >
                     {name && (
