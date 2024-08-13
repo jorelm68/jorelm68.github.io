@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/static/js/main.38c568d9.js",
+    "main.js": "/static/js/main.ea71c55c.js",
     "static/media/generic7.jpg": "/static/media/generic7.d5edbe12005812dafc48.jpg",
     "static/media/generic31.jpg": "/static/media/generic31.770dc8571c9649405b5b.jpg",
     "static/media/generic46.jpg": "/static/media/generic46.08adc993958128850241.jpg",
@@ -29,11 +29,13 @@
     "static/media/generic34.jpg": "/static/media/generic34.091508ba059724894a42.jpg",
     "static/media/generic47.jpg": "/static/media/generic47.8cf8f90f9c64ad87ae14.jpg",
     "static/media/generic12.jpg": "/static/media/generic12.3781828affbb0149a7bf.jpg",
+    "static/media/profileMap.jpg": "/static/media/profileMap.27326c189f83da62c06f.jpg",
     "static/media/generic49.jpg": "/static/media/generic49.476fabaf600ff37f7d4d.jpg",
     "static/media/generic44.jpg": "/static/media/generic44.ca5276c88deb1f1c30a6.jpg",
     "static/media/generic52.jpg": "/static/media/generic52.269f9331fa2accc5946a.jpg",
     "static/media/me1.png": "/static/media/me1.58c134256c6b33b65e63.png",
     "static/media/generic51.jpg": "/static/media/generic51.36155bdccc9b1b1c654b.jpg",
+    "static/media/libraryScraps.jpg": "/static/media/libraryScraps.8edf5850fde52cac9493.jpg",
     "static/media/generic8.jpg": "/static/media/generic8.56977d37dfd0fefd3037.jpg",
     "static/media/generic22.jpg": "/static/media/generic22.858b8e2bdbc95e178c6b.jpg",
     "static/media/generic10.jpg": "/static/media/generic10.ca841fcca62e1eaac24c.jpg",
@@ -48,8 +50,11 @@
     "static/media/generic15.jpg": "/static/media/generic15.6f65a0ac903772770743.jpg",
     "static/media/generic16.jpg": "/static/media/generic16.1ed9847ec4f85ac17566.jpg",
     "static/media/generic18.jpg": "/static/media/generic18.1f9a415cc230f9803971.jpg",
+    "static/media/profileBooks.jpg": "/static/media/profileBooks.886759576ff210d502a1.jpg",
     "static/media/generic23.jpg": "/static/media/generic23.a4b232e32a627d40ac49.jpg",
     "static/media/generic21.jpg": "/static/media/generic21.d99e91aa11671e50eb49.jpg",
+    "static/media/cameraPrograph.jpg": "/static/media/cameraPrograph.f4731445e71b4f27dc5f.jpg",
+    "static/media/cameraRetrograph.jpg": "/static/media/cameraRetrograph.5df84315136de2396037.jpg",
     "static/media/generic13.jpg": "/static/media/generic13.7a3466ef2e6211dceaa3.jpg",
     "static/media/generic69.jpg": "/static/media/generic69.45e29b62c97eeb523c65.jpg",
     "static/media/generic2.jpg": "/static/media/generic2.13234e7a7b26bb5c201a.jpg",
@@ -64,17 +69,27 @@
     "static/media/phone.png": "/static/media/phone.e3e6a7de35e24876bcba.png",
     "static/media/generic36.jpg": "/static/media/generic36.a00942620754dcefd591.jpg",
     "static/media/generic58.jpg": "/static/media/generic58.6322fba7b425a8d839ad.jpg",
+    "static/media/book6.jpg": "/static/media/book6.ebb5216d424796c8460d.jpg",
     "static/media/generic67.jpg": "/static/media/generic67.530c345d8622c8f28745.jpg",
+    "static/media/book4.jpg": "/static/media/book4.b520c154c8ec602e7bf1.jpg",
     "static/media/generic62.jpg": "/static/media/generic62.52583693daf1863ffbfd.jpg",
+    "static/media/book2.jpg": "/static/media/book2.4573e28627062f21bec3.jpg",
+    "static/media/book8.jpg": "/static/media/book8.f7a00c295377ac7fbdf8.jpg",
     "static/media/generic56.jpg": "/static/media/generic56.5eed8ef0a8c5e990d8ef.jpg",
     "static/media/generic68.jpg": "/static/media/generic68.4e147b7a9633a178cb34.jpg",
     "static/media/generic59.jpg": "/static/media/generic59.0947f20e6bb88762d9ad.jpg",
+    "static/media/book3.jpg": "/static/media/book3.4820571ab8a16e823db5.jpg",
+    "static/media/book5.jpg": "/static/media/book5.bdb7c4097a89a646e556.jpg",
+    "static/media/book9.jpg": "/static/media/book9.c6d18f9ff4d81856653a.jpg",
+    "static/media/book7.jpg": "/static/media/book7.a5dfa0a341dd964afce4.jpg",
     "static/media/generic63.jpg": "/static/media/generic63.c03085e84480c9a8dc14.jpg",
     "static/media/generic55.jpg": "/static/media/generic55.c5a84cb36a3ba610d1b6.jpg",
     "static/media/generic60.jpg": "/static/media/generic60.124fb482c59f4d49d555.jpg",
     "static/media/generic70.jpg": "/static/media/generic70.752a6ad318a0f9c60a4b.jpg",
     "static/media/generic66.jpg": "/static/media/generic66.26799f3fea2354baa3ee.jpg",
     "static/media/generic57.jpg": "/static/media/generic57.d27a0669fe25e6db5952.jpg",
+    "static/media/book10.jpg": "/static/media/book10.810feefd77817b8dfa22.jpg",
+    "static/media/book1.jpg": "/static/media/book1.9bc08e16564ca81c1dc7.jpg",
     "static/media/view1.jpg": "/static/media/view1.b78975f1dbf5b5b94cc5.jpg",
     "static/media/generic65.jpg": "/static/media/generic65.35657ee11bd151290063.jpg",
     "static/media/view2.jpg": "/static/media/view2.c6207cfaf9fd4d1df7a8.jpg",
@@ -88,9 +103,9 @@
     "static/media/leetcode.png": "/static/media/leetcode.fe072219124ea9a62935.png",
     "static/media/pdf.png": "/static/media/pdf.70e51bca7cfb1e5e8857.png",
     "index.html": "/index.html",
-    "main.38c568d9.js.map": "/static/js/main.38c568d9.js.map"
+    "main.ea71c55c.js.map": "/static/js/main.ea71c55c.js.map"
   },
   "entrypoints": [
-    "static/js/main.38c568d9.js"
+    "static/js/main.ea71c55c.js"
   ]
 }
