@@ -34,10 +34,10 @@ export default function WorkScreen() {
             flexDirection: 'row',
             flexWrap: 'wrap',
             gap: constants.POST_GAP,
-            scrollbarWidth: 'auto',
-            height: 'auto',
+            height: '100%',
             width: FULL_WIDTH,
             marginLeft: constants.SIDE_GAP,
+            overflowY: 'auto',
         }}>
             {posts.map((post, index) => {
                 return (
