@@ -54,7 +54,7 @@ interface PostWrapperProps {
 }
 
 const PostWrapper = ({ post }: PostWrapperProps) => {
-    const { name, description, urls, color, backgroundColor } = usePost(post);
+    const { name, description, urls, link, color, backgroundColor } = usePost(post);
     const url = urls[0];
 
     return (
@@ -64,6 +64,7 @@ const PostWrapper = ({ post }: PostWrapperProps) => {
             url={url}
             name={name}
             description={description}
+            link={link}
         />
     )
 }

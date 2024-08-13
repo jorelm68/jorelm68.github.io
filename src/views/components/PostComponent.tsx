@@ -22,7 +22,12 @@ interface LinkWrapperProps {
 
 const LinkWrapper = ({ link, children }: LinkWrapperProps) => {
     return link ? (
-        <Link to={link}>
+        <Link to={link} style={{
+            ...styles.reset,
+            display: 'flex',
+            width: '100%',
+            maxWidth: constants.MAX_POST_WIDTH,
+        }}>
             {children}
         </Link>
     ) : (
@@ -45,14 +50,11 @@ const PostComponent = ({ color, link, backgroundColor, url, name, description }:
                 style={{
                     ...styles.reset,
                     display: 'flex',
-                    flexDirection: (width < constants.WEB_VERTICAL_POST_MIN) || (width < constants.WEB_VERTICAL_POST_MAX && width >= constants.WEB_VERTICAL_POST_MIN) ? 'column' : 'row',
                     width: '100%',
+                    flexDirection: (width < constants.WEB_VERTICAL_POST_MIN) || (width < constants.WEB_VERTICAL_POST_MAX && width >= constants.WEB_VERTICAL_POST_MIN) ? 'column' : 'row',
                     backgroundColor: backgroundColor ? backgroundColor : constants.EMPTY_POST.backgroundColor,
                     color: color,
                     borderRadius: constants.BORDER_RADIUS,
-                    boxSizing: 'border-box',
-                    maxWidth: constants.MAX_POST_WIDTH,
-                    alignItems: 'center',
                     border: `1px solid ${color ? color : constants.EMPTY_POST.color}`,
                 }}
             >
