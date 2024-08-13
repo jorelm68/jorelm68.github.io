@@ -21,6 +21,23 @@ const files: { [key: string]: string } = {
     dance: require("../assets/photos/dance.jpg"),
     businessCard: require("../assets/photos/businessCard.png"),
     headshot: require("../assets/photos/headshot.jpg"),
+
+    book1: require("../assets/scrap/book1.jpg"),
+    book2: require("../assets/scrap/book2.jpg"),
+    book3: require("../assets/scrap/book3.jpg"),
+    book4: require("../assets/scrap/book4.jpg"),
+    book5: require("../assets/scrap/book5.jpg"),
+    book6: require("../assets/scrap/book6.jpg"),
+    book7: require("../assets/scrap/book7.jpg"),
+    book8: require("../assets/scrap/book8.jpg"),
+    book9: require("../assets/scrap/book9.jpg"),
+    book10: require("../assets/scrap/book10.jpg"),
+
+    cameraPrograph: require("../assets/scrap/cameraPrograph.jpg"),
+    cameraRetrograph: require("../assets/scrap/cameraRetrograph.jpg"),
+    libraryScraps: require("../assets/scrap/libraryScraps.jpg"),
+    profileBooks: require("../assets/scrap/profileBooks.jpg"),
+    profileMap: require("../assets/scrap/profileMap.jpg"),
 };
 
 // Add all generic images as static imports

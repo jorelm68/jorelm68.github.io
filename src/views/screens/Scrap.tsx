@@ -6,6 +6,7 @@ import api from "../../lib/api";
 import { Res } from "../../lib/types";
 import PostComponent from "../components/PostComponent";
 import constants from "../../lib/constants";
+import files from "../../lib/files";
 
 export default function ScrapScreen() {
     const dispatch = useDispatch();
@@ -117,7 +118,7 @@ export default function ScrapScreen() {
             <h2>What is Scrap?</h2>
 
             <div class="columns">
-                <img src="https://scrap-back-end-fa4b5e8c3d1c.herokuapp.com/profileMap" alt="Profile Map">
+                <img src="${files.profileMap}" alt="Profile Map">
                 <p class="text">Scrap is an online digital scrapbooking app!<br>
                     It offers a convenient way to document your memories on the go and share them with your
                     friends!<br><br>
@@ -128,7 +129,7 @@ export default function ScrapScreen() {
             </div>
 
             <div class="columns">
-                <img src="https://scrap-back-end-fa4b5e8c3d1c.herokuapp.com/libraryScrapsImage" alt="Library Scraps">
+                <img src="${files.libraryScraps}" alt="Library Scraps">
 
                 <p class="text">Here are some Scraps I've taken on the left, as well as some Books I've made on the
                     right!<br><br>
@@ -138,13 +139,13 @@ export default function ScrapScreen() {
 
                 </p>
 
-                <img src="https://scrap-back-end-fa4b5e8c3d1c.herokuapp.com/profileBooksImage" alt="Profile Books">
+                <img src="${files.profileBooks}" alt="Profile Books">
             </div>
 
             <div class="columns">
                 <div class="columns">
-                    <img src="https://scrap-back-end-fa4b5e8c3d1c.herokuapp.com/cameraPrograph" alt="Camera Prograph">
-                    <img src="https://scrap-back-end-fa4b5e8c3d1c.herokuapp.com/cameraRetrograph" alt="Camera Retrograph">
+                    <img src="${files.cameraPrograph}" alt="Camera Prograph">
+                    <img src="${files.cameraRetrograph}" alt="Camera Retrograph">
                 </div>
 
                 <p class="text">The only way to get images into the app is to <strong>Make Memories NOW!</strong> It's
@@ -156,16 +157,16 @@ export default function ScrapScreen() {
             <p class="text">Below is a Book I made when traveling to one of my dance competitions!<br></p>
 
             <div class="book">
-                <img src="https://scrap-back-end-fa4b5e8c3d1c.herokuapp.com/book1Image" alt="Scrap 1">
-                <img src="https://scrap-back-end-fa4b5e8c3d1c.herokuapp.com/book2Image" alt="Scrap 2">
-                <img src="https://scrap-back-end-fa4b5e8c3d1c.herokuapp.com/book3Image" alt="Scrap 3">
-                <img src="https://scrap-back-end-fa4b5e8c3d1c.herokuapp.com/book4Image" alt="Scrap 4">
-                <img src="https://scrap-back-end-fa4b5e8c3d1c.herokuapp.com/book5Image" alt="Scrap 5">
-                <img src="https://scrap-back-end-fa4b5e8c3d1c.herokuapp.com/book6Image" alt="Scrap 6">
-                <img src="https://scrap-back-end-fa4b5e8c3d1c.herokuapp.com/book7Image" alt="Scrap 7">
-                <img src="https://scrap-back-end-fa4b5e8c3d1c.herokuapp.com/book8Image" alt="Scrap 8">
-                <img src="https://scrap-back-end-fa4b5e8c3d1c.herokuapp.com/book9Image" alt="Scrap 9">
-                <img src="https://scrap-back-end-fa4b5e8c3d1c.herokuapp.com/book10Image" alt="Scrap 10">
+                <img src="${files.book1}" alt="Scrap 1">
+                <img src="${files.book2}" alt="Scrap 2">
+                <img src="${files.book3}" alt="Scrap 3">
+                <img src="${files.book4}" alt="Scrap 4">
+                <img src="${files.book5}" alt="Scrap 5">
+                <img src="${files.book6}" alt="Scrap 6">
+                <img src="${files.book7}" alt="Scrap 7">
+                <img src="${files.book8}" alt="Scrap 8">
+                <img src="${files.book9}" alt="Scrap 9">
+                <img src="${files.book10}" alt="Scrap 10">
             </div>
         </div>
     </div>
