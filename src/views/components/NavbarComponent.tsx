@@ -121,6 +121,7 @@ const NavbarComponent = () => {
                     ...styles.reset,
                     height: '100%',
                     position: 'absolute',
+                    padding: '4px 16px',
                     top: 0,
                     right: 0,
                     backgroundColor: styles.colors.white,
@@ -128,7 +129,7 @@ const NavbarComponent = () => {
                     color: styles.colors.black,
                     cursor: 'pointer',
                 }}>
-                    {showEssay ? 'Show Media 📚' : 'Show Essay 📝'}
+                    {showEssay ? '📚' : '📝'}
                 </button>
             )}
 
