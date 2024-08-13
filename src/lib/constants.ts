@@ -101,6 +101,7 @@ const constants = {
     MAX_MEDIA_WIDTH: 226,
 
     POST_TEXT_PADDING: '1rem',
+    POST_MEDIA_PADDING: '1rem',
 
     VIDEO_ALLOW: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
 

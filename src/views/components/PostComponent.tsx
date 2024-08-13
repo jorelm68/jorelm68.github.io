@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import PhotoComponent from "./PhotoComponent";
-import { usePost } from "../../lib/hooks";
 import View from "./View";
 import Text from "./Text";
 import { useAppSelector } from "../../redux/hooks";
@@ -8,41 +7,53 @@ import constants from "../../lib/constants";
 import styles from "../../lib/styles";
 
 interface PostComponentProps {
-    post: string,
+    color: string,
+    backgroundColor: string,
+    url: string,
+    name: string,
+    description: string,
+    link?: string,
 }
 
-const PostComponent = ({ post: _id }: PostComponentProps) => {
+interface LinkWrapperProps {
+    link?: string,
+    children: React.ReactNode,
+}
+
+const LinkWrapper = ({ link, children }: LinkWrapperProps) => {
+    return link ? (
+        <Link to={link}>
+            {children}
+        </Link>
+    ) : (
+        <>{children}</>
+    )
+}
+
+const PostComponent = ({ color, link, backgroundColor, url, name, description }: PostComponentProps) => {
     const { width } = useAppSelector(state => state.global);
-    const post = usePost(_id);
 
     const conditionalBorder = (width < constants.WEB_VERTICAL_POST_MIN) || (width < constants.WEB_VERTICAL_POST_MAX && width >= constants.WEB_VERTICAL_POST_MIN) ? {
-        borderTop: `1px solid ${post.color}`,
+        borderTop: `1px solid ${color}`,
     } : {
-        borderLeft: `1px solid ${post.color}`,
+        borderLeft: `1px solid ${color}`,
     }
 
-    if (!post) {
-        return (
-            <View />
-        )
-    }
-
-    else {
-        return (
-            <Link
-                to={post.link ? post.link : constants.EMPTY_POST.link}
+    return (
+        <LinkWrapper link={link}>
+            <View
                 style={{
                     ...styles.reset,
                     display: 'flex',
                     flexDirection: (width < constants.WEB_VERTICAL_POST_MIN) || (width < constants.WEB_VERTICAL_POST_MAX && width >= constants.WEB_VERTICAL_POST_MIN) ? 'column' : 'row',
                     width: '100%',
-                    backgroundColor: post.backgroundColor ? post.backgroundColor : constants.EMPTY_POST.backgroundColor,
-                    color: post.color,
+                    backgroundColor: backgroundColor ? backgroundColor : constants.EMPTY_POST.backgroundColor,
+                    color: color,
                     borderRadius: constants.BORDER_RADIUS,
                     boxSizing: 'border-box',
                     maxWidth: constants.MAX_POST_WIDTH,
                     alignItems: 'center',
-                    border: `1px solid ${post.color ? post.color : constants.EMPTY_POST.color}`,
+                    border: `1px solid ${color ? color : constants.EMPTY_POST.color}`,
                 }}
             >
                 <View
@@ -50,17 +61,19 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                         flex: '1 1 40%',
                         height: 'auto',
                         overflow: 'hidden',
-                        minWidth: post.urls[0] && post.urls[0].includes('api/photo/readPhoto') ? constants.MIN_PHOTO_WIDTH : constants.MAX_MEDIA_WIDTH,
+                        minWidth: url && url.includes('api/photo/readPhoto') ? constants.MIN_PHOTO_WIDTH : constants.MAX_MEDIA_WIDTH,
                         maxWidth: constants.MAX_MEDIA_WIDTH,
+                        padding: constants.POST_MEDIA_PADDING,
+                        boxSizing: 'border-box',
                     }}
                 >
-                    {post.urls[0] && post.urls[0].includes('youtube') ? (
+                    {url && url.includes('youtube') ? (
                         <iframe
                             style={{
                                 width: '100%',
                                 height: 'auto',
                             }}
-                            src={post.urls[0]}
+                            src={url}
                             title={`YouTube Video`}
                             frameBorder="0"
                             allow={constants.VIDEO_ALLOW}
@@ -68,7 +81,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                         />
                     ) : (
                         <PhotoComponent
-                            photo={post.urls[0]}
+                            photo={url}
                             resolution={constants.RESOLUTION}
                             style={{
                                 width: '100%',
@@ -86,7 +99,7 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                         ...conditionalBorder,
                     }}
                 >
-                    {post.name && (
+                    {name && (
                         <Text
                             style={{
                                 fontSize: constants.TITLE_FONT_SIZE,
@@ -95,26 +108,26 @@ const PostComponent = ({ post: _id }: PostComponentProps) => {
                                 overflow: 'hidden',
                                 textOverflow: 'ellipsis',
                                 textAlign: 'center',
-                                color: post.color ? post.color : constants.EMPTY_POST.color,
+                                color: color ? color : constants.EMPTY_POST.color,
                             }}
                         >
-                            {post.name}
+                            {name}
                         </Text>
                     )}
 
-                    {post.description && (
-                        <p dangerouslySetInnerHTML={{ __html: post.description }} style={{
+                    {description && (
+                        <p dangerouslySetInnerHTML={{ __html: description }} style={{
                             fontSize: constants.TEXT_FONT_SIZE,
                             overflow: 'hidden',
-                            color: post.color ? post.color : constants.EMPTY_POST.color,
+                            color: color ? color : constants.EMPTY_POST.color,
                             fontFamily: constants.FONT,
                             lineHeight: constants.TEXT_LINE_HEIGHT,
                         }} />
                     )}
                 </View>
-            </Link>
-        )
-    }
+            </View>
+        </LinkWrapper>
+    )
 }
 
 export default PostComponent;

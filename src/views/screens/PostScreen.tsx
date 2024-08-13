@@ -3,13 +3,13 @@ import Page from "../components/Page";
 import { usePost } from "../../lib/hooks";
 import View from "../components/View";
 import Text from "../components/Text";
-import PostRawComponent from "../components/PostRawComponent";
 import { useAppSelector } from "../../redux/hooks";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setScreen } from "../../redux/global.reducer";
 import constants from "../../lib/constants";
 import styles from "../../lib/styles";
+import PostComponent from "../components/PostComponent";
 
 const FULL_SIZE_ESSAY_WIDTH = '90%';
 const HALF_SIZE_ESSAY_WIDTH = '45%';
@@ -127,7 +127,7 @@ export default function PostScreen() {
                         const name = parts[0];
                         const description = parts[1];
                         return (
-                            <PostRawComponent
+                            <PostComponent
                                 key={index}
                                 url={url}
                                 name={name}
