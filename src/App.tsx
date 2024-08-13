@@ -16,6 +16,7 @@ import MyNameComponent from './views/components/MyNameComponent';
 import Me2Component from './views/components/Me2Component';
 import BusinessCardComponent from './views/components/BusinessCardComponent';
 import WorkScreen from './views/screens/WorkScreen';
+import ScrapScreen from './views/screens/Scrap';
 
 function App() {
   useEffect(() => {
@@ -41,7 +42,8 @@ function App() {
           <Route path="/contact" element={<ContactScreen />} />
           <Route path="/work" element={<WorkScreen />} />
           <Route path="/post/:post" element={<PostScreen />} />
-
+          <Route path='/scrap' element={<ScrapScreen />} />
+ 
           <Route path="/auth" element={<AuthScreen />} />
           <Route path="/createPost" element={<CreatePostScreen />} />
           <Route path="/post/:post/edit" element={<EditPostScreen />} />
