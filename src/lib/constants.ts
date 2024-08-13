@@ -141,8 +141,10 @@ const constants = {
         In my free time, I enjoy 
         <a href="https://jorelm68.github.io/#/post/Post-66bbd5e30058fb3a79573c75">skydiving</a>, 
         <a href="https://jorelm68.github.io/#/post/Post-66bbd12a0058fb3a79573c47">ballroom dancing</a>, and 
-        <a href="https://jorelm68.github.io/#/post/Post-66bbd69f0058fb3a79573c78">playing guitar</a>.`
+        playing guitar.`
     )
 };
+
+// <a href="https://jorelm68.github.io/#/post/Post-66bbd69f0058fb3a79573c78">playing guitar</a>.
 
 export default constants;
