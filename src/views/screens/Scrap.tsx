@@ -17,7 +17,8 @@ export default function ScrapScreen() {
 
     return (
         <Page style={{
-            paddingLeft: '10%',
+            alignItems: 'center',
+            justifyContent: 'center',
             paddingTop: constants.HEADER_HEIGHT,
         }}>
             <div dangerouslySetInnerHTML={{
