@@ -19,7 +19,7 @@ export default function WorkScreen() {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        api.post.searchPosts('').then((res: Res) => {
+        api.post.searchPosts('work').then((res: Res) => {
             setPosts(res.data);
         })
     }, [])
