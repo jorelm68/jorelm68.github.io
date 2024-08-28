@@ -43,13 +43,32 @@ const handlePexels = async (query: string, numResults: number = 10): Promise<Rec
     }
 };
 
-// 'Month Day, Year - Month Day, Year
+const getOrdinalSuffix = (day: number): string => {
+    if (day > 3 && day < 21) return 'th'; // for 11th, 12th, 13th, etc.
+    switch (day % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+    }
+};
+
 const formatDateRange = (start: string, end: string): string => {
     const startDate = new Date(start);
     const endDate = new Date(end);
 
-    return `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`;
-}
+    const startMonth = startDate.toLocaleString('en-US', { month: 'short' });
+    const startDay = startDate.getDate();
+    const startYear = startDate.getFullYear();
+
+    const endMonth = endDate.toLocaleString('en-US', { month: 'long' });
+    const endDay = endDate.getDate();
+    const endYear = endDate.getFullYear();
+
+    const startDayWithSuffix = `${startDay}${getOrdinalSuffix(startDay)}`;
+
+    return `${startMonth} ${startDayWithSuffix}, ${startYear} - ${endMonth} ${endDay}, ${endYear}`;
+};
 
 export default {
     handlePhoto,
