@@ -141,7 +141,29 @@ const constants = {
         In my free time, I enjoy 
         <a href="https://jorelm68.github.io/#/post/Post-66bbd5e30058fb3a79573c75">skydiving</a>, 
         <a href="https://jorelm68.github.io/#/post/Post-66bbd12a0058fb3a79573c47">ballroom dancing</a>, and 
-        playing guitar.`
+        playing guitar.
+        <br />
+        <br />
+        <strong>Skills:</strong>
+        <br />
+        <ul>
+        <li>MERN Stack</li>
+        <li>React</li>
+        <li>React Native</li>
+        <li>JavaScript</li>
+        <li>TypeScript</li>
+        <li>Node.js</li>
+        <li>Express.js</li>
+        <li>MongoDB</li>
+        <li>Amazon S3</li>
+        <li>Next.js</li>
+        <li>Firebase</li>
+        <li>C++</li>
+        <li>C</li>
+        <li>Python</li>
+        <li>Java</li>
+        <li>ARM Assembly</li>
+        </ul>`
     )
 };
 
