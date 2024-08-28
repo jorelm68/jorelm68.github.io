@@ -61,7 +61,7 @@ const formatDateRange = (start: string, end: string): string => {
     const startDay = startDate.getDate();
     const startYear = startDate.getFullYear();
 
-    const endMonth = endDate.toLocaleString('en-US', { month: 'long' });
+    const endMonth = endDate.toLocaleString('en-US', { month: 'short' });
     const endDay = endDate.getDate();
     const endYear = endDate.getFullYear();
 
