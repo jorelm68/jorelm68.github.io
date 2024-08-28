@@ -10,6 +10,7 @@ import { setScreen } from "../../redux/global.reducer";
 import constants from "../../lib/constants";
 import styles from "../../lib/styles";
 import PostComponent from "../components/PostComponent";
+import helper from "../../lib/helper";
 
 const FULL_SIZE_ESSAY_WIDTH = '90%';
 const HALF_SIZE_ESSAY_WIDTH = '45%';
@@ -27,6 +28,8 @@ export default function PostScreen() {
         backgroundColor,
         urls,
         captions,
+        start,
+        end,
     } = usePost(post);
 
     const { width, showEssay } = useAppSelector(state => state.global);
@@ -94,6 +97,13 @@ export default function PostScreen() {
                             padding: constants.POST_TEXT_PADDING,
                             paddingBottom: '0px',
                         }}>{name}</Text>
+
+                        <Text style={{
+                            fontSize: constants.TEXT_FONT_SIZE,
+                            color,
+                            textAlign: 'center',
+                            padding: '0px',
+                        }}>{start && end ? helper.formatDateRange(start, end) : null}</Text>
 
                         <p dangerouslySetInnerHTML={{ __html: essay }} style={{
                             fontSize: constants.TEXT_FONT_SIZE,

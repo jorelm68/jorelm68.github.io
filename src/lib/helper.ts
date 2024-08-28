@@ -43,7 +43,16 @@ const handlePexels = async (query: string, numResults: number = 10): Promise<Rec
     }
 };
 
+// 'Month Day, Year - Month Day, Year
+const formatDateRange = (start: string, end: string): string => {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+
+    return `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`;
+}
+
 export default {
     handlePhoto,
     handlePexels,
+    formatDateRange,
 }
