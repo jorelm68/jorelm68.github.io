@@ -87,19 +87,19 @@ async function handleRequest(route: string, type: string, data?: any, blob: bool
 
 export default {
     general: {
-        read: async (model: string, _id: string): Promise<Res> => await handleRequest('api/general/read', 'POST', { model, _id }),
-        update: async (model: string, _id: string, data: object): Promise<Res> => await handleRequest('api/general/update', 'POST', { model, _id, rawData: JSON.stringify(data) }),
-        push: async (model: string, _id: string, data: object): Promise<Res> => await handleRequest('api/general/push', 'POST', { model, _id, rawData: JSON.stringify(data) }),
-        pull: async (model: string, _id: string, data: object): Promise<Res> => await handleRequest('api/general/pull', 'POST', { model, _id, rawData: JSON.stringify(data) }),
-        exists: async (model: string, data: object): Promise<Res> => await handleRequest('api/general/exists', 'POST', { model, rawData: JSON.stringify(data) }),
-        clean: async (models: string[]): Promise<Res> => await handleRequest('api/general/clean', 'POST', { rawModels: JSON.stringify(models) }),
-        factoryReset: async (): Promise<Res> => await handleRequest('api/general/factoryReset', 'POST'),
+        read: async (model: string, _id: string): Promise<Res> => await handleRequest('api/portfolio/general/read', 'POST', { model, _id }),
+        update: async (model: string, _id: string, data: object): Promise<Res> => await handleRequest('api/portfolio/general/update', 'POST', { model, _id, rawData: JSON.stringify(data) }),
+        push: async (model: string, _id: string, data: object): Promise<Res> => await handleRequest('api/portfolio/general/push', 'POST', { model, _id, rawData: JSON.stringify(data) }),
+        pull: async (model: string, _id: string, data: object): Promise<Res> => await handleRequest('api/portfolio/general/pull', 'POST', { model, _id, rawData: JSON.stringify(data) }),
+        exists: async (model: string, data: object): Promise<Res> => await handleRequest('api/portfolio/general/exists', 'POST', { model, rawData: JSON.stringify(data) }),
+        clean: async (models: string[]): Promise<Res> => await handleRequest('api/portfolio/general/clean', 'POST', { rawModels: JSON.stringify(models) }),
+        factoryReset: async (): Promise<Res> => await handleRequest('api/portfolio/general/factoryReset', 'POST'),
     },
     photo: {
-        createPhoto: async (uri: string) => await handleRequest('api/photo/createPhoto', 'POST', { file: uri }),
-        readPhoto: async (photo: string, resolution: number) => await handleRequest(`api/photo/readPhoto/${photo}/${resolution}`, 'GET', undefined, true),
-        updatePhoto: async (photo: string, uri: string) => await handleRequest('api/photo/updatePhoto', 'POST', { photo, file: uri }),
-        deletePhoto: async (photo: string) => await handleRequest('api/photo/deletePhoto', 'POST', { photo }),
+        createPhoto: async (uri: string) => await handleRequest('api/portfolio/photo/createPhoto', 'POST', { file: uri }),
+        readPhoto: async (photo: string, resolution: number) => await handleRequest(`api/portfolio/photo/readPhoto/${photo}/${resolution}`, 'GET', undefined, true),
+        updatePhoto: async (photo: string, uri: string) => await handleRequest('api/portfolio/photo/updatePhoto', 'POST', { photo, file: uri }),
+        deletePhoto: async (photo: string) => await handleRequest('api/portfolio/photo/deletePhoto', 'POST', { photo }),
     },
     post: {
         searchPosts: async (query: string) => await handleRequest('api/portfolio/post/searchPosts', 'POST', { query }),
