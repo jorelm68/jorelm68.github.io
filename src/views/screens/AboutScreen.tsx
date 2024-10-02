@@ -89,7 +89,7 @@ export default function AboutScreen() {
                     maxWidth: MAX_CONTAINER_WIDTH,
                     boxSizing: 'border-box',
                     padding: constants.POST_TEXT_PADDING,
-                    backgroundColor: 'white',
+                    backgroundColor: constants.RANDOM_COLOR(),
                     borderRadius: constants.BORDER_RADIUS,
                     textAlign: 'center',
                     paddingTop: '8px',
@@ -102,15 +102,18 @@ export default function AboutScreen() {
                 flexWrap: 'wrap',
                 width: '100%',
                 justifyContent: 'space-around',
+                alignItems: 'center',
                 boxSizing: 'border-box',
                 padding: constants.POST_TEXT_PADDING,
             }}>
-                {constants.SKILLS.map((skill, index) => {
-                    const { name, photo, description } = skill as Skill;
-                    return (
-                        <SkillComponent key={index} name={name} photo={photo} description={description} />
-                    )
-                })}
+                {[...constants.SKILLS]
+                    .sort(() => Math.random() - 0.5)
+                    .map((skill, index) => {
+                        const { name, photo, description } = skill as Skill;
+                        return (
+                            <SkillComponent key={index} name={name} photo={photo} description={description} />
+                        );
+                    })}
             </View>
         </Page>
     );

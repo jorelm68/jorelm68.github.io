@@ -3,6 +3,22 @@ import { Blank, GlobalReducer, Post, Res } from "./types";
 const NUMBERS = '10.0.0.82';
 const PORT = 4000;
 
+const EARTHY_COLORS = [
+    '#8B4513',  // SaddleBrown (wood, earthy brown)
+    '#A0522D',  // Sienna (brownish)
+    '#6B8E23',  // OliveDrab (green, natural)
+    '#556B2F',  // DarkOliveGreen (green, muted)
+    '#8FBC8F',  // DarkSeaGreen (soft, earthy green)
+    '#DEB887',  // BurlyWood (light brown)
+    '#D2B48C',  // Tan (warm, natural)
+    '#C0C0C0',  // Silver (for stone-like accents)
+    '#BDB76B',  // DarkKhaki (faded yellow-green)
+    '#CD853F',  // Peru (earthy brown)
+    '#BC8F8F',  // RosyBrown (warm, muted red-brown)
+    '#4682B4',  // SteelBlue (for a subtle sky or cool tone)
+    '#808000',  // Olive (classic, earthy green)
+];
+
 const EMPTY_RES: Res = {
     status: 0,
     success: false,
@@ -137,12 +153,20 @@ const constants = {
         I'm a junior studying Computer Science and Business at the University of Michigan. 
         I have experience in full-stack web development and mobile app development. 
         I'm always looking for new opportunities to learn and grow as a developer. 
-        I'm currently working as a developer for Streetmeet Inc. 
         In my free time, I enjoy 
         <a href="https://jorelm68.github.io/#/post/Post-66bbd5e30058fb3a79573c75">skydiving</a>, 
         <a href="https://jorelm68.github.io/#/post/Post-66bbd12a0058fb3a79573c47">ballroom dancing</a>, and 
         playing guitar.`
     ),
+
+    RANDOM_COLOR: () => {
+        return `rgba(${255 - (Math.random() * 100) % 50}, ${255 - (Math.random() * 100) % 50}, ${255 - (Math.random() * 100) % 50}, 1)`;
+    },
+
+    EARTHY_COLOR: () => {
+        const randomIndex = Math.floor(Math.random() * EARTHY_COLORS.length);
+        return EARTHY_COLORS[randomIndex];
+    },
 
     SKILLS: [
         {

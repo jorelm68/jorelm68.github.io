@@ -23,9 +23,10 @@ export default function SkillComponent({ name, photo, description }: SkillCompon
             maxWidth: MAX_CONTAINER_WIDTH,
             boxSizing: 'border-box',
             padding: constants.POST_TEXT_PADDING,
-            borderRadius: constants.BORDER_RADIUS,
-            backgroundColor: `rgba(${255 - (Math.random() * 100) % 50}, ${255 - (Math.random() * 100) % 50}, ${255 - (Math.random() * 100) % 50}, 1)`,
+            borderRadius: constants.BORDER_RADIUS * 2,
+            backgroundColor: constants.RANDOM_COLOR(),
             boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.1)',
+            justifyContent: 'space-around',
         }}>
             <PhotoComponent
                 photo={photo}
@@ -42,6 +43,7 @@ export default function SkillComponent({ name, photo, description }: SkillCompon
                 marginTop: constants.DEFAULT_PADDING,
                 borderTop: 'solid 1px black',
                 borderBottom: 'solid 1px black',
+                width: '100%',
             }}>
                 {name}
             </Text>
