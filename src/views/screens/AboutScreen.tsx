@@ -89,7 +89,7 @@ export default function AboutScreen() {
                     maxWidth: MAX_CONTAINER_WIDTH,
                     boxSizing: 'border-box',
                     padding: constants.POST_TEXT_PADDING,
-                    backgroundColor: constants.RANDOM_COLOR(),
+                    backgroundColor: 'white',
                     borderRadius: constants.BORDER_RADIUS,
                     textAlign: 'center',
                     paddingTop: '8px',
