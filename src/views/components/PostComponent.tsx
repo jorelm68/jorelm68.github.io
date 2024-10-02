@@ -48,7 +48,7 @@ const PostComponent = ({ color, link, backgroundColor, url, name, description }:
                     width: '100%',
                     alignItems: 'center',
                     flexDirection: (width < constants.WEB_VERTICAL_POST_MIN) || (width < constants.WEB_VERTICAL_POST_MAX && width >= constants.WEB_VERTICAL_POST_MIN) ? 'column' : 'row',
-                    backgroundColor: constants.RANDOM_COLOR(),
+                    backgroundColor: constants.SKIN_TONE(),
                     color: color,
                     borderRadius: constants.BORDER_RADIUS,
                     border: `1px solid ${color ? color : constants.EMPTY_POST.color}`,

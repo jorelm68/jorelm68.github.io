@@ -19,6 +19,22 @@ const EARTHY_COLORS = [
     '#808000',  // Olive (classic, earthy green)
 ];
 
+const STATUE_COLORS = [
+    '#F0EDE7',
+    '#DCD3C9',
+    '#70644C',
+    '#D9D4D4',
+    '#9B968E',
+]
+
+const SKIN_TONES = [
+    '#f4e8d9',
+    '#eadac3',
+    '#d6c0a8',
+    '#c3ab93',
+    '#b29b84',
+]
+
 const EMPTY_RES: Res = {
     status: 0,
     success: false,
@@ -166,6 +182,16 @@ const constants = {
     EARTHY_COLOR: () => {
         const randomIndex = Math.floor(Math.random() * EARTHY_COLORS.length);
         return EARTHY_COLORS[randomIndex];
+    },
+
+    STATUE_COLOR: () => {
+        const randomIndex = Math.floor(Math.random() * STATUE_COLORS.length);
+        return STATUE_COLORS[randomIndex];
+    },
+
+    SKIN_TONE: () => {
+        const randomIndex = Math.floor(Math.random() * SKIN_TONES.length);
+        return SKIN_TONES[randomIndex];
     },
 
     SKILLS: [

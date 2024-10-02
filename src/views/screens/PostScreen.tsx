@@ -72,7 +72,7 @@ export default function PostScreen() {
                         borderRadius: constants.BORDER_RADIUS,
                         boxSizing: 'border-box',
                         border: `1px solid ${color}`,
-                        backgroundColor: constants.RANDOM_COLOR(),
+                        backgroundColor: constants.SKIN_TONE(),
                     }}>
                         {isAuthenticated && (
                             <Link
