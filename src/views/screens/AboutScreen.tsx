@@ -8,6 +8,8 @@ import PhotoComponent from "../components/PhotoComponent";
 import files from "../../lib/files";
 import constants from "../../lib/constants";
 import styles from "../../lib/styles";
+import SkillComponent from "../components/SkillComponent";
+import { Skill } from "../../lib/types";
 
 const DOCUMENT_TITLE = 'About | Ethan McIntyre';
 const MAX_CONTAINER_WIDTH = '1000px';
@@ -55,7 +57,7 @@ export default function AboutScreen() {
                     width: '100%',
                     maxWidth: MAX_CONTAINER_WIDTH,
                     justifyContent: 'space-around',
-                    gap: IMAGE_GAP, 
+                    gap: IMAGE_GAP,
                     boxSizing: 'border-box',
                     padding: constants.POST_TEXT_PADDING,
                 }}>
@@ -81,14 +83,34 @@ export default function AboutScreen() {
                 <Text dangerouslySetInnerHTML={{ __html: constants.ABOUT }} style={{
                     ...styles.reset,
                     fontSize: constants.TEXT_FONT_SIZE,
-                    color: styles.colors.offWhite,
+                    color: 'black',
                     lineHeight: constants.TEXT_LINE_HEIGHT,
                     fontWeight: 'normal',
                     maxWidth: MAX_CONTAINER_WIDTH,
                     boxSizing: 'border-box',
-                    padding:  constants.POST_TEXT_PADDING,
-                    paddingTop: '0px',
+                    padding: constants.POST_TEXT_PADDING,
+                    backgroundColor: 'white',
+                    borderRadius: constants.BORDER_RADIUS,
+                    textAlign: 'center',
+                    paddingTop: '8px',
                 }} />
+            </View>
+
+            <View style={{
+                display: 'flex',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                width: '100%',
+                justifyContent: 'space-around',
+                boxSizing: 'border-box',
+                padding: constants.POST_TEXT_PADDING,
+            }}>
+                {constants.SKILLS.map((skill, index) => {
+                    const { name, photo, description } = skill as Skill;
+                    return (
+                        <SkillComponent key={index} name={name} photo={photo} description={description} />
+                    )
+                })}
             </View>
         </Page>
     );

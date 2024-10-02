@@ -46,7 +46,7 @@ const EMPTY_GLOBAL_STATE: GlobalReducer = {
 };
 
 const constants = {
-    NO_BACKDROP: ['AboutScreen'],
+    NO_BACKDROP: [''],
 
     FONT: 'Nunito',
 
@@ -141,30 +141,251 @@ const constants = {
         In my free time, I enjoy 
         <a href="https://jorelm68.github.io/#/post/Post-66bbd5e30058fb3a79573c75">skydiving</a>, 
         <a href="https://jorelm68.github.io/#/post/Post-66bbd12a0058fb3a79573c47">ballroom dancing</a>, and 
-        playing guitar.
-        <br />
-        <br />
-        <strong>Skills:</strong>
-        <br />
-        <ul>
-        <li>MERN Stack</li>
-        <li>React</li>
-        <li>React Native</li>
-        <li>JavaScript</li>
-        <li>TypeScript</li>
-        <li>Node.js</li>
-        <li>Express.js</li>
-        <li>MongoDB</li>
-        <li>Amazon S3</li>
-        <li>Next.js</li>
-        <li>Firebase</li>
-        <li>C++</li>
-        <li>C</li>
-        <li>Python</li>
-        <li>Java</li>
-        <li>ARM Assembly</li>
-        </ul>`
-    )
+        playing guitar.`
+    ),
+
+    SKILLS: [
+        {
+            name: 'React',
+            photo: 'https://static-00.iconduck.com/assets.00/react-original-wordmark-icon-840x1024-vhmauxp6.png',
+            description: 'JavaScript library for building user interfaces.',
+        },
+        {
+            name: 'React Native',
+            photo: 'https://devtop.io/wp-content/uploads/2022/10/react-native-1.png',
+            description: 'JavaScript framework for building mobile applications.',
+        },
+        {
+            name: 'Node.js',
+            photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Node.js_logo_2015.svg/2560px-Node.js_logo_2015.svg.png',
+            description: 'JavaScript runtime built on Chrome V8 engine.',
+        },
+        {
+            name: 'Express.js',
+            photo: 'https://images.credly.com/images/1c2c86e1-16ce-4e4d-a425-d1ac96bb026d/express.png',
+            description: 'Fast, unopinionated, minimalist web framework for Node.js.',
+        },
+        {
+            name: 'MongoDB',
+            photo: 'https://i0.wp.com/ahex.co/wp-content/uploads/2022/06/mongodb-logo.png?fit=413%2C484&ssl=1',
+            description: 'Document-oriented NoSQL database program.',
+        },
+        {
+            name: 'Firebase',
+            photo: 'https://cdn.iconscout.com/icon/free/png-256/free-firebase-1-282796.png?f=webp&w=256',
+            description: 'Platform developed by Google for creating mobile and web applications.',
+        },
+        {
+            name: 'C++',
+            photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1822px-ISO_C%2B%2B_Logo.svg.png',
+            description: 'General-purpose programming language.',
+        },
+        {
+            name: 'C',
+            photo: 'https://upload.wikimedia.org/wikipedia/commons/1/19/C_Logo.png',
+            description: 'General-purpose programming language.',
+        },
+        {
+            name: 'Python',
+            photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1869px-Python-logo-notext.svg.png',
+            description: 'High-level programming language.',
+        },
+        {
+            name: 'Java',
+            photo: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/1200px-Java_programming_language_logo.svg.png',
+            description: 'Object-oriented programming language.',
+        },
+        {
+            name: 'ARM Assembly',
+            photo: 'https://assets.labs.ine.com/web/badges/low/arm-assembly.png',
+            description: 'Low-level programming language.',
+        },
+        {
+            name: 'Flask',
+            photo: 'https://cdn.icon-icons.com/icons2/2389/PNG/512/flask_logo_icon_145276.png',
+            description: 'Micro web framework written in Python.',
+        },
+        {
+            name: 'React PDF',
+            photo: 'https://react-pdf.org/images/logo.png',
+            description: 'React library for creating PDF files.',
+        },
+        {
+            name: 'React Beautiful DnD',
+            photo: 'https://user-images.githubusercontent.com/2182637/53611918-54c1ff80-3c24-11e9-9917-66ac3cef513d.png',
+            description: 'React library for drag and drop functionality.',
+        },
+        {
+            name: 'Sharp',
+            photo: 'https://cdn.jsdelivr.net/gh/lovell/sharp@main/docs/image/sharp-logo-600.png',
+            description: 'High performance Node.js image processing module.',
+        },
+        {
+            name: 'Mongoose',
+            photo: 'https://media.licdn.com/dms/image/D4D12AQEk8opKsyHhRQ/article-cover_image-shrink_720_1280/0/1693917399837?e=2147483647&v=beta&t=6LPN-E9p8k_59NMv17edpwj8ofRzcXd_vlmlFoc1fLw',
+            description: 'Elegant MongoDB object modeling for Node.js.',
+        },
+        {
+            name: 'Axios',
+            photo: 'https://user-images.githubusercontent.com/8939680/57233884-20344080-6fe5-11e9-8df3-0df1282e1574.png',
+            description: 'Promise based HTTP client for the browser and Node.js.',
+        },
+        {
+            name: 'React Redux',
+            photo: 'https://raw.githubusercontent.com/reduxjs/redux/master/logo/logo.png',
+            description: 'Predictable state container for JavaScript apps.',
+        },
+        {
+            name: 'React Router',
+            photo: 'https://static-00.iconduck.com/assets.00/react-router-icon-2048x1116-jfeevj0l.png',
+            description: 'Declarative routing for React.',
+        },
+        {
+            name: 'React Context',
+            photo: 'https://miro.medium.com/v2/resize:fit:1400/1*hNRK_zr3qrTORJXD3pwuZA.png',
+            description: 'React library for managing global state.',
+        },
+        {
+            name: 'HTML',
+            photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/512px-HTML5_logo_and_wordmark.svg.png',
+            description: 'Standard markup language for documents designed to be displayed in a web browser.',
+        },
+        {
+            name: 'CSS',
+            photo: 'https://1000logos.net/wp-content/uploads/2020/09/CSS-Logo.png',
+            description: 'Style sheet language used for describing the presentation of a document written in a markup language.',
+        },
+        {
+            name: 'Figma',
+            photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Figma-logo.svg/1667px-Figma-logo.svg.png',
+            description: 'Vector graphics editor and prototyping tool.',
+        },
+        {
+            name: 'JavaScript',
+            photo: 'https://i.pinimg.com/originals/13/40/7c/13407c12f50f08d328800c3caef43f61.png',
+            description: 'High-level, interpreted programming language.',
+        },
+        {
+            name: 'TypeScript',
+            photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/2048px-Typescript_logo_2020.svg.png',
+            description: 'Strict syntactical superset of JavaScript.',
+        },
+        {
+            name: 'Heroku',
+            photo: 'https://cdn.icon-icons.com/icons2/2699/PNG/512/heroku_logo_icon_168126.png',
+            description: 'Cloud platform as a service supporting several programming languages.',
+        },
+        {
+            name: 'Git',
+            photo: 'https://static-00.iconduck.com/assets.00/git-icon-2048x2048-juzdf1l5.png',
+            description: 'Distributed version control system.'
+        },
+        {
+            name: 'GitHub',
+            photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/600px-Octicons-mark-github.svg.png',
+            description: 'Web-based version control system.'
+        },
+        {
+            name: 'Vercel',
+            photo: 'https://cdn.worldvectorlogo.com/logos/vercel.svg',
+            description: 'Cloud platform for static sites and serverless functions.',
+        },
+        {
+            name: 'Expo Router',
+            photo: 'https://expo.github.io/router/img/logo.light.svg',
+            description: 'React Native framework for defining navigation in mobile applications.',
+        },
+        {
+            name: 'EAS',
+            photo: 'https://cdn.icon-icons.com/icons2/2389/PNG/512/expo_logo_icon_145293.png',
+            description: 'React Native framework for building and deploying mobile applications to Android and iOS.',
+        },
+        {
+            name: 'Firestore Database',
+            photo: 'https://lh3.googleusercontent.com/DeQhTyR14i47oAgzoOSJZbSpPRwjfpAW5NuXkDq4vxqXvRUhq4kZ6KJ-P4PqURTpqMCmBvdhJkjALL32XSWq=w240-h240',
+            description: 'Cloud-hosted NoSQL database.',
+        },
+        {
+            name: 'Firebase Security Rules',
+            photo: 'https://seeklogo.com/images/F/firestore-logo-3828671CC5-seeklogo.com.png',
+            description: 'Firebase service that allows for the creation of security rules to protect data in Firestore.',
+        },
+        {
+            name: 'Firebase Authentication',
+            photo: 'https://jorelm68-1dc8eff04a80.herokuapp.com/api/portfolio/photo/readPhoto/Photo-66babfbf0058fb3a795736cf/1080',
+            description: 'Firebase service that can authenticate users using only client-side code.',
+        },
+        {
+            name: 'Firebase Storage',
+            photo: 'https://firebase.google.com/static/images/products/icons/build_storage.svg',
+            description: 'Firebase service that supports uploading and downloading user-generated content.',
+        },
+        {
+            name: 'Stripe',
+            photo: 'https://cdn.dribbble.com/users/920/screenshots/3031540/untitled-3.gif',
+            description: 'Online payment processing for internet businesses.',
+        },
+        {
+            name: 'Express Validator',
+            photo: 'https://images.opencollective.com/express-validator/36a8af1/logo/256.png',
+            description: 'Express middleware for input validation.',
+        },
+        {
+            name: 'Amazon S3',
+            photo: 'https://miro.medium.com/v2/resize:fit:401/1*ThIofZs6uOtgMsiMP2rWGg.png',
+            description: 'Scalable object storage service.',
+        },
+        {
+            name: 'Bootstrap',
+            photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Bootstrap_logo.svg/1280px-Bootstrap_logo.svg.png',
+            description: 'CSS framework for developing responsive and mobile-first websites.',
+        },
+        {
+            name: 'EJS',
+            photo: 'https://www.svgrepo.com/show/373574/ejs.svg',
+            description: 'Embedded JavaScript templating.',
+        },
+        {
+            name: 'Nodemailer',
+            photo: 'https://i0.wp.com/community.nodemailer.com/wp-content/uploads/2015/10/n2-2.png?fit=422%2C360&ssl=1',
+            description: 'Module for Node.js applications to allow easy email sending.',
+        },
+        {
+            name: 'Bcrypt',
+            photo: 'https://cdn.prod.website-files.com/633ecd318496f5ccb3678555/633ecd318496f56a9c67872f_Copy%20of%20Copy%20of%20Untitled%20(5).svg',
+            description: 'Password hashing function.',
+        },
+        {
+            name: 'Expo Notifications',
+            photo: 'https://cdn.icon-icons.com/icons2/2389/PNG/512/expo_logo_icon_145293.png',
+            description: 'React Native framework for sending push notifications.',
+        },
+        {
+            name: 'Framer Motion',
+            photo: 'https://www.ejable.com/wp-content/uploads/2022/04/Framer-Motion.webp',
+            description: 'React library for creating animations.',
+        },
+        {
+            name: 'Next.js',
+            photo: 'https://cdn.worldvectorlogo.com/logos/next-js.svg',
+            description: 'React framework for building server-side rendered applications.',
+        },
+        {
+            name: 'TestFlight',
+            photo: 'https://cdn.jim-nielsen.com/macos/512/testflight-2023-05-19.png?rf=1024',
+            description: 'Beta testing service for iOS applications.',
+        },
+        {
+            name: 'Google Play Console',
+            photo: 'https://developer.android.com/static/distribute/console/images/play-console-blue.png',
+            description: 'Developer console for publishing Android applications.',
+        },
+        {
+            name: 'Mapbox',
+            photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Mapbox_logo_2019.svg/1200px-Mapbox_logo_2019.svg.png',
+            description: 'Location data platform for mobile and web applications.',
+        }
+    ]
 };
 
 // <a href="https://jorelm68.github.io/#/post/Post-66bbd69f0058fb3a79573c78">playing guitar</a>.

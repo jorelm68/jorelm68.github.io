@@ -14,6 +14,12 @@ export type Blank = {
     createdAt: Date,
 }
 
+export type Skill = {
+    name: string,
+    photo: string,
+    description: string,
+}
+
 export type Post = {
     _id: string,
     
