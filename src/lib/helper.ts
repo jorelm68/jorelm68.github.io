@@ -31,7 +31,7 @@ const handlePexels = async (query: string, numResults: number = 10): Promise<Rec
     try {
         const response = await axios.get(endpoint, {
             headers: {
-                Authorization: constants.PEXELS_API_KEY,
+                Authorization: process.env.PEXELS_API_KEY,
             },
         });
 
