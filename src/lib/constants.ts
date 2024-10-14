@@ -105,7 +105,7 @@ const constants = {
     Z_FRONT: 1,
     Z_FAR_FRONT: 2,
 
-    RESUME_NAME: 'Ethan McIntyre.pdf',
+    RESUME_NAME: 'McIntyre_Ethan_Resume.pdf',
     GITHUB_LINK: 'https://www.github.com/jorelm68',
     LINKEDIN_LINK: 'https://www.linkedin.com/in/ethan-mcintyre68',
 
