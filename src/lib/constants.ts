@@ -156,7 +156,7 @@ const constants = {
     PHOTOS_ROUTE: '../assets/photos',
     FILES_ROUTE: '../assets/files',
 
-    SERVER_URL: 'https://jorelm68-1dc8eff04a80.herokuapp.com',
+    SERVER_URL: 'https://backend-steel-one-99.vercel.app',
 
     LOCAL_URL: `http://${NUMBERS}:${PORT}`,
 
