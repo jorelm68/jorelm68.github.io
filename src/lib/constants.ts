@@ -142,7 +142,7 @@ const constants = {
     BUTTON_PADDING: '10px 20px',
     TEXT_INPUT_PADDING: 10,
 
-    PHOTO_ENDPOINT: 'https://jorelm68-1dc8eff04a80.herokuapp.com/api/photo/readPhoto/',
+    PHOTO_ENDPOINT: 'https://backend-steel-one-99.vercel.app/api/photo/readPhoto/',
     YOUTUBE_ENDPOINT: 'https://www.youtube.com/embed/',
 
     POST_GAP: 16,
@@ -360,7 +360,7 @@ const constants = {
         },
         {
             name: 'Firebase Authentication',
-            photo: 'https://jorelm68-1dc8eff04a80.herokuapp.com/api/portfolio/photo/readPhoto/Photo-66babfbf0058fb3a795736cf/1080',
+            photo: 'https://backend-steel-one-99.vercel.app/api/portfolio/photo/readPhoto/Photo-66babfbf0058fb3a795736cf/1080',
             description: 'Firebase service that can authenticate users using only client-side code.',
         },
         {
