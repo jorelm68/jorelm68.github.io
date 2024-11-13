@@ -34,8 +34,6 @@ const LinkWrapper = ({ link, children }: LinkWrapperProps) => {
         }
     }    
 
-    console.log(sanitizedLink)
-
     return sanitizedLink ? (
         <Link to={sanitizedLink} style={{
             ...styles.reset,
