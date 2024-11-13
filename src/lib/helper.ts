@@ -57,21 +57,22 @@ const formatDateRange = (start: string, end: string): string => {
     const startDate = new Date(start);
     const endDate = new Date(end);
 
-    const startMonth = startDate.toLocaleString('en-US', { month: 'short' });
-    const startDay = startDate.getDate();
-    const startYear = startDate.getFullYear();
+    // Format the date range like "Jan 2021 - Jan 2021"
 
-    const endMonth = endDate.toLocaleString('en-US', { month: 'short' });
-    const endDay = endDate.getDate();
-    const endYear = endDate.getFullYear();
-
-    const startDayWithSuffix = `${startDay}${getOrdinalSuffix(startDay)}`;
-
-    return `${startMonth} ${startDayWithSuffix}, ${startYear} - ${endMonth} ${endDay}, ${endYear}`;
+    // Use the formatDate helper function
+    return `${formatDate(start)} - ${formatDate(end)}`;
 };
+
+const formatDate = (date: string): string => {
+    const newDate = new Date(date);
+
+    // Format the date like "Jan 2021"
+    return newDate.toLocaleString('en-US', { month: 'short' }) + ' ' + newDate.getFullYear();
+}
 
 export default {
     handlePhoto,
     handlePexels,
     formatDateRange,
+    formatDate,
 }

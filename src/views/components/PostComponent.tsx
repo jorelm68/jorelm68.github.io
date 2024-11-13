@@ -5,6 +5,7 @@ import Text from "./Text";
 import { useAppSelector } from "../../redux/hooks";
 import constants from "../../lib/constants";
 import styles from "../../lib/styles";
+import helper from "../../lib/helper";
 
 interface PostComponentProps {
     color: string,
@@ -13,6 +14,8 @@ interface PostComponentProps {
     name: string,
     description: string,
     link?: string,
+    start?: string,
+    end?: string,
 }
 
 interface LinkWrapperProps {
@@ -36,8 +39,21 @@ const LinkWrapper = ({ link, children }: LinkWrapperProps) => {
     )
 }
 
-const PostComponent = ({ color, link, backgroundColor, url, name, description }: PostComponentProps) => {
+const PostComponent = ({ color, link, backgroundColor, url, name, description, start, end }: PostComponentProps) => {
     const { width } = useAppSelector(state => state.global);
+
+    let dateDisplay = undefined;
+    if (start && end) {
+        if (helper.formatDate(start) == helper.formatDate(end)) {
+            dateDisplay = helper.formatDate(start);
+        }
+        else {
+            dateDisplay = helper.formatDateRange(start, end);
+        }
+    }
+    if (start && !end) {
+        dateDisplay = `${helper.formatDate(start)} - Present`;
+    }
 
     return (
         <LinkWrapper link={link}>
@@ -104,10 +120,24 @@ const PostComponent = ({ color, link, backgroundColor, url, name, description }:
                                 overflow: 'hidden',
                                 textOverflow: 'ellipsis',
                                 textAlign: 'center',
+                                textDecoration: link ? 'underline' : 'none',
                                 color: color ? color : constants.EMPTY_POST.color,
                             }}
                         >
                             {name}
+                        </Text>
+                    )}
+
+                    {(start || end) && (
+                        <Text
+                            style={{
+                                fontSize: constants.DATE_FONT_SIZE,
+                                fontStyle: 'italic',
+                                color: color ? color : constants.EMPTY_POST.color,
+                                textAlign: 'center',
+                            }}
+                        >
+                            {dateDisplay}
                         </Text>
                     )}
 

@@ -195,8 +195,6 @@ export default function EditPostScreen(): JSX.Element {
         updateFormData('captions', newCaptions);
     };
 
-    console.log(formData);
-
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setLoading(true);

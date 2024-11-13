@@ -7,6 +7,7 @@ import { Res } from "../../lib/types";
 import PostComponent from "../components/PostComponent";
 import constants from "../../lib/constants";
 import { usePost } from "../../lib/hooks";
+import PostWrapper from "../components/PostWrapper";
 
 const FULL_WIDTH = '90%';
 
@@ -43,25 +44,5 @@ export default function WorkScreen() {
                 return <PostWrapper key={index} post={post} />
             })}
         </Page>
-    )
-}
-
-interface PostWrapperProps {
-    post: string;
-}
-
-const PostWrapper = ({ post }: PostWrapperProps) => {
-    const { name, description, urls, link, color, backgroundColor } = usePost(post);
-    const url = urls[0];
-
-    return (
-        <PostComponent
-            color={color}
-            backgroundColor={backgroundColor}
-            url={url}
-            name={name}
-            description={description}
-            link={link}
-        />
     )
 }

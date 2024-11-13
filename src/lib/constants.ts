@@ -86,6 +86,7 @@ const constants = {
     HEADER_FONT_SIZE: 'clamp(24px, 6vw, 72px)',
     TITLE_FONT_SIZE: '1.5em',
     TEXT_FONT_SIZE: 'clamp(1rem, 2.5vw, 1.2rem)',
+    DATE_FONT_SIZE: 'clamp(0.8rem, 2vw, 1rem)',
     NAVBAR_FONT_SIZE: 12,
 
     SMALL_BORDER_RADIUS: 5,
