@@ -138,8 +138,10 @@ export default function PostScreen() {
                         const parts = caption.split(' ~ ');
                         const name = parts[0];
                         const description = parts[1];
+                        const link = parts[2];
                         return (
                             <PostComponent
+                                link = {link}
                                 key={index}
                                 url={url}
                                 name={name}
