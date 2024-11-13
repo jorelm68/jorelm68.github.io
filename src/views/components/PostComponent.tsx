@@ -24,7 +24,17 @@ interface LinkWrapperProps {
 }
 
 const LinkWrapper = ({ link, children }: LinkWrapperProps) => {
-    const sanitizedLink: string | undefined = link?.replace(/^#/, '');
+    let sanitizedLink = link;
+    if (link && link.includes('Post-')) {
+        // Use the relative path from the root, get rid of the domain
+        // Split at /#
+        const splitLink = link.split('/#');
+        if (splitLink.length > 1) {
+            sanitizedLink = splitLink[1];
+        }
+    }    
+
+    console.log(sanitizedLink)
 
     return sanitizedLink ? (
         <Link to={sanitizedLink} style={{
