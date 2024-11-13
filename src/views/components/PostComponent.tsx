@@ -24,8 +24,10 @@ interface LinkWrapperProps {
 }
 
 const LinkWrapper = ({ link, children }: LinkWrapperProps) => {
-    return link ? (
-        <Link to={link} style={{
+    const sanitizedLink: string | undefined = link?.replace(/^#/, '');
+
+    return sanitizedLink ? (
+        <Link to={sanitizedLink} style={{
             ...styles.reset,
             display: 'flex',
             width: '100%',
