@@ -1,6 +1,6 @@
 import { Blank, GlobalReducer, Post, Res } from "./types";
 
-const AUTOMATIC_AUTH = true;
+const AUTOMATIC_AUTH = false;
 const NUMBERS = '10.0.0.82';
 const PORT = 4000;
 
