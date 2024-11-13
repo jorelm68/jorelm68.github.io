@@ -16,6 +16,7 @@ import MyNameComponent from './views/components/MyNameComponent';
 import Me2Component from './views/components/Me2Component';
 import BusinessCardComponent from './views/components/BusinessCardComponent';
 import WorkScreen from './views/screens/WorkScreen';
+import ClassScreen from './views/screens/ClassScreen';
 import ScrapScreen from './views/screens/Scrap';
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
           <Route path="/about" element={<AboutScreen />} />
           <Route path="/contact" element={<ContactScreen />} />
           <Route path="/work" element={<WorkScreen />} />
+          <Route path="/class" element={<ClassScreen />} />
           <Route path="/post/:post" element={<PostScreen />} />
           <Route path='/scrap' element={<ScrapScreen />} />
  

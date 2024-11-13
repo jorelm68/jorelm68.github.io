@@ -97,6 +97,15 @@ const NavbarComponent = () => {
                 </Link>
 
                 <Link
+                    to="/class"
+                    style={linkStyle(screen === 'ClassScreen')}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
+                    CLASS
+                </Link>
+                
+                <Link
                     to="/about"
                     style={linkStyle(screen === 'AboutScreen')}
                     onMouseEnter={handleMouseEnter}
