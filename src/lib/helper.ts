@@ -54,9 +54,6 @@ const getOrdinalSuffix = (day: number): string => {
 };
 
 const formatDateRange = (start: string, end: string): string => {
-    const startDate = new Date(start);
-    const endDate = new Date(end);
-
     // Format the date range like "Jan 2021 - Jan 2021"
 
     // Use the formatDate helper function
