@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from 'next/font/local';
 import "./globals.css";
+import { NAME } from "@/lib/constants";
 
 const myFont = localFont({
   src: './fonts/Noto-Regular.ttf',
@@ -8,7 +9,7 @@ const myFont = localFont({
 });
 
 export const metadata = {
-  title: 'My Next.js App',
+  title: NAME,
   description: 'App with a custom local font',
 };
 
