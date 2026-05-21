@@ -1,7 +1,9 @@
 // app/page.tsx
 import Backdrop from '@/components/Backdrop';
 import NameBanner from '@/components/NameBanner';
-import AboutMeBanner from '@/components/AboutMeBanner'; 
+import AboutMeBanner from '@/components/AboutMeBanner';
+// 1. Import the new client component
+import ScrollIndicator from '@/components/ScrollIndicator';
 
 export default function HomePage() {
   return (
@@ -13,13 +15,11 @@ export default function HomePage() {
       <section className="relative w-full h-screen">
         <NameBanner />
         
-        {/* Optional arrow indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 text-sm animate-pulse">
-          Scroll Down ↓
-        </div>
+        {/* 2. Drop in the new fading indicator */}
+        <ScrollIndicator />
       </section>
 
-      {/* 2. SECTION 2: Now using our custom AboutMeBanner component */}
+      {/* SECTION 2: Now using our custom AboutMeBanner component */}
       {/* WRAPPED IN A SOFTER GRADIENT: Reduced via to 20% and end to 40% */}
       <div className="relative w-full bg-gradient-to-b from-transparent via-black/20 to-black/40">
         <AboutMeBanner />
