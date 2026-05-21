@@ -6,7 +6,7 @@ import { BACKGROUND_IMAGES } from "@/lib/constants";
 
 const PHOTO_INTERVAL = 12000; 
 const FADE_DURATION = 2; 
-const TINT_OPACITY = 0.4; 
+const TINT_OPACITY = 0.4; // Base darkness level when sitting still at the top
 
 export default function Backdrop() {
   const [index, setIndex] = useState<number | null>(null);
@@ -14,9 +14,16 @@ export default function Backdrop() {
   // 1. Grab the scroll progress of the page (0 = top, 1 = end of page)
   const { scrollYProgress } = useScroll();
 
-  // 2. Map the scroll progress to a blur string.
-  // When scroll is 0 (top), blur is 0px. By the time they scroll 80% down (0.8), it hits full blur.
-  const backdropBlur = useTransform(scrollYProgress, [0, 0.4], ["blur(0px)", "blur(3px)"]);
+  // 2. Map the scroll progress to our gentle blur setting
+  const backdropBlur = useTransform(scrollYProgress, [0, 0.4], ["blur(0px)", "blur(4px)"]);
+
+  // 3. Map the scroll progress to an extra dark overlay layer
+  // Starts completely clear (black with 0% opacity) and darkens to black with 40% opacity
+  const dynamicDarkness = useTransform(
+    scrollYProgress, 
+    [0, 0.4], 
+    ["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.4)"]
+  );
 
   useEffect(() => {
     const startingIndex = Math.floor(Math.random() * BACKGROUND_IMAGES.length);
@@ -60,11 +67,14 @@ export default function Backdrop() {
           )}
         </AnimatePresence>
 
-        {/* 3. THE DYNAMIC BLUR OVERLAY */}
-        {/* This layer sits perfectly on top of the image and updates its blur live via the GPU */}
+        {/* 4. THE COMBINED DYNAMIC OVERLAY */}
+        {/* We map both the backdropFilter and the backgroundColor style to our scroll transforms */}
         <motion.div 
-          style={{ backdropFilter: backdropBlur }}
-          className="absolute inset-0 w-full h-full transition-colors duration-300"
+          style={{ 
+            backdropFilter: backdropBlur,
+            backgroundColor: dynamicDarkness
+          }}
+          className="absolute inset-0 w-full h-full"
         />
       </div>
     </>
