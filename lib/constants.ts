@@ -2,6 +2,7 @@ export const NAME = "Ethan McIntyre";
 export const EMAIL = "methan@umich.edu";
 export const LINKEDIN = "https://www.linkedin.com/in/ethan-mcintyre68/";
 export const GITHUB = "https://github.com/jorelm68";
+export const DNEP = "https://detroitsmallbusiness.umich.edu/";
 
 export const BACKGROUND_IMAGES = [
     '/generic1.jpg',

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import { Mail } from "lucide-react";
-import { EMAIL, GITHUB, LINKEDIN } from "@/lib/constants";
+import { EMAIL, GITHUB, LINKEDIN, DNEP } from "@/lib/constants";
 
 // --- ANIMATION CONFIGURATIONS ---
 
@@ -201,16 +201,13 @@ export default function AboutMeBanner() {
             className="flex-1 text-sm md:text-base text-neutral-800 leading-relaxed space-y-4"
           >
             <motion.p variants={textItemVariants}>
-              <strong className="text-neutral-900 font-semibold">Ethan McIntyre</strong> is a software 
-              engineer and consultant for modern web projects. His technical interests focus heavily 
-              on cloud-native architectures, performance optimization, and crafting fluid, intuitive 
-              user interfaces.
+              I am a University of Michigan Computer Science graduate pursuing a Master’s in Accounting at the Ross School of Business (expected May 2027). 
+              I work as a Data Analyst for the <a href={DNEP} target="_blank" rel="noreferrer" className="text-blue-500 hover:text-blue-700 underline">Detroit Neighborhood Entrepreneurs Project (DNEP)</a>, where I build data pipelines and dashboards to support Detroit's small businesses.
             </motion.p>
+            
             <motion.p variants={textItemVariants}>
-              His engineering ethos combines technical precision with scalable system architectures, 
-              consistently using modern paradigms like Next.js, React, and GPU-accelerated motion systems. 
-              When away from his editor, Ethan is working to explore creative technological intersections 
-              and optimizing digital workflows.
+              I have a technical background in full-stack development and ETL/data engineering, backed by an official Airtable certification and experience in Python, SQL, JavaScript, and C++. 
+              Outside of work, I enjoy ballroom dancing and playing guitar.
             </motion.p>
           </motion.div>
 
