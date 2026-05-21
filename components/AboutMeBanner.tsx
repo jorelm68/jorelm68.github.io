@@ -134,7 +134,7 @@ export default function AboutMeBanner() {
                 <Mail size={18} />
                 
                 <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-neutral-800 text-white text-xs font-medium rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-lg">
-                  {copied ? "Copied!" : `Email: ${EMAIL} (copy to clipboard)`}
+                  {copied ? "Copied!" : `${EMAIL} (click to copy)`}
                   <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-neutral-800" />
                 </div>
               </button>
