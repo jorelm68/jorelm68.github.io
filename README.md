@@ -1,4 +1,4 @@
-# Jorel M. 
+# Ethan McIntyre
 
 **Live Portfolio:** [jorelm68.github.io](https://jorelm68.github.io)
 
