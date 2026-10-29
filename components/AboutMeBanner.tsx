@@ -188,7 +188,7 @@ export default function AboutMeBanner() {
             className="w-full max-w-[180px] sm:max-w-[200px] md:max-w-[220px] aspect-[4/3] md:aspect-square flex-shrink-0 overflow-hidden rounded-md border border-neutral-200 shadow-sm bg-neutral-100 origin-left"
           >
             <Image 
-              src="/headshot.png" 
+              src="/headshot.jpg" 
               alt="Ethan McIntyre"
               width={300}
               height={300}
