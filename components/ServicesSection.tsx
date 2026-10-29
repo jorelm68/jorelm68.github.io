@@ -19,7 +19,7 @@ export default function ServicesSection() {
         className="max-w-4xl w-full bg-white rounded-xl p-6 md:p-8 shadow-xl shadow-black/20 flex flex-col gap-4"
       >
         <h2 className="text-3xl md:text-4xl font-semibold text-neutral-900 tracking-tight border-b border-neutral-100 pb-4">
-          Services
+          Consulting Services
         </h2>
         <p className="text-sm md:text-base text-neutral-800 leading-relaxed">
           I am happy to help work on a website project or a web-based software / tool for your small business.

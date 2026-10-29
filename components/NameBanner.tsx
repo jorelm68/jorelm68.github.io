@@ -36,19 +36,34 @@ export default function NameBanner() {
           </motion.p>
         </div>
 
-        {/* Bottom Line: CONSULTANT */}
+        {/* Bottom Lines: services */}
         <div className="w-full border-b border-white/20 py-2 overflow-hidden">
           <motion.p
             initial={{ x: "20%", opacity: 0 }}
             animate={{ x: "0%", opacity: 1 }}
             transition={{
               duration: 0.8,
-              delay: BASE_DELAY + 0.15, // Waits 1.15 seconds to maintain the stagger effect
+              delay: BASE_DELAY + 0.15,
               ease: "backOut",
             }}
-            className="m-0 text-3xl sm:text-5xl md:text-6xl font-bold text-white/80 text-center whitespace-nowrap tracking-widest"
+            className="m-0 text-base sm:text-3xl md:text-4xl font-bold text-white/80 text-center whitespace-nowrap tracking-wider"
           >
-            CONSULTANT
+            BOOKKEEPING &amp; ACCOUNTING
+          </motion.p>
+        </div>
+
+        <div className="w-full border-b border-white/20 py-2 overflow-hidden">
+          <motion.p
+            initial={{ x: "-20%", opacity: 0 }}
+            animate={{ x: "0%", opacity: 1 }}
+            transition={{
+              duration: 0.8,
+              delay: BASE_DELAY + 0.3,
+              ease: "backOut",
+            }}
+            className="m-0 text-base sm:text-3xl md:text-4xl font-bold text-white/80 text-center whitespace-nowrap tracking-wider"
+          >
+            TECHNOLOGY &amp; OPERATIONS
           </motion.p>
         </div>
 
