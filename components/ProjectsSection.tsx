@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { PROJECTS } from "@/lib/constants";
 
@@ -34,8 +35,16 @@ export default function ProjectsSection() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.8, delay: i * 0.1, ease: fancyEase }}
-              className="group bg-white rounded-xl p-6 shadow-xl shadow-black/20 flex flex-col gap-3 hover:-translate-y-1 transition-transform"
+              className="group bg-white rounded-xl overflow-hidden shadow-xl shadow-black/20 flex flex-col hover:-translate-y-1 transition-transform"
             >
+              <Image
+                src={project.image}
+                alt={`${project.name} preview`}
+                width={1200}
+                height={630}
+                className="w-full aspect-[1200/630] object-cover border-b border-neutral-100"
+              />
+              <div className="p-6 flex flex-col gap-3 flex-1">
               <div className="flex items-center justify-between">
                 <h3 className="text-xl font-semibold text-neutral-900 tracking-tight">
                   {project.name}
@@ -51,6 +60,7 @@ export default function ProjectsSection() {
               <span className="text-xs text-neutral-500 mt-auto">
                 {project.url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")}
               </span>
+              </div>
             </motion.a>
           ))}
         </div>

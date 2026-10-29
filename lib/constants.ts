@@ -96,21 +96,25 @@ export const PROJECTS = [
     {
         name: "Tax Conversion Planner",
         url: "https://tax-conversion-planner.vercel.app/",
+        image: "/projects/tax.png",
         description: "Finds the Traditional-to-Roth IRA conversion schedule that maximizes after-tax wealth. Runs entirely in the browser.",
     },
     {
         name: "Parline",
         url: "https://www.parline.app/",
+        image: "/projects/parline.png",
         description: "Real double-entry books and financial statements for small business owners, keeping business and personal finances apart.",
     },
     {
         name: "Baker’s Acres",
         url: "https://www.bakersacresdexter.com/",
+        image: "/projects/bakers.jpg",
         description: "A website for a farm just outside Dexter, Michigan, where customers order fresh produce and eggs delivered to their door.",
     },
     {
         name: "DNEP Detroit",
         url: "https://dnep-detroit.vercel.app/",
+        image: "/projects/dnep.png",
         description: "A site for the Detroit Neighborhood Entrepreneurs Project, offering free accounting and tech consulting to Detroit small businesses.",
     },
 ];
