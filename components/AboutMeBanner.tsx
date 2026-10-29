@@ -202,11 +202,7 @@ export default function AboutMeBanner() {
           >
             <motion.p variants={textItemVariants}>
               I am a University of Michigan Computer Science graduate pursuing a Master’s in Accounting at the Ross School of Business (expected May 2027). 
-              I work as a Data Analyst for the <a href={DNEP} target="_blank" rel="noreferrer" className="text-blue-500 hover:text-blue-700 underline">Detroit Neighborhood Entrepreneurs Project (DNEP)</a>, where I build data pipelines and dashboards to support Detroit's small businesses.
-            </motion.p>
-            
-            <motion.p variants={textItemVariants}>
-              I have a technical background in full-stack development and ETL/data engineering, backed by an official Airtable certification and experience in Python, SQL, JavaScript, and C++. 
+              I work as a Data Analyst for the <a href={DNEP} target="_blank" rel="noreferrer" className="text-blue-500 hover:text-blue-700 underline">Detroit Neighborhood Entrepreneurs Project (DNEP)</a>, where I build data pipelines and dashboards to support Detroit's small businesses. 
               Outside of work, I enjoy ballroom dancing and playing guitar.
             </motion.p>
           </motion.div>
@@ -215,4 +211,4 @@ export default function AboutMeBanner() {
       </motion.div>
     </motion.section>
   );
-}
+}

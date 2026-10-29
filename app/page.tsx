@@ -2,6 +2,8 @@
 import Backdrop from '@/components/Backdrop';
 import NameBanner from '@/components/NameBanner';
 import AboutMeBanner from '@/components/AboutMeBanner';
+import ProjectsSection from '@/components/ProjectsSection';
+import ServicesSection from '@/components/ServicesSection';
 import ScrollIndicator from '@/components/ScrollIndicator';
 import BouncingBackground from '@/components/BouncingBackground';
 
@@ -27,15 +29,15 @@ export default function HomePage() {
         <AboutMeBanner />
       </div>
 
-      {/* SECTION 3: My Work */}
-      {/* <section className="relative w-full h-screen flex flex-col items-center justify-center text-white px-4 bg-black/40">
-        <div className="max-w-2xl text-center">
-          <h3 className="text-3xl font-bold mb-4">My Work</h3>
-          <p className="text-white/70 text-lg">
-            Another viewport section to expand your single-page portfolio layout.
-          </p>
-        </div>
-      </section> */}
+      {/* SECTION 3: Projects */}
+      <div className="relative w-full bg-black/40">
+        <ProjectsSection />
+      </div>
+
+      {/* SECTION 4: Services */}
+      <div className="relative w-full bg-gradient-to-b from-black/40 to-black/60">
+        <ServicesSection />
+      </div>
       
     </main>
   );

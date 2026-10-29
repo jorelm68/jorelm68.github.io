@@ -36,7 +36,7 @@ export default function NameBanner() {
           </motion.p>
         </div>
 
-        {/* Bottom Line: DEVELOPER */}
+        {/* Bottom Line: CONSULTANT */}
         <div className="w-full border-b border-white/20 py-2 overflow-hidden">
           <motion.p
             initial={{ x: "20%", opacity: 0 }}
@@ -48,11 +48,11 @@ export default function NameBanner() {
             }}
             className="m-0 text-3xl sm:text-5xl md:text-6xl font-bold text-white/80 text-center whitespace-nowrap tracking-widest"
           >
-            DEVELOPER
+            CONSULTANT
           </motion.p>
         </div>
 
       </motion.div>
     </div>
   );
-}
+}
