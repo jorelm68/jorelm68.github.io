@@ -20,26 +20,26 @@ export default function Backdrop() {
   );
 
   useEffect(() => {
-    // 1. SILENTLY PRELOAD AND DECODE ALL IMAGES
-    // This happens asynchronously in the background without blocking the UI
-    BACKGROUND_IMAGES.forEach((src) => {
+    // Only the current image and the next one are ever requested, so a visitor
+    // never downloads the whole library. The next image is fetched and decoded
+    // ahead of time so the crossfade never stalls on a network request.
+    const total = BACKGROUND_IMAGES.length;
+    const preload = (i: number) => {
       const img = new Image();
-      img.src = src;
-      // .decode() forces the browser to process the image into GPU memory
-      // avoiding the main-thread freeze when Framer Motion mounts it!
+      img.src = BACKGROUND_IMAGES[i];
       img.decode().catch(() => {
         // Silently ignore if an image fails to load/decode
       });
-    });
+    };
 
-    const startingIndex = Math.floor(Math.random() * BACKGROUND_IMAGES.length);
-    setIndex(startingIndex);
+    let current = Math.floor(Math.random() * total);
+    setIndex(current);
+    preload((current + 1) % total);
 
     const interval = setInterval(() => {
-      setIndex((prevIndex) => {
-        if (prevIndex === null) return startingIndex;
-        return (prevIndex + 1) % BACKGROUND_IMAGES.length;
-      });
+      current = (current + 1) % total;
+      setIndex(current);
+      preload((current + 1) % total);
     }, PHOTO_INTERVAL);
 
     return () => clearInterval(interval);
