@@ -117,4 +117,10 @@ export const PROJECTS = [
         image: "/projects/dnep.png",
         description: "A site for the Detroit Neighborhood Entrepreneurs Project, offering free accounting and tech consulting to Detroit small businesses.",
     },
+    {
+        name: "Outreach Community Services",
+        url: "https://community-outreach-services.jorelm68.workers.dev/",
+        image: "/projects/outreach.png",
+        description: "A website for a Detroit nonprofit offering door-to-door rides for seniors and people with disabilities, with service pricing and booking.",
+    },
 ];
