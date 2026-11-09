@@ -4,7 +4,7 @@ export const LINKEDIN = "https://www.linkedin.com/in/ethan-mcintyre68/";
 export const GITHUB = "https://github.com/jorelm68";
 export const DNEP = "https://detroitsmallbusiness.umich.edu/";
 export const WEBSITE = "https://jorelm68.github.io/";
-export const DESCRIPTION = "Specializing in Accounting, Airtable development, and small business consulting with the Detroit Neighborhood Entrepreneurs Project (DNEP).";
+export const DESCRIPTION = "Ethan McIntyre: accounting, bookkeeping, Airtable development and small business consulting with the Detroit Neighborhood Entrepreneurs Project (DNEP).";
 export const KEYWORDS = [
     `${NAME}`, 
     "Detroit Neighborhood Entrepreneurs Project", 
