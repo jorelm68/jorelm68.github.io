@@ -92,7 +92,16 @@ export const BACKGROUND_IMAGES = [
     '/generic71.jpg',
     
 ];
-export const PROJECTS = [
+export type Project = {
+    name: string;
+    url: string;
+    image: string;
+    description: string;
+    // "invite-only": the landing page is public, but sign-in is limited to invited emails.
+    access?: "invite-only";
+};
+
+export const PROJECTS: Project[] = [
     {
         name: "Tax Conversion Planner",
         url: "https://tax-conversion-planner.vercel.app/",
@@ -122,5 +131,12 @@ export const PROJECTS = [
         url: "https://community-outreach-services.jorelm68.workers.dev/",
         image: "/projects/outreach.png",
         description: "A website for a Detroit nonprofit offering door-to-door rides for seniors and people with disabilities, with service pricing and booking.",
+    },
+    {
+        name: "Strawberry Monster",
+        url: "https://strawberry-monster.vercel.app/",
+        image: "/projects/strawberry-monster.png",
+        description: "A stock research lab combining technical indicators, SEC financial statements, automatic Elliott Wave counts and a strategy backtester into a Claude-assisted Buy/Hold/Avoid verdict.",
+        access: "invite-only",
     },
 ];
