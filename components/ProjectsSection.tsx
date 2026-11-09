@@ -50,7 +50,7 @@ export default function ProjectsSection() {
                   className="w-full aspect-[1200/630] object-cover border-b border-neutral-100"
                 />
                 {locked && (
-                  <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-neutral-900/90 px-3 py-1 text-xs font-semibold text-amber-300 shadow-lg backdrop-blur">
+                  <span className="absolute bottom-0 right-4 translate-y-1/2 z-10 inline-flex items-center gap-1.5 rounded-full bg-neutral-900/90 px-3 py-1 text-xs font-semibold text-amber-300 shadow-lg backdrop-blur">
                     <Lock size={12} />
                     Invite only
                   </span>
