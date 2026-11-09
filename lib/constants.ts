@@ -139,4 +139,11 @@ export const PROJECTS: Project[] = [
         description: "A stock research lab combining technical indicators, SEC financial statements, automatic Elliott Wave counts and a strategy backtester into a Claude-assisted Buy/Hold/Avoid verdict.",
         access: "invite-only",
     },
+    {
+        name: "NONOZEMPIC",
+        url: "https://nonozempic.vercel.app/",
+        image: "/projects/nonozempic.png",
+        description: "A private calorie tracker for friends: a daily goal and 7-day chart, quick meal logging with optional AI-assisted calorie estimates, and a Claude connector for logging meals by chat. Prototype.",
+        access: "invite-only",
+    },
 ];
