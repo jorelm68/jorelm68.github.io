@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   
   title: {
-    default: `${NAME} | Portfolio`,
+    default: `${NAME} | Accounting, Airtable & Small Business Consultant`,
     template: `%s | ${NAME}`, 
   },
   
@@ -24,6 +24,8 @@ export const metadata: Metadata = {
   
   keywords: KEYWORDS,
   
+  alternates: { canonical: "/" },
+
   authors: [{ name: `${NAME}`, url: SITE_URL }],
   creator: `${NAME}`,
   
@@ -31,7 +33,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: SITE_URL,
-    title: `${NAME} | Portfolio`,
+    title: `${NAME} | Accounting, Airtable & Small Business Consultant`,
     description: DESCRIPTION,
     siteName: `${NAME} Portfolio`,
     images: [
@@ -46,7 +48,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: `${NAME} | Portfolio`,
+    title: `${NAME} | Accounting, Airtable & Small Business Consultant`,
     description: DESCRIPTION,
     images: ["/MACC_BANNER.png"],
   },

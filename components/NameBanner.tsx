@@ -22,7 +22,7 @@ export default function NameBanner() {
         
         {/* Top Line: ETHAN MCINTYRE */}
         <div className="w-full border-t border-b border-white/20 py-2 overflow-hidden">
-          <motion.p
+          <motion.h1
             initial={{ x: "-20%", opacity: 0 }}
             animate={{ x: "0%", opacity: 1 }}
             transition={{
@@ -33,7 +33,7 @@ export default function NameBanner() {
             className="m-0 text-4xl sm:text-6xl md:text-7xl font-bold text-white text-center whitespace-nowrap tracking-wider"
           >
             ETHAN MCINTYRE
-          </motion.p>
+          </motion.h1>
         </div>
 
         {/* Bottom Lines: services */}
