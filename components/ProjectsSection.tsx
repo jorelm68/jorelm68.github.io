@@ -11,20 +11,20 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="relative w-full min-h-screen flex flex-col items-center justify-center px-4 md:px-8 py-20"
+      className="relative w-full flex flex-col items-center justify-center px-4 md:px-8 py-6"
     >
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.8, ease: fancyEase }}
-        className="max-w-4xl w-full"
+        viewport={{ once: true, amount: 0.05 }}
+        transition={{ duration: 0.5, ease: fancyEase }}
+        className="max-w-4xl xl:max-w-7xl w-full"
       >
         <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-tight mb-8">
           Projects
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
           {PROJECTS.map((project, i) => {
             const locked = project.access === "invite-only";
             return (
@@ -35,8 +35,8 @@ export default function ProjectsSection() {
               rel="noreferrer"
               initial={{ opacity: 0, y: 40, scale: 0.95 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.8, delay: i * 0.1, ease: fancyEase }}
+              viewport={{ once: true, amount: 0.05 }}
+              transition={{ duration: 0.5, delay: (i % 4) * 0.06, ease: fancyEase }}
               className={`group relative bg-white rounded-xl overflow-hidden shadow-xl shadow-black/20 flex flex-col hover:-translate-y-1 transition-transform ${
                 locked ? "ring-2 ring-dashed ring-amber-400" : ""
               }`}

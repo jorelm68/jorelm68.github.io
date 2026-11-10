@@ -18,8 +18,8 @@ const masterSectionVariants: Variants = {
     opacity: 1,
     transition: {
       when: "beforeChildren",
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
     },
   },
 };
@@ -31,7 +31,7 @@ const cardVariants: Variants = {
     scale: 1, 
     y: 0,
     transition: {
-      duration: 1.2,
+      duration: 0.6,
       ease: fancyEase,
     },
   },
@@ -48,7 +48,7 @@ const headerItemVariants: Variants = {
 
 const iconListVariants: Variants = {
   visible: {
-    transition: { staggerChildren: 0.1, delayChildren: 0.4 }
+    transition: { staggerChildren: 0.06, delayChildren: 0.2 }
   }
 };
 
@@ -71,7 +71,7 @@ const imageVariants: Variants = {
     opacity: 1, 
     x: 0, 
     scale: 1,
-    transition: { duration: 1.0, delay: 0.2, ease: "circOut" }
+    transition: { duration: 0.6, delay: 0.1, ease: "circOut" }
   }
 };
 
@@ -99,10 +99,10 @@ export default function AboutMeBanner() {
   return (
     <motion.section 
       id="about" 
-      className="relative w-full h-screen flex flex-col items-center justify-center px-4 md:px-8 pointer-events-none"
+      className="relative w-full flex flex-col items-center justify-center px-4 md:px-8 pt-24 md:pt-32 pb-6 pointer-events-none"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.1 }}
       variants={masterSectionVariants}
     >
       <motion.div 
@@ -197,7 +197,7 @@ export default function AboutMeBanner() {
           </motion.div>
 
           <motion.div 
-            transition={{ staggerChildren: 0.25, delayChildren: 0.3 }}
+            transition={{ staggerChildren: 0.12, delayChildren: 0.15 }}
             className="flex-1 text-sm md:text-base text-neutral-800 leading-relaxed space-y-4"
           >
             <motion.p variants={textItemVariants}>
@@ -211,4 +211,4 @@ export default function AboutMeBanner() {
       </motion.div>
     </motion.section>
   );
-}
+}
