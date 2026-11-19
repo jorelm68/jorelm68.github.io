@@ -5,19 +5,6 @@ export const GITHUB = "https://github.com/jorelm68";
 export const DNEP = "https://detroitsmallbusiness.umich.edu/";
 export const WEBSITE = "https://jorelm68.github.io/";
 export const DESCRIPTION = "Ethan McIntyre: accounting, bookkeeping, Airtable development and small business consulting with the Detroit Neighborhood Entrepreneurs Project (DNEP).";
-export const KEYWORDS = [
-    `${NAME}`, 
-    "Detroit Neighborhood Entrepreneurs Project", 
-    "DNEP", 
-    "Airtable", 
-    "Accounting", 
-    "Ballroom Dance", 
-    "Guitar", 
-    "Accounting Consultant",
-    "Business Consultant",
-    "Data Automation"
-]
-
 export const BACKGROUND_IMAGES = [
     '/generic1.jpg',
     '/generic2.jpg',
@@ -105,7 +92,7 @@ export const PROJECTS: Project[] = [
     {
         name: "Tax Conversion Planner",
         url: "https://tax-conversion-planner.vercel.app/",
-        image: "/projects/tax.png",
+        image: "/projects/tax.jpg",
         description: "Finds the Traditional-to-Roth IRA conversion schedule that maximizes after-tax wealth. Runs entirely in the browser.",
     },
     {
@@ -129,13 +116,13 @@ export const PROJECTS: Project[] = [
     {
         name: "Outreach Community Services",
         url: "https://outreach-community-services.jorelm68.workers.dev/",
-        image: "/projects/outreach.png",
+        image: "/projects/outreach.jpg",
         description: "A website for a Detroit nonprofit offering door-to-door rides for seniors and people with disabilities, with service pricing and booking.",
     },
     {
         name: "Strawberry Monster",
         url: "https://strawberry-monster.vercel.app/",
-        image: "/projects/strawberry-monster.png",
+        image: "/projects/strawberry-monster.jpg",
         description: "A stock research lab combining technical indicators, SEC financial statements, automatic Elliott Wave counts and a strategy backtester into a Claude-assisted Buy/Hold/Avoid verdict.",
         access: "invite-only",
     },

@@ -33,16 +33,23 @@ export default function Backdrop() {
     };
 
     let current = Math.floor(Math.random() * total);
-    setIndex(current);
-    preload((current + 1) % total);
-
-    const interval = setInterval(() => {
-      current = (current + 1) % total;
+    const show = () => {
       setIndex(current);
       preload((current + 1) % total);
+    };
+
+    const first = setTimeout(show, 0);
+    const interval = setInterval(() => {
+      // Hidden tabs keep their timers; don't keep downloading photos nobody sees.
+      if (document.hidden) return;
+      current = (current + 1) % total;
+      show();
     }, PHOTO_INTERVAL);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearTimeout(first);
+      clearInterval(interval);
+    };
   }, []);
 
   return (
@@ -53,7 +60,7 @@ export default function Backdrop() {
           <motion.img
             key={index} 
             src={BACKGROUND_IMAGES[index]}
-            alt="Atmospheric Backdrop"
+            alt=""
             // Keep this! It acts as a safety net for decoding
             decoding="async" 
             initial={{ opacity: 0, scale: 1.1, x: "0%" }}

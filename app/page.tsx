@@ -58,7 +58,7 @@ export default function HomePage() {
       <Backdrop />
       
       {/* SECTION 1: The Hero/Landing Viewport */}
-      <section className="relative w-full h-screen">
+      <section className="relative w-full h-svh">
         <NameBanner />
         <ScrollIndicator />
       </section>

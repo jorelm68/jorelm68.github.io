@@ -88,12 +88,16 @@ export default function AboutMeBanner() {
   const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText(EMAIL);
-    setCopied(true);
-    
-    setTimeout(() => {
-      setCopied(false);
-    }, 2000);
+    navigator.clipboard
+      .writeText(EMAIL)
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      })
+      // Clipboard can be blocked (permissions, in-app browsers): open the mail app instead.
+      .catch(() => {
+        window.location.href = `mailto:${EMAIL}`;
+      });
   };
 
   return (
@@ -128,12 +132,14 @@ export default function AboutMeBanner() {
             
             <motion.div variants={iconVariants} className="relative">
               <button 
+                type="button"
+                aria-label="Copy email address"
                 onClick={handleCopyEmail} 
-                className="group relative p-2 text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100 rounded transition-colors focus:outline-none"
+                className="group relative p-2 text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100 rounded transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400"
               >
                 <Mail size={18} />
                 
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-neutral-800 text-white text-xs font-medium rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-lg">
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-neutral-800 text-white text-xs font-medium rounded opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-lg">
                   {copied ? "Copied!" : `${EMAIL} (click to copy)`}
                   <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-neutral-800" />
                 </div>
@@ -145,14 +151,14 @@ export default function AboutMeBanner() {
               href={GITHUB} 
               target="_blank" 
               rel="noreferrer" 
-              className="group relative p-2 text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100 rounded transition-colors focus:outline-none"
+              className="group relative p-2 text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100 rounded transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
                 <path d="M9 18c-4.51 2-5-2-7-2"/>
               </svg>
 
-              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-neutral-800 text-white text-xs font-medium rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-lg">
+              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-neutral-800 text-white text-xs font-medium rounded opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-lg">
                 GitHub (opens in new window)
                 <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-neutral-800" />
               </div>
@@ -163,7 +169,7 @@ export default function AboutMeBanner() {
               href={LINKEDIN} 
               target="_blank" 
               rel="noreferrer" 
-              className="group relative p-2 text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100 rounded transition-colors focus:outline-none"
+              className="group relative p-2 text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100 rounded transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
@@ -171,7 +177,7 @@ export default function AboutMeBanner() {
                 <circle cx="4" cy="4" r="2"/>
               </svg>
 
-              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-neutral-800 text-white text-xs font-medium rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-lg">
+              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-neutral-800 text-white text-xs font-medium rounded opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-lg">
                 LinkedIn (opens in new window)
                 <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-neutral-800" />
               </div>
@@ -202,7 +208,7 @@ export default function AboutMeBanner() {
           >
             <motion.p variants={textItemVariants}>
               I am a University of Michigan Computer Science graduate pursuing a Master’s in Accounting at the Ross School of Business (expected May 2027). 
-              I work as a Data Analyst for the <a href={DNEP} target="_blank" rel="noreferrer" className="text-blue-500 hover:text-blue-700 underline">Detroit Neighborhood Entrepreneurs Project (DNEP)</a>, where I build data pipelines and dashboards to support Detroit's small businesses. 
+              I work as a Data Analyst for the <a href={DNEP} target="_blank" rel="noreferrer" className="text-blue-500 hover:text-blue-700 underline">Detroit Neighborhood Entrepreneurs Project (DNEP)</a>, where I build data pipelines and dashboards to support Detroit&apos;s small businesses. 
               Outside of work, I enjoy ballroom dancing and playing guitar.
             </motion.p>
           </motion.div>
