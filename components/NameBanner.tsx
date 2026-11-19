@@ -7,7 +7,7 @@ export default function NameBanner() {
   const BASE_DELAY = 1.0; 
 
   return (
-    <div className="absolute inset-x-0 top-1/3 z-20 flex flex-col items-center justify-center w-full pointer-events-none select-none">
+    <div className="absolute inset-0 z-20 flex flex-col items-center justify-center w-full pointer-events-none select-none">
       
       {/* 1. The Main Wrapper now waits 1 second before fading in */}
       <motion.div
