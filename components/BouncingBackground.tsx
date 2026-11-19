@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 
 // --- PHYSICS CONFIGURATION ---
@@ -18,36 +18,43 @@ export default function BouncingBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
   const boxRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const [isVisible, setIsVisible] = useState(false);
+  // Physics state. Filled in the effect below so Math.random never runs during render.
+  const physicsState = useRef<
+    { baseSpeed: number; x: number; y: number; vx: number; vy: number; isHovered: boolean }[]
+  >([]);
 
-  // Physics state
-  const physicsState = useRef(
-    IMAGES.map((_, i) => {
-      const baseSpeed = Math.random() * 2.0 + 1.0; 
-      
+  const lastScrollY = useRef(0);
+  const scrollDelta = useRef(0);
+  const mousePos = useRef({ x: -1000, y: -1000 }); 
+  const wasHoveringAny = useRef(false);
+
+  useEffect(() => {
+    // Visitors who ask for less motion get a still page: no floating logos at all.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    physicsState.current = IMAGES.map(() => {
+      const baseSpeed = Math.random() * 2.0 + 1.0;
       return {
-        id: i,
-        baseSpeed, 
+        baseSpeed,
         x: Math.random() * 500,
         y: Math.random() * 500,
         vx: (Math.random() > 0.5 ? 1 : -1) * baseSpeed,
         vy: (Math.random() > 0.5 ? 1 : -1) * baseSpeed,
         isHovered: false, // Track state in memory to prevent DOM style spamming
       };
-    })
-  );
+    });
+    lastScrollY.current = window.scrollY;
+    if (containerRef.current) containerRef.current.style.opacity = "1";
 
-  const lastScrollY = useRef(typeof window !== 'undefined' ? window.scrollY : 0);
-  const scrollDelta = useRef(0);
-  const mousePos = useRef({ x: -1000, y: -1000 }); 
-  const wasHoveringAny = useRef(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-    
     let animationFrameId: number;
+    let lastTime = performance.now();
 
-    const loop = () => {
+    const loop = (now: number) => {
+      // Speeds were tuned at 60 fps. Scale by elapsed time so 120/144 Hz screens
+      // run at the same speed (capped so a stalled tab doesn't teleport the logos).
+      const dt = Math.min((now - lastTime) / (1000 / 60), 2);
+      lastTime = now;
+
       const width = window.innerWidth;
       const height = window.innerHeight;
       const boxes = physicsState.current;
@@ -69,8 +76,9 @@ export default function BouncingBackground() {
         if (isHovered) {
           isHoveringAny = true;
           // Smoothly brake the block underneath the mouse so it stands still for the click
-          box.vx *= 0.85;
-          box.vy *= 0.85;
+          const brake = Math.pow(0.85, dt);
+          box.vx *= brake;
+          box.vy *= brake;
         } else {
           // 2. Only apply repulsion physics if the cursor is OUTSIDE the block
           const dxMouse = (box.x + BOX_SIZE / 2) - mouse.x;
@@ -79,15 +87,16 @@ export default function BouncingBackground() {
 
           if (distanceToMouse < MOUSE_REPULSION_RADIUS && distanceToMouse > 0) {
             const force = (MOUSE_REPULSION_RADIUS - distanceToMouse) / MOUSE_REPULSION_RADIUS;
-            box.vx += (dxMouse / distanceToMouse) * force * MOUSE_REPULSION_FORCE;
-            box.vy += (dyMouse / distanceToMouse) * force * MOUSE_REPULSION_FORCE;
+            box.vx += (dxMouse / distanceToMouse) * force * MOUSE_REPULSION_FORCE * dt;
+            box.vy += (dyMouse / distanceToMouse) * force * MOUSE_REPULSION_FORCE * dt;
           }
 
           // Friction & Baseline Settle
           const currentSpeed = Math.sqrt(box.vx * box.vx + box.vy * box.vy);
           if (currentSpeed > box.baseSpeed * 1.1) {
-            box.vx *= 0.995; 
-            box.vy *= 0.995;
+            const friction = Math.pow(0.995, dt);
+            box.vx *= friction;
+            box.vy *= friction;
           } else if (currentSpeed < box.baseSpeed * 0.95) {
             const scale = box.baseSpeed / (currentSpeed || 1);
             box.vx *= scale;
@@ -96,8 +105,8 @@ export default function BouncingBackground() {
         }
 
         // Apply velocities to coordinates
-        box.x += box.vx;
-        box.y += box.vy;
+        box.x += box.vx * dt;
+        box.y += box.vy * dt;
 
         // Left / Right Boundaries
         if (box.x <= 0) {
@@ -142,7 +151,8 @@ export default function BouncingBackground() {
           const dy = b1.y + BOX_SIZE / 2 - (b2.y + BOX_SIZE / 2);
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < BOX_SIZE) {
+          // distance === 0 (two logos squeezed into the same spot) would divide by zero.
+          if (distance > 0 && distance < BOX_SIZE) {
             const overlap = BOX_SIZE - distance;
             const nx = dx / distance;
             const ny = dy / distance;
@@ -232,9 +242,8 @@ export default function BouncingBackground() {
   return (
     <div 
       ref={containerRef} 
-      className={`fixed inset-0 pointer-events-none z-[-1] overflow-hidden transition-opacity duration-[2000ms] ease-in-out ${
-        isVisible ? "opacity-100" : "opacity-0"
-      }`}
+      aria-hidden="true"
+      className="fixed inset-0 pointer-events-none z-[-1] overflow-hidden opacity-0 transition-opacity duration-[2000ms] ease-in-out"
     >
       {IMAGES.map((src, i) => (
         <div
@@ -253,7 +262,7 @@ export default function BouncingBackground() {
         >
           <Image 
             src={src} 
-            alt={`Floating background element ${i + 1}`} 
+            alt="" 
             width={BOX_SIZE} 
             height={BOX_SIZE}
             className="w-full h-full object-cover"

@@ -1,44 +1,41 @@
 import type { Metadata } from "next";
 import localFont from 'next/font/local';
 import "./globals.css";
-import { DESCRIPTION, KEYWORDS, NAME, WEBSITE } from "@/lib/constants";
+import MotionProvider from "@/components/MotionProvider";
+import { DESCRIPTION, NAME, WEBSITE } from "@/lib/constants";
 
 const myFont = localFont({
   src: './fonts/Noto-Regular.ttf',
   display: 'swap', 
 });
 
-// FIX 1: Ensured the fallback WEBSITE constant has a proper protocol (http/https) in your constants file
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || WEBSITE;
+const TITLE = `${NAME} | Accounting, Airtable & Small Business Consultant`;
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
+  metadataBase: new URL(WEBSITE),
   
   title: {
-    default: `${NAME} | Accounting, Airtable & Small Business Consultant`,
+    default: TITLE,
     template: `%s | ${NAME}`, 
   },
   
-  // FIX 2: Removed "Portfolio of Ethan McIntyre." if your DESCRIPTION constant already includes your name naturally
   description: DESCRIPTION,
-  
-  keywords: KEYWORDS,
   
   alternates: { canonical: "/" },
 
-  authors: [{ name: `${NAME}`, url: SITE_URL }],
+  authors: [{ name: `${NAME}`, url: WEBSITE }],
   creator: `${NAME}`,
   
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: SITE_URL,
-    title: `${NAME} | Accounting, Airtable & Small Business Consultant`,
+    url: WEBSITE,
+    title: TITLE,
     description: DESCRIPTION,
     siteName: `${NAME} Portfolio`,
     images: [
       {
-        url: "/MACC_BANNER.png", 
+        url: "/MACC_BANNER.jpg", 
         width: 1200,
         height: 630,
         alt: `${NAME} Portfolio Preview`,
@@ -48,9 +45,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: `${NAME} | Accounting, Airtable & Small Business Consultant`,
+    title: TITLE,
     description: DESCRIPTION,
-    images: ["/MACC_BANNER.png"],
+    images: ["/MACC_BANNER.jpg"],
   },
 
   robots: {
@@ -64,9 +61,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "z-pAqW-s2EIANRpdmUyZyXZWJYeeHwkKENFXZCplUkk",
-  },
 };
 
 export default function RootLayout({
@@ -76,7 +70,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={myFont.className} suppressHydrationWarning>
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        <MotionProvider>{children}</MotionProvider>
+      </body>
     </html>
   );
 }

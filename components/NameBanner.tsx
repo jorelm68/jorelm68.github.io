@@ -30,7 +30,7 @@ export default function NameBanner() {
               delay: BASE_DELAY, // Waits 1 second before sliding
               ease: "backOut",
             }}
-            className="m-0 text-4xl sm:text-6xl md:text-7xl font-bold text-white text-center whitespace-nowrap tracking-wider"
+            className="m-0 text-[8vw] sm:text-6xl md:text-7xl font-bold text-white text-center whitespace-nowrap tracking-wider"
           >
             ETHAN MCINTYRE
           </motion.h1>

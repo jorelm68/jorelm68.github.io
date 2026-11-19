@@ -2,4 +2,4 @@
 
 **Live Portfolio:** [jorelm68.github.io](https://jorelm68.github.io)
 
-I am a Full-Stack Developer graduating from the University of Michigan with my Bachelor of Science in Computer Science (May 2026) and my Master's of Accounting (May 2027).
+I am a University of Michigan Computer Science graduate pursuing a Master's in Accounting at the Ross School of Business (expected May 2027). I work as a Data Analyst for the Detroit Neighborhood Entrepreneurs Project (DNEP) and consult for small businesses on accounting, bookkeeping and web tools.
