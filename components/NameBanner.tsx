@@ -17,7 +17,7 @@ export default function NameBanner() {
           duration: 0.5, 
           delay: BASE_DELAY 
         }}
-        className="w-full max-w-[1000px] px-4 mx-auto box-border"
+        className="relative w-full max-w-[1000px] px-4 mx-auto box-border"
       >
         
         {/* Top Line: ETHAN MCINTYRE */}
@@ -36,7 +36,8 @@ export default function NameBanner() {
           </motion.h1>
         </div>
 
-        {/* Bottom Lines: services */}
+        {/* Bottom Lines: services (hang below the name so the name stays vertically centered) */}
+        <div className="absolute top-full left-0 w-full px-4">
         <div className="w-full border-b border-white/20 py-2 overflow-hidden">
           <motion.p
             initial={{ x: "20%", opacity: 0 }}
@@ -65,6 +66,7 @@ export default function NameBanner() {
           >
             TECHNOLOGY &amp; OPERATIONS
           </motion.p>
+        </div>
         </div>
 
       </motion.div>
