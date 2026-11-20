@@ -215,13 +215,13 @@ export default function AboutMeBanner() {
 
         </div>
 
-        <motion.div variants={textItemVariants} className="w-full max-w-[260px]">
+        <motion.div variants={textItemVariants} className="w-full">
           <Image
             src="/dnep-event.jpg"
             alt="Ethan and a fellow student standing on stage at a Detroit Neighborhood Entrepreneurs Project event while a speaker addresses the audience"
             width={1280}
             height={853}
-            sizes="260px"
+            sizes="(min-width: 896px) 832px, 100vw"
             className="w-full h-auto rounded-md border border-neutral-200 shadow-sm"
           />
         </motion.div>
