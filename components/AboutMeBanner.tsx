@@ -214,6 +214,20 @@ export default function AboutMeBanner() {
           </motion.div>
 
         </div>
+
+        <motion.figure variants={textItemVariants} className="flex flex-col gap-2">
+          <Image
+            src="/dnep-event.jpg"
+            alt="Ethan and a fellow student standing on stage at a Detroit Neighborhood Entrepreneurs Project event while a speaker addresses the audience"
+            width={1280}
+            height={853}
+            sizes="(min-width: 896px) 832px, 100vw"
+            className="w-full h-auto rounded-md border border-neutral-200 shadow-sm"
+          />
+          <figcaption className="text-xs md:text-sm text-neutral-500">
+            Being recognized at a Detroit Neighborhood Entrepreneurs Project event.
+          </figcaption>
+        </motion.figure>
       </motion.div>
     </motion.section>
   );
