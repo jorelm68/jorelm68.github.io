@@ -5,6 +5,10 @@
 // request, so the consent page cannot be used to send anyone to another site.
 
 export type ConnectorApp = {
+  /** Which logo and wordmark to draw (see components/BrandMarks.tsx). */
+  brand: 'parline' | 'nonozempic';
+  /** The app's main colour, used for the hover ring and the arrow. */
+  accent: string;
   name: string;
   blurb: string;
   /** The app's own consent screen. It receives the same authorization id. */
@@ -15,11 +19,15 @@ export type ConnectorApp = {
 
 export const CONNECTOR_APPS: ConnectorApp[] = [
   {
+    brand: "parline",
+    accent: "#1b3563",
     name: "Parline",
     blurb: "Double-entry bookkeeping",
     consentUrl: "https://www.parline.app/oauth/consent",
   },
   {
+    brand: "nonozempic",
+    accent: "#2f7d4f",
     name: "NONOZEMPIC",
     blurb: "Calorie tracker",
     consentUrl: "https://nonozempic.vercel.app/oauth/consent",
